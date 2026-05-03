@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch2 — Besoins Nutritionnels de l'Homme</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --e:#1e5fa3;--em:#2563eb;--el:#eaf1fb;--ep:#f0f4ff;
+  --v:#1B5E20;--vl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#eaf1fb;--tx:#1a1a1a;--mu:#666;
+  --brd:#bfd6f5;--sh:0 2px 12px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.6;}
+header{background:linear-gradient(135deg,#0D3B66,#1e5fa3 50%,#2563eb);color:#fff;padding:18px 26px 13px;position:sticky;top:0;z-index:100;box-shadow:0 3px 16px rgba(0,0,0,.3);}
+header h1{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:2px;}
+header p{font-size:.8rem;opacity:.85;}
+.signature-header{font-size:.7rem;opacity:.7;margin-top:3px;font-style:italic;letter-spacing:.6px;color:#bfd6f5;}
+.pb{height:4px;background:rgba(255,255,255,.3);border-radius:2px;margin-top:8px;}
+.pf{height:100%;background:#bfd6f5;border-radius:2px;transition:width .4s;width:8%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:86px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:10px 9px;font-size:.69rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--em);background:var(--el);}
+.t.on{color:var(--e);border-bottom-color:var(--e);}
+.content{max-width:960px;margin:0 auto;padding:18px 18px 60px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--em);}
+.card.v{border-left-color:var(--v);}.card.r{border-left-color:var(--r);}.card.ar{border-left-color:var(--ar);}
+h2{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:9px;color:var(--e);}
+h2.v{color:var(--v);}h2.r{color:var(--r);}h2.ar{color:var(--ar);}
+h3{font-size:.88rem;font-weight:700;margin:9px 0 5px;color:var(--e);}
+.sech{background:linear-gradient(135deg,#0D3B66,#1e5fa3);color:#fff;padding:10px 15px;border-radius:10px;font-weight:600;margin-bottom:12px;font-size:.88rem;}
+.tip{background:#fdf6ec;border:1.5px solid var(--j);border-radius:10px;margin:8px 0;overflow:hidden;}
+.tip-head{padding:8px 13px;cursor:pointer;display:flex;gap:8px;align-items:center;font-size:.86rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:10px 13px 12px;font-size:.85rem;line-height:1.7;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--el));border:2px solid var(--vi);border-radius:10px;padding:13px;margin:10px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.82rem;letter-spacing:.8px;text-transform:uppercase;margin-bottom:9px;}
+.mq p{margin-bottom:7px;font-size:.88rem;line-height:1.85;}
+select.bl{border:2px solid var(--vi);border-radius:5px;padding:2px 6px;font-size:.84rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.82rem;padding:6px 10px;border-radius:7px;margin-top:7px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:6px 13px;border-radius:7px;cursor:pointer;font-weight:700;font-size:.8rem;margin-top:8px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:6px 11px;border-radius:7px;cursor:pointer;font-size:.8rem;margin-top:8px;margin-left:5px;}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.83rem;}
+th{background:var(--e);color:#fff;padding:7px 9px;text-align:left;}
+td{padding:6px 9px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--ep);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.ret{background:var(--jl);border:1.5px solid var(--j);border-radius:9px;padding:10px 13px;margin:10px 0;}
+.ret h4{color:var(--o);font-size:.74rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.ret p{margin-bottom:4px;font-size:.85rem;}
+.ret dt{font-weight:700;color:var(--o);display:inline;}
+.ret dd{display:inline;margin-left:3px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:9px 0;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+.img-grid img{width:100%;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.al{list-style:none;display:grid;gap:5px;}
+.al li{padding:7px 11px;background:var(--el);border-radius:7px;border-left:4px solid var(--e);font-size:.85rem;}
+.al li::before{content:"✓ ";color:var(--e);font-weight:700;}
+.bstep{background:#fff;border-radius:11px;padding:14px;margin-bottom:10px;box-shadow:var(--sh);border-top:4px solid var(--e);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--e);color:#fff;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.88rem;margin-right:8px;flex-shrink:0;}
+.gfb{font-size:.83rem;padding:7px 11px;border-radius:8px;margin-top:8px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;box-shadow:var(--sh);border-left:4px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:7px;padding:8px 12px;margin-bottom:9px;font-size:.84rem;border-left:3px solid var(--ar);}
+select.tcell{border:1.5px solid var(--vi);border-radius:4px;padding:2px 5px;font-size:.81rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:280px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin:10px 0;}
+.fcc{background:#fff;border-radius:9px;padding:12px;box-shadow:var(--sh);border-top:4px solid var(--e);}
+.fcp{font-size:.87rem;line-height:1.9;margin-bottom:7px;}
+select.fs{border:2px solid var(--vi);border-radius:5px;padding:2px 6px;font-size:.81rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.btn{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:.83rem;}
+.bv{background:var(--e);color:#fff;}.bv:hover{background:#0D3B66;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:10px;padding:13px;margin-bottom:10px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:8px;font-size:.89rem;}
+.qo{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border-radius:6px;margin-bottom:4px;cursor:pointer;font-size:.86rem;border:1.5px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--el);}
+.qo input{accent-color:var(--e);margin-top:3px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.8rem;margin-top:3px;display:none;line-height:1.5;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.qcm-ctrl .btn{font-size:.78rem;}
+.qcm-score{font-size:.82rem;padding:6px 10px;border-radius:7px;font-weight:600;display:inline-block;margin-left:8px;}
+.bilan-rev{background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);border-left:5px solid var(--e);}
+.bilan-rev h3{color:var(--e);font-size:.95rem;margin-bottom:10px;}
+.bilan-rev .obj-block{background:var(--el);border-radius:9px;padding:12px;margin-bottom:12px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--e);color:#fff;border-radius:50%;width:24px;height:24px;font-weight:700;font-size:.78rem;margin-right:7px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.86rem;color:var(--e);margin-bottom:6px;display:flex;align-items:center;}
+.bilan-rev .bonus-q{background:#fff;border-radius:7px;padding:10px;margin-top:8px;font-size:.84rem;line-height:1.7;border:1.5px dashed var(--sa);}
+.expl-text{font-size:.88rem;line-height:1.85;color:var(--tx);margin-bottom:10px;padding:10px 14px;background:var(--el);border-radius:9px;border-left:4px solid var(--e);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--el));border:2px solid var(--b);border-radius:10px;padding:13px;margin:10px 0;font-size:.86rem;line-height:1.8;}
+.focus-box strong{color:var(--b);}
+footer{background:linear-gradient(135deg,#0D3B66,#1e5fa3 50%,#2563eb);color:#fff;text-align:center;padding:14px 18px;font-size:.78rem;opacity:.9;margin-top:30px;border-radius:12px 12px 0 0;}
+footer .ft-sig{font-size:.76rem;opacity:.75;font-style:italic;letter-spacing:.6px;margin-top:4px;}
+.resume-hero{background:linear-gradient(135deg,#0D3B66,#1e5fa3 50%,#2563eb);color:#fff;border-radius:14px;padding:22px;margin-bottom:16px;}
+.resume-hero h2{color:#bfd6f5;font-size:1.15rem;margin-bottom:8px;}
+.resume-hero p{font-size:.9rem;line-height:1.75;opacity:.92;}
+.resume-hero .sub{font-size:.8rem;opacity:.7;margin-top:6px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
+.cnode{border-radius:11px;padding:13px;cursor:pointer;transition:all .25s;border:2px solid transparent;}
+.cnode:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:1.5rem;margin-bottom:5px;}
+.cnode .cn-title{font-size:.85rem;font-weight:700;margin-bottom:3px;}
+.cnode .cn-sub{font-size:.74rem;opacity:.85;line-height:1.35;}
+.cn-a{background:linear-gradient(135deg,#1e5fa3,#2563eb);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:11px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:5px solid var(--e);}
+.cn-panel.b{border-left:5px solid var(--v);}
+.cn-panel.c{border-left:5px solid var(--r);}
+.cn-panel.d{border-left:5px solid var(--b);}
+.cn-panel.e{border-left:5px solid var(--ar);}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:11px 0;}
+.conn-item{border-radius:9px;padding:12px;border:2px solid;font-size:.84rem;line-height:1.6;}
+.conn-item .conn-ch{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;opacity:.75;}
+.conn-item .conn-notion{font-weight:700;margin-bottom:3px;}
+.piege-item{border-radius:10px;padding:13px;margin-bottom:9px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:10px;font-size:.86rem;line-height:1.7;color:var(--tx);}
+.piege-body.on{display:block;}
+.piege-body strong{color:var(--r);}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--el));border:2px solid var(--vi);border-radius:11px;padding:14px;margin:12px 0;}
+.reflex h4{color:var(--vi);font-size:.85rem;font-weight:700;margin-bottom:10px;}
+.reflex-q{background:#fff;border-radius:8px;padding:11px;margin-bottom:8px;}
+.reflex-q .rq{font-size:.88rem;line-height:1.7;font-weight:600;margin-bottom:7px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:.79rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:8px;padding:9px 12px;background:var(--vil);border-radius:7px;font-size:.85rem;line-height:1.7;color:#4a0080;}
+.reflex-ans.on{display:block;}
+.glp-wrap{display:flex;justify-content:center;gap:20px;margin:20px 0;flex-wrap:wrap;}
+.glp-item{background:#fff;border-radius:10px;padding:20px 24px;box-shadow:var(--sh);text-align:center;min-width:120px;}
+.glp-item .glp-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--e);}
+.glp-item .glp-lbl{font-size:11px;color:var(--mu);margin-top:4px;font-weight:600;}
+@media(max-width:600px){
+  .g2,.concept-map,.connexion-grid,.img-grid{grid-template-columns:1fr;}
+  header h1{font-size:.82rem;}.t{padding:8px 3px;font-size:.6rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 2 — Besoins Nutritionnels de l'Homme</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie I · Pages 20–52 · 5 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">🧪 Act.1 — Glucides</button>
+  <button class="t"     onclick="showTab(3)">🧬 Act.2 — Protides</button>
+  <button class="t"     onclick="showTab(4)">🫒 Act.3 — Lipides</button>
+  <button class="t"     onclick="showTab(5)">📊 Act.4 — Besoins</button>
+  <button class="t"     onclick="showTab(6)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(7)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(8)">📋 Bilan Révision</button>
+  <button class="t"     onclick="showTab(9)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(10)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#0D3B66,#1e5fa3 50%,#2563eb);color:#fff;border-radius:14px;padding:22px;margin-bottom:16px;">
+    <h2 style="color:#bfd6f5;font-size:1.18rem;margin-bottom:12px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.88rem;line-height:1.7;margin-bottom:12px;opacity:.92;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie I), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:rgba(255,255,255,.1);padding:10px 13px;border-radius:8px;font-size:.84rem;line-height:1.6;border-left:3px solid #bfd6f5;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bfd6f5;color:#0D3B66;border-radius:50%;width:22px;height:22px;font-weight:700;font-size:.76rem;margin-right:6px;">1</span> Distinguer les différents <strong>aliments simples</strong></div>
+      <div style="background:rgba(255,255,255,.1);padding:10px 13px;border-radius:8px;font-size:.84rem;line-height:1.6;border-left:3px solid #bfd6f5;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bfd6f5;color:#0D3B66;border-radius:50%;width:22px;height:22px;font-weight:700;font-size:.76rem;margin-right:6px;">2</span> Reconnaître les <strong>propriétés physico-chimiques</strong></div>
+      <div style="background:rgba(255,255,255,.1);padding:10px 13px;border-radius:8px;font-size:.84rem;line-height:1.6;border-left:3px solid #bfd6f5;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bfd6f5;color:#0D3B66;border-radius:50%;width:22px;height:22px;font-weight:700;font-size:.76rem;margin-right:6px;">3</span> Définir une <strong>ration alimentaire équilibrée</strong></div>
+      <div style="background:rgba(255,255,255,.1);padding:10px 13px;border-radius:8px;font-size:.84rem;line-height:1.6;border-left:3px solid #bfd6f5;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bfd6f5;color:#0D3B66;border-radius:50%;width:22px;height:22px;font-weight:700;font-size:.76rem;margin-right:6px;">4</span> Établir des <strong>rations</strong> selon l'âge, le sexe, l'activité</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Préacquis</h2>
+    <ul class="al">
+      <li><strong>Ch.1 —</strong> La malnutrition (suralimentation et sous-alimentation) justifie la nécessité d'une alimentation équilibrée.</li>
+      <li>Les aliments sont composés d'<strong>aliments simples</strong> (protides, lipides, glucides) et de <strong>nutriments</strong> (eau, sels minéraux, vitamines).</li>
+      <li>La <strong>digestion</strong> (Ch.3 à venir) transforme les aliments simples en nutriments absorbables.</li>
+    </ul>
+  </div>
+  <div class="card ar"><h2 class="ar">❓ 4 Questions directrices</h2>
+    <ol style="margin-left:17px;line-height:2.4;font-size:.92rem">
+      <li>Quels sont les différents <strong>aliments simples</strong> et leurs propriétés ?</li>
+      <li>Quels sont nos <strong>besoins qualitatifs</strong> (AAE, AGE) ?</li>
+      <li>Quels sont nos <strong>besoins quantitatifs</strong> en énergie et nutriments ?</li>
+      <li>Comment établir une <strong>ration alimentaire équilibrée</strong> ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>Ce chapitre répond à une question fondamentale : <strong>de quoi notre corps a-t-il besoin pour fonctionner ?</strong> La réponse tient en trois familles d'aliments simples — <strong>glucides</strong> (carburant), <strong>protides</strong> (bâtisseurs) et <strong>lipides</strong> (réserve d'énergie) — et une règle d'or : <strong>GLP = 4.2.1</strong>. Mais les besoins varient selon l'âge, le sexe, l'activité et l'état physiologique. La science de la nutrition permet d'établir des <strong>rations personnalisées</strong>.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🧪</div><div class="cn-title">Glucides</div><div class="cn-sub">Oses · Diholosides · Polyosides</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🧬</div><div class="cn-title">Protides</div><div class="cn-sub">AA · Peptides · AAE · Protéines</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">🫒</div><div class="cn-title">Lipides</div><div class="cn-sub">AG saturés/insaturés · Glycérides</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">📊</div><div class="cn-title">Rations & GLP</div><div class="cn-sub">Pyramide · 4.2.1 · Besoins</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges + Liens</div><div class="cn-sub">Erreurs CAPES + Connexions</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:var(--e)">🧪 Les Glucides</h3><p class="expl-text">Formule brute Cₙ(H₂O)ₙ — «hydrates de carbone». Principale source d'énergie (4 kcal/g).</p><table><tr><th>Classe</th><th>Exemples</th><th>Propriétés</th></tr><tr class="hl"><td><strong>Oses</strong> (monosaccharides)</td><td>Glucose, Fructose, Galactose, Ribose</td><td>Solubles, réducteurs, non hydrolysables</td></tr><tr><td><strong>Diholosides</strong></td><td>Saccharose, Maltose, Lactose</td><td>Solubles, hydrolysables → 2 oses</td></tr><tr class="hl"><td><strong>Polyosides</strong></td><td>Amidon, Glycogène, Cellulose</td><td>Insolubles, non réducteurs, polymères d'oses</td></tr></table></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:var(--v)">🧬 Les Protides</h3><p class="expl-text">Composés quaternaires C,H,O,N (+S,P). 4 kcal/g. 20 acides aminés différents, 8 essentiels (AAE).</p><table><tr><th class="v">Niveau</th><th class="v">Structure</th></tr><tr class="hl"><td>Acide aminé</td><td>R-CH(NH₂)-COOH</td></tr><tr><td>Dipeptide</td><td>Liaison peptidique : CO-NH</td></tr><tr class="hl"><td>Protéine</td><td>> 50 AA, structure 3D</td></tr></table></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:var(--r)">🫒 Les Lipides</h3><p class="expl-text">Composés ternaires C,H,O. 9 kcal/g — les plus énergétiques. Esters d'alcool (glycérol) + acides gras.</p><table><tr><th class="r">Type AG</th><th class="r">Caractéristique</th><th class="r">Exemple</th></tr><tr class="hl"><td>Saturés</td><td>Pas de double liaison</td><td>Acide palmitique</td></tr><tr><td>Monoinsaturés</td><td>1 double liaison</td><td>Acide oléique (huile d'olive)</td></tr><tr class="hl"><td>Polyinsaturés</td><td>Plusieurs doubles liaisons</td><td>Oméga 3, Oméga 6</td></tr></table></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:var(--b)">📊 Rations & GLP</h3><p class="expl-text">Règle GLP = 4:2:1 en masse. Glucides 55-60%, Lipides 25-30%, Protides 15%. Pyramide alimentaire : base = eau + féculents, sommet = graisses + sucreries. Besoins variables selon âge, sexe, activité, état physiologique.</p></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:var(--ar)">⚠️ 3 Pièges + 🔗 Connexions</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Ose ≠ Diholoside ≠ Polyoside <span style="margin-left:auto">▼</span></div><div class="piege-body">Ose = non hydrolysable (unité). Diholoside = 2 oses liés. Polyoside = polymère d'oses. L'hydrolyse acide libère les oses.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ AAE (8) ≠ AGE (polyinsaturés) <span style="margin-left:auto">▼</span></div><div class="piege-body">AAE = Acides Aminés Essentiels (8, non synthétisés). AGE = Acides Gras Essentiels (linoléique, linolénique).</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ GLP 4:2:1 = MASSE (pas énergie) <span style="margin-left:auto">▼</span></div><div class="piege-body">En masse G:L:P = 4:2:1. En énergie G:L:P ≈ 55%:30%:15%. Ne pas confondre.</div></div></div>
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi les protéines de l'œuf ont-elles une valeur biologique supérieure à celles du blé ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">L'œuf contient les 8 AAE en proportions équilibrées. Le blé est pauvre en lysine et tryptophane. La valeur biologique dépend de la richesse en AAE et de leur équilibre.</div></div><div class="reflex-q"><div class="rq">2. Un adolescent a des besoins énergétiques supérieurs à ceux de son père sédentaire. Pourquoi ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">L'adolescent est en croissance → synthèse de nouveaux tissus + métabolisme basal élevé. Le père sédentaire n'a que des besoins d'entretien.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — GLUCIDES ══ -->
+<div class="pan" id="p2">
+  <div class="sech">🧪 Activité 1 — Les Glucides (p.23–24)</div>
+  <div class="card"><h2>Classification et propriétés des glucides</h2>
+    <p class="expl-text">Les glucides sont des molécules organiques de formule brute <strong>Cₙ(H₂O)ₙ</strong>. Leur principal rôle est de fournir de l'<strong>énergie</strong> à l'organisme (4 kcal/g). Ils sont classés selon leur <strong>taille moléculaire</strong>, du plus simple (oses) au plus complexe (polyosides).</p>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc08_experiences_glucides.PNG" alt="Doc.8 — Schéma des expériences glucides (p.23)">
+      <img class="manuel" src="images/T3Ch2_Doc10_formules_sucres.PNG" alt="Doc.10 — Formules développées de quelques sucres (p.23)">
+    </div>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc09_cristaux_sucres.PNG" alt="Doc.9 — Cristaux de sucres (p.23)">
+      <img class="manuel" src="images/T3Ch2_Doc11_chromatographie.PNG" alt="Doc.11 — Résultat chromatographie (p.24)">
+    </div>
+    <table><tr><th>Classe</th><th>Exemples</th><th>Formule</th><th>Propriétés clés</th></tr>
+      <tr class="hl"><td><strong>Oses (monosaccharides)</strong><br><small>Hexoses (6C)</small></td><td>Glucose, Fructose, Galactose</td><td>C₆H₁₂O₆</td><td>Solubles, diffusibles, réducteurs, <strong>non hydrolysables</strong></td></tr>
+      <tr><td><strong>Oses</strong><br><small>Pentoses (5C)</small></td><td>Ribose (ARN), Désoxyribose (ADN)</td><td>C₅H₁₀O₅ / C₅H₁₀O₄</td><td>Constituants des acides nucléiques</td></tr>
+      <tr class="hl"><td><strong>Diholosides</strong></td><td>Saccharose (Glu+Fru), Maltose (Glu+Glu), Lactose (Glu+Gal)</td><td>C₁₂H₂₂O₁₁</td><td>Solubles, cristallisables, <strong>hydrolysables</strong> → 2 oses</td></tr>
+      <tr><td><strong>Polyosides</strong></td><td>Amidon, Glycogène, Cellulose</td><td>(C₆H₁₀O₅)ₙ</td><td>Insolubles, non cristallisables, <strong>hydrolysables</strong> → nombreux oses</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 Hydrolyse de l'amidon :</strong> (C₆H₁₀O₅)ₙ + nH₂O → n(C₆H₁₂O₆). L'amidon + eau iodée → coloration <strong>bleue</strong>. Le glycogène + eau iodée → coloration <strong>brun acajou</strong>. La cellulose = fibres alimentaires (non digérées, activent le transit).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz</div><div id="mq1-q">
+      <p>1. Le glucose est un <select class="bl" data-rep="ose (monosaccharide) — non hydrolysable"><option value="">—</option><option>diholoside</option><option>ose (monosaccharide) — non hydrolysable</option></select>.</p>
+      <p>2. Le saccharose est un diholoside formé de <select class="bl" data-rep="glucose + fructose"><option value="">—</option><option>glucose + glucose</option><option>glucose + fructose</option></select>.</p>
+      <p>3. L'amidon donne une coloration <select class="bl" data-rep="bleue avec l'eau iodée"><option value="">—</option><option>rouge brique</option><option>bleue avec l'eau iodée</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — PROTIDES ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🧬 Activité 2 — Les Protides (p.25–26, 28–29)</div>
+  <div class="card"><h2>Structure, propriétés et besoins en protides</h2>
+    <p class="expl-text">Les protides sont des composés quaternaires (C,H,O,N ± S,P). Ils sont présents dans les œufs, viandes, lait, poissons, légumineuses. L'hydrolyse totale libère des <strong>acides aminés</strong> (20 différents). Parmi eux, <strong>8 sont essentiels</strong> (AAE) car non synthétisables par l'organisme.</p>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc13_formules_acides_amines.PNG" alt="Doc.13 — Formules développées d'acides aminés (p.26)">
+      <img class="manuel" src="images/T3Ch2_Doc14_modele_sequence_AA.PNG" alt="Doc.14 — Modèle de séquence d'AA (p.26)">
+    </div>
+    <img class="manuel" src="images/T3Ch2_Doc17_croissance_rats_caseine_zeine.PNG" alt="Doc.17 — Croissance des rats (p.28)" style="max-width:70%;margin:10px auto;display:block;">
+    <table><tr><th>Niveau structural</th><th>Définition</th><th>Exemple</th></tr>
+      <tr class="hl"><td><strong>Acide aminé (AA)</strong></td><td>Unité de base, formule R-CH(NH₂)-COOH</td><td>Glycine, Lysine, Tryptophane</td></tr>
+      <tr><td><strong>Dipeptide</strong></td><td>2 AA liés par liaison peptidique (-CO-NH-)</td><td>Gly-Ala</td></tr>
+      <tr class="hl"><td><strong>Polypeptide / Protéine</strong></td><td>> 50 AA, structure tridimensionnelle</td><td>Hémoglobine, Insuline, Ovalbumine</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 AAE et valeur biologique :</strong> Les 8 AAE (Lysine, Tryptophane, Valine, Leucine, Isoleucine, Phénylalanine, Méthionine, Thréonine) doivent être apportés par l'alimentation. La <strong>valeur biologique</strong> d'une protéine dépend de sa richesse en AAE. Protéines animales (œuf, lait, viande) > protéines végétales (blé, maïs).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz</div><div id="mq2-q">
+      <p>1. La liaison peptidique s'établit entre <select class="bl" data-rep="COOH d'un AA et NH₂ d'un autre AA"><option value="">—</option><option>deux groupements NH₂</option><option>COOH d'un AA et NH₂ d'un autre AA</option></select>.</p>
+      <p>2. Les AAE sont <select class="bl" data-rep="8 acides aminés que l'organisme ne peut pas synthétiser"><option value="">—</option><option>20 acides aminés synthétisés par l'organisme</option><option>8 acides aminés que l'organisme ne peut pas synthétiser</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2')">↺</button><div class="mq-fb" id="mq2-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — LIPIDES ══ -->
+<div class="pan" id="p4">
+  <div class="sech">🫒 Activité 3 — Les Lipides (p.27, 29)</div>
+  <div class="card"><h2>Structure, propriétés et besoins en lipides</h2>
+    <p class="expl-text">Les lipides sont des composés ternaires (C,H,O). Ce sont les plus énergétiques : <strong>9 kcal/g</strong>. Ils sont insolubles dans l'eau. Un lipide simple = ester d'alcool (glycérol) + acides gras.</p>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc15_etat_huile_5C.PNG" alt="Doc.15 — État de l'huile à 5°C (p.27)">
+      <img class="manuel" src="images/T3Ch2_Doc16_hydrolyse_glyceride.PNG" alt="Doc.16 — Hydrolyse d'un glycéride (p.27)">
+    </div>
+    <table><tr><th>Type d'acide gras</th><th>Caractéristique</th><th>Exemple</th><th>Effet santé</th></tr>
+      <tr class="hl"><td><strong>Saturés</strong></td><td>Pas de double liaison</td><td>Acide palmitique, stéarique</td><td>⬆️ LDL → risque cardiovasculaire</td></tr>
+      <tr><td><strong>Monoinsaturés</strong></td><td>1 double liaison</td><td>Acide oléique (77% huile d'olive)</td><td>⬇️ LDL · ⬆️ HDL — protecteur</td></tr>
+      <tr class="hl"><td><strong>Polyinsaturés</strong></td><td>≥ 2 doubles liaisons</td><td>Oméga 3, Oméga 6, acide linoléique</td><td>Anti-agrégant plaquettaire</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 AGE (Acides Gras Essentiels) :</strong> Acides gras polyinsaturés non synthétisables : acide linoléique, linolénique, arachidonique. Indispensables à la croissance et aux membranes cellulaires. Les lipides végétaux (huile d'olive) sont recommandés par rapport aux lipides animaux (beurre, saindoux).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz</div><div id="mq3-q">
+      <p>1. Les lipides fournissent <select class="bl" data-rep="9 kcal/g (2× plus que glucides et protides)"><option value="">—</option><option>4 kcal/g</option><option>9 kcal/g (2× plus que glucides et protides)</option></select>.</p>
+      <p>2. L'acide oléique (huile d'olive) est un acide gras <select class="bl" data-rep="monoinsaturé (1 double liaison)"><option value="">—</option><option>saturé</option><option>monoinsaturé (1 double liaison)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — BESOINS QUANTITATIFS ══ -->
+<div class="pan" id="p5">
+  <div class="sech">📊 Activité 4 — Besoins quantitatifs et Rations (p.30–48)</div>
+  <div class="card"><h2>Rations alimentaires et règle GLP</h2>
+    <p class="expl-text">Une <strong>ration alimentaire</strong> est l'ensemble des aliments consommés pendant une journée. Elle doit couvrir les <strong>dépenses énergétiques</strong> et apporter tous les <strong>nutriments nécessaires</strong>. Les besoins varient selon l'âge, le sexe, l'activité et l'état physiologique.</p>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc18_depenses_energetiques.PNG" alt="Doc.18 — Dépenses énergétiques (p.30)">
+      <img class="manuel" src="images/T3Ch2_Doc25_bilan_energetique_masse.PNG" alt="Doc.25 — Bilan énergétique et masse corporelle (p.33)">
+    </div>
+    <img class="manuel" src="images/T3Ch2_Doc22_tableau_Bootby.PNG" alt="Doc.22 — Tableau de Bootby (p.31)" style="max-width:100%;margin:10px auto;display:block;">
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc32_courbe_croissance_enfant.PNG" alt="Doc.32 — Courbe croissance enfant (p.36)">
+      <img class="manuel" src="images/T3Ch2_Doc37_rations_travailleurs.PNG" alt="Doc.37 — Rations des travailleurs (p.37)">
+    </div>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc39_pyramide_alimentaire.PNG" alt="Doc.39 — Pyramide alimentaire (p.44)">
+      <img class="manuel" src="images/T3Ch2_Doc40_regle_GLP.PNG" alt="Doc.40 — Règle GLP (p.45)">
+    </div>
+    <div class="glp-wrap">
+      <div class="glp-item"><div class="glp-val">55–60%</div><div class="glp-lbl">🌾 GLUCIDES<br>Complexes préférés</div></div>
+      <div class="glp-item"><div class="glp-val">25–30%</div><div class="glp-lbl">🫒 LIPIDES<br>Végétaux > animaux</div></div>
+      <div class="glp-item"><div class="glp-val">15%</div><div class="glp-lbl">🥚 PROTIDES<br>½ animaux + ½ végétaux</div></div>
+    </div>
+    <p style="text-align:center;font-size:.85rem;color:var(--mu);margin-bottom:10px">Règle GLP = 4:2:1 <strong>en masse</strong> · Équivalences : 100g viande = 100g poisson = 2 œufs = ½L lait = 60g fromage</p>
+    <table><tr><th>Profil</th><th>Énergie (kcal/j)</th><th>Protides (g/j)</th><th>Particularité</th></tr>
+      <tr class="hl"><td>Adolescent 13-15 ans</td><td>2 588</td><td>85</td><td>Ration de croissance</td></tr>
+      <tr><td>Adulte sédentaire (H)</td><td>2 500</td><td>80-100</td><td>Ration d'entretien</td></tr>
+      <tr class="hl"><td>Femme enceinte</td><td>2 270</td><td>75</td><td>Besoins Ca ++ (1000 mg/j)</td></tr>
+      <tr><td>Femme allaitante</td><td>2 510</td><td>80</td><td>Besoins Ca +++ (1200 mg/j)</td></tr>
+      <tr class="hl"><td>Travail de force</td><td>4 200–6 500</td><td>140</td><td>Jusqu'à 2,5× le sédentaire</td></tr>
+    </table>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc41_equivalences_proteiques.PNG" alt="Doc.41 — Équivalences protéiques (p.46)">
+      <img class="manuel" src="images/T3Ch2_Doc42_vitamines_tableau.PNG" alt="Doc.42 — Tableau vitamines (p.47)">
+    </div>
+    <div class="img-grid">
+      <img class="manuel" src="images/T3Ch2_Doc26_sources_fibres.PNG" alt="Doc.26 — Sources de fibres (p.34)">
+      <img class="manuel" src="images/T3Ch2_Doc28_teneur_fibres_aliments.PNG" alt="Doc.28 — Teneur en fibres (p.34)">
+    </div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz</div><div id="mq4-q">
+      <p>1. La règle GLP signifie <select class="bl" data-rep="Glucides 55-60%, Lipides 25-30%, Protides 15% en énergie"><option value="">—</option><option>Glucides 15%, Lipides 25%, Protides 60%</option><option>Glucides 55-60%, Lipides 25-30%, Protides 15% en énergie</option></select>.</p>
+      <p>2. Une femme enceinte a des besoins accrus en <select class="bl" data-rep="calcium et protides"><option value="">—</option><option>glucides uniquement</option><option>calcium et protides</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4')">↺</button><div class="mq-fb" id="mq4-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 6 BILAN ══ -->
+<div class="pan" id="p6">
+  <div class="sech">📋 BILAN — Pages 40–48 (7 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> L'eau et les glucides (p.40-41)</h3><p style="font-size:.88rem">L'eau représente <select class="bl" data-rep="environ 70% de la masse corporelle"><option value="">—</option><option>environ 30%</option><option>environ 70% de la masse corporelle</option></select>. Les glucides ont pour formule brute <select class="bl" data-rep="Cₙ(H₂O)ₙ"><option value="">—</option><option>CₙH₂ₙO₂</option><option>Cₙ(H₂O)ₙ</option></select>. Les oses sont <select class="bl" data-rep="non hydrolysables"><option value="">—</option><option>hydrolysables</option><option>non hydrolysables</option></select>. L'amidon est un <select class="bl" data-rep="polyoside (polymère de glucose)"><option value="">—</option><option>diholoside</option><option>polyoside (polymère de glucose)</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Les protides (p.41-42)</h3><p style="font-size:.88rem">Les protides sont formés de <select class="bl" data-rep="C, H, O, N (+ S, P)"><option value="">—</option><option>C, H, O uniquement</option><option>C, H, O, N (+ S, P)</option></select>. L'unité de base est l'<select class="bl" data-rep="acide aminé (formule R-CH(NH₂)-COOH)"><option value="">—</option><option>ose</option><option>acide aminé (formule R-CH(NH₂)-COOH)</option></select>. La liaison peptidique unit <select class="bl" data-rep="COOH et NH₂ de deux AA avec libération d'eau"><option value="">—</option><option>deux groupements COOH</option><option>COOH et NH₂ de deux AA avec libération d'eau</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Les lipides (p.42-43)</h3><p style="font-size:.88rem">Les lipides simples sont des <select class="bl" data-rep="esters d'alcool (glycérol) et d'acides gras"><option value="">—</option><option>polymères de glucose</option><option>esters d'alcool (glycérol) et d'acides gras</option></select>. Les acides gras saturés <select class="bl" data-rep="n'ont pas de double liaison"><option value="">—</option><option>ont une double liaison</option><option>n'ont pas de double liaison</option></select>. Les acides gras insaturés ont <select class="bl" data-rep="une ou plusieurs doubles liaisons"><option value="">—</option><option>une ou plusieurs doubles liaisons</option><option>uniquement des liaisons simples</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Les rations alimentaires (p.44-45)</h3><p style="font-size:.88rem">Une ration équilibrée doit couvrir les dépenses énergétiques et apporter tous les nutriments. La règle GLP en énergie : G=<select class="bl" data-rep="55-60%"><option value="">—</option><option>15%</option><option>55-60%</option></select>, L=<select class="bl" data-rep="25-30%"><option value="">—</option><option>55-60%</option><option>25-30%</option></select>, P=<select class="bl" data-rep="15%"><option value="">—</option><option>25-30%</option><option>15%</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">5</span> Variation des besoins (p.45)</h3><p style="font-size:.88rem">Les besoins varient selon : l'<select class="bl" data-rep="âge"><option value="">—</option><option>âge</option><option>groupe sanguin</option></select>, le <select class="bl" data-rep="sexe"><option value="">—</option><option>sexe</option><option>poids uniquement</option></select>, l'<select class="bl" data-rep="activité physique"><option value="">—</option><option>activité physique</option><option>heure des repas</option></select> et la température ambiante. L'adolescent a une ration de <select class="bl" data-rep="croissance (riche en protides et calcium)"><option value="">—</option><option>entretien</option><option>croissance (riche en protides et calcium)</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">6</span> Besoins en nutriments non énergétiques (p.46-47)</h3><p style="font-size:.88rem">Les <strong>vitamines</strong> sont des composés organiques indispensables en petites quantités. On dénombre <select class="bl" data-rep="13 vitamines indispensables"><option value="">—</option><option>8 vitamines</option><option>13 vitamines indispensables</option></select>. Les vitamines liposolubles (A,D,E,K) peuvent être <select class="bl" data-rep="stockées dans les graisses"><option value="">—</option><option>éliminées quotidiennement</option><option>stockées dans les graisses</option></select>. Les vitamines hydrosolubles (B,C) doivent être consommées <select class="bl" data-rep="régulièrement (non stockées)"><option value="">—</option><option>une fois par mois</option><option>régulièrement (non stockées)</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">7</span> Règles d'une alimentation équilibrée (p.48)</h3><p style="font-size:.88rem">Respecter la pyramide alimentaire · Répartir en <select class="bl" data-rep="3 ou 4 repas quotidiens"><option value="">—</option><option>1 repas par jour</option><option>3 ou 4 repas quotidiens</option></select> · Ne pas sauter le <select class="bl" data-rep="petit déjeuner"><option value="">—</option><option>dîner</option><option>petit déjeuner</option></select> · Éviter le <select class="bl" data-rep="grignotage entre les repas"><option value="">—</option><option>grignotage entre les repas</option><option>repas familial</option></select> · Préférer l'<select class="bl" data-rep="eau"><option value="">—</option><option>sodas</option><option>eau</option></select> aux boissons sucrées.</p></div>
+  <div style="margin-top:14px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan (7 blocs)</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 7 EXERCICES ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📝 Exercices — Manuel p.51–52</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:8px">✏️ Ex.1 — QCM du manuel (p.51)</h3><div class="ctx">Chaque série d'affirmations peut comporter une ou plusieurs réponse(s) exacte(s).</div>
+    <table>
+      <tr><td><strong>1. Une protéine est :</strong></td><td><select class="tcell" data-rep="a- une molécule organique, c- formée par un enchaînement d'acides aminés"><option value="">—</option><option>a uniquement</option><option>a- une molécule organique, c- formée par un enchaînement d'acides aminés</option><option>b uniquement</option></select></td></tr>
+      <tr><td><strong>2. Un acide aminé :</strong></td><td><select class="tcell" data-rep="b- molécule élémentaire des protéines, d- se lie par liaison peptidique"><option value="">—</option><option>a uniquement</option><option>b- molécule élémentaire des protéines, d- se lie par liaison peptidique</option></select></td></tr>
+      <tr><td><strong>3. Un lipide :</strong></td><td><select class="tcell" data-rep="b- est un ester d'acides gras et d'alcool"><option value="">—</option><option>a- formé par un enchaînement d'acides gras</option><option>b- est un ester d'acides gras et d'alcool</option></select></td></tr>
+      <tr><td><strong>4. Un glucide :</strong></td><td><select class="tcell" data-rep="a- molécule ternaire C,H,O, d- peut être un polymère d'oses"><option value="">—</option><option>b uniquement</option><option>a- molécule ternaire C,H,O, d- peut être un polymère d'oses</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:8px">📊 Ex.2 — Diagrammes alimentaires USA/Soudan (p.51)</h3>
+    <div class="ctx">Les diagrammes donnent la composition de l'alimentation aux USA (obésité, diabète, MCV) et au Soudan (rachitisme, kwashiorkor).</div>
+    <img class="manuel" src="images/T3Ch2_Doc45_diagrammes_USA_Soudan.PNG" alt="Doc.45 — Diagrammes USA/Soudan (p.51)" style="max-width:80%;margin:10px auto;display:block;">
+    <p style="font-size:.85rem;margin-bottom:6px">L'alimentation américaine est <select class="bl" data-rep="riche en lipides et glucides simples → obésité, diabète, MCV"><option value="">—</option><option>équilibrée selon GLP</option><option>riche en lipides et glucides simples → obésité, diabète, MCV</option></select>. L'alimentation soudanaise est <select class="bl" data-rep="carencée en protides et calcium → kwashiorkor, rachitisme"><option value="">—</option><option>trop riche en protides</option><option>carencée en protides et calcium → kwashiorkor, rachitisme</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:8px">🐀 Ex.3 — Expérience rats et AAE (p.52)</h3>
+    <div class="ctx">Expérience sur 3 lots de rats : lot 1 (P+T ajoutés), lot 2 (P seul ajouté), lot 3 (T seul ajouté). P=Phénylalanine, T=Tyrosine.</div>
+    <img class="manuel" src="images/T3Ch2_Doc46_experience_rats_P_T.PNG" alt="Doc.46 — Expérience rats P/T (p.52)" style="max-width:70%;margin:10px auto;display:block;">
+    <p style="font-size:.85rem;margin-bottom:6px">Le lot qui ne reçoit pas de phénylalanine <select class="bl" data-rep="ne croît pas normalement car la phénylalanine est un AAE"><option value="">—</option><option>croît normalement</option><option>ne croît pas normalement car la phénylalanine est un AAE</option></select>. La tyrosine <select class="bl" data-rep="peut être synthétisée à partir de la phénylalanine (non essentielle)"><option value="">—</option><option>est aussi un AAE</option><option>peut être synthétisée à partir de la phénylalanine (non essentielle)</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex3')">↺</button><div class="mq-fb" id="ex3-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:8px">🇹🇳 Ex.4 — Évolution alimentation Tunisie 1980–2000 (p.52)</h3>
+    <div class="ctx">L'Institut National des Statistiques a publié des données sur l'évolution de l'alimentation de 1980 à 2000.</div>
+    <img class="manuel" src="images/T3Ch2_Doc47_evolution_conso_Tunisie.PNG" alt="Doc.47 — Évolution consommation Tunisie (p.52)" style="max-width:80%;margin:10px auto;display:block;">
+    <p style="font-size:.85rem;margin-bottom:6px">De 1980 à 2000, la consommation de céréales a <select class="bl" data-rep="diminué (210 → 180 kg/personne)"><option value="">—</option><option>augmenté</option><option>diminué (210 → 180 kg/personne)</option></select>. La consommation de produits d'origine animale a <select class="bl" data-rep="augmenté (83 → 109 kg/personne)"><option value="">—</option><option>augmenté (83 → 109 kg/personne)</option><option>diminué</option></select>. Cette évolution traduit <select class="bl" data-rep="une transition vers une alimentation plus riche en lipides et protides animales"><option value="">—</option><option>un retour à l'alimentation traditionnelle</option><option>une transition vers une alimentation plus riche en lipides et protides animales</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex4')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex4')">↺</button><div class="mq-fb" id="ex4-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 8 BILAN RÉVISION ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif du programme</div>
+  <p style="font-size:.85rem;color:var(--mu);margin-bottom:12px">Exercice principal + bonus d'approfondissement par objectif.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Distinguer les aliments simples</div><p style="font-size:.85rem;margin-bottom:6px">Associer : Glucides → <select class="bl" data-rep="C,H,O — 4 kcal/g"><option value="">—</option><option>C,H,O,N — 4 kcal/g</option><option>C,H,O — 4 kcal/g</option></select>. Protides → <select class="bl" data-rep="C,H,O,N — 4 kcal/g"><option value="">—</option><option>C,H,O,N — 4 kcal/g</option><option>C,H,O — 9 kcal/g</option></select>. Lipides → <select class="bl" data-rep="C,H,O — 9 kcal/g"><option value="">—</option><option>C,H,O,N — 4 kcal/g</option><option>C,H,O — 9 kcal/g</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span><div class="bonus-q"><strong>🔍 Bonus :</strong> L'amidon est un <select class="bl" data-rep="polyoside"><option value="">—</option><option>ose</option><option>polyoside</option></select>. Le glucose est un <select class="bl" data-rep="ose"><option value="">—</option><option>ose</option><option>diholoside</option></select>.</div></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Reconnaître les propriétés physico-chimiques</div><p style="font-size:.85rem;margin-bottom:6px">Test à l'eau iodée : amidon → <select class="bl" data-rep="coloration bleue"><option value="">—</option><option>coloration rouge brique</option><option>coloration bleue</option></select>. Liqueur de Fehling à chaud : glucose → <select class="bl" data-rep="précipité rouge brique"><option value="">—</option><option>coloration bleue</option><option>précipité rouge brique</option></select>. Réaction de Biuret : protides → <select class="bl" data-rep="coloration bleu violacée"><option value="">—</option><option>coloration jaune</option><option>coloration bleu violacée</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Définir une ration alimentaire équilibrée</div><p style="font-size:.85rem;margin-bottom:6px">La ration doit couvrir <select class="bl" data-rep="les dépenses énergétiques ET apporter tous les nutriments"><option value="">—</option><option>uniquement les dépenses énergétiques</option><option>les dépenses énergétiques ET apporter tous les nutriments</option></select>. Elle est répartie en <select class="bl" data-rep="3 ou 4 repas quotidiens"><option value="">—</option><option>1 ou 2 repas</option><option>3 ou 4 repas quotidiens</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span><div class="bonus-q"><strong>🔍 Bonus :</strong> La règle GLP en énergie = <select class="bl" data-rep="55-60% G, 25-30% L, 15% P"><option value="">—</option><option>15% G, 25% L, 60% P</option><option>55-60% G, 25-30% L, 15% P</option></select>.</div></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">4</span> Établir des rations selon l'âge, le sexe, l'activité</div><p style="font-size:.85rem;margin-bottom:6px">L'adolescent a une ration de <select class="bl" data-rep="croissance (riche en protides et calcium)"><option value="">—</option><option>entretien</option><option>croissance (riche en protides et calcium)</option></select>. Le travailleur de force a des besoins <select class="bl" data-rep="2 à 2,5 fois supérieurs au sédentaire"><option value="">—</option><option>identiques au sédentaire</option><option>2 à 2,5 fois supérieurs au sédentaire</option></select>.</p><button class="bck" onclick="ckMQ('rev4')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev4-fb"></span><div class="bonus-q"><strong>🔍 Bonus :</strong> La femme allaitante a besoin de <select class="bl" data-rep="1200 mg/j de calcium"><option value="">—</option><option>800 mg/j</option><option>1200 mg/j de calcium</option></select>.</div></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">5</span> Maîtriser la structure des aliments simples</div><p style="font-size:.85rem;margin-bottom:6px">Un diholoside est hydrolysé en <select class="bl" data-rep="2 oses"><option value="">—</option><option>un seul ose</option><option>2 oses</option></select>. Un polyoside est hydrolysé en <select class="bl" data-rep="nombreux oses (polymère)"><option value="">—</option><option>2 oses</option><option>nombreux oses (polymère)</option></select>.</p><button class="bck" onclick="ckMQ('rev5')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev5-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">6</span> Connaître AAE, AGE et vitamines</div><p style="font-size:.85rem;margin-bottom:6px">AAE = <select class="bl" data-rep="8 acides aminés essentiels non synthétisés"><option value="">—</option><option>acides gras essentiels</option><option>8 acides aminés essentiels non synthétisés</option></select>. Vitamine D = <select class="bl" data-rep="liposoluble (stockée), favorise absorption Ca"><option value="">—</option><option>hydrosoluble (non stockée)</option><option>liposoluble (stockée), favorise absorption Ca</option></select>.</p><button class="bck" onclick="ckMQ('rev6')" style="font-size:.72rem;">Vérifier</button><span class="mq-fb" id="rev6-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 9 FLASHCARDS ══ -->
+<div class="pan" id="p9"><h2 style="margin-bottom:12px">🃏 Flashcards — Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:7px 12px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 10 QCM ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:6px">✏️ QCM — 20 Questions (Manuel + BAC)</h2><p style="margin-bottom:6px;font-size:.85rem;color:var(--mu)">Questions 1-4 (p.51) + 16 questions complémentaires</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.78rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.78rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 2 — Besoins Nutritionnels de l'Homme · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+// ══ NAVIGATION CORRIGÉE ══
+const panels = document.querySelectorAll('.pan');
+const tabs = document.querySelectorAll('.t');
+const pf = document.getElementById('pf');
+let vis = new Set([0]);
+
+function showTab(n) {
+  panels.forEach(p => p.classList.remove('on'));
+  tabs.forEach(t => t.classList.remove('on'));
+  if (panels[n]) panels[n].classList.add('on');
+  if (tabs[n]) tabs[n].classList.add('on');
+  vis.add(n);
+  pf.style.width = Math.round(vis.size / tabs.length * 100) + '%';
+  localStorage.setItem('t3ch2tab', n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const sv = localStorage.getItem('t3ch2tab');
+if (sv) {
+  const n = parseInt(sv);
+  if (n > 0 && n < panels.length) {
+    panels.forEach(p => p.classList.remove('on'));
+    tabs.forEach(t => t.classList.remove('on'));
+    if (panels[n]) panels[n].classList.add('on');
+    if (tabs[n]) tabs[n].classList.add('on');
+    vis.add(n);
+    pf.style.width = Math.round(vis.size / tabs.length * 100) + '%';
+  }
+}
+
+function togTip(h){h.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');const cn=document.querySelector('.cnode.cn-'+id);if(cn)cn.classList.add('active');}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p6 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p6 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"Les <select class='fs' data-ans='glucides'>—|protides|glucides|lipides</select> ont pour formule Cₙ(H₂O)ₙ. Ils fournissent <select class='fs' data-ans='4 kcal/g'>—|9 kcal/g|4 kcal/g</select>. Les oses sont <select class='fs' data-ans='non hydrolysables'>—|hydrolysables|non hydrolysables</select>."},{p:"Les <select class='fs' data-ans='protides'>—|glucides|protides|lipides</select> sont formés de C,H,O,N. Leur unité est l'<select class='fs' data-ans='acide aminé'>—|ose|acide aminé|acide gras</select>. La liaison peptidique unit <select class='fs' data-ans='COOH et NH₂'>—|COOH et COOH|COOH et NH₂</select>."},{p:"Les <select class='fs' data-ans='lipides'>—|glucides|protides|lipides</select> sont les plus énergétiques : <select class='fs' data-ans='9 kcal/g'>—|4 kcal/g|9 kcal/g</select>. Un lipide = ester d'<select class='fs' data-ans='alcool (glycérol) + acides gras'>—|ose + acide aminé|alcool (glycérol) + acides gras</select>."},{p:"Les <select class='fs' data-ans='8 AAE'>—|20 AAE|8 AAE|13 vitamines</select> sont les acides aminés que l'organisme <select class='fs' data-ans='ne peut pas synthétiser'>—|peut synthétiser|ne peut pas synthétiser</select>."},{p:"La règle GLP en énergie : G = <select class='fs' data-ans='55-60%'>—|15%|25-30%|55-60%</select>, L = <select class='fs' data-ans='25-30%'>—|15%|25-30%|55-60%</select>, P = <select class='fs' data-ans='15%'>—|15%|25-30%|55-60%</select>."},{p:"L'amidon + eau iodée → <select class='fs' data-ans='coloration bleue'>—|précipité rouge brique|coloration bleue</select>. Le glucose + liqueur de Fehling → <select class='fs' data-ans='précipité rouge brique'>—|coloration bleue|précipité rouge brique</select>."},{p:"Les vitamines <select class='fs' data-ans='liposolubles (A,D,E,K)'>—|hydrosolubles (B,C)|liposolubles (A,D,E,K)</select> sont stockées. Les vitamines <select class='fs' data-ans='hydrosolubles (B,C)'>—|liposolubles (A,D,E,K)|hydrosolubles (B,C)</select> doivent être consommées régulièrement."},{p:"L'huile d'olive est riche en acide <select class='fs' data-ans='oléique (monoinsaturé)'>—|palmitique (saturé)|oléique (monoinsaturé)</select>. Les oméga 3 sont des acides gras <select class='fs' data-ans='polyinsaturés'>—|saturés|polyinsaturés</select>."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 20 questions
+const QS=[{q:'Q1 (p.51). Une protéine est :',o:['Une molécule organique','Formée par un enchaînement d\'acides gras','Formée par un enchaînement d\'acides aminés','D\'origine strictement animale'],c:[0,2],fb:'Protéine = molécule organique (a) formée d\'acides aminés (c). Pas d\'acides gras (b). Origine animale ET végétale (d faux).'},{q:'Q2 (p.51). Un acide aminé :',o:['Est la molécule élémentaire des lipides','Est la molécule élémentaire des protéines','Est formé de C, H, O, N','Se lie par liaison peptidique'],c:[1,2,3],fb:'AA = unité des protéines (b), formé de C,H,O,N (c), liaison peptidique (d). Pas des lipides (a).'},{q:'Q3 (p.51). Un lipide :',o:['Est formé par un enchaînement d\'acides gras','Est un ester d\'acides gras et d\'alcool','Est soluble dans l\'eau','Est un acide gras formé de C, H, O'],c:[1],fb:'Lipide = ester d\'AG + alcool (b). Pas un enchaînement (a). Insoluble dans l\'eau (c faux). Pas seulement AG (d).'},{q:'Q4 (p.51). Un glucide :',o:['Est une molécule ternaire C, H, O','A pour formule C₆H₁₂O₆','Est toujours réducteur','Est un polymère d\'oses (pour les polyosides)'],c:[0,3],fb:'Glucide = molécule ternaire (a). Les polyosides sont des polymères d\'oses (d). Pas toujours C₆H₁₂O₆ (b). Pas toujours réducteur (saccharose non réducteur) (c).'},{q:'Q5. Un ose (monosaccharide) est caractérisé par :',o:['Être non hydrolysable','Être un polymère','Être soluble dans l\'eau','Donner un précipité rouge brique avec la liqueur de Fehling (s\'il est réducteur)'],c:[0,2,3],fb:'Ose = non hydrolysable (a), soluble (c), réducteur (d). Pas un polymère (b).'},{q:'Q6. La liaison peptidique s\'établit entre :',o:['COOH et COOH','COOH et NH₂','NH₂ et NH₂','Avec libération d\'une molécule d\'eau'],c:[1,3],fb:'Liaison peptidique = COOH + NH₂ → CO-NH + H₂O (b,d).'},{q:'Q7. Les acides gras insaturés :',o:['Possèdent une ou plusieurs doubles liaisons','Sont uniquement d\'origine animale','L\'acide oléique en est un exemple','Augmentent le LDL-cholestérol'],c:[0,2],fb:'AG insaturés = doubles liaisons (a). Acide oléique (c) = monoinsaturé (huile d\'olive). Pas uniquement animaux (b). Pas d\'augmentation LDL pour les insaturés (d).'},{q:'Q8. La valeur biologique d\'une protéine dépend de :',o:['Sa teneur en glucides','Sa richesse en acides aminés essentiels (AAE)','L\'équilibre entre les AAE','Sa couleur'],c:[1,2],fb:'Valeur biologique = richesse en AAE (b) + équilibre (c).'},{q:'Q9. Le tableau de Bootby permet de déterminer :',o:['Le poids idéal','Le métabolisme de base','Les besoins énergétiques','L\'IMC'],c:[1,2],fb:'Bootby = métabolisme de base (b) puis besoins énergétiques (c).'},{q:'Q10. La ration d\'un adolescent se distingue par :',o:['Des besoins en protides plus élevés','Des besoins en calcium plus élevés','Des besoins énergétiques inférieurs à l\'adulte','Une ration de croissance'],c:[0,1,3],fb:'Adolescent = croissance → besoins protides (a), calcium (b), ration croissance (d). Besoins supérieurs, pas inférieurs (c).'},{q:'Q11. Le saccharose est hydrolysé en :',o:['Glucose + Glucose','Glucose + Fructose','Glucose + Galactose','Fructose + Galactose'],c:[1],fb:'Saccharose = glucose + fructose (b). Maltose = glucose+glucose. Lactose = glucose+galactose.'},{q:'Q12. L\'amidon est mis en évidence par :',o:['La liqueur de Fehling','L\'eau iodée (coloration bleue)','Le réactif de Biuret','L\'acide nitrique'],c:[1],fb:'Amidon + eau iodée = coloration BLEUE (b). Fehling = glucose. Biuret = protides.'},{q:'Q13. Les acides gras essentiels (AGE) sont :',o:['Synthétisés par l\'organisme','Non synthétisés, doivent être apportés par l\'alimentation','L\'acide linoléique en fait partie','Sont des acides gras saturés'],c:[1,2],fb:'AGE = non synthétisés (b), acide linoléique (c). Pas synthétisés (a). Pas saturés (d).'},{q:'Q14. La ration de la femme allaitante :',o:['Est identique à celle de la femme sédentaire','Est plus riche en calcium','Est plus riche en protides','Apporte moins d\'énergie'],c:[1,2],fb:'Femme allaitante = besoins Ca (b) et protides (c) augmentés.'},{q:'Q15. Le glycogène :',o:['Est le polyoside de réserve animal','Donne une coloration brun acajou avec l\'eau iodée','Est présent dans le foie et les muscles','Est un diholoside'],c:[0,1,2],fb:'Glycogène = polyoside animal (a), brun acajou (b), foie+muscles (c). Pas diholoside (d).'},{q:'Q16. Les fibres alimentaires :',o:['Sont digérées par l\'organisme','Activent le transit intestinal','Peuvent réduire le cholestérol','Sont des polyosides (cellulose)'],c:[1,2,3],fb:'Fibres = activent transit (b), réduisent cholestérol (c), cellulose = polyoside (d). NON digérées (a).'},{q:'Q17. La formule brute du glucose est :',o:['C₆H₁₂O₆','C₁₂H₂₂O₁₁','(C₆H₁₀O₅)ₙ','C₅H₁₀O₅'],c:[0],fb:'Glucose = C₆H₁₂O₆ (a). C₁₂H₂₂O₁₁ = diholoside. (C₆H₁₀O₅)ₙ = polyoside. C₅H₁₀O₅ = ribose.'},{q:'Q18. L\'hydrolyse d\'un diholoside libère :',o:['1 ose','2 oses','De nombreux oses','Aucun ose'],c:[1],fb:'Diholoside → 2 oses (b). Polyoside → nombreux oses. Ose → non hydrolysable.'},{q:'Q19. La pyramide alimentaire place à sa base :',o:['Les graisses et huiles','Les féculents et l\'eau','Les produits laitiers','Les viandes et poissons'],c:[1],fb:'Base = féculents + eau (b) → à consommer le plus. Sommet = graisses + sucreries → le moins.'},{q:'Q20. 100g de viande = :',o:['2 œufs','½ L de lait','60g de fromage','200g de poisson'],c:[0,1,2],fb:'Équivalences : 100g viande = 100g poisson = 2 œufs (a) = ½L lait (b) = 60g fromage (c).'},];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:8px;padding:8px 12px;background:#e8f5e9;border-radius:7px;font-size:.82rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.76rem;margin-top:6px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
