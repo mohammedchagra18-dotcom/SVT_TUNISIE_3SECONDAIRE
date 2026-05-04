@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch8 — L'Excrétion Urinaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#E65100;--cl:#BF360C;--cbg:#fff8f2;--cs:#fff3e6;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#fff8f2;--tx:#1a1a1a;--mu:#888;
+  --brd:#ffe0cc;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:18px;line-height:1.7;}
+header{background:linear-gradient(135deg,#BF360C,#E65100 50%,#F57F17);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.45rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#ffe0cc;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#ffe0cc;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 9px;font-size:.7rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:1100px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--c);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#BF360C,#E65100);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+.table-scroll{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--c);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--cs);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--cs);border-radius:8px;border-left:5px solid var(--c);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:420px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#BF360C;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--c);margin-bottom:8px;display:flex;align-items:center;}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--cs);border-radius:10px;border-left:5px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+footer{background:linear-gradient(135deg,#BF360C,#E65100 50%,#F57F17);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#BF360C,#E65100 50%,#F57F17);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#ffe0cc;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode .cn-icon{font-size:2rem;margin-bottom:6px;}
+.cnode .cn-title{font-size:.8rem;font-weight:700;margin-bottom:3px;}
+.cnode .cn-sub{font-size:.68rem;opacity:.88;line-height:1.35;}
+.cn-a{background:linear-gradient(135deg,#E65100,#F57F17);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#B71C1C,#C62828);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid #E65100;}
+.cn-panel.b{border-left:6px solid #0277BD;}
+.cn-panel.c{border-left:6px solid #1B5E20;}
+.cn-panel.d{border-left:6px solid #B71C1C;}
+.cn-panel.e{border-left:6px solid #37474F;}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 3px;font-size:.58rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 8 — L'Excrétion Urinaire</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie IV · Pages 127–138 · 4 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">🏗️ Act.1 — Appareil</button>
+  <button class="t"     onclick="showTab(3)">🔬 Act.2 — Structure</button>
+  <button class="t"     onclick="showTab(4)">💧 Act.3 — Formation</button>
+  <button class="t"     onclick="showTab(5)">🩺 Act.4 — Dialyse</button>
+  <button class="t"     onclick="showTab(6)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(7)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(8)">📋 Révision</button>
+  <button class="t"     onclick="showTab(9)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(10)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#BF360C,#E65100 50%,#F57F17);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#ffe0cc;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie IV), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #ffe0cc;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffe0cc;color:#BF360C;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Reconnaître les <strong>organes de l'appareil urinaire</strong> et leurs rôles</div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #ffe0cc;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffe0cc;color:#BF360C;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">2</span> Expliquer les <strong>mécanismes de la formation de l'urine</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #ffe0cc;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffe0cc;color:#BF360C;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">3</span> Expliquer comment l'<strong>excrétion urinaire participe à la régulation</strong> du milieu intérieur</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.127-128)</h2>
+    <p class="expl-text">L'<strong>urine</strong> constitue la voie principale du rejet hydrique (1,5 L/j). Elle se forme à partir du sang et est constituée d'eau, de sels minéraux et de déchets cellulaires (urée, créatinine, acide urique). L'excrétion urinaire intervient dans la <strong>régulation de la constance du milieu intérieur</strong>. Quand il fait chaud, la miction diminue et l'urine est plus concentrée en NaCl. Après absorption d'eau, l'urine est abondante mais diluée. Un régime sans sel produit une urine abondante et diluée.</p>
+    <img src="images/T3Ch8_Doc01_bilan_hydrique.PNG" alt="Bilan hydrique" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — Bilan hydrique : entrées (boisson, aliments, métabolisme) = sorties (urine, peau, poumons, fèces) ≈ 2,55 L/j (p.127)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis</h2>
+    <p class="expl-text">Le <strong>milieu intérieur</strong> (Ch.7) a une composition constante : eau ≈ 90%, sels minéraux, protéines, glucose. Le <strong>rein</strong> est l'organe principal de l'excrétion urinaire. En cas de déficience rénale, le traitement par <strong>hémodialyse</strong> (rein artificiel) est vital.</p>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 3 Questions directrices</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Comment se forme l'<strong>urine</strong> dans le rein ?</li>
+      <li>Quels sont les <strong>mécanismes</strong> de filtration, réabsorption et sécrétion ?</li>
+      <li>Comment l'excrétion urinaire participe-t-elle à la <strong>régulation du milieu intérieur</strong> ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>L'<strong>excrétion urinaire</strong> (diurèse) est assurée par le <strong>néphron</strong>, unité fonctionnelle du rein (≈ 1 million/rein). Elle comporte trois étapes : la <strong>filtration glomérulaire</strong> (passive — 170 L/j d'urine primitive), la <strong>réabsorption</strong> (active pour sels/glucose, passive pour l'eau — 168,5 L/j retournent au sang) et la <strong>sécrétion/excrétion</strong> (active — élimination de déchets). Certaines substances sont à <strong>seuil</strong> (glucose : excrété si glycémie > 1,7 g/l), d'autres sont <strong>sans seuil</strong> (urée, créatinine, médicaments — toujours excrétées). L'excrétion urinaire est régulée par des hormones (ADH, aldostérone) pour maintenir l'homéostasie.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🏗️</div><div class="cn-title">Appareil</div><div class="cn-sub">Rein·Uretère·Vessie·Urètre</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">💧</div><div class="cn-title">Filtration</div><div class="cn-sub">Glomérule → 170 L/j</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">🔄</div><div class="cn-title">Réabsorption</div><div class="cn-sub">Eau·Glucose·Sels → Sang</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges</div><div class="cn-sub">Erreurs fréquentes</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">🔗</div><div class="cn-title">Connexions</div><div class="cn-sub">Ch.7·Ch.9</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:#E65100">🏗️ Appareil urinaire et néphron</h3><p class="expl-text"><strong>Organes :</strong> Reins (filtration) → Uretères (conduction) → Vessie (stockage) → Urètre (évacuation). Le <strong>néphron</strong> = glomérule + capsule de Bowman + tube contourné proximal + anse de Henlé + tube contourné distal + tube collecteur (Bellini).</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:#0277BD">💧 Filtration glomérulaire</h3><p class="expl-text"><strong>Mécanisme PASSIF</strong> (pression hydrostatique). Le plasma est filtré à travers la paroi des capillaires glomérulaires → <strong>urine primitive</strong> dans la capsule de Bowman. Composition = plasma SANS protéines ni cellules. Débit = 120 ml/min → <strong>170 L/24h</strong>. Pression de filtration = 75 (sang) − 30 (oncotique) − 20 (capsule) = <strong>25 mmHg</strong>.</p></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:#1B5E20">🔄 Réabsorption et Sécrétion</h3><p class="expl-text"><strong>Réabsorption :</strong> Tube contourné proximal = eau (passive), Na⁺, K⁺, Cl⁻, glucose, acides aminés, HPO₄²⁻ (actifs). Anse de Henlé = eau et électrolytes. Tube collecteur = eau (active, régulée par ADH). <strong>Sécrétion :</strong> Tube contourné = H⁺, NH₃, colorants, médicaments — substances non présentes dans le filtrat initial.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:#B71C1C">⚠️ 3 Pièges du CAPES</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Urine primitive ≠ Urine définitive <span style="margin-left:auto">▼</span></div><div class="piege-body"><strong>Urine primitive</strong> = filtrat glomérulaire (170 L/j, contient glucose, pas de protéines). <strong>Urine définitive</strong> = après réabsorption (1,5 L/j, SANS glucose, concentrée en urée). 99% du volume filtré est réabsorbé.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Filtration passive ≠ Réabsorption active <span style="margin-left:auto">▼</span></div><div class="piege-body">La <strong>filtration</strong> est un phénomène physique PASSIF (pression). La <strong>réabsorption</strong> est ACTIVE pour les sels/glucose (pompes, ATP) et PASSIVE pour l'eau (osmose). La <strong>sécrétion</strong> est également ACTIVE.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Substances à seuil ≠ Sans seuil <span style="margin-left:auto">▼</span></div><div class="piege-body"><strong>À seuil :</strong> glucose (seuil = 1,7 g/l), NaCl (5,6 g/l) — excrétés seulement si dépassent le seuil plasmatique. <strong>Sans seuil :</strong> urée, créatinine, acide urique, médicaments — excrétés quelle que soit leur concentration plasmatique.</div></div></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:#37474F">🔗 Connexions</h3><div class="connexion-grid"><div class="conn-item" style="border-color:#E65100;background:#fff3e6"><div class="conn-ch" style="color:#E65100">← Ch.7 — Milieu intérieur</div><p style="font-size:.86rem">L'excrétion urinaire régule la composition du milieu intérieur (volume, sels, déchets).</p></div><div class="conn-item" style="border-color:#0277BD;background:#e1f5fe"><div class="conn-ch" style="color:#0277BD">→ Ch.9 — Régulation glycémie</div><p style="font-size:.86rem">Le glucose est réabsorbé totalement si < 1,7 g/l. Au-delà → glucosurie (diabète).</p></div></div></div>
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi une personne diabétique a-t-elle du glucose dans ses urines (glucosurie) ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">Normalement, le glucose filtré est <strong>totalement réabsorbé</strong> dans le tube contourné proximal. Si la glycémie dépasse le <strong>seuil rénal de réabsorption</strong> (≈ 1,7 g/l), les transporteurs de glucose sont saturés → le glucose non réabsorbé reste dans l'urine → <strong>glucosurie</strong>. C'est un signe caractéristique du diabète sucré.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — APPAREIL URINAIRE ══ -->
+<div class="pan" id="p2">
+  <div class="sech">🏗️ Activité 1 — L'Appareil Urinaire (p.129)</div>
+  <div class="card"><h3 style="color:var(--c);">Organisation anatomique</h3>
+    <p class="expl-text">L'appareil urinaire comprend : deux <strong>reins</strong> (formation de l'urine), deux <strong>uretères</strong> (conduits acheminant l'urine vers la vessie), la <strong>vessie</strong> (réservoir musculaire) et l'<strong>urètre</strong> (canal d'évacuation vers l'extérieur). Chaque rein contient environ <strong>1 million de néphrons</strong>, unités fonctionnelles microscopiques.</p>
+    <img src="images/T3Ch8_Doc02_appareil_urinaire.PNG" alt="Appareil urinaire" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — Schéma de l&apos;appareil urinaire chez la femme (p.129)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. L'urine est formée dans <select class="bl" data-rep="les reins"><option value="">—</option><option>les reins</option><option>la vessie</option></select>.</p>
+      <p>2. L'urine est stockée temporairement dans <select class="bl" data-rep="la vessie"><option value="">—</option><option>les uretères</option><option>la vessie</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div></div>
+  </div>
+  <div class="card"><h3 style="color:var(--c);">Composition chimique de l'urine (p.129)</h3>
+    <p class="expl-text">L'urine contient <strong>930-945 g/l d'eau</strong>, des sels minéraux (Na⁺, K⁺, Ca²⁺, Cl⁻), et des <strong>déchets azotés</strong> : urée (10-35 g/l), acide urique (0,35-1 g/l), créatinine (0,5-2,25 g/l), ammoniac (0,5 g/l). Elle ne contient normalement <strong>pas de glucose</strong> (sauf diabète) ni de <strong>protéines</strong> (sauf néphropathie).</p>
+    <img src="images/T3Ch8_Doc03_composition_urine.PNG" alt="Composition urine" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.3 — Composition chimique de l&apos;urine — Tableau (p.129)</div>'">
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — STRUCTURE REIN ET NÉPHRON ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🔬 Activité 2 — Structure du Rein et du Néphron (p.130-131)</div>
+  <div class="card"><h3 style="color:var(--c);">Anatomie du rein</h3>
+    <p class="expl-text">Une coupe de rein montre trois zones : le <strong>cortex</strong> (périphérique), la <strong>médulla</strong> (centrale, avec les pyramides de Malpighi) et le <strong>bassinet</strong> (collecte l'urine vers l'uretère). Le néphron traverse ces zones : le glomérule et la capsule de Bowman sont dans le cortex, les tubes contournés et l'anse de Henlé plongent dans la médulla.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch8_Doc06_rein.PNG" alt="Rein" onerror="this.outerHTML='<div class=img-fb>📷 Doc.6 — Rein — Schéma anatomique (p.130)</div>'">
+      <img src="images/T3Ch8_Doc07_coupe_rein.PNG" alt="Coupe rein" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — Schéma d&apos;interprétation d&apos;une coupe d&apos;un rein (p.130)</div>'">
+    </div>
+    <img src="images/T3Ch8_Doc09_nephron_localisation.PNG" alt="Néphron localisation" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — Vascularisation et localisation du néphron au niveau du rein (p.131)</div>'">
+    <div class="focus-box"><strong>🔍 Le néphron :</strong> Artériole afférente → Glomérule (capillaires) → Artériole efférente → Capsule de Bowman → Tube contourné proximal → Anse de Henlé (branche descendante + ascendante) → Tube contourné distal → Tube collecteur (Bellini) → Calices → Bassinet → Uretère.</div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — FORMATION DE L'URINE ══ -->
+<div class="pan" id="p4">
+  <div class="sech">💧 Activité 3 — La Formation de l'Urine (p.132-133)</div>
+  <div class="card"><h3 style="color:var(--c);">A — Filtration glomérulaire (p.132)</h3>
+    <p class="expl-text">Au niveau du glomérule, la <strong>pression hydrostatique</strong> du sang (75 mmHg) pousse le plasma à travers la paroi des capillaires vers la capsule de Bowman. La <strong>pression oncotique</strong> (30 mmHg, due aux protéines) et la <strong>pression dans la capsule</strong> (20 mmHg) s'y opposent. La <strong>pression de filtration nette</strong> = 75 − 30 − 20 = <strong>25 mmHg</strong>. Le filtrat obtenu est <strong>l'urine primitive</strong> (170 L/24h), de composition proche du plasma mais SANS protéines ni cellules sanguines.</p>
+    <img src="images/T3Ch8_Doc10_composition_bowman_collecteur.PNG" alt="Composition Bowman" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10 — Composition du sang, du liquide glomérulaire (capsule de Bowman) et de l&apos;urine dans le tube collecteur (p.132)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 3A</div><div id="mq3a-q">
+      <p>1. La filtration glomérulaire est un phénomène <select class="bl" data-rep="passif (pression hydrostatique)"><option value="">—</option><option>passif (pression hydrostatique)</option><option>actif (consomme de l'ATP)</option></select>.</p>
+      <p>2. Le volume d'urine primitive formé par jour est d'environ <select class="bl" data-rep="170 litres"><option value="">—</option><option>1,5 litre</option><option>170 litres</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3a')">↺</button><div class="mq-fb" id="mq3a-fb"></div></div>
+  </div>
+  <div class="card"><h3 style="color:var(--c);">B — Réabsorption tubulaire (p.132-133)</h3>
+    <p class="expl-text">L'urine primitive (170 L) est très différente de l'urine définitive (1,5 L). La différence s'explique par la <strong>réabsorption</strong> massive d'eau et de solutés tout au long du néphron. Sur les 170 L filtrés, <strong>168,5 L sont réabsorbés</strong> (99%).</p>
+    <div class="table-scroll"><table><tr><th>Substance</th><th>Quantité filtrée/24h</th><th>Quantité excrétée/24h</th><th>% réabsorbé</th></tr>
+      <tr class="hl"><td>Eau</td><td>170 L</td><td>1,5 L</td><td>≈ 99%</td></tr>
+      <tr><td>Glucose</td><td>170 g</td><td>0 g</td><td>100% (si < seuil)</td></tr>
+      <tr class="hl"><td>Na⁺</td><td>560 g</td><td>5 g</td><td>≈ 99%</td></tr>
+      <tr><td>Urée</td><td>51 g</td><td>30 g</td><td>≈ 41%</td></tr>
+    </table></div>
+    <img src="images/T3Ch8_Doc12_modele_nephron.PNG" alt="Modèle néphron" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.12 — Modèle du fonctionnement du néphron : filtration glomérulaire + réabsorption tubulaire (p.133)</div>'">
+    <div class="focus-box"><strong>🔍 Localisation précise :</strong> Tube contourné proximal = réabsorption ACTIVE (Na⁺, glucose, acides aminés, phosphates) et PASSIVE (H₂O par osmose). Anse de Henlé = réabsorption H₂O (branche descendante) et NaCl (branche ascendante). Tube contourné distal = réabsorption ACTIVE régulée par hormones (aldostérone pour Na⁺). Tube collecteur = réabsorption H₂O régulée par <strong>ADH</strong> (hormone antidiurétique).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 3B</div><div id="mq3b-q">
+      <p>1. Le glucose est normalement réabsorbé à <select class="bl" data-rep="100% (totalement)"><option value="">—</option><option>100% (totalement)</option><option>50%</option></select>.</p>
+      <p>2. L'urée est réabsorbée à <select class="bl" data-rep="environ 41% (partiellement)"><option value="">—</option><option>environ 41% (partiellement)</option><option>100%</option></select>.</p>
+      <p>3. La réabsorption de l'eau dans le tube collecteur est régulée par <select class="bl" data-rep="l'ADH (hormone antidiurétique)"><option value="">—</option><option>l'ADH (hormone antidiurétique)</option><option>l'insuline</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3b')">↺</button><div class="mq-fb" id="mq3b-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La réabsorption est le mécanisme qui permet de <strong>récupérer</strong> l'essentiel de l'eau et des substances utiles (glucose, sels) filtrées. Sans elle, l'organisme perdrait 170 L d'eau et 170 g de glucose par jour — ce serait rapidement mortel. L'urée, déchet toxique, est beaucoup moins réabsorbée (41%) et s'accumule dans l'urine définitive.</div></div>
+  </div>
+  <div class="card"><h3 style="color:var(--c);">C — Sécrétion et excrétion</h3>
+    <p class="expl-text">Certaines substances comme l'<strong>acide hippurique</strong> et l'<strong>ammoniac</strong> ne sont pas présentes dans le filtrat glomérulaire mais apparaissent dans l'urine définitive. Elles sont <strong>sécrétées activement</strong> par les cellules des tubes contournés. Il en est de même des <strong>médicaments et colorants</strong> qui passent du sang vers l'urine par transport actif. C'est un mécanisme d'<strong>épuration</strong> complémentaire à la filtration.</p>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — REIN ARTIFICIEL ══ -->
+<div class="pan" id="p5">
+  <div class="sech">🩺 Activité 4 — Le Rein Artificiel (Hémodialyse) (p.134)</div>
+  <div class="card"><h3 style="color:var(--c);">Principe de l'hémodialyse</h3>
+    <p class="expl-text">En cas d'<strong>insuffisance rénale</strong> (perte de fonction > 80%), les déchets s'accumulent dans le sang (urée, créatinine). Le <strong>rein artificiel</strong> (hémodialyseur) permet de suppléer cette fonction : le sang du malade circule dans des tubes semi-perméables immergés dans un <strong>liquide de dialyse</strong> de composition contrôlée. Les déchets diffusent du sang vers le dialysat (du milieu le plus concentré vers le moins concentré), tandis que les substances utiles (glucose, électrolytes) sont maintenues à des concentrations physiologiques.</p>
+    <img src="images/T3Ch8_Doc13_hemodialyse.PNG" alt="Hémodialyse" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — Schéma de l&apos;hémodialyse (rein artificiel) (p.134)</div>'">
+    <div class="table-scroll"><table><tr><th>Substance</th><th>Plasma du malade</th><th>Liquide de dialyse</th><th>Transfert</th></tr>
+      <tr class="hl"><td>Urée</td><td>260 mg/100 ml</td><td>0</td><td>Sang → Dialysat (épuration)</td></tr>
+      <tr><td>Glucose</td><td>100 mg/100 ml</td><td>100 mg/100 ml</td><td>Aucun (équilibre)</td></tr>
+      <tr class="hl"><td>Na⁺</td><td>142 mEq/l</td><td>126 mEq/l</td><td>Faible transfert</td></tr>
+    </table></div>
+    <div class="focus-box"><strong>🔍 Différence avec le néphron :</strong> Le rein artificiel repose sur la <strong>dialyse</strong> (diffusion passive à travers une membrane), alors que le néphron combine <strong>filtration</strong> (pression), <strong>réabsorption active</strong> (pompes) et <strong>sécrétion active</strong>. La dialyse est moins performante (2-3 séances/semaine nécessaires) mais permet la survie des insuffisants rénaux en attendant une greffe.</div>
+  </div>
+</div>
+
+<!-- ══ 6 BILAN ══ -->
+<div class="pan" id="p6">
+  <div class="sech">📋 BILAN — Pages 135-136 (5 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> Le néphron, unité fonctionnelle du rein (p.135)</h3><p style="font-size:.92rem">Le néphron assure la <select class="bl" data-rep="diurèse (formation de l'urine)"><option value="">—</option><option>diurèse (formation de l'urine)</option><option>digestion</option></select>. La filtration glomérulaire est <select class="bl" data-rep="un phénomène physique passif"><option value="">—</option><option>un phénomène physique passif</option><option>un transport actif</option></select> qui retient <select class="bl" data-rep="les protéines et les cellules sanguines"><option value="">—</option><option>les protéines et les cellules sanguines</option><option>le glucose et les sels</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> La réabsorption (p.135)</h3><p style="font-size:.92rem">Le glucose et les acides aminés sont réabsorbés <select class="bl" data-rep="totalement (100%)"><option value="">—</option><option>totalement (100%)</option><option>partiellement (50%)</option></select>. L'eau et les sels sont réabsorbés <select class="bl" data-rep="partiellement"><option value="">—</option><option>partiellement</option><option>pas du tout</option></select>. La réabsorption du glucose est <select class="bl" data-rep="active (consomme de l'énergie)"><option value="">—</option><option>active (consomme de l'énergie)</option><option>passive</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> La sécrétion (p.135)</h3><p style="font-size:.92rem">Certaines substances comme <select class="bl" data-rep="l'acide hippurique, l'ammoniac, les médicaments"><option value="">—</option><option>l'acide hippurique, l'ammoniac, les médicaments</option><option>le glucose, les acides aminés</option></select> sont sécrétées des capillaires vers l'urine. Ce phénomène est <select class="bl" data-rep="actif (avec dépense énergétique)"><option value="">—</option><option>actif (avec dépense énergétique)</option><option>passif</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Seuil d'élimination urinaire (p.136)</h3><p style="font-size:.92rem">Le glucose est une substance <select class="bl" data-rep="à seuil (excrété si glycémie > 1,7 g/l)"><option value="">—</option><option>à seuil (excrété si glycémie > 1,7 g/l)</option><option>sans seuil</option></select>. L'urée est une substance <select class="bl" data-rep="sans seuil (toujours excrétée)"><option value="">—</option><option>sans seuil (toujours excrétée)</option><option>à seuil</option></select>. Le NaCl est une substance <select class="bl" data-rep="à seuil (5,6 g/l)"><option value="">—</option><option>à seuil (5,6 g/l)</option><option>sans seuil</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">5</span> Régulation hormonale (p.136)</h3><p style="font-size:.92rem">L'<select class="bl" data-rep="ADH"><option value="">—</option><option>ADH</option><option>insuline</option></select> active la réabsorption d'eau au niveau du tube collecteur. L'<select class="bl" data-rep="aldostérone"><option value="">—</option><option>aldostérone</option><option>glucagon</option></select> active la réabsorption de NaCl au niveau du tube contourné distal.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 7 EXERCICES ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📝 Exercices — Manuel p.137-138</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.137)</h3>
+    <table>
+      <tr><td><strong>1. Liquide capsule Bowman =</strong></td><td><select class="tcell" data-rep="d- ultrafiltration du plasma"><option value="">—</option><option>a- diffusion</option><option>d- ultrafiltration du plasma</option></select></td></tr>
+      <tr><td><strong>2. Filtration glomérulaire :</strong></td><td><select class="tcell" data-rep="c- est un phénomène passif"><option value="">—</option><option>a- est sélective</option><option>c- est un phénomène passif</option></select></td></tr>
+      <tr><td><strong>3. Réabsorption passive :</strong></td><td><select class="tcell" data-rep="d- par diffusion et osmose"><option value="">—</option><option>a- par apport énergétique</option><option>d- par diffusion et osmose</option></select></td></tr>
+      <tr><td><strong>4. Réabsorption active :</strong></td><td><select class="tcell" data-rep="a- nécessite énergie, d- maintient constance milieu intérieur"><option value="">—</option><option>a + d</option><option>b- concerne eau et sels</option></select></td></tr>
+      <tr><td><strong>5. Le néphron :</strong></td><td><select class="tcell" data-rep="a- assure filtration, b- unité fonctionnelle, c- réabsorption passive eau, d- réabsorption active glucose et acides aminés"><option value="">—</option><option>a + b + c + d</option><option>a uniquement</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">📈 Ex.2 — ADH et débit urinaire (p.137)</h3>
+    <div class="ctx">Courbes de débit urinaire chez deux sujets A et B : A a bu 1,7 l d'eau pure, B a bu 1,7 l d'eau + injection d'ADH.</div>
+    <p style="font-size:.88rem;margin-bottom:7px">Chez le sujet A, le débit urinaire <select class="bl" data-rep="augmente (élimination de l'excès d'eau)"><option value="">—</option><option>augmente (élimination de l'excès d'eau)</option><option>diminue</option></select>. Chez le sujet B (ADH), le débit <select class="bl" data-rep="reste faible (ADH active la réabsorption d'eau)"><option value="">—</option><option>augmente fortement</option><option>reste faible (ADH active la réabsorption d'eau)</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 8 BILAN RÉVISION ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.88rem;color:var(--mu);margin-bottom:14px">Bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Organes de l'appareil urinaire</div><p style="font-size:.88rem;margin-bottom:7px">Formation urine = <select class="bl" data-rep="reins (néphrons)"><option value="">—</option><option>reins (néphrons)</option><option>vessie</option></select>. Conduction = <select class="bl" data-rep="uretères"><option value="">—</option><option>uretères</option><option>urètre</option></select>. Stockage = <select class="bl" data-rep="vessie"><option value="">—</option><option>vessie</option><option>rein</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Formation de l'urine</div><p style="font-size:.88rem;margin-bottom:7px">Filtration = <select class="bl" data-rep="passive (pression hydrostatique), 170 L/j"><option value="">—</option><option>passive (pression hydrostatique), 170 L/j</option><option>active, 1,5 L/j</option></select>. Réabsorption = <select class="bl" data-rep="active (sels, glucose) et passive (eau)"><option value="">—</option><option>active (sels, glucose) et passive (eau)</option><option>uniquement passive</option></select>. Urine définitive = <select class="bl" data-rep="1,5 L/j, sans glucose, riche en urée"><option value="">—</option><option>1,5 L/j, sans glucose, riche en urée</option><option>170 L/j, avec glucose</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Régulation du milieu intérieur</div><p style="font-size:.88rem;margin-bottom:7px">ADH = <select class="bl" data-rep="active réabsorption H₂O au tube collecteur"><option value="">—</option><option>active réabsorption H₂O au tube collecteur</option><option>inhibe la réabsorption</option></select>. Glucose = substance <select class="bl" data-rep="à seuil (1,7 g/l)"><option value="">—</option><option>à seuil (1,7 g/l)</option><option>sans seuil</option></select>. Urée = substance <select class="bl" data-rep="sans seuil (toujours excrétée)"><option value="">—</option><option>sans seuil (toujours excrétée)</option><option>à seuil</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 9 FLASHCARDS ══ -->
+<div class="pan" id="p9"><h2 style="margin-bottom:14px">🃏 Flashcards — 8 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 10 QCM ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 8 — L'Excrétion Urinaire · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch8tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch8tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p6 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p6 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"Le <select class='fs' data-ans='néphron'>—|néphron|glomérule|uretère|vessie</select> est l'unité fonctionnelle du <select class='fs' data-ans='rein'>—|rein|foie|poumon|cœur</select>. Il y en a environ <select class='fs' data-ans='1 million par rein'>—|1 million par rein|100|1000|10</select>."},{p:"La <select class='fs' data-ans='filtration glomérulaire'>—|filtration glomérulaire|réabsorption|sécrétion|digestion</select> est un phénomène <select class='fs' data-ans='passif (pression)'>—|passif (pression)|actif (ATP)|enzymatique|chimique</select>. Elle produit <select class='fs' data-ans='170 L d&apos;urine primitive par jour'>—|170 L d&apos;urine primitive par jour|1,5 L|10 L|500 ml</select>."},{p:"Le <select class='fs' data-ans='glucose'>—|glucose|NaCl|urée|créatinine</select> est normalement réabsorbé à <select class='fs' data-ans='100%'>—|100%|50%|0%|25%</select>. C'est une substance <select class='fs' data-ans='à seuil (1,7 g/l)'>—|à seuil (1,7 g/l)|sans seuil|toujours excrétée</select>."},{p:"L'<select class='fs' data-ans='urée'>—|urée|glucose|NaCl|eau</select> est une substance <select class='fs' data-ans='sans seuil (toujours excrétée)'>—|sans seuil (toujours excrétée)|à seuil|jamais excrétée</select>. Elle est réabsorbée à <select class='fs' data-ans='environ 41%'>—|environ 41%|100%|0%|90%</select>."},{p:"L'<select class='fs' data-ans='ADH'>—|ADH|insuline|glucagon|aldostérone</select> active la réabsorption d'<select class='fs' data-ans='eau au tube collecteur'>—|eau au tube collecteur|glucose|NaCl|urée</select>. L'<select class='fs' data-ans='aldostérone'>—|ADH|aldostérone|insuline|cortisol</select> active la réabsorption de NaCl."},{p:"L'<select class='fs' data-ans='hémodialyse'>—|hémodialyse|diurèse|filtration|réabsorption</select> est un traitement qui supplée le <select class='fs' data-ans='rein déficient'>—|rein déficient|foie|cœur|poumon</select>. Le sang est mis en contact avec un <select class='fs' data-ans='liquide de dialyse'>—|liquide de dialyse|plasma|sérum|acide</select>."},{p:"La <select class='fs' data-ans='réabsorption'>—|réabsorption|filtration|sécrétion|digestion</select> permet de récupérer <select class='fs' data-ans='99% de l&apos;eau filtrée'>—|99% de l&apos;eau filtrée|10%|0%|50%</select>. L'urine définitive a un volume de <select class='fs' data-ans='1,5 L/j'>—|1,5 L/j|170 L/j|10 L/j|50 L/j</select>."},{p:"La <select class='fs' data-ans='sécrétion tubulaire'>—|sécrétion tubulaire|filtration|réabsorption|dialyse</select> élimine activement <select class='fs' data-ans='les médicaments, colorants, H⁺, NH₃'>—|les médicaments, colorants, H⁺, NH₃|le glucose|les protéines|les hématies</select>."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. Le liquide de la capsule de Bowman est le résultat :',o:['D\'une diffusion simple','D\'un transport actif','D\'un transport passif et actif','D\'une ultrafiltration du plasma'],c:[3],fb:'Liquide capsule Bowman = ultrafiltration du plasma (d), phénomène passif.'},{q:'Q2. La filtration glomérulaire :',o:['Est sélective (retient protéines et cellules)','Est une dialyse','Est un phénomène passif','Ne dépend pas de la pression artérielle'],c:[0,2],fb:'Filtration = sélective (a), passive (c). Dépend de la pression !'},{q:'Q3. La réabsorption tubulaire passive :',o:['Se fait par apport énergétique','Se fait sans dépense énergétique','Par diffusion','Par diffusion et osmose'],c:[3],fb:'Réabsorption passive = diffusion + osmose (d). Sans énergie.'},{q:'Q4. La réabsorption tubulaire active :',o:['Nécessite de l\'énergie','Concerne l\'eau et les sels minéraux','Ne fait pas intervenir d\'hormones','Assure le maintien de la constance du milieu intérieur'],c:[0,3],fb:'Réabsorption active = énergie (a), maintien homéostasie (d).'},{q:'Q5. Le néphron :',o:['Assure la filtration du plasma','Est l\'unité fonctionnelle du rein','Assure la réabsorption passive de l\'eau','Assure la réabsorption active du glucose et des acides aminés'],c:[0,1,2,3],fb:'Toutes vraies (a,b,c,d). Néphron = unité complète de formation de l\'urine.'},{q:'Q6. Le glucose dans l\'urine (glucosurie) apparaît quand :',o:['La glycémie dépasse 1,7 g/l','Les transporteurs de glucose sont saturés','Le rein est normal','La volémie augmente'],c:[0,1],fb:'Glucosurie = glycémie > seuil (a), saturation transporteurs (b).'},{q:'Q7. L\'ADH (hormone antidiurétique) :',o:['Active la réabsorption d\'eau au tube collecteur','Augmente le volume urinaire','Est sécrétée par l\'hypothalamus','Agit sur le glomérule'],c:[0,2],fb:'ADH = réabsorption H₂O (a), sécrétée par hypothalamus (c). DIMINUE le volume urinaire.'},{q:'Q8. L\'hémodialyse (rein artificiel) :',o:['Utilise un liquide de dialyse','Repose sur le principe de diffusion','Est aussi efficace qu\'un rein sain','Élimine l\'urée du sang'],c:[0,1,3],fb:'Dialyse = dialysat (a), diffusion (b), élimine urée (d). Moins efficace que le rein (c faux).'},{q:'Q9. L\'urée est une substance :',o:['À seuil d\'élimination','Sans seuil (toujours excrétée)','Réabsorbée partiellement (≈ 41%)','Totalement réabsorbée'],c:[1,2],fb:'Urée = sans seuil (b), réabsorbée partiellement (c).'},{q:'Q10. Le volume d\'urine définitive par jour est d\'environ :',o:['1,5 litre','170 litres','0,5 litre','15 litres'],c:[0],fb:'Urine définitive ≈ 1,5 L/j (a). 170 L = urine primitive.'},{q:'Q11. La pression de filtration nette au glomérule est de :',o:['75 mmHg','30 mmHg','25 mmHg','20 mmHg'],c:[2],fb:'PF nette = 75 (sang) − 30 (oncotique) − 20 (capsule) = 25 mmHg (c).'},{q:'Q12. Une hémorragie grave (hypotension artérielle) :',o:['Augmente la filtration glomérulaire','Diminue la pression de filtration','Réduit la formation d\'urine','N\'a aucun effet sur le rein'],c:[1,2],fb:'Hypotension → baisse pression filtration (b) → moins d\'urine formée (c).'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
