@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thème 3 — Dynamique du globe terrestre &amp; Évolution biologique | SVT 3ème</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#b45309;--em-d:#92400e;--em-lt:#fffbeb;--em-md:#d97706;
+  --teal:#0f766e;--teal-lt:#f0fdfa;
+  --purple:#7c3aed;--purple-lt:#f5f3ff;
+  --blue:#1e5fa3;--blue-lt:#eff6ff;
+  --red:#b91c1c;--red-lt:#fef2f2;
+  --amber:#d97706;--amber-lt:#fffbeb;
+  --green:#047857;--green-lt:#ecfdf5;
+  --gray1:#f8fafc;--gray2:#e2e8f0;--gray3:#cbd5e1;
+  --gray6:#475569;--gray8:#1e293b;
+  --shadow:0 2px 12px rgba(0,0,0,.07);--shadow-md:0 4px 20px rgba(0,0,0,.11);
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:#fffbf0;color:var(--gray8);font-size:15px;line-height:1.7}
+
+header{background:linear-gradient(135deg,#78350f 0%,var(--em-d) 50%,var(--em) 100%);color:#fff;padding:24px 36px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(180,83,9,.4);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
+header::after{content:'';position:absolute;left:30%;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hdr-badge{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;line-height:1.2}
+.hdr-sub{opacity:.75;font-size:1rem;font-weight:400;margin-top:3px}
+.hdr-right{text-align:right;font-size:12px;opacity:.8;line-height:2;z-index:1}
+.hdr-right strong{display:block;font-size:13px;font-weight:700;opacity:1}
+
+.progress-wrap{background:rgba(0,0,0,.15);height:4px}
+.progress-bar{height:4px;background:linear-gradient(90deg,#fcd34d,#f59e0b);width:0%;transition:width .4s}
+
+.tabs-nav{background:#fff;border-bottom:2px solid var(--gray2);display:flex;padding:0 28px;gap:2px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;overflow-x:auto}
+.tab-btn{padding:14px 16px;background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:12.5px;font-weight:600;color:var(--gray6);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--em);background:var(--em-lt);border-radius:6px 6px 0 0}
+.tab-btn.active{color:var(--em);border-bottom-color:var(--em)}
+
+.tab-panel{display:none;padding:28px 36px;max-width:1100px;margin:0 auto;animation:fadeIn .3s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.section-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--em-d);border-left:4px solid var(--em);padding-left:12px;margin:32px 0 16px;display:flex;align-items:center;gap:10px}
+.sub-title{font-size:1rem;font-weight:700;color:var(--teal);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sub-title::before{content:'';display:block;width:22px;height:2.5px;background:var(--teal);border-radius:2px}
+.sub-title.purple{color:var(--purple)}.sub-title.purple::before{background:var(--purple)}
+.sub-title.red{color:var(--red)}.sub-title.red::before{background:var(--red)}
+.sub-title.blue{color:var(--blue)}.sub-title.blue::before{background:var(--blue)}
+.sub-title.amber{color:var(--amber)}.sub-title.amber::before{background:var(--amber)}
+.sub-title.green{color:var(--green)}.sub-title.green::before{background:var(--green)}
+
+.def-box{background:var(--em-lt);border:1.5px solid #fcd34d;border-radius:var(--radius);padding:14px 18px;margin:12px 0}
+.def-box .lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--em);margin-bottom:6px}
+.def-box p{font-size:14.5px}
+.info-box{border-left:4px solid var(--amber);background:var(--amber-lt);border-radius:0 var(--radius) var(--radius) 0;padding:11px 16px;margin:12px 0;font-size:13.5px}
+.info-box.blue{border-left-color:var(--blue);background:var(--blue-lt)}
+.info-box.red{border-left-color:var(--red);background:var(--red-lt)}
+.info-box.green{border-left-color:var(--green);background:var(--green-lt)}
+.info-box.teal{border-left-color:var(--teal);background:var(--teal-lt)}
+.info-box.purple{border-left-color:var(--purple);background:var(--purple-lt)}
+.info-box strong{color:var(--em-d)}
+.info-box.blue strong{color:var(--blue)}
+.info-box.red strong{color:var(--red)}
+.info-box.green strong{color:var(--green)}
+.info-box.teal strong{color:var(--teal)}
+.info-box.purple strong{color:var(--purple)}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.card{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border-top:3px solid var(--em)}
+.card.teal{border-top-color:var(--teal)}.card.purple{border-top-color:var(--purple)}
+.card.amber{border-top-color:var(--amber)}.card.red{border-top-color:var(--red)}
+.card.blue{border-top-color:var(--blue)}.card.green{border-top-color:var(--green)}
+.card h4{font-size:.9rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card ul{padding-left:18px;font-size:13.5px;color:var(--gray6)}.card ul li{margin-bottom:5px}
+.card p{font-size:13.5px;color:var(--gray6)}
+
+.img-wrap{background:var(--gray1);border:2px dashed var(--gray3);border-radius:var(--radius);padding:8px;margin:14px 0;text-align:center;overflow:hidden}
+.img-wrap img{max-width:100%;max-height:280px;border-radius:var(--radius-sm);display:block;margin:0 auto;object-fit:contain}
+.img-fallback{padding:20px 16px;color:var(--gray6);font-size:12.5px}
+.img-fallback .ico-ph{font-size:28px;display:block;margin-bottom:6px}
+.img-fallback strong{display:block;font-size:13px;color:var(--gray8);margin-bottom:4px}
+.img-caption{font-size:11.5px;color:var(--gray6);text-align:center;margin-top:5px;font-style:italic}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.img-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+
+.tbl-wrap{overflow-x:auto;margin:14px 0;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;background:#fff}
+th{background:var(--em-d);color:#fff;padding:10px 14px;font-size:12.5px;font-weight:600;text-align:left}
+th.teal{background:var(--teal)}th.purple{background:var(--purple)}th.blue{background:var(--blue)}
+th.amber{background:var(--amber)}th.red{background:var(--red)}th.green{background:var(--green)}
+td{padding:9px 14px;font-size:13px;border-bottom:1px solid var(--gray2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray1)}
+
+.activity{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin:18px 0;overflow:hidden;border:1.5px solid var(--gray2)}
+.activity-header{background:linear-gradient(135deg,#78350f 0%,var(--em) 100%);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.activity-header.teal{background:linear-gradient(135deg,var(--teal) 0%,#0d9488 100%)}
+.activity-header.purple{background:linear-gradient(135deg,var(--purple) 0%,#6d28d9 100%)}
+.activity-header.amber{background:linear-gradient(135deg,var(--amber) 0%,#f59e0b 100%)}
+.activity-header.blue{background:linear-gradient(135deg,var(--blue) 0%,#2563eb 100%)}
+.activity-header.green{background:linear-gradient(135deg,var(--green) 0%,#059669 100%)}
+.activity-header h3{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.activity-header .toggle-ico{font-size:18px;transition:transform .3s}
+.activity-header.open .toggle-ico{transform:rotate(180deg)}
+.activity-body{padding:18px 20px;display:none}
+.activity-body.open{display:block}
+
+.schema-expression{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0;padding:16px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+.schema-box{background:var(--em-lt);border:2px solid var(--em);border-radius:var(--radius-sm);padding:10px 16px;text-align:center;font-weight:700;font-size:13px;color:var(--em-d)}
+.schema-box.blue{background:var(--blue-lt);border-color:var(--blue);color:var(--blue)}
+.schema-box.purple{background:var(--purple-lt);border-color:var(--purple);color:var(--purple)}
+.schema-box.teal{background:var(--teal-lt);border-color:var(--teal);color:var(--teal)}
+.schema-box.green{background:var(--green-lt);border-color:var(--green);color:var(--green)}
+.schema-box.red{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.schema-arrow{font-size:22px;color:var(--gray3);font-weight:700}
+.schema-label{font-size:10px;color:var(--gray6);display:block;font-weight:400;margin-top:2px}
+
+.qcm-item{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.qcm-item .qnum{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--em);margin-bottom:8px}
+.qcm-item .qtxt{font-size:14.5px;font-weight:700;margin-bottom:14px;line-height:1.4;color:var(--gray8)}
+.qcm-opt{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:6px;font-size:13.5px;border:1.5px solid var(--gray2);transition:all .15s;user-select:none}
+.qcm-opt:hover{background:var(--em-lt);border-color:#fcd34d}
+.qcm-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.qcm-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+.qcm-opt.missed{background:#fef9c3;border-color:#ca8a04;color:#854d0e;pointer-events:none}
+.qcm-opt input[type=radio]{accent-color:var(--em);width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.btn-verify{margin-top:12px;padding:9px 22px;background:var(--em);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s}
+.btn-verify:hover{background:var(--em-d)}
+.qcm-fb{margin-top:10px;padding:13px 16px;border-radius:var(--radius-sm);font-size:13.5px;display:none;line-height:1.7}
+.qcm-fb.show{display:block}
+.qcm-fb.ok{background:#d1fae5;color:#065f46;border:1px solid #059669}
+.qcm-fb.ko{background:#fff7ed;color:#7c2d12;border:1px solid #fb923c}
+
+.prereq-q{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin:12px 0;border-left:4px solid var(--purple)}
+.prereq-q .qlbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px}
+.prereq-q .qtxt{font-size:14px;font-weight:600;margin-bottom:12px}
+.prereq-opt{padding:8px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:13.5px;border:1.5px solid var(--gray2);margin-bottom:6px;transition:all .2s;user-select:none;display:block;width:100%;text-align:left;background:#fff;font-family:'Source Sans 3',sans-serif}
+.prereq-opt:hover{background:var(--purple-lt);border-color:var(--purple)}
+.prereq-opt.correct-ans{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.prereq-opt.wrong-ans{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+
+.gap-text{font-size:14.5px;line-height:2.8;background:#fff;border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.gap-select{display:inline-block;padding:2px 6px;border:1.5px solid var(--em);border-radius:4px;background:#fff;font-family:'Source Sans 3',sans-serif;font-size:13.5px;color:var(--gray8);cursor:pointer;vertical-align:middle;min-width:130px}
+.gap-select:focus{outline:none;border-color:var(--em-d)}
+.gap-select.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+.gap-select.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.btn-check-gap{margin-top:12px;padding:8px 20px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s;display:block}
+.btn-check-gap:hover{background:var(--em)}
+.gap-score{margin-top:10px;font-size:13.5px;font-weight:700;display:none}
+.gap-score.show{display:block}
+
+.dna-seq{font-family:'Courier New',monospace;font-size:12.5px;background:var(--gray1);border:1.5px solid var(--gray2);border-radius:var(--radius-sm);padding:12px 16px;margin:10px 0;overflow-x:auto;white-space:pre;line-height:1.9}
+
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:16px 0}
+.fc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);cursor:pointer;min-height:140px;perspective:900px;transition:transform .2s}
+.fc:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.fc-inner{position:relative;width:100%;min-height:140px;transform-style:preserve-3d;transition:transform .45s}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;padding:16px 18px;border-radius:var(--radius);backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:140px}
+.fc-front{background:linear-gradient(135deg,#78350f 0%,var(--em) 100%);color:#fff}
+.fc-back{background:#fff;color:var(--gray8);transform:rotateY(180deg);border:1.5px solid var(--gray2)}
+.fc-front .qlbl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;opacity:.65;margin-bottom:7px}
+.fc-front .qtxt{font-size:13.5px;font-weight:600;line-height:1.4}
+.fc-front .qhint{font-size:10px;opacity:.55;margin-top:8px}
+.fc-back .albl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--em);font-weight:700;margin-bottom:7px}
+.fc-back .atxt{font-size:13px;line-height:1.55}
+.cnt{font-size:10px;opacity:.4;align-self:flex-end}
+
+.score-wrap{background:var(--em-d);color:#fff;border-radius:var(--radius);padding:16px 22px;margin-top:18px;text-align:center;display:none}
+.score-wrap.show{display:block}
+.score-wrap .score-num{font-family:'Playfair Display',serif;font-size:2rem;margin:8px 0}
+
+#mindmap-canvas{border-radius:var(--radius);background:#fff;box-shadow:var(--shadow);display:block;margin:0 auto;max-width:100%}
+
+footer{text-align:center;padding:20px 16px;color:var(--gray6);font-size:12px;border-top:1px solid var(--gray2);margin-top:40px;background:#fff}
+footer strong{color:var(--em)}
+
+@media(max-width:640px){
+  header{flex-direction:column;gap:12px;padding:18px 20px}
+  .hdr-right{text-align:left}
+  .tab-panel{padding:18px 16px}
+  .img-trio{grid-template-columns:1fr}
+  .schema-expression{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="hdr-badge">🌍 SVT · 3ème Année Secondaire · Thème 3 — Géologie</div>
+    <div class="hdr-title">Dynamique du globe terrestre &amp; Évolution biologique</div>
+    <div class="hdr-sub">Ch.1 : Structure du globe &nbsp;·&nbsp; Ch.2 : Tectonique des plaques &nbsp;·&nbsp; Ch.3 : Évolution biologique</div>
+  </div>
+  <div class="hdr-right">
+    <strong>INGÉNIEUR Mohamed CHAGRAOUI</strong>
+    Candidat CAPES SVT 2026<br>
+    Programme officiel tunisien · Fiche interactive
+  </div>
+</header>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('contexte',this)">🎯 Mise en contexte</button>
+  <button class="tab-btn" onclick="showTab('ch1',this)">🌐 Ch.1 — Structure du globe</button>
+  <button class="tab-btn" onclick="showTab('ch2',this)">🔄 Ch.2 — Tectonique</button>
+  <button class="tab-btn" onclick="showTab('ch3',this)">🦕 Ch.3 — Évolution biologique</button>
+  <button class="tab-btn" onclick="showTab('synthese',this)">🗺️ Synthèse</button>
+  <button class="tab-btn" onclick="showTab('eval',this)">✅ Exercices CAPES</button>
+</nav>
+
+<!-- ══════════════ TAB 1 — CONTEXTE ══════════════ -->
+<div class="tab-panel active" id="tab-contexte">
+
+  <h2 class="section-title">🌍 Thème 3 — Géologie : la Terre en mouvement</h2>
+  <div class="def-box">
+    <div class="lbl">Problématique générale</div>
+    <p>La Terre (4,6 milliards d'années) n'est pas une planète figée : elle est le siège d'une <strong>activité géologique intense</strong> (séismes, volcans, formation des montagnes) et d'une <strong>évolution biologique permanente</strong> (apparition et disparition d'espèces). Ce thème explore la relation entre ces deux évolutions.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card"><h4 style="color:var(--em)">🌐 Ch.1 — Structure du globe</h4><p>Sismologie, discontinuités (Moho, Gutenberg, Lehmann), croûte, manteau, noyau, lithosphère, asthénosphère, volcanisme.</p></div>
+    <div class="card teal"><h4 style="color:var(--teal)">🔄 Ch.2 — Tectonique des plaques</h4><p>Wegener, dorsales, expansion océanique, subduction, plaques lithosphériques, points chauds, Atlas tunisien.</p></div>
+    <div class="card blue"><h4 style="color:var(--blue)">🦕 Ch.3 — Évolution biologique</h4><p>Darwinisme, datation radioactive, formes intermédiaires, arbre phylogénique, crises biologiques, rapport évolution géologique/biologique.</p></div>
+  </div>
+
+  <div class="img-trio">
+    <div>
+      <div class="img-wrap">
+        <img src="images/t3_fig_globe_terrestre.png" alt="Globe terrestre" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig_globe_terrestre.png</strong>Le globe terrestre — planète bleue du système solaire (doc.1 p.261)</div>
+      </div>
+      <div class="img-caption">Doc.1 — La Terre, planète active</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/t3_fig_dorsales_carte.png" alt="Dorsales médio-océaniques" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig_dorsales_carte.png</strong>Dorsales médio-océaniques — 60 000 km parcourant tous les océans (doc.1 p.280)</div>
+      </div>
+      <div class="img-caption">Doc.1 — Dorsales médio-océaniques (60 000 km)</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/t3_fig_calendrier_géologique.png" alt="Calendrier géologique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig_calendrier_géologique.png</strong>Le calendrier géologique — ères primaire, secondaire, tertiaire, quaternaire (p.259)</div>
+      </div>
+      <div class="img-caption">Calendrier géologique</div>
+    </div>
+  </div>
+
+  <div class="info-box green">
+    <strong>Questions directrices :</strong> Quelle est la structure interne du globe terrestre ? Comment expliquer la répartition des séismes et des volcans ? Qu'est-ce que la tectonique des plaques ? Comment la vie a-t-elle évolué sur Terre et quelle est la relation entre évolution géologique et biologique ?
+  </div>
+
+  <h2 class="section-title">📋 Préacquis — Testez vos connaissances</h2>
+  <div id="prereq-container"></div>
+
+</div>
+
+<!-- ══════════════ TAB 2 — CH.1 STRUCTURE DU GLOBE ══════════════ -->
+<div class="tab-panel" id="tab-ch1">
+
+  <h2 class="section-title">🌐 Chapitre 1 — Structure et composition du globe terrestre</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>L'intérieur du globe est <strong>inaccessible directement</strong> (forage max. 12 km). On l'explore indirectement grâce à deux outils : la <strong>sismologie</strong> (propagation des ondes sismiques) et le <strong>volcanisme</strong> (remontée de matériaux profonds). Ces deux méthodes ont permis d'établir un <strong>modèle structural différencié</strong> du globe.</p>
+  </div>
+
+  <!-- ACT 1 : Sismologie -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🌊 Activité 1 — La sismologie : outil d'investigation du globe</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title">A — Les ondes sismiques : types et propriétés</div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig1_sismographe.png" alt="Sismographe" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig1_sismographe.png</strong>Sismographe vertical et sismomètre lié à un ordinateur (docs 5&amp;7 p.263)</div>
+          </div>
+          <div class="img-caption">Doc.5/7 — Sismographe et sismomètre</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig2_séismogramme.png" alt="Séismogramme avec ondes P S L" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig2_séismogramme.png</strong>Séismogramme réel et interprétation — arrivée des ondes P, S puis L (docs 8&amp;9 p.264)</div>
+          </div>
+          <div class="img-caption">Doc.8/9 — Séismogramme : ondes P, S et L</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type d'onde</th><th class="teal">Nature</th><th class="blue">Vitesse</th><th class="amber">Milieux traversés</th><th class="red">Ordre d'arrivée</th></tr>
+          <tr><td><strong>Ondes P</strong> (Primaires)</td><td>Compression — longitudinales (parallèles au déplacement)</td><td>Plus rapides (8–14 km/s)</td><td>Solides ET liquides ET gaz</td><td>1ères enregistrées</td></tr>
+          <tr><td><strong>Ondes S</strong> (Secondaires)</td><td>Cisaillement — transversales (⊥ au déplacement)</td><td>Moins rapides (4–8 km/s)</td><td>Solides UNIQUEMENT (pas les liquides)</td><td>2èmes enregistrées</td></tr>
+          <tr><td><strong>Ondes L</strong> (Lentes)</td><td>Ondes de surface</td><td>Les plus lentes (≈ 3,8 km/s)</td><td>Surface terrestre uniquement</td><td>3èmes enregistrées</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box green">
+        <strong>Analogie pour retenir P et S :</strong><br>
+        — Ondes <strong>P</strong> = comme un ressort comprimé → mouvement <strong>Poussé-tiré</strong> (longitudinal) → traversent tout<br>
+        — Ondes <strong>S</strong> = comme une corde agitée → mouvement de côté (<strong>S</strong>ecousse transversale) → bloquées par les liquides<br>
+        → La disparition des S à 2900 km de profondeur prouve l'existence d'un milieu liquide !
+      </div>
+
+      <div class="sub-title">B — Vitesse des ondes et structure interne</div>
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig3_ondes_profondeur.png" alt="Variation vitesse ondes selon profondeur" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig3_ondes_profondeur.png</strong>Variation de la vitesse des ondes P et S en fonction de la profondeur — discontinuités visibles (doc.12 p.265)</div>
+          </div>
+          <div class="img-caption">Doc.12 — Variation de la vitesse des ondes avec la profondeur</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig4_modèle_structural.png" alt="Modèle structural globe terrestre" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig4_modèle_structural.png</strong>Modèle structural du globe terrestre — croûte, manteau, noyau avec discontinuités (doc.16 p.268)</div>
+          </div>
+          <div class="img-caption">Doc.16 — Modèle structural du globe</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Discontinuité</th><th class="blue">Profondeur</th><th class="teal">Découverte par</th><th class="amber">Ce qu'elle sépare</th><th class="red">Signe sismique</th></tr>
+          <tr><td><strong>Moho</strong> (Mohorovičić)</td><td>≈ 30 km (continents) / ≈ 7 km (océans)</td><td>Mohorovičić, 1909</td><td>Croûte / Manteau</td><td>Accélération brusque des ondes P et S</td></tr>
+          <tr><td><strong>Gutenberg</strong></td><td>2 900 km</td><td>Gutenberg, 1913</td><td>Manteau / Noyau externe</td><td>Disparition des S + ralentissement des P</td></tr>
+          <tr><td><strong>Lehmann</strong></td><td>5 100 km</td><td>Inge Lehmann, 1936</td><td>Noyau externe / Noyau interne (graine)</td><td>Réapparition des S + accélération des P</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box teal">
+        <strong>Moyen mnémotechnique — 3 discontinuités :</strong> <em>«Mon Globe Légèrement»</em> → <strong>M</strong>oho (30 km) · <strong>G</strong>utenberg (2900 km) · <strong>L</strong>ehmann (5100 km)<br>
+        Profondeurs croissantes : 30 → 2 900 → 5 100 km
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.1 — n°1</div>
+        <div class="qtxt">À 3 000 km de profondeur dans le globe terrestre, les ondes S disparaissent. Quelle est la déduction correcte ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c1_1')"><input type="radio" name="q_c1_1"> a. La pression est trop forte pour que les ondes se propagent</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c1_1')"><input type="radio" name="q_c1_1"> b. Le milieu traversé est liquide — les ondes S ne se propagent pas dans les liquides</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c1_1')"><input type="radio" name="q_c1_1"> c. Les ondes S ont épuisé leur énergie au cours du trajet</div>
+        <button class="btn-verify" onclick="verifyQCM('q_c1_1',1,'✅ Exact ! Les ondes S (secondaires) sont des ondes de <strong>cisaillement transversal</strong> : elles nécessitent un milieu rigide pour se propager. Dans un liquide, les molécules peuvent glisser les unes sur les autres → pas de résistance au cisaillement → les ondes S ne peuvent pas se propager. La disparition des S à 2 900 km (discontinuité de Gutenberg) prouve donc que le <strong>noyau externe est liquide</strong>. Les ondes P (compression), elles, traversent les liquides → elles continuent.','❌ La pression et la distance ne sont pas la cause de la disparition des ondes S. La propriété physique fondamentale est que les ondes S (transversales) ne se propagent que dans les <strong>solides</strong> car elles nécessitent de la rigidité. Dans un milieu liquide, il n\'y a pas de résistance au cisaillement → les ondes S sont bloquées. À 2 900 km, on atteint la discontinuité de Gutenberg séparant le manteau solide du noyau externe <strong>liquide</strong>.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_c1_1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : Structure -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🏔️ Activité 2 — Modèle structural et composition du globe</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title">A — Les couches du globe terrestre</div>
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig5_croûtes.png" alt="Croûte continentale et océanique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig5_croûtes.png</strong>Croûte continentale (35 km) et croûte océanique (7 km) — densités comparées (doc.18 p.270)</div>
+          </div>
+          <div class="img-caption">Doc.18 — Croûte continentale vs océanique</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig6_roches_endogènes.png" alt="Granite basalte péridotite" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig6_roches_endogènes.png</strong>Trois roches endogènes : granite (croûte continentale), basalte (croûte océanique), péridotite (manteau) — observations à l'œil nu et au microscope (doc.24 p.273)</div>
+          </div>
+          <div class="img-caption">Doc.24 — Granite · Basalte · Péridotite</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Couche</th><th class="teal">Épaisseur / Profondeur</th><th class="blue">État</th><th class="amber">Composition</th><th class="green">Densité</th></tr>
+          <tr><td><strong>Croûte continentale</strong></td><td>≈ 35 km</td><td>Solide rigide</td><td><strong>Granite</strong> (Si + Al)</td><td>2,7–2,8</td></tr>
+          <tr><td><strong>Croûte océanique</strong></td><td>≈ 7 km</td><td>Solide rigide</td><td><strong>Basalte</strong> (Si + Mg)</td><td>2,9–3,0</td></tr>
+          <tr><td><strong>Manteau supérieur</strong></td><td>30–700 km</td><td>Solide élastique (partie rigide = lithosphère + partie plastique = asthénosphère)</td><td><strong>Péridotite</strong> + basalte (riches en olivine)</td><td>3,3–4,5</td></tr>
+          <tr><td><strong>Manteau inférieur</strong></td><td>700–2900 km</td><td>Solide visqueux</td><td><strong>Péridotite</strong></td><td>4,5–5,5</td></tr>
+          <tr><td><strong>Noyau externe</strong></td><td>2900–5100 km</td><td><strong>Liquide</strong> (S disparaissent)</td><td><strong>Fe + Ni + S</strong></td><td>9,9–12</td></tr>
+          <tr><td><strong>Noyau interne (graine)</strong></td><td>5100–6370 km</td><td>Solide (S réapparaissent)</td><td><strong>Fe + Ni</strong></td><td>12–13</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title">B — Lithosphère et asthénosphère</div>
+      <div class="schema-expression">
+        <div class="schema-box">Lithosphère (≈100 km)<span class="schema-label">Croûte + manteau sup. rigide<br>froide et cassante</span></div>
+        <div class="schema-arrow">flotte sur</div>
+        <div class="schema-box teal">Asthénosphère (550–620 km)<span class="schema-label">Manteau sup. visqueux<br>chaud et ductile</span></div>
+        <div class="schema-arrow">repose sur</div>
+        <div class="schema-box blue">Manteau inférieur<span class="schema-label">jusqu'à 2900 km</span></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Énergie interne du globe :</strong> Le globe est une source de chaleur (géothermie). Origine : désintégration des éléments radioactifs (Uranium, Thorium) dans les couches profondes. Le noyau atteint 4000–5000°C. Cette énergie est le moteur de la tectonique des plaques (courants de convection).
+      </div>
+
+      <div class="sub-title">Texte à trous — Structure du globe</div>
+      <div class="gap-text" id="gap-globe">
+        Le globe terrestre a une structure <select class="gap-select" data-answer="différenciée"><option value="">…</option><option>différenciée</option><option>homogène</option><option>uniforme</option></select> en couches concentriques séparées par des <select class="gap-select" data-answer="discontinuités"><option value="">…</option><option>discontinuités</option><option>failles</option><option>plissements</option></select>. La discontinuité de <select class="gap-select" data-answer="Mohorovičić"><option value="">…</option><option>Mohorovičić</option><option>Gutenberg</option><option>Lehmann</option></select> (à 30 km) sépare la croûte du manteau. La disparition des ondes <select class="gap-select" data-answer="S"><option value="">…</option><option>S</option><option>P</option><option>L</option></select> à 2900 km prouve que le noyau externe est <select class="gap-select" data-answer="liquide"><option value="">…</option><option>liquide</option><option>solide</option><option>gazeux</option></select>. La croûte continentale est constituée de <select class="gap-select" data-answer="granite"><option value="">…</option><option>granite</option><option>basalte</option><option>péridotite</option></select> tandis que la croûte océanique est constituée de <select class="gap-select" data-answer="basalte"><option value="">…</option><option>basalte</option><option>granite</option><option>fer</option></select>. Le manteau est composé de <select class="gap-select" data-answer="péridotite"><option value="">…</option><option>péridotite</option><option>granite</option><option>gneiss</option></select> et le noyau est essentiellement constitué de <select class="gap-select" data-answer="fer (Fe) et nickel (Ni)"><option value="">…</option><option>fer (Fe) et nickel (Ni)</option><option>silicium et aluminium</option><option>basalte fondu</option></select>.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-globe','score-globe')">Vérifier</button>
+      <div class="gap-score" id="score-globe"></div>
+    </div>
+  </div>
+
+  <!-- ACT 3 : Volcanisme -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>🌋 Activité 3 — Le volcanisme : fenêtre sur les profondeurs</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig7_volcan_stromboli.png" alt="Volcan Stromboli" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig7_volcan_stromboli.png</strong>Le Stromboli en éruption — Italie (doc.20 p.272)</div>
+          </div>
+          <div class="img-caption">Doc.20 — Le Stromboli en éruption</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig8_schéma_volcan.png" alt="Schéma d'un volcan" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig8_schéma_volcan.png</strong>Schéma d'un volcan — chambre magmatique, cratère, coulées de lave (doc.23 p.272)</div>
+          </div>
+          <div class="img-caption">Doc.23 — Schéma d'un volcan</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Produit volcanique</th><th class="teal">Nature</th><th class="blue">Caractéristiques</th></tr>
+          <tr><td><strong>Gaz</strong></td><td>H₂O (vapeur), CO₂, H₂S, CO</td><td>Premier signe d'activité. Témoignent de la composition des magmas profonds</td></tr>
+          <tr><td><strong>Laves basaltiques</strong></td><td>Roches liquides</td><td>Très fluides · Température ≈ 1200°C · Pauvres en silice · Origine : manteau</td></tr>
+          <tr><td><strong>Laves rhyolitiques</strong></td><td>Roches liquides</td><td>Très visqueuses · Température ≈ 800°C · Riches en silice · Origine : croûte</td></tr>
+          <tr><td><strong>Produits solides</strong></td><td>Bombes, scories, cendres, lapilli</td><td>Fragments de magma refroidi projetés lors des explosions</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box teal">
+        <strong>Origine du magma basaltique :</strong> Les péridotites du manteau remontent au niveau des rifts. La pression chute plus vite que la température → les péridotites <strong>fondent partiellement</strong> → magma basaltique. C'est la fusion partielle des péridotites qui produit les basaltes des dorsales et des volcans de point chaud.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TAB 3 — CH.2 TECTONIQUE ══════════════ -->
+<div class="tab-panel" id="tab-ch2">
+
+  <h2 class="section-title">🔄 Chapitre 2 — La Tectonique des plaques</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>La <strong>tectonique des plaques</strong> (théorie de 1968) est un modèle explicatif planétaire : elle explique la répartition des séismes, volcans et chaînes de montagnes par le découpage de la lithosphère en <strong>plaques rigides mobiles</strong> qui se déplacent sur l'asthénosphère visqueuse.</p>
+  </div>
+
+  <!-- ACT 1 : Wegener -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🗺️ Activité 1 — Wegener et la dérive des continents (1912)</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig9_pangée.png" alt="La Pangée et dérive des continents" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig9_pangée.png</strong>Évolution des continents depuis la Pangée (−200 Ma) jusqu'à l'actuel — docs 9, 10, 11, 12 p.284</div>
+          </div>
+          <div class="img-caption">Docs 9–12 — Dérive des continents depuis la Pangée</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig10_fossiles_répartition.png" alt="Répartition des fossiles Afrique Amérique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig10_fossiles_répartition.png</strong>Répartition des mêmes fossiles en Afrique et en Amérique du Sud — preuve de la dérive (doc.15 p.285)</div>
+          </div>
+          <div class="img-caption">Doc.15 — Mêmes fossiles sur deux continents séparés</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><h4 style="color:var(--em)">🌎 Preuves géographiques</h4><p>Complémentarité des formes des côtes : la côte Est de l'Amérique du Sud s'emboîte dans la côte Ouest de l'Afrique → ils étaient joints.</p></div>
+        <div class="card teal"><h4 style="color:var(--teal)">🦴 Preuves paléontologiques</h4><p>Mêmes fossiles d'animaux et végétaux retrouvés en Afrique et en Amérique du Sud — ces espèces ne pouvaient pas traverser l'Atlantique.</p></div>
+        <div class="card blue"><h4 style="color:var(--blue)">🌡️ Preuves paléoclimatiques</h4><p>Traces de glaciation et d'évaporites (dépôts de climat chaud) retrouvées de part et d'autre de l'Atlantique. Les continents étaient dans d'autres latitudes.</p></div>
+        <div class="card purple"><h4 style="color:var(--purple)">🪨 Preuves géologiques</h4><p>Chaînes de montagnes d'âge identique et de même structure de part et d'autre de l'Atlantique (Appalaches / Mauritanides / Calédonides).</p></div>
+      </div>
+
+      <div class="info-box">
+        <strong>Limite de la théorie de Wegener :</strong> Il ne pouvait pas expliquer quelle <em>force motrice</em> déplace les continents. Sa théorie fut rejetée jusqu'à la découverte des dorsales océaniques et des courants de convection dans les années 1960.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : Dorsales + expansion -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🌊 Activité 2 — Dorsales océaniques et expansion du plancher</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig11_dorsale_atlantique.png" alt="Dorsale médio-atlantique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig11_dorsale_atlantique.png</strong>Reconstitution numérique de la dorsale médio-atlantique — rift central et volcanisme (doc.18 p.286)</div>
+          </div>
+          <div class="img-caption">Doc.18 — Dorsale médio-atlantique et rift</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig12_pilow_lavas.png" alt="Pilow lavas basaltiques" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig12_pilow_lavas.png</strong>Laves basaltiques en «coussins» (Pilow Lavas) — fond océanique (doc.19 p.286)</div>
+          </div>
+          <div class="img-caption">Doc.19 — Pilow Lavas : croûte océanique en formation</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig13_âge_fonds.png" alt="Carte âge des fonds océaniques" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig13_âge_fonds.png</strong>Carte de la variation de l'âge du fond océanique — plus ancien en s'éloignant du rift (doc.20 p.288)</div>
+          </div>
+          <div class="img-caption">Doc.20 — Âge du fond océanique (symétrique par rapport au rift)</div>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="lbl">Accrétion et expansion océanique</div>
+        <p><strong>Accrétion océanique :</strong> au niveau du rift de la dorsale, remontée de magma basaltique depuis l'asthénosphère → refroidissement → formation de nouvelle croûte océanique (Pilow Lavas).<br>
+        <strong>Expansion océanique :</strong> la nouvelle croûte formée pousse la croûte préexistante de part et d'autre → l'océan s'élargit. Vitesse : 1 cm/an (océan Indien) à 6–20 cm/an (Pacifique).</p>
+      </div>
+
+      <div class="sub-title blue">Preuve par le paléomagnétisme</div>
+      <div class="img-wrap">
+        <img src="images/t3_fig14_paléomagnétisme.png" alt="Anomalies magnétiques expansion océanique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig14_paléomagnétisme.png</strong>Anomalies magnétiques symétriques de part et d'autre du rift — preuve de l'expansion océanique (doc.23 p.290)</div>
+      </div>
+      <div class="img-caption">Doc.23 — Anomalies magnétiques symétriques par rapport au rift</div>
+
+      <div class="info-box blue">
+        <strong>Paléomagnétisme :</strong> Les laves basaltiques contiennent des minéraux ferrugineux qui s'aimantent selon le champ magnétique terrestre au moment de leur refroidissement → «fossile» du champ magnétique. Les basaltes de même âge ont la même polarité, disposés symétriquement de part et d'autre du rift → preuve de l'expansion océanique et permet de calculer sa vitesse.
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.2 — n°1</div>
+        <div class="qtxt">L'âge de la croûte océanique de l'Atlantique ne dépasse jamais 180 millions d'années, alors que l'âge de la Terre est de 4,6 milliards d'années. Comment expliquer cette «jeunesse» de la croûte océanique ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c2_1')"><input type="radio" name="q_c2_1"> a. La croûte océanique est récente car les océans se sont formés il y a 180 millions d'années seulement</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c2_1')"><input type="radio" name="q_c2_1"> b. La croûte océanique est constamment renouvelée : créée au niveau des dorsales (accrétion) et détruite au niveau des fosses (subduction) — cycle continu</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c2_1')"><input type="radio" name="q_c2_1"> c. Les techniques de datation radioactive sont moins précises pour les roches océaniques</div>
+        <button class="btn-verify" onclick="verifyQCM('q_c2_1',1,'✅ Parfait ! C\'est le modèle du <strong>renouvellement océanique</strong> de Harry Hess (1960) : la lithosphère océanique fonctionne comme un <strong>tapis roulant</strong>.<br>— Zone de création : rift des dorsales → accrétion (nouvelle croûte basaltique)<br>— Zone de destruction : fosses océaniques → subduction (ancienne croûte plonge dans le manteau)<br>La surface totale du globe reste constante car autant de lithosphère est créée que détruite. La croûte océanique la plus ancienne (bordure des océans) date de ≈180 Ma — au-delà, elle a déjà été détruite par subduction.','❌ Les océans existaient bien avant 180 Ma — par exemple, l\'ancêtre de la Méditerranée (Téthys) remonte au Permien. La vraie explication est le <strong>renouvellement continu</strong> de la croûte océanique : créée au niveau des rifts (dorsales) et détruite au niveau des fosses océaniques (subduction). Ce cycle continu explique que la croûte océanique la plus ancienne ne dépasse pas 180 Ma.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_c2_1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 3 : Subduction -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>⬇️ Activité 3 — Les fosses océaniques et la subduction</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig15_subduction.png" alt="Schéma de la subduction" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig15_subduction.png</strong>Schéma de la subduction — fosse océanique, plan de Benioff, séismes profonds, volcanisme à andésites (doc.29 p.293)</div>
+          </div>
+          <div class="img-caption">Doc.29 — Schéma de la subduction</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig16_plan_benioff.png" alt="Plan de Benioff répartition séismes" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig16_plan_benioff.png</strong>Répartition des foyers sismiques selon le plan de Benioff — foyers superficiels, moyens et profonds (doc.28 p.293)</div>
+          </div>
+          <div class="img-caption">Doc.28 — Plan de Benioff : séismes profonds</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Phénomène</th><th class="teal">Accrétion (dorsales)</th><th class="red">Subduction (fosses)</th></tr>
+          <tr><td><strong>Localisation</strong></td><td>Rifts des dorsales océaniques</td><td>Fosses océaniques (bordures continentales)</td></tr>
+          <tr><td><strong>Mouvement</strong></td><td>Divergence des plaques</td><td>Convergence : lithosphère océanique plonge sous continentale</td></tr>
+          <tr><td><strong>Création / Destruction</strong></td><td>Création de croûte océanique basaltique</td><td>Destruction de la lithosphère océanique dans l'asthénosphère</td></tr>
+          <tr><td><strong>Volcanisme</strong></td><td>Volcans à <strong>basaltes</strong> (Pilow Lavas)</td><td>Volcans à <strong>andésites</strong> (magma mixte croûte + sédiments)</td></tr>
+          <tr><td><strong>Sismicité</strong></td><td>Séismes <strong>superficiels</strong> + failles transformantes</td><td>Séismes de toutes profondeurs (jusqu'à 700 km) selon Plan de Benioff</td></tr>
+          <tr><td><strong>Vitesse</strong></td><td>1–20 cm/an selon l'océan</td><td>≈ 9 cm/an</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box red">
+        <strong>Pourquoi des séismes profonds dans les fosses ? (Preuve de la subduction)</strong><br>
+        Un séisme nécessite un milieu rigide dont la température reste &lt; 450–600°C. Au-delà, la roche devient ductile → pas de rupture → pas de séisme. Dans les fosses de subduction, des séismes ont lieu jusqu'à 700 km de profondeur → il existe à cette profondeur des roches froides et rigides → c'est la lithosphère océanique qui s'enfonce (subducte) dans l'asthénosphère chaude.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 4 : Plaques + Atlas -->
+  <div class="activity">
+    <div class="activity-header blue" onclick="toggleActivity(this)">
+      <h3>🌍 Activité 4 — Plaques lithosphériques, points chauds &amp; Atlas tunisien</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig17_plaques.png" alt="Plaques lithosphériques" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig17_plaques.png</strong>Représentation des 12 plaques lithosphériques — frontières divergentes, convergentes, coulissantes (doc.31 p.295)</div>
+          </div>
+          <div class="img-caption">Doc.31 — Les plaques lithosphériques</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig18_atlas_tunisien.png" alt="Orogenèse Atlas tunisien" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig18_atlas_tunisien.png</strong>Orogenèse de l'Atlas tunisien — collision plaque africaine/eurasiatique (docs 44-47 pp.303-305)</div>
+          </div>
+          <div class="img-caption">Docs 44–47 — Formation de l'Atlas tunisien</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><h4 style="color:var(--em)">🔀 Frontières divergentes</h4><p>Dorsales + rifts. Accrétion océanique. Volcans basaltiques. Séismes superficiels. Ex : dorsale médio-atlantique.</p></div>
+        <div class="card red"><h4 style="color:var(--red)">⬇️ Frontières convergentes</h4><p>Fosses de subduction. Destruction de croûte océanique. Volcans à andésites. Séismes profonds. Chaînes de montagnes. Ex : Andes, Himalaya.</p></div>
+        <div class="card teal"><h4 style="color:var(--teal)">↔️ Frontières coulissantes</h4><p>Failles transformantes. Glissement latéral sans création/destruction. Séismes superficiels fréquents. Ex : faille de San Andreas (Californie).</p></div>
+        <div class="card purple"><h4 style="color:var(--purple)">🌋 Points chauds</h4><p>Chalumeaux naturels fixes dans l'asthénosphère. Perforent la plaque en déplacement → alignement de volcans d'âge croissant. Ex : archipel d'Hawaï (âge croissant vers NW).</p></div>
+      </div>
+
+      <div class="def-box">
+        <div class="lbl">Orogenèse de l'Atlas tunisien — résumé</div>
+        <p>La Tunisie occupe la bordure nord de la <strong>plaque africaine</strong>. L'Atlas tunisien résulte de la convergence entre plaque africaine et plaque eurasiatique :<br>
+        — <strong>Miocène inférieur/moyen :</strong> subduction de la plaque africaine sous l'eurasiatique<br>
+        — <strong>Miocène supérieur :</strong> blocage de la subduction au nord de la Tunisie → <strong>collision</strong> → compression de la lithosphère<br>
+        — La compression se propage vers le sud → plissement de la lithosphère → formation de l'Atlas (chaîne de chotts, Gafsa, Atlas central, Atlas septentrional)</p>
+      </div>
+
+      <div class="info-box green">
+        <strong>Moteur de la tectonique des plaques :</strong> Les <strong>courants de convection</strong> dans l'asthénosphère. La matière chaude (moins dense) monte au niveau des rifts, la matière froide (plus dense) descend au niveau des fosses → circulation en boucle qui entraîne le glissement des plaques lithosphériques.
+      </div>
+
+      <div class="sub-title">Texte à trous — Tectonique des plaques</div>
+      <div class="gap-text" id="gap-tecto">
+        Au niveau des rifts des dorsales, le phénomène d'<select class="gap-select" data-answer="accrétion"><option value="">…</option><option>accrétion</option><option>subduction</option><option>collision</option></select> crée une nouvelle croûte <select class="gap-select" data-answer="océanique basaltique"><option value="">…</option><option>océanique basaltique</option><option>continentale granitique</option><option>mantellique</option></select>. Ce phénomène entraîne l'<select class="gap-select" data-answer="expansion océanique"><option value="">…</option><option>expansion océanique</option><option>fermeture des océans</option><option>fusion de la croûte</option></select>. Pour que la surface du globe reste constante, autant de lithosphère est détruite au niveau des <select class="gap-select" data-answer="fosses de subduction"><option value="">…</option><option>fosses de subduction</option><option>dorsales océaniques</option><option>rifts continentaux</option></select>. Les volcans des zones de subduction produisent des <select class="gap-select" data-answer="andésites"><option value="">…</option><option>andésites</option><option>basaltes</option><option>granites</option></select> tandis que ceux des dorsales produisent des <select class="gap-select" data-answer="basaltes"><option value="">…</option><option>basaltes</option><option>andésites</option><option>rhyolites</option></select>. Le moteur de la tectonique est constitué par les courants de <select class="gap-select" data-answer="convection"><option value="">…</option><option>convection</option><option>conduction</option><option>radiation</option></select> dans l'asthénosphère.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-tecto','score-tecto')">Vérifier</button>
+      <div class="gap-score" id="score-tecto"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TAB 4 — CH.3 ÉVOLUTION ══════════════ -->
+<div class="tab-panel" id="tab-ch3">
+
+  <h2 class="section-title">🦕 Chapitre 3 — L'Évolution biologique</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>La théorie de l'évolution (Darwin, 1859) postule que toutes les espèces dérivent d'un <strong>ancêtre commun</strong> par transformations progressives (mutations + sélection naturelle). Les <strong>fossiles</strong> constituent les preuves paléontologiques de cette théorie. L'évolution biologique est étroitement liée à l'évolution géologique (déplacement des continents, crises climatiques).</p>
+  </div>
+
+  <!-- ACT 1 : Lamarck vs Darwin -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 1 — Lamarckisme vs Darwinisme</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Critère</th><th class="teal">Lamarck (1809) — Transformisme</th><th class="blue">Darwin (1859) — Évolutionnisme</th></tr>
+          <tr><td><strong>Mécanisme</strong></td><td>L'usage d'un organe le développe ; le non-usage l'atrophie → caractère acquis par l'individu</td><td>Variation naturelle + sélection naturelle → les individus les mieux adaptés survivent et se reproduisent plus</td></tr>
+          <tr><td><strong>Exemple de la girafe</strong></td><td>La girafe a allongé son cou à force de l'étirer → ce caractère est devenu héréditaire</td><td>Les girafes au cou long (variant naturel) sont mieux adaptées → elles survivent et transmettent leur cou long</td></tr>
+          <tr><td><strong>Hérédité des caractères</strong></td><td>Les caractères <em>acquis</em> durant la vie deviennent héréditaires</td><td>Seules les <em>variations génétiques</em> (mutations) se transmettent aux descendants</td></tr>
+          <tr><td><strong>Validité scientifique</strong></td><td>❌ Infirmée — les caractères acquis ne se transmettent pas</td><td>✅ Validée et complétée par la génétique moléculaire (néo-darwinisme)</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box green">
+        <strong>Précurseurs arabes :</strong> El Jahedh (9ème siècle) et Ibn Khaldoun (14ème siècle) avaient introduit des idées évolutionnistes bien avant Lamarck et Darwin. L'idée que les espèces se transforment et s'adaptent à leur milieu est présente dans leurs œuvres.
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.3 — n°1</div>
+        <div class="qtxt">Selon Darwin, la prédominance de la forme sombre de la Phalène du bouleau dans les régions industrialisées (troncs noirs) s'explique par :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c3_1')"><input type="radio" name="q_c3_1"> a. La pollution a directement causé la mutation vers la couleur sombre chez toutes les Phalènes</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c3_1')"><input type="radio" name="q_c3_1"> b. La mutation sombre préexistait ; dans les régions polluées, les individus sombres sont mieux camouflés → moins prédatés → sélection naturelle favorise la forme sombre</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_c3_1')"><input type="radio" name="q_c3_1"> c. Les Phalènes claires ont volontairement développé une couleur sombre pour se camoufler (Lamarck)</div>
+        <button class="btn-verify" onclick="verifyQCM('q_c3_1',1,'✅ Exact ! C\'est l\'exemple classique de la <strong>sélection naturelle darwinienne</strong>. La mutation de la couleur sombre existait avant la pollution (phénomène spontané et rare). Dans les régions non polluées (troncs blancs/lichens), la forme sombre est visible des prédateurs → désavantagée. Dans les régions polluées (troncs noirs de suie), la forme sombre est camouflée → avantagée → moins prédatée → se reproduit davantage → devient prédominante. La pollution ne cause pas la mutation ; elle change la valeur sélective d\'une mutation préexistante.','❌ Réponse a : la pollution ne CAUSE pas de mutations dirigées — c\'est une idée lamarckiste. Réponse c : il s\'agit exactement du mécanisme lamarckien (modification voulue par l\'individu + hérédité des caractères acquis) qui est scientifiquement infirmé. La réponse correcte est darwinienne : variation aléatoire préexistante + sélection naturelle par le milieu.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_c3_1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : Formes intermédiaires -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🦴 Activité 2 — Preuves paléontologiques : les formes intermédiaires</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="info-box teal">
+        <strong>Principe :</strong> Une forme intermédiaire est un fossile qui possède des caractères de deux groupes différents → preuve d'une filiation évolutive. Plus l'ancêtre commun est lointain dans le temps, plus le nombre de différences est grand entre les groupes.
+      </div>
+
+      <div class="img-trio">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig19_ichtyostéga.png" alt="Ichtyostéga" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig19_ichtyostéga.png</strong>Ichtyostéga — fossile du Dévonien supérieur (−360 Ma) : entre poisson et amphibien (doc.13 p.315)</div>
+          </div>
+          <div class="img-caption">Doc.13 — Ichtyostéga (−360 Ma)</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig20_archéoptéryx.png" alt="Archéoptéryx" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig20_archéoptéryx.png</strong>Reconstitution d'Archéoptéryx — Jurassique supérieur (−150 Ma) : entre reptile et oiseau (doc.16 p.316)</div>
+          </div>
+          <div class="img-caption">Doc.16 — Archéoptéryx (−150 Ma)</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig21_dimetrodon.png" alt="Dimetrodon" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig21_dimetrodon.png</strong>Reconstitution de Dimetrodon — Permien inférieur (−280 Ma) : entre reptile et mammifère (doc.19 p.317)</div>
+          </div>
+          <div class="img-caption">Doc.19 — Dimetrodon (−280 Ma)</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Forme intermédiaire</th><th class="teal">Époque</th><th class="blue">Caractères de groupe A</th><th class="amber">Caractères de groupe B</th><th class="green">Filiation prouvée</th></tr>
+          <tr>
+            <td><strong>Ichtyostéga</strong></td>
+            <td>Dévonien sup. (−360 Ma)</td>
+            <td>🐟 Poisson : nageoire caudale rudimentaire, ligne latérale</td>
+            <td>🐸 Amphibien : 4 pattes, narines internes (respiration pulmonaire)</td>
+            <td>Poissons → Amphibiens</td>
+          </tr>
+          <tr>
+            <td><strong>Archéoptéryx</strong></td>
+            <td>Jurassique sup. (−150 Ma)</td>
+            <td>🦎 Reptile : dents coniques, vertèbres non soudées, doigts griffus sur ailes</td>
+            <td>🦅 Oiseau : corps couvert de plumes, furcula (clavicule en fourchette)</td>
+            <td>Reptiles → Oiseaux</td>
+          </tr>
+          <tr>
+            <td><strong>Dimetrodon</strong></td>
+            <td>Permien inf. (−280 Ma)</td>
+            <td>🦎 Reptile : corps couvert d'écailles, ovipare, membres courts</td>
+            <td>🐭 Mammifère : régulation thermique (voile vasculaire), carnivore prédateur</td>
+            <td>Reptiles → Mammifères</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="img-wrap">
+        <img src="images/t3_fig22_arbre_phylogénique.png" alt="Arbre phylogénique des vertébrés" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig22_arbre_phylogénique.png</strong>Arbre phylogénique des 5 classes de vertébrés — ordre d'apparition et filiations (doc.21 p.317)</div>
+      </div>
+      <div class="img-caption">Doc.21 — Arbre phylogénique des vertébrés</div>
+
+      <div class="dna-seq">ORDRE D'APPARITION DES GRANDS GROUPES DE VERTÉBRÉS
+(du plus ancien au plus récent)
+
+Ère PRIMAIRE  (−545 → −250 Ma) :
+  • Poissons cartilagineux (Dévonien inférieur, −450 Ma)
+  • Amphibiens — Ichtyostéga (Dévonien supérieur, −360 Ma)
+  • Reptiles (Carbonifère, −310 Ma)
+  • Premiers dinosaures + Dimetrodon (fin Primaire/début Secondaire)
+
+Ère SECONDAIRE (−250 → −65 Ma) :
+  • Mammifères (−220 Ma)
+  • Oiseaux — Archéoptéryx (Jurassique, −150 Ma)
+  • Apogée des dinosaures
+
+Ère TERTIAIRE  (−65 → −1,8 Ma) :
+  • Extinction dinosaures (crise Crétacé-Tertiaire, −65 Ma)
+  • Radiation évolutive des mammifères placentaires
+  • Apparition des primates → Homme (Quaternaire)</div>
+    </div>
+  </div>
+
+  <!-- ACT 3 : Crises biologiques -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>💥 Activité 3 — Crises biologiques et relation avec l'évolution géologique</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig23_crise_kT.png" alt="Crise Crétacé-Tertiaire conséquences" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig23_crise_kT.png</strong>Conséquences de la crise Crétacé-Tertiaire sur différents groupes animaux — extinctions et radiations évolutives (doc.28b p.321)</div>
+          </div>
+          <div class="img-caption">Doc.28b — Crise K-T : extinctions et radiations évolutives</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t3_fig24_oxygène_évolution.png" alt="Évolution teneur oxygène et vie" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t3_fig24_oxygène_évolution.png</strong>Évolution de la teneur en oxygène atmosphérique et évolution biologique corrélées (doc.26 p.320)</div>
+          </div>
+          <div class="img-caption">Doc.26 — Évolution de l'O₂ atmosphérique et vie</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Crise</th><th class="red">Époque</th><th class="blue">Ampleur</th><th class="teal">Causes supposées</th><th class="amber">Conséquences</th></tr>
+          <tr>
+            <td><strong>Crise Permo-Trias</strong></td>
+            <td>−250 Ma (fin Primaire)</td>
+            <td>La plus grande : 95% des espèces marines disparaissent ; 63% des familles d'insectes</td>
+            <td>Volcanisme intense (Sibérie), glaciation (Gondwana au pôle sud), modification niveau marin</td>
+            <td>Disparition des trilobites. Apparition des dinosaures (−220 Ma)</td>
+          </tr>
+          <tr>
+            <td><strong>Crise Crétacé-Tertiaire (K-T)</strong></td>
+            <td>−65 Ma (fin Secondaire)</td>
+            <td>Extinction de tous les dinosaures et 50% des espèces marines</td>
+            <td>Impact de météorites (pic d'iridium à la limite K-T) + volcanisme intense (laves du manteau inférieur riches en Fe et gaz)</td>
+            <td>Disparition dinosaures. Radiation évolutive des mammifères placentaires. Oiseaux non touchés</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-grid">
+        <div class="card red"><h4 style="color:var(--red)">💀 Extinction en masse</h4><p>Disparition brutale de nombreuses espèces sur une courte période géologique, due à des conditions défavorables soudaines.</p></div>
+        <div class="card teal"><h4 style="color:var(--teal)">🔥 Profiteurs</h4><p>Espèces capables de s'adapter aux nouvelles conditions défavorables → se développent pendant la crise. Ex : certains mammifères pendant la crise K-T.</p></div>
+        <div class="card green"><h4 style="color:var(--green)">🌱 Radiation évolutive</h4><p>Diversification rapide des survivants géniteurs après la crise → occupation des niches écologiques laissées vides. Ex : mammifères après −65 Ma.</p></div>
+      </div>
+
+      <div class="sub-title blue">Influence des continents sur la biodiversité — Exemple des Amériques</div>
+      <div class="info-box blue">
+        <strong>Formation de l'isthme de Panama (il y a 3 Ma) :</strong> L'Amérique du Sud était isolée depuis 50 Ma. La réunion des deux Amériques a permis des migrations → <strong>augmentation de la biodiversité</strong> dans les deux continents. Mais aussi compétition → disparition de certaines espèces locales. Preuve directe du lien entre tectonique des plaques et évolution biologique.
+      </div>
+
+      <div class="sub-title blue">Évolution de l'atmosphère et vie</div>
+      <div class="info-box teal">
+        <strong>Chronologie O₂ :</strong><br>
+        — Précambrien : atmosphère sans O₂ libre → organismes anaérobies (bactéries, algues bleues)<br>
+        — Cyanobactéries photosynthétiques → enrichissement progressif en O₂ → formation couche d'ozone<br>
+        — Ère Primaire : O₂ suffisant → respiration aérobie possible → explosion de la diversité → sortie des eaux (Ordovicien pour les végétaux, Dévonien pour les animaux)
+      </div>
+
+      <div class="sub-title">Texte à trous — Évolution biologique</div>
+      <div class="gap-text" id="gap-evol">
+        La théorie de l'évolution a été proposée par <select class="gap-select" data-answer="Darwin"><option value="">…</option><option>Darwin</option><option>Lamarck</option><option>Mendel</option></select> en 1859. Elle postule que toutes les espèces dérivent d'un <select class="gap-select" data-answer="ancêtre commun"><option value="">…</option><option>ancêtre commun</option><option>créateur unique</option><option>espèce moderne</option></select> par accumulation de <select class="gap-select" data-answer="mutations"><option value="">…</option><option>mutations</option><option>croisements</option><option>méioses</option></select> et <select class="gap-select" data-answer="sélection naturelle"><option value="">…</option><option>sélection naturelle</option><option>reproduction forcée</option><option>migration</option></select>. L'<select class="gap-select" data-answer="Ichtyostéga"><option value="">…</option><option>Ichtyostéga</option><option>Archéoptéryx</option><option>Dimetrodon</option></select> est une forme intermédiaire entre les poissons et les amphibiens. L'<select class="gap-select" data-answer="Archéoptéryx"><option value="">…</option><option>Archéoptéryx</option><option>Ichtyostéga</option><option>Dimetrodon</option></select> est une forme intermédiaire entre les reptiles et les oiseaux. La crise <select class="gap-select" data-answer="Crétacé-Tertiaire"><option value="">…</option><option>Crétacé-Tertiaire</option><option>Permo-Trias</option><option>Dévonien</option></select> a provoqué la disparition des <select class="gap-select" data-answer="dinosaures"><option value="">…</option><option>dinosaures</option><option>mammifères</option><option>trilobites</option></select>, suivie d'une radiation évolutive des <select class="gap-select" data-answer="mammifères placentaires"><option value="">…</option><option>mammifères placentaires</option><option>reptiles</option><option>poissons</option></select>.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-evol','score-evol')">Vérifier</button>
+      <div class="gap-score" id="score-evol"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TAB 5 — SYNTHÈSE ══════════════ -->
+<div class="tab-panel" id="tab-synthese">
+
+  <h2 class="section-title">🗺️ Synthèse — Thème 3 (Ch.1 · Ch.2 · Ch.3)</h2>
+  <div class="def-box">
+    <div class="lbl">Relation fondamentale</div>
+    <p>L'évolution géologique (tectonique des plaques) et l'évolution biologique sont <strong>profondément liées</strong> : le déplacement des continents modifie les milieux de vie, crée ou détruit des barrières géographiques, provoque des changements climatiques → extinctions et radiations évolutives.</p>
+  </div>
+
+  <canvas id="mindmap-canvas" style="width:100%;height:520px;cursor:pointer"></canvas>
+
+  <h2 class="section-title">📌 Connexions entre les 3 chapitres</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Phénomène</th><th class="teal">Ch.1 — Structure</th><th class="amber">Ch.2 — Tectonique</th><th class="blue">Ch.3 — Évolution</th></tr>
+      <tr><td><strong>Volcanisme</strong></td><td>Remontée magma depuis manteau (péridotites fondues). Composition (basalte, andésite)</td><td>Volcans de rift (basalte) / Volcans de subduction (andésite) / Points chauds</td><td>Volcanisme intense = cause des crises biologiques (gaz + iridium)</td></tr>
+      <tr><td><strong>Mouvement des plaques</strong></td><td>Moteur : énergie thermique du globe, courants de convection</td><td>Accrétion + Subduction = renouvellement de la lithosphère</td><td>Séparation continents = isolement → spéciation. Réunion = compétition → extinctions</td></tr>
+      <tr><td><strong>Séismes profonds</strong></td><td>Prouvent l'existence du noyau liquide (disparition ondes S)</td><td>Preuve de la subduction (lithosphère froide et rigide jusqu'à 700 km)</td><td>Perturbations associées aux crises biologiques</td></tr>
+      <tr><td><strong>Fossiles</strong></td><td>—</td><td>Preuves de la dérive des continents (mêmes fossiles sur deux continents)</td><td>Preuves de l'évolution (formes intermédiaires, ordre d'apparition)</td></tr>
+    </table>
+  </div>
+
+  <h2 class="section-title">🎓 Points prioritaires CAPES — Thème 3</h2>
+  <div class="card-grid">
+    <div class="card"><h4 style="color:var(--em)">🌐 Structure du globe</h4><ul><li>3 discontinuités (profondeurs exactes)</li><li>Ondes P traversent tout, S bloquées par liquides</li><li>Composition de chaque couche</li><li>Lithosphère vs asthénosphère</li></ul></div>
+    <div class="card teal"><h4 style="color:var(--teal)">🔄 Tectonique</h4><ul><li>Accrétion = création, Subduction = destruction</li><li>4 preuves de la dérive des continents (Wegener)</li><li>Paléomagnétisme : preuve de l'expansion</li><li>Atlas tunisien : collision afr./eur.</li></ul></div>
+    <div class="card blue"><h4 style="color:var(--blue)">🦕 Évolution</h4><ul><li>Lamarck (caractères acquis) vs Darwin (sélection naturelle)</li><li>3 formes intermédiaires + leur filiation</li><li>2 grandes crises : Permo-Trias et K-T</li><li>Radiation évolutive vs extinction</li></ul></div>
+  </div>
+
+  <div class="fc-grid" id="fc-grid"></div>
+</div>
+
+<!-- ══════════════ TAB 6 — EXERCICES CAPES ══════════════ -->
+<div class="tab-panel" id="tab-eval">
+
+  <h2 class="section-title">✅ Exercices CAPES — QCM avec feedback explicatif</h2>
+  <div class="info-box teal">
+    <strong>Mode d'emploi :</strong> Choisissez la réponse correcte, puis cliquez sur «Vérifier» pour obtenir l'explication développée. Score global disponible en bas.
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°1 (Ondes sismiques)</div>
+    <div class="qtxt">Une station sismique enregistre les ondes P à 8h00'00'' et les ondes S à 8h01'15''. Quelle information peut-on en tirer ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce1')"><input type="radio" name="ce1"> a. Les deux ondes voyagent à la même vitesse mais l'une a fait un trajet plus long</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce1')"><input type="radio" name="ce1"> b. Les ondes P sont plus rapides que les S ; l'écart de 75 s permet de calculer la distance à l'épicentre</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce1')"><input type="radio" name="ce1"> c. Le séisme s'est produit au niveau de la station sismique à 8h00'00''</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce1')"><input type="radio" name="ce1"> d. Les ondes L arriveront avant les ondes S</div>
+    <button class="btn-verify" onclick="verifyQCM('ce1',1,'✅ Exact ! Les ondes P (Primaires) sont les plus rapides (≈8 km/s) → arrivées en 1er. Les ondes S (Secondaires) sont plus lentes (≈4,5 km/s) → arrivées plus tard. L\'écart de temps entre l\'arrivée des P et des S est proportionnel à la distance à l\'épicentre : plus la station est loin du foyer, plus cet écart est grand. Avec 3 stations réparties sur le globe, on peut trianguler la position exacte de l\'épicentre. Les ondes L arrivent toujours en 3ème, après les S.','❌ Les ondes P et S voyagent à des vitesses différentes depuis le même foyer sismique : P ≈8 km/s, S ≈4,5 km/s. L\'écart temporel à l\'enregistrement est dû à leur différence de vitesse, pas à un trajet différent. Les ondes L arriveront après les S (elles sont les plus lentes). L\'heure d\'enregistrement des P n\'est pas l\'heure du séisme — le séisme s\'est produit avant.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°2 (Discontinuités)</div>
+    <div class="qtxt">La discontinuité de Mohorovičić (MOHO) est caractérisée par :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce2')"><input type="radio" name="ce2"> a. La disparition totale des ondes P et S — milieu liquide en dessous</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce2')"><input type="radio" name="ce2"> b. Une accélération brusque des ondes P et S à ≈30 km de profondeur — passage d'un milieu moins dense (croûte) à un milieu plus dense (manteau)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce2')"><input type="radio" name="ce2"> c. La disparition des ondes S à 2900 km — passage au noyau externe liquide</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce2')"><input type="radio" name="ce2"> d. Une réduction de la vitesse des ondes due à la forte pression</div>
+    <button class="btn-verify" onclick="verifyQCM('ce2',1,'✅ Correct ! La discontinuité de Moho (Mohorovičić, 1909) se situe à ≈30 km sous les continents et ≈7 km sous les océans. Elle est caractérisée par une <strong>accélération brusque</strong> des vitesses des ondes sismiques P et S : elles passent de 6–7 km/s (croûte) à 8 km/s (manteau). Cette accélération s\'explique par la plus grande densité du manteau (péridotite, densité 3,3) par rapport à la croûte (granite 2,7 ou basalte 2,9). La vitesse des ondes augmente avec la densité et la rigidité du milieu.','❌ La disparition des S se produit à la discontinuité de Gutenberg (2900 km), pas au Moho. La discontinuité de Moho est caractérisée par une <strong>accélération</strong> des ondes P et S (passage de la croûte moins dense au manteau plus dense), pas une disparition. Le Moho sépare la croûte (granite/basalte) du manteau (péridotite).')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°3 (Expansion océanique)</div>
+    <div class="qtxt">L'étude du paléomagnétisme de la croûte océanique montre des bandes d'anomalies magnétiques symétriques de part et d'autre d'une dorsale. Quelle est la déduction correcte ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce3')"><input type="radio" name="ce3"> a. Le champ magnétique terrestre a toujours eu la même orientation (normal)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce3')"><input type="radio" name="ce3"> b. La croûte océanique s'est formée progressivement de part et d'autre du rift, en enregistrant les inversions successives du champ magnétique — preuve de l'expansion océanique</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce3')"><input type="radio" name="ce3"> c. La symétrie est due à une composition identique des basaltes de part et d'autre de la dorsale</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce3')"><input type="radio" name="ce3"> d. Les anomalies magnétiques ne sont pas liées à l'expansion océanique</div>
+    <button class="btn-verify" onclick="verifyQCM('ce3',1,'✅ Parfait ! Le paléomagnétisme est une preuve majeure de l\'expansion océanique. Mécanisme : les laves basaltiques émises au rift contiennent des minéraux ferrugineux (magnétite) qui s\'aimantent selon le champ magnétique terrestre au moment de leur refroidissement → ils «fossilisent» l\'orientation du champ. Comme le champ terrestre s\'inverse périodiquement (tous les quelques centaines de milliers d\'années), les basaltes alternent entre polarité normale et inverse. La <strong>symétrie de ces bandes</strong> de part et d\'autre du rift prouve que la croûte a été créée progressivement au rift et poussée vers les bords → expansion océanique. On peut aussi calculer la vitesse d\'expansion en connaissant l\'âge des inversions et la distance des bandes au rift.','❌ Le champ magnétique terrestre s\'inverse régulièrement (anomalies magnétiques). La symétrie observée n\'est pas liée à la composition (tous les basaltes de la dorsale ont la même composition), mais à l\'<strong>histoire de la formation</strong> de la croûte océanique : créée au rift, elle enregistre les inversions successives puis s\'éloigne symétriquement de part et d\'autre du rift → preuve irréfutable de l\'expansion.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°4 (Subduction)</div>
+    <div class="qtxt">Lors d'une subduction océan-continent (type Andes), la plaque océanique plonge sous la plaque continentale. Quelles sont les deux conséquences directes de ce plongement ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce4')"><input type="radio" name="ce4"> a. Création de croûte océanique basaltique + séismes superficiels uniquement</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce4')"><input type="radio" name="ce4"> b. Séismes de toutes profondeurs (plan de Benioff) + volcans à andésites en bordure continentale</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce4')"><input type="radio" name="ce4"> c. Expansion de l'océan + formation d'une dorsale</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce4')"><input type="radio" name="ce4"> d. Séismes profonds seulement + absence de volcanisme</div>
+    <button class="btn-verify" onclick="verifyQCM('ce4',1,'✅ Exact ! La subduction génère deux types d\'activité tectonique :<br>1. <strong>Séismicité selon le plan de Benioff</strong> : la lithosphère plongeante froide et rigide subit des frottements contre la plaque continentale → ruptures → séismes à toutes profondeurs (superficiels à 700 km). Le plan incliné des foyers sismiques (plan de Benioff) est la preuve géophysique de la subduction.<br>2. <strong>Volcanisme à andésites</strong> : à ≈150 km de profondeur, la lithosphère océanique plongeante (croûte basaltique + sédiments continentaux) fond partiellement → magma mixte → remontée → volcans à andésites en bordure de la plaque continentale (exemple : ceinture de feu du Pacifique, Andes).','❌ La création de croûte océanique basaltique se passe au niveau des dorsales (accrétion), pas dans les zones de subduction. Dans les zones de subduction, la croûte est détruite. Les volcans de subduction produisent des <em>andésites</em> (magma issu de la fusion de la croûte océanique + sédiments), différents des basaltes des dorsales. Les séismes couvrent toutes les profondeurs (jusqu\'à 700 km selon le plan de Benioff).')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°5 (Points chauds)</div>
+    <div class="qtxt">L'archipel d'Hawaï présente des îles alignées NW–SE avec un âge croissant en s'éloignant de l'île principale. Comment interpréter ce fait par la théorie des points chauds ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce5')"><input type="radio" name="ce5"> a. Les îles se sont formées simultanément à partir d'une dorsale sous-marine orientée NW–SE</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce5')"><input type="radio" name="ce5"> b. Un point chaud fixe dans l'asthénosphère a perforé la plaque pacifique en déplacement → formation d'une île active (actuelle), puis les anciens volcans s'éloignent et s'éteignent au fur et à mesure du déplacement de la plaque</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce5')"><input type="radio" name="ce5"> c. Le point chaud s'est déplacé vers le SE en perforant successivement la plaque</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce5')"><input type="radio" name="ce5"> d. L'alignement est dû à une faille transformante active</div>
+    <button class="btn-verify" onclick="verifyQCM('ce5',1,'✅ Exact ! La théorie des points chauds (Tuzo Wilson, 1965) postule que des <strong>panaches thermiques fixes</strong> dans l\'asthénosphère perforent la plaque lithosphérique en déplacement, comme un chalumeau fixe sous une tôle mobile. Résultat : une série de volcans alignés d\'âge croissant dans la direction opposée au déplacement de la plaque. L\'île d\'Hawaï (la plus active, la plus jeune ≈ 0 Ma) est directement au-dessus du point chaud. Les îles plus au NW sont plus anciennes (certaines jusqu\'à 40 Ma) et éteintes → elles se sont formées au-dessus du même point chaud quand la plaque Pacifique les surplombait encore.','❌ Le point chaud est <strong>fixe</strong> dans l\'asthénosphère — c\'est la plaque qui se déplace. La formation successive des îles d\'Hawaï témoigne du déplacement de la plaque Pacifique vers le NW. Ce n\'est pas une dorsale ni une faille transformante. L\'alignement d\'îles volcaniques d\'âge croissant est la signature caractéristique d\'un point chaud + plaque en mouvement.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°6 (Formes intermédiaires)</div>
+    <div class="qtxt">L'Archéoptéryx possède à la fois des plumes et des dents. Quelle est la conclusion paléontologique correcte ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce6')"><input type="radio" name="ce6"> a. L'Archéoptéryx est un oiseau moderne apparu au Jurassique supérieur</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce6')"><input type="radio" name="ce6"> b. L'Archéoptéryx est une forme intermédiaire entre reptiles et oiseaux, prouvant la filiation reptiles → oiseaux</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce6')"><input type="radio" name="ce6"> c. L'Archéoptéryx est un reptile qui s'est adapté au vol en développant des plumes</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce6')"><input type="radio" name="ce6"> d. Les plumes et les dents ne peuvent pas coexister — il s'agit d'un fossile mal daté</div>
+    <button class="btn-verify" onclick="verifyQCM('ce6',1,'✅ Parfait ! L\'Archéoptéryx (−150 Ma, Jurassique supérieur de Bavière) est l\'exemple classique de <strong>forme intermédiaire</strong>. Il cumule :<br>— <strong>Caractères reptiliens :</strong> dents coniques, vertèbres caudales non soudées, 3 doigts griffus aux ailes, os non pneumatisés<br>— <strong>Caractères aviaires :</strong> corps couvert de plumes, furcula (clavicule soudée en fourchette), pied préhensile (oiseau percheur)<br>Ces caractères mixtes prouvent une <strong>filiation évolutive</strong> entre les reptiles (ancêtres) et les oiseaux (descendants). C\'est une preuve paléontologique majeure de la théorie de l\'évolution.','❌ Un «oiseau moderne» ne possède pas de dents — aucun oiseau actuel n\'en a. Les dents coniques de l\'Archéoptéryx sont un caractère hérité des reptiles. Ce n\'est pas non plus un reptile «qui s\'est adapté» (ce serait du lamarckisme). L\'Archéoptéryx est bien une <strong>forme intermédiaire fossile</strong> entre les deux groupes, prouvant une filiation évolutive progressive reptiles → oiseaux.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°7 (Crises biologiques)</div>
+    <div class="qtxt">À la limite Crétacé-Tertiaire, on trouve une couche argileuse noire de 50 cm enrichie en iridium. Quelle est l'hypothèse la plus cohérente pour expliquer cette anomalie ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce7')"><input type="radio" name="ce7"> a. Une activité volcanique ordinaire qui a déposé des cendres riches en iridium</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce7')"><input type="radio" name="ce7"> b. L'impact d'une ou plusieurs météorites (l'iridium est abondant dans les météorites) et/ou un volcanisme exceptionnel issu du manteau inférieur riche en fer</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce7')"><input type="radio" name="ce7"> c. Une augmentation brusque du niveau de la mer qui a dissous les carbonates et concentré l'iridium</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce7')"><input type="radio" name="ce7"> d. Un enrichissement progressif et naturel en iridium lors de la sédimentation normale</div>
+    <button class="btn-verify" onclick="verifyQCM('ce7',1,'✅ Exact ! Le pic d\'iridium (élément rare dans la croûte terrestre mais abondant dans les météorites) à la limite K-T est une preuve majeure. Deux hypothèses complémentaires :<br>1. <strong>Impact de météorite(s)</strong> : collision avec un ou plusieurs corps extraterrestres riches en iridium → nuage de poussières mondial → refroidissement climatique → extinction en masse<br>2. <strong>Volcanisme intense du manteau inférieur</strong> : le manuel tunisien signale que les laves associées aux grandes extinctions proviennent du <strong>manteau inférieur</strong> (plus riche en fer et en gaz CO₂/SO₂ que le manteau supérieur) → serre/refroidissement<br>Les deux phénomènes peuvent s\'être combinés pour déclencher la crise K-T.','❌ L\'iridium est <strong>extrêmement rare</strong> dans la croûte terrestre et dans les volcans ordinaires → une activité volcanique normale ne peut pas l\'enrichir. Son abondance exceptionnelle dans la couche K-T pointe vers une origine externe (météorite) et/ou un volcanisme profond (manteau inférieur). La sédimentation normale n\'enrichit pas en iridium.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°8 (Composition globe)</div>
+    <div class="qtxt">Expérimentalement, la vitesse de propagation des ondes P dans un matériau augmente avec sa densité. Sachant que les ondes P traversent le manteau à ≈8–13 km/s et que la vitesse dans la péridotite est de 4,5–7,8 km/s en surface normale, quelle conclusion tire-t-on ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce8')"><input type="radio" name="ce8"> a. Le manteau est constitué d'un matériau moins dense que la péridotite</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce8')"><input type="radio" name="ce8"> b. La forte pression en profondeur comprime la péridotite → sa densité augmente → les ondes accélèrent ; le manteau est bien constitué de péridotite sous haute pression</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce8')"><input type="radio" name="ce8"> c. Le manteau est constitué d'un matériau totalement différent de la péridotite</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce8')"><input type="radio" name="ce8"> d. Les vitesses plus élevées prouvent que le manteau est liquide</div>
+    <button class="btn-verify" onclick="verifyQCM('ce8',1,'✅ Exact ! C\'est le raisonnement de Francis Birch (Harvard) : en comparant les vitesses des ondes dans le globe avec celles mesurées en laboratoire sur différents matériaux soumis à haute pression/température, il a pu identifier la composition du manteau. La péridotite en surface normale (1 atm) transmet les ondes à 4,5–7,8 km/s. Sous la pression considérable des profondeurs terrestres, sa densité augmente → les ondes s\'y propagent plus vite (8–13 km/s). Cette cohérence entre les vitesses observées dans le manteau et celles de la péridotite sous haute pression confirme que le <strong>manteau est constitué de péridotite</strong>.','❌ Les vitesses plus élevées dans le manteau ne signifient pas que c\'est un matériau différent de la péridotite — elles s\'expliquent par la <strong>haute pression</strong> qui augmente la densité de la péridotite et donc la vitesse de propagation. Le manteau liquide est impossible car les ondes S s\'y propagent (preuve qu\'il est solide). La méthode de comparaison laboratoire/globe est la base de la sismologie expérimentale.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°9 (Formation des montagnes)</div>
+    <div class="qtxt">La chaîne de l'Himalaya résulte de la collision entre la plaque indienne et la plaque eurasiatique. Pourquoi cette collision n'a-t-elle pas donné lieu à une subduction classique comme les Andes ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce9')"><input type="radio" name="ce9"> a. La plaque indienne est trop petite pour subduire sous la plaque eurasiatique</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce9')"><input type="radio" name="ce9"> b. Deux croûtes continentales (de même densité ≈2,7–2,8) ne peuvent pas subduire l'une sous l'autre — collision frontale → chevauchement → plissement → formation de montagnes</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce9')"><input type="radio" name="ce9"> c. La subduction s'est arrêtée car la vitesse de déplacement de l'Inde était trop faible</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce9')"><input type="radio" name="ce9"> d. La plaque indienne a simplement glissé sous l'eurasiatique sans se déformer</div>
+    <button class="btn-verify" onclick="verifyQCM('ce9',1,'✅ Exact ! La différence fondamentale entre les Andes et l\'Himalaya :<br><strong>Andes (subduction océan-continent) :</strong> la croûte océanique (densité 2,9–3,0) est plus dense que la croûte continentale (2,7) → elle plonge naturellement sous le continent → subduction.<br><strong>Himalaya (collision continent-continent) :</strong> la croûte indienne (continentale, densité 2,7) rencontre la croûte eurasiatique (continentale, densité 2,7) → même densité → aucune ne peut «plonger» sous l\'autre → collision frontale → chevauchement → empilement de nappes → formation de l\'Himalaya (la plus haute chaîne du monde). Avant la collision, il y avait bien une phase de subduction de l\'océan Téthys.','❌ La clé est la <strong>densité comparative</strong> des deux croûtes. La croûte continentale indienne (densité ≈2,7) a la même densité que la croûte eurasiatique → elle ne peut pas «plonger» (contrairement à la croûte océanique plus dense ≈3,0 qui plonge sous le continent aux Andes). La collision frontale de deux croûtes continentales de même densité aboutit à un épaississement et un plissement de la croûte → chaîne de montagnes.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°10 (Évolution des végétaux)</div>
+    <div class="qtxt">Les grands gisements de charbon de l'ère Carbonifère (Europe, Amérique du Nord) témoignent de :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce10')"><input type="radio" name="ce10"> a. L'existence de vastes forêts de végétaux vasculaires (fougères, prèles, lépidodendrons) qui se sont enfouies et ont été transformées par la pression et la chaleur</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce10')"><input type="radio" name="ce10"> b. L'activité volcanique intense du Carbonifère qui a déposé du carbone sous forme de charbon</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce10")"><input type="radio" name="ce10"> c. La présence de pétrole transformé en charbon par les bactéries</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce10')"><input type="radio" name="ce10"> d. L'extinction des plantes vasculaires pendant une crise biologique du Carbonifère</div>
+    <button class="btn-verify" onclick="verifyQCM('ce10',0,'✅ Exact ! Le <strong>charbon fossile</strong> est d\'origine <strong>biologique</strong> : au Carbonifère (−360 à −300 Ma), un climat chaud et humide a favorisé le développement de gigantesques forêts de végétaux vasculaires (fougères arborescentes, lépidodendrons, cordaïtales de 40 m). Ces végétaux se sont accumulés dans des marécages, puis ont été enfouis et transformés par la pression et la chaleur en charbon (houille). C\'est la même origine que le pétrole pour les roches organiques marines. Le Carbonifère tire son nom de ces gisements de charbon découverts au 19ème siècle pour la révolution industrielle.','❌ Le charbon n\'est pas d\'origine volcanique. La réponse correcte est que le charbon provient de l\'enfouissement et de la transformation (diagenèse) de matière végétale (fougères, arbres du Carbonifère) sur des millions d\'années. Les végétaux ont d\'abord formé de la tourbe, puis du lignite, puis de la houille selon la pression et la température.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce10"></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°11 (Preuves de la dérive des continents)</div>
+    <div class="qtxt">Wegener a proposé la théorie de la dérive des continents en 1912. Laquelle de ces preuves est une preuve GÉOLOGIQUE (et non géographique ou paléontologique) ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce11')"><input type="radio" name="ce11"> a. La complémentarité des formes des côtes africaine et sud-américaine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce11')"><input type="radio" name="ce11"> b. Les mêmes fossiles de Mesosaurus retrouvés en Afrique et en Amérique du Sud</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce11')"><input type="radio" name="ce11"> c. Les chaînes de montagnes Appalaches (Amérique) et Calédonides (Europe) de même âge (470–350 Ma) et même structure, aujourd'hui séparées par l'Atlantique</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce11')"><input type="radio" name="ce11"> d. Les traces de glaciation de même âge retrouvées en Afrique, Inde et Amérique du Sud</div>
+    <button class="btn-verify" onclick="verifyQCM('ce11',2,'✅ Exact ! Les 4 types de preuves de Wegener :<br>— <strong>Géographique</strong> : complémentarité des côtes (réponse a)<br>— <strong>Paléontologique</strong> : mêmes fossiles sur continents séparés (réponse b)<br>— <strong>Géologique ★</strong> : chaînes de montagnes de même âge et structure de part et d\'autre de l\'Atlantique (réponse c) → prouve que ces chaînes étaient continues avant la séparation<br>— <strong>Paléoclimatique</strong> : traces de glaciation et évaporites sur continents aujourd\'hui tropicaux (réponse d)<br>Les Appalaches (E. Amérique du Nord) et les Calédonides (Scandinavie/Îles Britanniques) et les Mauritanides (NO Afrique) forment une seule chaîne interrompue par l\'ouverture de l\'Atlantique.','❌ La complémentarité des côtes est une preuve géographique, les fossiles une preuve paléontologique, les glaciations une preuve paléoclimatique. Les chaînes de montagnes Appalaches/Calédonides/Mauritanides (même âge, même structure géologique) constituent la preuve <strong>géologique</strong>.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce11"></div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°12 (Synthèse : évolution et géologie)</div>
+    <div class="qtxt">La grande crise Permo-Trias (−250 Ma) a conduit à la disparition de 95% des espèces marines dont les trilobites. Quelle relation peut-on établir avec les données géologiques de cette époque ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce12')"><input type="radio" name="ce12"> a. La crise est due uniquement à l'impact d'une météorite géante au Permien, comme pour la crise K-T</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce12')"><input type="radio" name="ce12"> b. La crise coïncide avec la formation de la Pangée (rassemblement de tous les continents) : réduction des mers épicontinentales, glaciation (Gondwana au pôle sud), volcanisme intense en Sibérie → conditions défavorables pour la faune marine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce12')"><input type="radio" name="ce12"> c. La crise a été causée uniquement par la disparition de l'oxygène atmosphérique</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ce12')"><input type="radio" name="ce12"> d. La crise Permo-Trias est la moins importante des crises biologiques</div>
+    <button class="btn-verify" onclick="verifyQCM('ce12',1,'✅ Exact ! C\'est l\'exemple parfait de la <strong>relation entre évolution géologique et biologique</strong>. Au Permien, la Pangée s\'est formée (tous les continents rassemblés) :<br>— Réduction des mers épicontinentales (zones côtières peu profondes = habitats des trilobites et espèces marines) → destruction des niches écologiques<br>— La portion Gondwana de la Pangée est au pôle sud → glaciation → baisse du niveau marin<br>— Volcanisme intense en Sibérie (trapps de Sibérie) → émissions de CO₂ et SO₂ → modifications climatiques<br>→ Conditions devenues défavorables pour 95% des espèces marines → extinction en masse (la plus grande de l\'histoire). Cette crise est séparée par les géologues en ère Primaire/Secondaire.','❌ La crise Permo-Trias est la <strong>plus grande</strong> de l\'histoire (95% des espèces marines disparaissent, 63% des insectes) — pas la moins importante. L\'hypothèse impact de météorite est associée à la crise K-T (−65 Ma), pas à la crise Permo-Trias. La cause principale est la combinaison de phénomènes géologiques liés à la formation de la Pangée.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-ce12"></div>
+  </div>
+
+  <button class="btn-verify" style="font-size:14px;padding:12px 32px;margin-top:8px;display:block" onclick="showScore()">📊 Voir mon score global</button>
+  <div class="score-wrap" id="score-global">
+    <div>Votre score CAPES :</div>
+    <div class="score-num" id="score-num">—</div>
+    <div id="score-msg"></div>
+  </div>
+
+</div><!-- fin tab-eval -->
+
+<footer>
+  <strong>INGÉNIEUR Mohamed CHAGRAOUI</strong><br>
+  Enseignant SVT · Candidat CAPES SVT 2026 · Tunisie<br>
+  Thème 3 — Ch.1 Structure du globe · Ch.2 Tectonique des plaques · Ch.3 Évolution biologique
+</footer>
+
+<!--
+════════════════════════════════════════════════════
+LISTE COMPLÈTE DES IMAGES — placer dans images/
+════════════════════════════════════════════════════
+
+MISE EN CONTEXTE :
+  t3_fig_globe_terrestre.png        → doc.1 p.261  : Le globe terrestre (photo satellite)
+  t3_fig_dorsales_carte.png         → doc.1 p.280  : Carte des dorsales médio-océaniques (60 000 km)
+  t3_fig_calendrier_géologique.png  → p.259        : Calendrier géologique (ères primaire→quaternaire)
+
+CHAPITRE 1 — Structure du globe :
+  t3_fig1_sismographe.png           → docs 5&7 p.263 : Sismographe vertical + sismomètre numérique
+  t3_fig2_séismogramme.png          → docs 8&9 p.264 : Séismogramme réel + interprétation (ondes P,S,L)
+  t3_fig3_ondes_profondeur.png      → doc.12 p.265   : Variation vitesse ondes P et S en fct de la profondeur
+  t3_fig4_modèle_structural.png     → doc.16 p.268   : Modèle structural globe (discontinuités + couches)
+  t3_fig5_croûtes.png               → doc.18 p.270   : Croûte continentale (35 km) vs océanique (7 km) + densités
+  t3_fig6_roches_endogènes.png      → doc.24 p.273   : Granite, basalte, péridotite (œil nu + microscope)
+  t3_fig7_volcan_stromboli.png      → doc.20 p.272   : Stromboli en éruption
+  t3_fig8_schéma_volcan.png         → doc.23 p.272   : Schéma d'un volcan (chambre, cheminée, coulée)
+
+CHAPITRE 2 — Tectonique des plaques :
+  t3_fig9_pangée.png                → docs 9-12 p.284 : Évolution continents Pangée → actuel (4 étapes)
+  t3_fig10_fossiles_répartition.png → doc.15 p.285    : Mêmes fossiles Afrique + Amérique du Sud
+  t3_fig11_dorsale_atlantique.png   → doc.18 p.286    : Reconstitution dorsale médio-atlantique + rift
+  t3_fig12_pilow_lavas.png          → doc.19 p.286    : Pilow Lavas (basaltes en coussins, fond océanique)
+  t3_fig13_âge_fonds.png            → doc.20 p.288    : Carte de la variation d'âge du fond océanique
+  t3_fig14_paléomagnétisme.png      → doc.23 p.290    : Anomalies magnétiques symétriques / rift (t0→t3)
+  t3_fig15_subduction.png           → doc.29 p.293    : Schéma de la subduction (fosse, plan Benioff, andésites)
+  t3_fig16_plan_benioff.png         → doc.28 p.293    : Répartition foyers sismiques plan de Benioff (Japon)
+  t3_fig17_plaques.png              → doc.31 p.295    : Les 12 plaques lithosphériques + flèches de déplacement
+  t3_fig18_atlas_tunisien.png       → docs 44-47 pp.303-305 : Orogenèse Atlas tunisien (4 étapes)
+
+CHAPITRE 3 — Évolution biologique :
+  t3_fig19_ichtyostéga.png          → doc.13 p.315   : Ichtyostéga (fossile) + maquereau + grenouille comparés
+  t3_fig20_archéoptéryx.png         → doc.16 p.316   : Reconstitution Archéoptéryx
+  t3_fig21_dimetrodon.png           → doc.19 p.317   : Reconstitution Dimetrodon (voile dorsal)
+  t3_fig22_arbre_phylogénique.png   → doc.21 p.317   : Arbre phylogénique des 5 classes de vertébrés
+  t3_fig23_crise_kT.png             → doc.28b p.321  : Conséquences crise K-T sur groupes animaux
+  t3_fig24_oxygène_évolution.png    → doc.26 p.320   : Évolution teneur O₂ atmosphérique et vie corrélées
+════════════════════════════════════════════════════
+TOTAL : 27 images
+════════════════════════════════════════════════════
+-->
+
+<script>
+/* ── TABS ── */
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  updateProgress();
+  if(id==='synthese')setTimeout(drawMindMap,120);
+}
+function toggleActivity(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+function updateProgress(){
+  const tabs=document.querySelectorAll('.tab-btn');
+  const idx=Array.from(tabs).indexOf(document.querySelector('.tab-btn.active'));
+  document.getElementById('progress-bar').style.width=((idx+1)/tabs.length*100)+'%';
+}
+updateProgress();
+
+/* ── PREREQ ── */
+const prereqData=[
+  {q:"Les ondes sismiques P se propagent :",opts:["Dans les solides uniquement","Dans les solides ET les liquides ✓","Dans les liquides uniquement"],ans:1},
+  {q:"La croûte continentale est constituée principalement de :",opts:["Basalte","Péridotite","Granite ✓"],ans:2},
+  {q:"La théorie de l'évolution a été proposée par :",opts:["Lamarck","Darwin ✓","Mendel"],ans:1},
+  {q:"La subduction est le phénomène par lequel :",opts:["De la croûte océanique est créée au niveau des dorsales","De la croûte océanique est détruite au niveau des fosses ✓","Deux continents entrent en collision"],ans:1},
+];
+const pc=document.getElementById('prereq-container');
+prereqData.forEach((d,i)=>{
+  const div=document.createElement('div');div.className='prereq-q';
+  div.innerHTML=`<div class="qlbl">Préacquis ${i+1}</div><div class="qtxt">${d.q}</div>`
+    +d.opts.map((o,j)=>`<button class="prereq-opt" onclick="answerPrereq(this,${j===d.ans})">${o.replace(' ✓','')}</button>`).join('');
+  pc.appendChild(div);
+});
+function answerPrereq(btn,correct){
+  if(btn.parentElement.querySelector('.correct-ans,.wrong-ans'))return;
+  btn.classList.add(correct?'correct-ans':'wrong-ans');
+  if(!correct){
+    const items=document.querySelectorAll('.prereq-q');
+    const qIdx=Array.from(items).indexOf(btn.parentElement);
+    btn.parentElement.querySelectorAll('.prereq-opt')[prereqData[qIdx].ans].classList.add('correct-ans');
+  }
+}
+
+/* ── QCM ── */
+function selectOpt(opt,group){
+  const parent=opt.closest('.qcm-item');
+  if(parent.querySelector('.correct,.wrong,.missed'))return;
+  const inp=opt.querySelector('input');
+  if(inp&&inp.type==='radio'){parent.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);inp.checked=true;}
+}
+function verifyQCM(group,correctIdx,msgOk,msgKo){
+  const btn=document.querySelector(`.btn-verify[onclick*="'${group}'"]`);
+  const parent=btn.closest('.qcm-item');
+  const opts=parent.querySelectorAll('.qcm-opt');
+  let chosen=-1;
+  opts.forEach((o,i)=>{if(o.querySelector('input')&&o.querySelector('input').checked)chosen=i;});
+  if(chosen===-1)return;
+  opts.forEach((o,i)=>{
+    if(i===correctIdx)o.classList.add('correct');
+    else if(i===chosen)o.classList.add('wrong');
+    o.style.pointerEvents='none';
+  });
+  btn.disabled=true;btn.style.opacity='.5';
+  const fb=document.getElementById('fb-'+group);
+  const isOk=chosen===correctIdx;
+  fb.classList.add('show',isOk?'ok':'ko');
+  fb.innerHTML=isOk?(msgOk||'✅ Correct !'):(msgKo||'❌ Incorrect — la bonne réponse est surlignée en vert.');
+  if(!window._scores)window._scores={};
+  if(window._scores[group]===undefined)window._scores[group]=isOk?1:0;
+}
+
+/* ── GAP FILL ── */
+function checkGap(cid,sid){
+  const c=document.getElementById(cid);
+  const sels=c.querySelectorAll('.gap-select');
+  let correct=0;
+  sels.forEach(s=>{
+    s.classList.remove('correct','wrong');
+    if(s.value==='')return;
+    if(s.value===s.dataset.answer){s.classList.add('correct');correct++;}
+    else s.classList.add('wrong');
+  });
+  const sc=document.getElementById(sid);
+  sc.classList.add('show');
+  sc.style.color=correct===sels.length?'var(--green)':'var(--red)';
+  sc.textContent=`Score : ${correct} / ${sels.length} ${correct===sels.length?'🎉 Parfait !':'— Corrections en rouge.'}`;
+}
+
+/* ── SCORE GLOBAL ── */
+function showScore(){
+  if(!window._scores)window._scores={};
+  const entries=Object.values(window._scores);
+  const total=entries.length,ok=entries.reduce((a,b)=>a+b,0);
+  const pct=total?Math.round(ok/total*100):0;
+  document.getElementById('score-num').textContent=`${ok} / ${total}  (${pct}%)`;
+  const msgs=['📚 À réviser — Reprends les activités','👍 Passable — Quelques points à revoir','✅ Bien — Continue !','🎉 Excellent ! Niveau CAPES atteint'];
+  document.getElementById('score-msg').textContent=msgs[pct<40?0:pct<60?1:pct<80?2:3];
+  document.getElementById('score-global').classList.add('show');
+  document.getElementById('score-global').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── FLASHCARDS ── */
+const fcData=[
+  {q:"Quelles sont les 3 discontinuités du globe et leurs profondeurs ?",a:"Moho (≈30 km) : croûte/manteau. Gutenberg (2900 km) : manteau/noyau externe liquide. Lehmann (5100 km) : noyau externe/noyau interne (graine). Mnémo : «Mon Globe Légèrement»"},
+  {q:"Pourquoi les ondes S disparaissent à 2900 km ?",a:"Les ondes S (cisaillement transversal) ne se propagent que dans les solides. À 2900 km (discontinuité de Gutenberg), le milieu devient liquide (noyau externe) → les S sont bloquées. Les P (compression) continuent car elles traversent les liquides."},
+  {q:"Quelle est la composition de chaque couche du globe ?",a:"Croûte continentale : granite (Si+Al). Croûte océanique : basalte (Si+Mg). Manteau : péridotite (olivine, Fe, Mg). Noyau externe (liquide) : Fe+Ni+S. Noyau interne / graine (solide) : Fe+Ni."},
+  {q:"Quelles sont les 4 preuves de la dérive des continents (Wegener) ?",a:"1. Géographique : complémentarité des côtes (Afrique/Amérique du Sud). 2. Paléontologique : mêmes fossiles sur continents séparés. 3. Géologique : chaînes de montagnes de même âge et structure (Appalaches/Calédonides). 4. Paléoclimatique : traces glaciation et évaporites sur continents aujourd'hui tropicaux."},
+  {q:"Qu'est-ce que l'accrétion océanique ? Où a-t-elle lieu ?",a:"Création de nouvelle croûte océanique basaltique au niveau du rift des dorsales océaniques. Magma provenant de l'asthénosphère remonte, se refroidit au contact de l'eau → Pilow Lavas → croûte océanique. Entraîne l'expansion océanique."},
+  {q:"Comment le paléomagnétisme prouve-t-il l'expansion océanique ?",a:"Les basaltes s'aimantent selon le champ magnétique lors de leur refroidissement. Les bandes de polarité magnétique sont SYMÉTRIQUES de part et d'autre du rift → preuves que la croûte s'est formée progressivement au rift et a migré vers les bords. Permet de calculer la vitesse d'expansion."},
+  {q:"Qu'est-ce que la subduction ? Quelles sont ses conséquences ?",a:"Plongement de la lithosphère océanique (plus dense) sous la lithosphère continentale au niveau des fosses océaniques. Conséquences : séismes de toutes profondeurs (plan de Benioff), volcans à andésites en bordure continentale, chaînes de montagnes (Andes). Destruction de croûte océanique."},
+  {q:"Comment l'Atlas tunisien s'est-il formé ?",a:"Résultat de la convergence plaques africaine et eurasiatique. Miocène : subduction plaque africaine sous eurasiatique. Miocène supérieur : blocage subduction au N. Tunisie → collision → compression propagée vers le sud → plissement lithosphère → formation de l'Atlas (chaîne chotts, Gafsa, Atlas central et septentrional)."},
+  {q:"Définir : Ichtyostéga, Archéoptéryx, Dimetrodon. Quelle filiation prouve chacun ?",a:"Ichtyostéga (Dévonien, −360 Ma) : 4 pattes + nageoire caudale + ligne latérale → forme intermédiaire Poissons→Amphibiens. Archéoptéryx (Jurassique, −150 Ma) : plumes + dents + doigts griffus → Reptiles→Oiseaux. Dimetrodon (Permien, −280 Ma) : écailles + voile thermorégulateur → Reptiles→Mammifères."},
+  {q:"Quelles sont les 2 grandes crises biologiques et leurs caractéristiques ?",a:"Permo-Trias (−250 Ma) : la plus grave (95% espèces marines), fin du Primaire. Causes : formation Pangée, glaciation, volcanisme sibérien. Disparition des trilobites. K-T (−65 Ma) : fin du Secondaire. Causes : météorite (iridium) + volcanisme profond. Disparition dinosaures. Radiation évolutive des mammifères."},
+  {q:"Quel est le moteur de la tectonique des plaques ?",a:"Les courants de convection dans l'asthénosphère. La matière chaude (moins dense) monte au niveau des rifts, la matière froide (plus dense) descend au niveau des fosses → circulation en boucles qui fait glisser les plaques lithosphériques rigides sur l'asthénosphère visqueuse."},
+  {q:"Qu'est-ce qu'une radiation évolutive ? Donner un exemple.",a:"Diversification rapide d'un groupe (survivant géniteur) qui occupe les niches écologiques laissées vides après une extinction en masse. Exemple : après la crise K-T (−65 Ma), les mammifères placentaires (qui étaient rares et petits) ont subi une radiation évolutive spectaculaire → tous les grands groupes de mammifères actuels."},
+];
+
+document.addEventListener('DOMContentLoaded',function(){
+  const grid=document.getElementById('fc-grid');
+  if(grid){
+    fcData.forEach((d,i)=>{
+      grid.innerHTML+=`<div class="fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="qlbl">Question</div><div class="qtxt">${d.q}</div><div class="qhint">Cliquer pour la réponse</div></div>
+          <div class="fc-back"><div class="albl">Réponse</div><div class="atxt">${d.a}</div><div class="cnt">${i+1}/${fcData.length}</div></div>
+        </div></div>`;
+    });
+  }
+});
+
+/* ── MIND MAP ── */
+function drawMindMap(){
+  const canvas=document.getElementById('mindmap-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||1000;
+  canvas.width=W;canvas.height=520;
+  ctx.clearRect(0,0,W,520);
+  const cx=W/2;
+
+  const nodes=[
+    {id:'root',x:cx,y:260,text:'THÈME 3\nGéologie',color:'#92400e',tc:'#fff',w:130,h:50,bold:true},
+    // CH1
+    {id:'ch1',x:cx-290,y:130,text:'Ch.1\nStructure du globe',color:'#78350f',tc:'#fff',w:155,h:46},
+    {id:'s1',x:cx-450,y:65,text:'Ondes P, S, L',color:'#fde68a',tc:'#78350f',w:130,h:28},
+    {id:'s2',x:cx-450,y:103,text:'Discontinuités (×3)',color:'#fde68a',tc:'#78350f',w:150,h:28},
+    {id:'s3',x:cx-450,y:141,text:'Croûte / Manteau / Noyau',color:'#fde68a',tc:'#78350f',w:165,h:28},
+    {id:'s4',x:cx-450,y:179,text:'Lithosphère / Asthéno.',color:'#fde68a',tc:'#78350f',w:165,h:28},
+    // CH2
+    {id:'ch2',x:cx+290,y:130,text:'Ch.2\nTectonique',color:'#0f766e',tc:'#fff',w:140,h:46},
+    {id:'t1',x:cx+440,y:65,text:'Wegener (4 preuves)',color:'#99f6e4',tc:'#134e4a',w:155,h:28},
+    {id:'t2',x:cx+440,y:103,text:'Accrétion + expansion',color:'#99f6e4',tc:'#134e4a',w:155,h:28},
+    {id:'t3',x:cx+440,y:141,text:'Subduction + Fosses',color:'#99f6e4',tc:'#134e4a',w:155,h:28},
+    {id:'t4',x:cx+440,y:179,text:'Atlas tunisien',color:'#b91c1c',tc:'#fff',w:140,h:28},
+    // CH3
+    {id:'ch3',x:cx,y:430,text:'Ch.3\nÉvolution biologique',color:'#1e5fa3',tc:'#fff',w:165,h:46},
+    {id:'e1',x:cx-175,y:487,text:'Darwin vs Lamarck',color:'#bfdbfe',tc:'#1e3a5f',w:150,h:28},
+    {id:'e2',x:cx+10,y:487,text:'Formes intermédiaires',color:'#bfdbfe',tc:'#1e3a5f',w:160,h:28},
+    {id:'e3',x:cx+195,y:487,text:'Crises biologiques',color:'#7c3aed',tc:'#fff',w:145,h:28},
+  ];
+
+  const links=[
+    ['root','ch1'],['root','ch2'],['root','ch3'],
+    ['ch1','s1'],['ch1','s2'],['ch1','s3'],['ch1','s4'],
+    ['ch2','t1'],['ch2','t2'],['ch2','t3'],['ch2','t4'],
+    ['ch3','e1'],['ch3','e2'],['ch3','e3'],
+  ];
+
+  ctx.lineWidth=1.5;
+  links.forEach(([a,b])=>{
+    const nA=nodes.find(n=>n.id===a),nB=nodes.find(n=>n.id===b);
+    if(!nA||!nB)return;
+    ctx.beginPath();ctx.strokeStyle='#fde68a';
+    ctx.moveTo(nA.x,nA.y);
+    ctx.bezierCurveTo((nA.x+nB.x)/2,nA.y,(nA.x+nB.x)/2,nB.y,nB.x,nB.y);
+    ctx.stroke();
+  });
+
+  nodes.forEach(n=>{
+    ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(n.x-n.w/2,n.y-n.h/2,n.w,n.h,8);
+    else ctx.rect(n.x-n.w/2,n.y-n.h/2,n.w,n.h);
+    ctx.fillStyle=n.color;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=n.tc;
+    const lines=n.text.split('\n');
+    lines.forEach((line,li)=>{
+      ctx.font=`${n.bold?'bold ':''}12px 'Source Sans 3',sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(line,n.x,n.y+(li-(lines.length-1)/2)*14);
+    });
+  });
+}
+</script>
+</body>
+</html>
