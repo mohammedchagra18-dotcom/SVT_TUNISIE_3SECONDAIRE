@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch3 — La Digestion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --e:#e67e22;--em:#f39c12;--el:#fef9f0;--ep:#fff8ed;
+  --v:#1B5E20;--vl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#fef9f0;--tx:#1a1a1a;--mu:#888;
+  --brd:#fde0c4;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:20px;line-height:1.7;}
+header{background:linear-gradient(135deg,#7B3F00,#e67e22 50%,#f39c12);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#fde0c4;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#fde0c4;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 9px;font-size:.72rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--em);background:var(--el);}
+.t.on{color:var(--e);border-bottom-color:var(--e);}
+.content{max-width:900px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--em);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--e);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--e);}
+.sech{background:linear-gradient(135deg,#7B3F00,#e67e22);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.tip{background:#fdf6ec;border:2px solid var(--j);border-radius:11px;margin:12px 0;overflow:hidden;}
+.tip-head{padding:10px 16px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:.9rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:13px 16px 15px;font-size:.89rem;line-height:1.8;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--el));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--e);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--ep);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.ret{background:var(--jl);border:2px solid var(--j);border-radius:10px;padding:12px 15px;margin:12px 0;}
+.ret h4{color:var(--o);font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.ret p{margin-bottom:5px;font-size:.89rem;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-50{display:block;max-width:50%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--el);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--el);border-radius:8px;border-left:5px solid var(--e);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--e);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--e);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--e);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:320px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--e);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--e);color:#fff;}.bv:hover{background:#7B3F00;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--el);}
+.qo input{accent-color:var(--e);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--e);}
+.bilan-rev h3{color:var(--e);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--el);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--e);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--e);margin-bottom:8px;display:flex;align-items:center;}
+.bilan-rev .bonus-q{background:#fff;border-radius:8px;padding:12px;margin-top:10px;font-size:.88rem;line-height:1.8;border:2px dashed var(--sa);}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--el);border-radius:10px;border-left:5px solid var(--e);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--el));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+footer{background:linear-gradient(135deg,#7B3F00,#e67e22 50%,#f39c12);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#7B3F00,#e67e22 50%,#f39c12);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#fde0c4;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:2.2rem;margin-bottom:7px;}
+.cnode .cn-title{font-size:.85rem;font-weight:700;margin-bottom:4px;}
+.cnode .cn-sub{font-size:.74rem;opacity:.88;line-height:1.4;}
+.cn-a{background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#B71C1C,#880000);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid var(--e);}
+.cn-panel.b{border-left:6px solid var(--v);}
+.cn-panel.c{border-left:6px solid var(--b);}
+.cn-panel.d{border-left:6px solid var(--r);}
+.cn-panel.e{border-left:6px solid var(--ar);}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--el));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 4px;font-size:.62rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 3 — Des Aliments aux Nutriments : La Digestion</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie II · Pages 55–72 · 5 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">📜 Act.1</button>
+  <button class="t"     onclick="showTab(3)">🧪 Act.2</button>
+  <button class="t"     onclick="showTab(4)">🧬 Act.3</button>
+  <button class="t"     onclick="showTab(5)">⚙️ Act.4</button>
+  <button class="t"     onclick="showTab(6)">🩸 Act.5</button>
+  <button class="t"     onclick="showTab(7)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(8)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(9)">📋 Révision</button>
+  <button class="t"     onclick="showTab(10)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(11)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#7B3F00,#e67e22 50%,#f39c12);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#fde0c4;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie II), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #fde0c4;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fde0c4;color:#7B3F00;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Expliquer le <strong>mécanisme de la digestion</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #fde0c4;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fde0c4;color:#7B3F00;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">2</span> Préciser le <strong>rôle des glandes et des sucs digestifs</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #fde0c4;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fde0c4;color:#7B3F00;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">3</span> Reconnaître les <strong>conditions d'activité enzymatique</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #fde0c4;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fde0c4;color:#7B3F00;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">4</span> Identifier les <strong>voies d'absorption</strong> des nutriments</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.55-56)</h2>
+    <p class="expl-text">Les aliments que nous consommons — makroudh (riche en amidon, huile, sucre) et chorba (riche en amidon, protéines, huile) — sont des <strong>aliments composés</strong>. Seuls les <strong>nutriments</strong>, molécules de petite taille, traversent la paroi intestinale. Les macromolécules doivent donc être <strong>simplifiées</strong> : c'est la digestion.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch3_Doc02_makroudh.PNG" alt="Makroudh riche en amidon, huile, sucre" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — Makroudh riche en amidon, en huile et en sucre (p.56)</div>'">
+      <img src="images/T3Ch3_Doc03_chorba.PNG" alt="Chorba riche en protéines, amidon, huile" onerror="this.outerHTML='<div class=img-fb>📷 Doc.3 — Chorba riche en amidon, en protéines, en huile... (p.56)</div>'">
+    </div>
+    <img src="images/T3Ch3_Doc01_glandes_salivaires.PNG" alt="Glandes salivaires" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — 1. Glandes salivaires : 1. glande parotide ; 2. langue ; 3. conduit parotidien ; 4. conduit sublingual majeur ; 5. conduit sous-maxillaire ; 6. glande parotide ; 7. glande sublinguale (p.55)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis (p.57)</h2>
+    <p class="expl-text">Un <strong>aliment composé</strong> est un ensemble d'aliments simples (protéiques, glucidiques, lipidiques). Un <strong>aliment simple</strong> est un ensemble de nutriments. La digestion est la transformation des aliments simples en nutriments grâce aux <strong>sucs digestifs</strong>. Les nutriments passent dans le sang au niveau des villosités intestinales : c'est l'<strong>absorption</strong>.</p>
+    <img src="images/T3Ch3_Doc04_appareil_digestif_homme.PNG" alt="Appareil digestif de l'Homme" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.4 — L&apos;appareil digestif de l&apos;Homme — schéma à légender (p.57)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Préacquis</div><div id="mq0-q">
+      <p>1. Les aliments composés contiennent des <select class="bl" data-rep="aliments simples (protéiques, glucidiques, lipidiques)"><option value="">—</option><option>nutriments uniquement</option><option>aliments simples (protéiques, glucidiques, lipidiques)</option></select>.</p>
+      <p>2. La digestion transforme les aliments simples en <select class="bl" data-rep="nutriments (molécules de petite taille)"><option value="">—</option><option>macromolécules plus complexes</option><option>nutriments (molécules de petite taille)</option></select>.</p>
+      <p>3. L'absorption a lieu au niveau <select class="bl" data-rep="des villosités de l'intestin grêle"><option value="">—</option><option>de l'estomac</option><option>des villosités de l'intestin grêle</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq0')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq0')">↺</button><div class="mq-fb" id="mq0-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La digestion est une <strong>simplification moléculaire</strong> qui transforme les macromolécules alimentaires (amidon, protéines, lipides) en petites molécules absorbables (oses, acides aminés, acides gras). Cette transformation est réalisée par des <strong>enzymes</strong> contenues dans les sucs digestifs. La digestion commence dans la bouche et se poursuit tout au long du tube digestif.</div></div>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 3 Questions directrices (p.57)</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Comment se fait la <strong>transformation des aliments simples en nutriments</strong> ?</li>
+      <li>Quels sont les <strong>sucs digestifs</strong> et les <strong>enzymes</strong> impliqués ?</li>
+      <li>Quelles sont les <strong>conditions d'action</strong> des enzymes digestives ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>La digestion est une <strong>simplification moléculaire</strong> : les macromolécules (amidon, protéines, lipides) sont hydrolysées en nutriments (glucose, acides aminés, acides gras). Cette transformation est réalisée par des <strong>enzymes</strong>, catalyseurs biologiques spécifiques qui agissent dans des conditions précises de température et de pH. Le modèle <strong>clé-serrure</strong> explique la spécificité enzyme-substrat. Après digestion, les nutriments sont absorbés au niveau des <strong>villosités intestinales</strong> par deux voies : sanguine et lymphatique.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🧪</div><div class="cn-title">Simplification</div><div class="cn-sub">Macromolécules → Nutriments</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">⚙️</div><div class="cn-title">Enzymes</div><div class="cn-sub">Spécificité · T° · pH</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">🩸</div><div class="cn-title">Absorption</div><div class="cn-sub">Villosités · 2 voies</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges</div><div class="cn-sub">Erreurs fréquentes</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">🔗</div><div class="cn-title">Connexions</div><div class="cn-sub">Ch.2 · Ch.4 · Thème 1</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:var(--e)">🧪 La digestion = simplification moléculaire</h3><p class="expl-text">La digestion transforme les aliments simples (macromolécules) en nutriments (petites molécules) par des réactions d'<strong>hydrolyse</strong>. Chaque type d'aliment est hydrolysé par une enzyme spécifique. L'hydrolyse est une réaction chimique qui utilise <strong>l'eau</strong> pour couper les liaisons covalentes.</p><table><tr><th>Aliment simple</th><th>Enzyme</th><th>Produit</th></tr><tr class="hl"><td>Amidon (polyoside)</td><td>Amylase salivaire</td><td>Maltose (diholoside)</td></tr><tr><td>Protéines</td><td>Pepsine</td><td>Polypeptides</td></tr><tr class="hl"><td>Lipides</td><td>Lipase</td><td>Acides gras + Glycérol</td></tr></table></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:var(--v)">⚙️ Caractéristiques des enzymes</h3><table><tr><th style="background:var(--v)">Caractéristique</th><th style="background:var(--v)">Description</th></tr><tr class="hl"><td><strong>Spécificité</strong></td><td>Une enzyme n'agit que sur un substrat précis (modèle clé-serrure)</td></tr><tr><td><strong>Température optimale</strong></td><td>30-40°C. Au-delà → dénaturation irréversible</td></tr><tr class="hl"><td><strong>pH optimal</strong></td><td>Pepsine = pH 2 · Amylase = pH 7 · Trypsine = pH 9</td></tr></table></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:var(--b)">🩸 Absorption intestinale</h3><p class="expl-text">Deux voies au niveau de l'intestin grêle : <strong>voie sanguine</strong> (oses, acides aminés, eau, sels, vitamines B et C) et <strong>voie lymphatique</strong> (acides gras, glycérol, vitamines liposolubles A, D, E, K). La lymphe rejoint le sang au niveau de la veine cave.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:var(--r)">⚠️ 3 Pièges</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Enzyme = catalyseur biologique protéique <span style="margin-left:auto">▼</span></div><div class="piege-body">Toutes les enzymes sont des <strong>protéines</strong>. Elles sont dénaturées par la chaleur (>60°C) de façon <strong>irréversible</strong>. À basse température (0°C), elles sont seulement <strong>inactivées réversiblement</strong>. Ne pas confondre inactivation et dénaturation.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Spécificité enzyme-substrat <span style="margin-left:auto">▼</span></div><div class="piege-body">L'amylase n'hydrolyse QUE l'amidon, pas les protéines. La pepsine n'hydrolyse QUE les protéines, pas l'amidon. Chaque enzyme reconnaît <strong>son</strong> substrat grâce à la complémentarité structurale entre le <strong>site actif</strong> de l'enzyme et le substrat (modèle clé-serrure).</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ pH ≠ même pour toutes les enzymes <span style="margin-left:auto">▼</span></div><div class="piege-body">Pepsine (estomac) = pH 2 optimal grâce à HCl. Amylase salivaire (bouche) = pH 7. Trypsine (pancréas) = pH 9. Chaque enzyme a <strong>son</strong> pH optimal. La bile, elle, ne contient PAS d'enzymes — elle émulsionne les lipides.</div></div></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:var(--ar)">🔗 Connexions</h3><div class="connexion-grid"><div class="conn-item" style="border-color:var(--e);background:var(--el)"><div class="conn-ch" style="color:var(--e)">← Ch.2 — Besoins nutritionnels</div><p style="font-size:.86rem">Les aliments simples étudiés au Ch.2 sont ici transformés en nutriments absorbables.</p></div><div class="conn-item" style="border-color:var(--b);background:var(--bl)"><div class="conn-ch" style="color:var(--b)">→ Ch.4 — Respiration</div><p style="font-size:.86rem">Les nutriments absorbés (glucose) seront dégradés par la respiration cellulaire (Ch.4).</p></div></div></div>
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi la pepsine agit-elle dans l'estomac (pH 2) mais pas dans l'intestin (pH 8) ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">La pepsine a un <strong>pH optimal de 2</strong>. Dans l'intestin (pH 8), sa conformation spatiale est modifiée → le site actif n'est plus complémentaire du substrat → l'enzyme est <strong>inactive</strong>. Chaque enzyme possède une structure tridimensionnelle qui dépend du pH de son milieu d'action.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — HISTORIQUE ══ -->
+<div class="pan" id="p2">
+  <div class="sech">📜 Activité 1 — Expériences historiques sur la digestion (p.58)</div>
+  <div class="card"><h3 style="color:var(--e);">Spallanzani et la découverte de la digestion chimique</h3>
+    <p class="expl-text">Au XVIIIe siècle, les scientifiques pensaient que la digestion était un phénomène purement <strong>mécanique</strong> (trituration par les parois de l'estomac). L'abbé <strong>Spallanzani</strong> (1729-1799) va prouver, par une série d'expériences ingénieuses sur lui-même et sur des animaux, que la digestion est aussi — et surtout — un phénomène <strong>chimique</strong>.</p>
+    <table><tr><th>Expérience</th><th>Résultat observé</th><th>Conclusion</th></tr>
+      <tr class="hl"><td><strong>1. Bourse de toile + pain mâché</strong> avalée puis récupérée après 23h</td><td>Le pain a disparu. La toile est intacte.</td><td>La digestion n'est PAS une trituration mécanique — sinon la toile aurait été déchirée.</td></tr>
+      <tr><td><strong>2. Bourse + chair de pigeon cuite</strong> — 18h45 dans l'estomac</td><td>Les chairs sont entièrement digérées.</td><td>Le résultat est valable aussi pour les aliments d'origine animale.</td></tr>
+      <tr class="hl"><td><strong>3. Tube en bois percé</strong> + chair de veau — 22h dans l'estomac</td><td>La chair a disparu malgré la protection du tube.</td><td><strong>Preuve décisive</strong> contre la trituration : le suc gastrique agit chimiquement à travers les trous.</td></tr>
+      <tr><td><strong>4. Suc gastrique in vitro</strong> sur viande à 30-35°C (sans estomac)</td><td>La viande se dissout en 35h. Dans l'eau pure : aucune dissolution.</td><td>Le suc gastrique contient un <strong>agent chimique actif</strong> responsable de la digestion — découverte des enzymes.</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 Conclusion historique :</strong> Spallanzani démontre que la digestion n'est PAS mécanique (trituration) mais <strong>CHIMIQUE</strong>. Le suc gastrique contient des substances — plus tard appelées <strong>ENZYMES</strong> — qui dissolvent les aliments. Il prouve aussi que cette action nécessite une température proche de celle du corps (30-35°C).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. Avant Spallanzani, on pensait que la digestion était <select class="bl" data-rep="purement mécanique (trituration)"><option value="">—</option><option>purement chimique</option><option>purement mécanique (trituration)</option></select>.</p>
+      <p>2. L'expérience du tube en bois percé prouve que <select class="bl" data-rep="le suc gastrique agit chimiquement sans trituration"><option value="">—</option><option>la trituration est indispensable</option><option>le suc gastrique agit chimiquement sans trituration</option></select>.</p>
+      <p>3. L'expérience in vitro (suc gastrique seul) a été réalisée à <select class="bl" data-rep="30-35°C (température du corps)"><option value="">—</option><option>0°C (glace fondante)</option><option>30-35°C (température du corps)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les expériences de Spallanzani constituent le <strong>fondement historique</strong> de la biochimie digestive. Il a établi que la digestion est une transformation <strong>chimique</strong> catalysée par des substances contenues dans les sucs digestifs, agissant à température corporelle. Ces substances seront identifiées plus tard comme des <strong>enzymes</strong> (protéines catalytiques).</div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — DIGESTION AMIDON ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🧪 Activité 2 — La digestion de l'amidon (p.59–61)</div>
+  <div class="card"><h3 style="color:var(--e);">A — La salive et l'amylase salivaire (p.59-60)</h3>
+    <p class="expl-text">La digestion de l'amidon commence dans la <strong>bouche</strong> sous l'action de la <strong>salive</strong>. La salive est un suc digestif produit par les glandes salivaires (1 à 2 litres par jour). Elle contient 99% d'eau, des sels minéraux, des protéines et une enzyme : l'<strong>amylase salivaire</strong> (ou ptyaline).</p>
+    <img src="images/T3Ch3_Doc05_propos_pizza.PNG" alt="Propos d'une pizza — mastication" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — «Proppos d&apos;une pizza» — illustration humoristique de la mastication et de l&apos;action de la salive (p.59)</div>'">
+    <p class="expl-text">L'amylase salivaire catalyse l'<strong>hydrolyse de l'amidon</strong> (polyoside de formule (C₆H₁₀O₅)ₙ) en <strong>maltose</strong> (diholoside de formule C₁₂H₂₂O₁₁). La réaction nécessite de l'eau : (C₆H₁₀O₅)ₙ + n/2 H₂O → n/2 C₁₂H₂₂O₁₁.</p>
+    <img src="images/T3Ch3_Doc07_structure_amidon.PNG" alt="Structure molécule amidon" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — 9. Schéma de la structure de la molécule d&apos;amidon : chaîne de glucose (p.59)</div>'">
+    <img src="images/T3Ch3_Doc08_digestion_amidon_salive.PNG" alt="Digestion amidon par salive" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.8 — 10. Digestion de l&apos;amidon par la salive : tubes T1 (témoin) et T2 (salive) au bain-marie à ≈40°C (p.60)</div>'">
+    <div class="focus-box"><strong>🔍 Résultat expérimental :</strong> Dans le tube T2 (amidon + salive), le test à l'eau iodée devient négatif (disparition de l'amidon) et le test à la liqueur de Fehling devient positif (apparition d'un sucre réducteur : le maltose). Dans le tube T1 (témoin sans salive), l'amidon persiste.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 2A</div><div id="mq2a-q">
+      <p>1. L'amylase salivaire hydrolyse l'amidon en <select class="bl" data-rep="maltose (diholoside réducteur)"><option value="">—</option><option>glucose (ose) directement</option><option>maltose (diholoside réducteur)</option></select>.</p>
+      <p>2. Le test à l'eau iodée permet de détecter <select class="bl" data-rep="l'amidon (coloration bleue)"><option value="">—</option><option>le glucose</option><option>l'amidon (coloration bleue)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2a')">↺</button><div class="mq-fb" id="mq2a-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> L'amylase salivaire est une <strong>hydrolase</strong> — elle catalyse une réaction d'hydrolyse. Le produit de la réaction (maltose) est un sucre réducteur qui réduit la liqueur de Fehling (précipité rouge brique). La salive agit dans la bouche à pH ≈ 7 et 37°C.</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--e);">B — Conditions d'action de l'amylase salivaire (p.61)</h3>
+    <p class="expl-text">Pour déterminer les <strong>conditions optimales</strong> d'action de l'amylase salivaire, on réalise une expérience avec 5 tubes dans différentes conditions de température, de pH et de substrat.</p>
+    <img src="images/T3Ch3_Doc09_tableau_5_tubes.PNG" alt="Tableau des 5 tubes" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — Tableau des 5 tubes à essai pour tester les conditions d&apos;action de l&apos;amylase salivaire (T°, pH, spécificité) (p.61)</div>'">
+    <table><tr><th>Tube</th><th>Contenu</th><th>Condition</th><th>Résultat</th><th>Conclusion</th></tr>
+      <tr class="hl"><td>1</td><td>Amidon + Salive</td><td>37°C, pH 7</td><td>Digestion</td><td>Conditions optimales</td></tr>
+      <tr><td>2</td><td>Amidon + Salive bouillie</td><td>37°C, pH 7</td><td>Pas de digestion</td><td>Enzyme dénaturée par chauffage</td></tr>
+      <tr class="hl"><td>3</td><td>Amidon + Salive</td><td>0°C, pH 7</td><td>Pas de digestion</td><td>Enzyme inactivée par le froid</td></tr>
+      <tr><td>4</td><td>Amidon + Salive</td><td>37°C, pH 2</td><td>Pas de digestion</td><td>pH non optimal</td></tr>
+      <tr class="hl"><td>5</td><td>Saccharose + Salive</td><td>37°C, pH 7</td><td>Pas de digestion</td><td>Spécificité : l'amylase n'agit que sur l'amidon</td></tr>
+    </table>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 2B</div><div id="mq2b-q">
+      <p>1. Le tube 2 (salive bouillie) ne digère pas car l'enzyme est <select class="bl" data-rep="dénaturée irréversiblement par la chaleur"><option value="">—</option><option>inactivée réversiblement</option><option>dénaturée irréversiblement par la chaleur</option></select>.</p>
+      <p>2. Le tube 3 (0°C) ne digère pas car l'enzyme est <select class="bl" data-rep="inactivée réversiblement par le froid"><option value="">—</option><option>détruite</option><option>inactivée réversiblement par le froid</option></select>.</p>
+      <p>3. Le tube 5 (saccharose) montre que l'amylase est <select class="bl" data-rep="spécifique de l'amidon"><option value="">—</option><option>universelle</option><option>spécifique de l'amidon</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2b')">↺</button><div class="mq-fb" id="mq2b-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> L'amylase salivaire agit de façon optimale à <strong>37°C et pH 7</strong> (conditions de la bouche). Elle est <strong>spécifique</strong> de l'amidon. La chaleur (>60°C) la <strong>dénature irréversiblement</strong> ; le froid (0°C) l'<strong>inactive réversiblement</strong>. Ces propriétés sont communes à toutes les enzymes digestives.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — DIGESTION PROTÉINES ══ -->
+<div class="pan" id="p4">
+  <div class="sech">🧬 Activité 3 — La digestion des protéines par la pepsine (p.62–63)</div>
+  <div class="card"><h3 style="color:var(--e);">La pepsine : une enzyme gastrique spécifique des protéines</h3>
+    <p class="expl-text">La <strong>pepsine</strong> est une enzyme du suc gastrique, sécrétée par les glandes de la paroi de l'estomac. Elle catalyse l'<strong>hydrolyse des protéines</strong> (ex : ovalbumine) en polypeptides et acides aminés. Le suc gastrique contient également de l'<strong>acide chlorhydrique (HCl)</strong> qui abaisse le pH à environ 2 — condition indispensable à l'activité de la pepsine.</p>
+    <img src="images/T3Ch3_Doc10_tableau_7_tubes_pepsine.PNG" alt="Tableau des 7 tubes — pepsine" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10 — Tableau des 7 tubes pour tester les conditions d&apos;action de la pepsine sur l&apos;ovalbumine (pH, T°, spécificité) (p.62-63)</div>'">
+    <p class="expl-text">Le <strong>test de Biuret</strong> permet de suivre la digestion : il est positif (coloration bleu violacée) en présence de <strong>liaisons peptidiques</strong> (protéines non digérées). Quand la pepsine a hydrolysé l'ovalbumine, il n'y a plus de liaisons peptidiques → Biuret <strong>négatif</strong> → digestion effective.</p>
+    <div class="focus-box"><strong>🔍 Résultats clés :</strong> Tube 1 (pepsine + ovalbumine + HCl à 37°C) = digestion (Biuret négatif). Tube 2 (sans HCl) = pas de digestion. Tube 3 (sans pepsine) = pas de digestion. Tube 4 (pepsine seule, sans ovalbumine) = témoin. Tube 5 (pepsine bouillie) = pas de digestion. Tube 6 (amidon au lieu d'ovalbumine) = pas de digestion → <strong>spécificité</strong>. Tube 7 (0°C) = pas de digestion.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 3</div><div id="mq3-q">
+      <p>1. La pepsine agit dans l'estomac à pH optimal de <select class="bl" data-rep="2 (milieu acide grâce à HCl)"><option value="">—</option><option>7 (neutre — comme l'amylase)</option><option>2 (milieu acide grâce à HCl)</option></select>.</p>
+      <p>2. La pepsine est spécifique <select class="bl" data-rep="des protéines (elle n'hydrolyse pas l'amidon)"><option value="">—</option><option>de l'amidon également</option><option>des protéines (elle n'hydrolyse pas l'amidon)</option></select>.</p>
+      <p>3. Le test de Biuret devient négatif quand <select class="bl" data-rep="les liaisons peptidiques sont hydrolysées"><option value="">—</option><option>la température dépasse 60°C</option><option>les liaisons peptidiques sont hydrolysées</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La pepsine est une <strong>endopeptidase</strong> qui hydrolyse les liaisons peptidiques à l'intérieur des chaînes protéiques. Elle agit exclusivement en <strong>milieu acide</strong> (pH 2), condition réalisée dans l'estomac grâce à la sécrétion de HCl par les cellules pariétales. Sans HCl, la pepsine est inactive — ce qui montre l'importance de l'environnement chimique pour l'activité enzymatique.</div></div>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — CARACTÉRISTIQUES ENZYMES ══ -->
+<div class="pan" id="p5">
+  <div class="sech">⚙️ Activité 4 — Caractéristiques de l'activité enzymatique (p.64–66)</div>
+
+  <div class="card"><h3 style="color:var(--e);">A — La spécificité enzymatique : modèle clé-serrure (p.64)</h3>
+    <p class="expl-text">Les enzymes sont des <strong>catalyseurs biologiques</strong> de nature protéique. Elles présentent une double spécificité : spécificité de <strong>substrat</strong> (une enzyme n'agit que sur un substrat précis) et spécificité de <strong>réaction</strong> (les enzymes digestives catalysent toutes des hydrolyses — ce sont des <strong>hydrolases</strong>).</p>
+    <img src="images/T3Ch3_Doc11_modele_cle_serrure.PNG" alt="Modèle clé-serrure" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.11 — 11. La spécificité enzyme (E) substrat (S) est schématisée par le modèle clé-serrure (p.64)</div>'">
+    <p class="expl-text">Le modèle <strong>clé-serrure</strong> explique cette spécificité : le <strong>site actif</strong> de l'enzyme (la serrure) possède une configuration spatiale complémentaire de celle du <strong>substrat</strong> (la clé). Seul le substrat spécifique peut se fixer dans le site actif pour former le <strong>complexe enzyme-substrat</strong>, indispensable à la réaction d'hydrolyse.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4A</div><div id="mq4a-q">
+      <p>1. Le modèle clé-serrure explique la <select class="bl" data-rep="spécificité enzyme-substrat (complémentarité structurale)"><option value="">—</option><option>sensibilité au pH</option><option>spécificité enzyme-substrat (complémentarité structurale)</option></select>.</p>
+      <p>2. Les enzymes digestives sont toutes des <select class="bl" data-rep="hydrolases (elles catalysent des hydrolyses)"><option value="">—</option><option>oxydases</option><option>hydrolases (elles catalysent des hydrolyses)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4a')">↺</button><div class="mq-fb" id="mq4a-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La spécificité enzymatique est la propriété fondamentale qui permet à chaque enzyme de reconnaître <strong>son</strong> substrat parmi des milliers de molécules présentes dans la cellule. Cette reconnaissance repose sur une <strong>complémentarité géométrique et chimique</strong> entre le site actif et le substrat, comme une clé dans sa serrure.</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--e);">B — Influence de la température (p.65)</h3>
+    <p class="expl-text">L'activité enzymatique dépend étroitement de la <strong>température</strong>. On mesure l'efficacité enzymatique en fonction de la température du milieu réactionnel.</p>
+    <img src="images/T3Ch3_Doc12_courbe_température.PNG" alt="Courbe activité vs température" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.12 — 12. Courbe de la variation de l&apos;efficacité des enzymes en fonction de la température (p.65)</div>'">
+    <table><tr><th>Zone de température</th><th>Effet sur l'enzyme</th><th>Réversibilité</th></tr>
+      <tr class="hl"><td>0-10°C (basse T°)</td><td>Enzyme <strong>inactivée</strong> — activité très faible ou nulle</td><td>✅ Réversible</td></tr>
+      <tr><td>30-40°C (T° optimale)</td><td>Activité <strong>maximale</strong></td><td>—</td></tr>
+      <tr class="hl"><td>> 60°C (haute T°)</td><td>Enzyme <strong>dénaturée</strong> — perte définitive d'activité</td><td>❌ Irréversible</td></tr>
+    </table>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4B</div><div id="mq4b-q">
+      <p>1. La température optimale des enzymes est <select class="bl" data-rep="30-40°C (température corporelle)"><option value="">—</option><option>0-10°C</option><option>30-40°C (température corporelle)</option></select>.</p>
+      <p>2. À haute température (>60°C), l'enzyme est <select class="bl" data-rep="dénaturée irréversiblement (perte de la structure spatiale)"><option value="">—</option><option>inactivée réversiblement</option><option>dénaturée irréversiblement (perte de la structure spatiale)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4b')">↺</button><div class="mq-fb" id="mq4b-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La dénaturation thermique s'explique par la nature <strong>protéique</strong> des enzymes. Au-delà de 60°C, les liaisons faibles (hydrogène, ioniques) qui maintiennent la structure tridimensionnelle de la protéine sont rompues. L'enzyme perd sa configuration spatiale → le site actif est déformé → plus de reconnaissance du substrat → <strong>activité catalytique abolie</strong>.</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--e);">C — Influence du pH (p.65)</h3>
+    <p class="expl-text">Chaque enzyme possède un <strong>pH optimal</strong> qui dépend de son environnement d'action dans l'organisme.</p>
+    <img src="images/T3Ch3_Doc13_courbe_pH_3_enzymes.PNG" alt="Courbe activité vs pH" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — 13. Courbe de la variation de l&apos;activité de 3 enzymes selon le pH : pepsine (pH 2), amylase salivaire (pH 7), trypsine (pH 9) (p.65)</div>'">
+    <table><tr><th>Enzyme</th><th>Origine</th><th>pH optimal</th><th>Milieu d'action</th></tr>
+      <tr class="hl"><td>Pepsine</td><td>Suc gastrique (estomac)</td><td>≈ 2</td><td>Très acide (HCl)</td></tr>
+      <tr><td>Amylase salivaire</td><td>Salive (bouche)</td><td>≈ 7</td><td>Neutre</td></tr>
+      <tr class="hl"><td>Trypsine</td><td>Suc pancréatique</td><td>≈ 9</td><td>Basique</td></tr>
+    </table>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4C</div><div id="mq4c-q">
+      <p>1. La pepsine a un pH optimal <select class="bl" data-rep="acide (≈ 2), adapté à l'estomac"><option value="">—</option><option>neutre (≈ 7)</option><option>acide (≈ 2), adapté à l'estomac</option></select>.</p>
+      <p>2. La trypsine, enzyme pancréatique, a un pH optimal <select class="bl" data-rep="basique (≈ 9)"><option value="">—</option><option>acide (≈ 2)</option><option>basique (≈ 9)</option></select>.</p>
+      <p>3. Si on place la pepsine à pH 8, elle sera <select class="bl" data-rep="inactive (pH non optimal)"><option value="">—</option><option>plus active</option><option>inactive (pH non optimal)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4c')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4c')">↺</button><div class="mq-fb" id="mq4c-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le pH influence l'état d'<strong>ionisation</strong> des acides aminés du site actif. Un pH non optimal modifie les charges électriques → déformation du site actif → perte de complémentarité avec le substrat. Chaque enzyme est donc <strong>adaptée à son milieu d'action</strong> dans le tube digestif.</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--e);">D — Influence de la concentration en enzyme et en substrat (p.66)</h3>
+    <p class="expl-text">La <strong>vitesse de réaction enzymatique</strong> dépend également des concentrations respectives en enzyme et en substrat.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch3_Doc14_concentration_enzyme_C1_2C1.PNG" alt="Concentration enzyme" onerror="this.outerHTML='<div class=img-fb>📷 Doc.14 — Variation de l&apos;activité enzymatique pour une concentration en enzyme C1 et 2C1 (p.66)</div>'">
+      <img src="images/T3Ch3_Doc15_concentration_substrat.PNG" alt="Concentration substrat" onerror="this.outerHTML='<div class=img-fb>📷 Doc.15 — Variation de l&apos;activité enzymatique en fonction de la concentration en substrat [S] (p.66)</div>'">
+    </div>
+    <p class="expl-text"><strong>Concentration en enzyme :</strong> Si on double la concentration en enzyme (2C1), la <strong>vitesse initiale</strong> de la réaction double — à condition que le substrat soit en excès.<br><strong>Concentration en substrat :</strong> La vitesse augmente avec [S] jusqu'à un <strong>plateau de saturation</strong> : tous les sites actifs sont occupés → <strong>vitesse maximale (Vmax)</strong> atteinte.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4D</div><div id="mq4d-q">
+      <p>1. Si on double la concentration en enzyme, la vitesse de réaction <select class="bl" data-rep="double (si le substrat est en excès)"><option value="">—</option><option>reste identique</option><option>double (si le substrat est en excès)</option></select>.</p>
+      <p>2. Le plateau de saturation signifie que <select class="bl" data-rep="tous les sites actifs sont occupés (Vmax atteinte)"><option value="">—</option><option>l'enzyme est dénaturée</option><option>tous les sites actifs sont occupés (Vmax atteinte)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4d')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4d')">↺</button><div class="mq-fb" id="mq4d-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La cinétique enzymatique suit le modèle de <strong>Michaelis-Menten</strong>. À faible [S], la vitesse est proportionnelle à [S]. À forte [S], l'enzyme est <strong>saturée</strong> — la vitesse n'augmente plus. Ce concept est fondamental pour comprendre la régulation du métabolisme cellulaire.</div></div>
+  </div>
+</div>
+
+<!-- ══ 6 ACT.5 — ABSORPTION ══ -->
+<div class="pan" id="p6">
+  <div class="sech">🩸 Activité 5 — L'absorption intestinale (p.67–68)</div>
+  <div class="card"><h3 style="color:var(--e);">A — La villosité intestinale, siège de l'absorption (p.67)</h3>
+    <p class="expl-text">À la fin de la digestion, l'intestin grêle renferme tous les <strong>nutriments</strong>. Ceux-ci passent dans le milieu intérieur : c'est l'<strong>absorption intestinale</strong>. La paroi de l'intestin grêle présente une structure hautement adaptée à cette fonction.</p>
+    <img src="images/T3Ch3_Doc16_structure_paroi_intestin.PNG" alt="Structure paroi intestin grêle" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.16 — 16. Structure de la paroi de l&apos;intestin grêle : villosités, microvillosités, vaisseaux sanguins et lymphatiques (p.67)</div>'">
+    <p class="expl-text">La paroi intestinale forme plus de <strong>10 millions de replis</strong> richement vascularisés, offrant une surface d'échange d'environ <strong>400 m²</strong>. Chaque villosité contient un réseau de capillaires sanguins et un vaisseau lymphatique (chylifère). Les microvillosités (200 000/mm²) augmentent encore la surface d'absorption.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 5A</div><div id="mq5a-q">
+      <p>1. L'absorption intestinale a lieu au niveau <select class="bl" data-rep="des villosités de l'intestin grêle"><option value="">—</option><option>de l'estomac</option><option>des villosités de l'intestin grêle</option></select>.</p>
+      <p>2. La surface d'échange totale de l'intestin grêle est d'environ <select class="bl" data-rep="400 m² (grâce aux villosités et microvillosités)"><option value="">—</option><option>4 m²</option><option>400 m² (grâce aux villosités et microvillosités)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5a')">↺</button><div class="mq-fb" id="mq5a-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> L'adaptation de la paroi intestinale à l'absorption repose sur trois niveaux de replis : <strong>valvules conniventes</strong> (replis de la muqueuse), <strong>villosités</strong> (saillies digitiformes) et <strong>microvillosités</strong> (replis de la membrane plasmique des entérocytes). Cette organisation maximise la surface d'échange avec les nutriments.</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--e);">B — Les voies de l'absorption (p.68)</h3>
+    <p class="expl-text">Deux voies d'absorption s'offrent aux nutriments au niveau de l'intestin grêle : la <strong>voie sanguine</strong> et la <strong>voie lymphatique</strong>.</p>
+    <img src="images/T3Ch3_Doc17_composition_intestinal_sang.PNG" alt="Composition intestinal vs sang" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.17 — Tableau comparatif : composition du contenu intestinal et du sang de la veine porte (p.68)</div>'">
+    <img src="images/T3Ch3_Doc18_voies_absorption.PNG" alt="Voies d'absorption" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.18 — 18. Les voies de l&apos;absorption : voie sanguine (veine porte → foie) et voie lymphatique (chylifères → veine cave) (p.68)</div>'">
+    <table><tr><th style="background:var(--b)">Voie sanguine (veine porte → foie)</th><th style="background:var(--v)">Voie lymphatique (chylifères → veine cave)</th></tr>
+      <tr class="hl"><td>Oses (glucose, fructose, galactose)</td><td>Acides gras à longue chaîne</td></tr>
+      <tr><td>Acides aminés</td><td>Monoglycérides</td></tr>
+      <tr class="hl"><td>Eau et sels minéraux</td><td>Glycérol</td></tr>
+      <tr><td>Vitamines hydrosolubles (B, C)</td><td>Vitamines liposolubles (A, D, E, K)</td></tr>
+    </table>
+    <img src="images/T3Ch3_Doc19_schema_action_enzyme.PNG" alt="Schéma action enzyme digestive" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.19 — 19. Schématisation de l&apos;action d&apos;une enzyme digestive : substrat → produit (p.69)</div>'">
+    <img src="images/T3Ch3_Doc20_bile_lipase.PNG" alt="Bile et lipase" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.20 — 20. La bile facilite l&apos;action de la lipase : émulsion des lipides (p.70)</div>'">
+    <div class="focus-box"><strong>🔍 Chylomicrons :</strong> Dans les cellules intestinales (entérocytes), les acides gras, monoglycérides et glycérol se rassemblent pour reformer des <strong>triglycérides</strong>. Ceux-ci sont enrobés de protéines pour former des <strong>chylomicrons</strong> (lipoprotéines), qui sont sécrétés dans les vaisseaux lymphatiques. La lymphe se déverse dans le sang au niveau de la <strong>veine cave supérieure</strong> → tous les nutriments finissent dans la circulation sanguine.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 5B</div><div id="mq5b-q">
+      <p>1. Les oses et acides aminés empruntent la voie <select class="bl" data-rep="sanguine (veine porte → foie)"><option value="">—</option><option>lymphatique</option><option>sanguine (veine porte → foie)</option></select>.</p>
+      <p>2. Les acides gras à longue chaîne empruntent la voie <select class="bl" data-rep="lymphatique (chylifères)"><option value="">—</option><option>sanguine</option><option>lymphatique (chylifères)</option></select>.</p>
+      <p>3. La bile, produite par le foie, <select class="bl" data-rep="émulsionne les lipides (ne contient pas d'enzymes)"><option value="">—</option><option>contient des enzymes digestives</option><option>émulsionne les lipides (ne contient pas d'enzymes)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5b')">↺</button><div class="mq-fb" id="mq5b-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La dualité des voies d'absorption reflète les propriétés chimiques des nutriments. Les molécules <strong>hydrosolubles</strong> (oses, acides aminés) passent directement dans le sang. Les molécules <strong>liposolubles</strong> (acides gras, vitamines A,D,E,K) nécessitent une transformation préalable en chylomicrons et empruntent la voie lymphatique. La <strong>bile</strong> (produite par le foie, stockée dans la vésicule biliaire) ne contient pas d'enzymes mais facilite l'action de la lipase en émulsionnant les lipides.</div></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 BILAN — Pages 69–71 (6 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> La digestion : simplification moléculaire (p.69)</h3><p style="font-size:.92rem">La digestion transforme les aliments simples (macromolécules) en <select class="bl" data-rep="nutriments (petites molécules absorbables)"><option value="">—</option><option>macromolécules plus complexes</option><option>nutriments (petites molécules absorbables)</option></select>. Les enzymes sont des <select class="bl" data-rep="catalyseurs biologiques de nature protéique"><option value="">—</option><option>lipides</option><option>catalyseurs biologiques de nature protéique</option></select>. Elles agissent à des <select class="bl" data-rep="concentrations faibles et dans des conditions compatibles avec la vie"><option value="">—</option><option>concentrations élevées</option><option>concentrations faibles et dans des conditions compatibles avec la vie</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Spécificité enzymatique (p.69)</h3><p style="font-size:.92rem">L'amylase salivaire hydrolyse <select class="bl" data-rep="l'amidon en maltose"><option value="">—</option><option>les protéines</option><option>l'amidon en maltose</option></select>. La pepsine hydrolyse <select class="bl" data-rep="les protéines"><option value="">—</option><option>l'amidon</option><option>les protéines</option></select>. Le modèle <select class="bl" data-rep="clé-serrure (complémentarité site actif/substrat)"><option value="">—</option><option>catalyseur-substrat</option><option>clé-serrure (complémentarité site actif/substrat)</option></select> explique cette spécificité.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Influence de la température (p.70)</h3><p style="font-size:.92rem">L'activité est maximale à <select class="bl" data-rep="30-40°C (optimum thermique)"><option value="">—</option><option>0°C</option><option>30-40°C (optimum thermique)</option></select>. À basse T°, les enzymes sont <select class="bl" data-rep="inactivées réversiblement"><option value="">—</option><option>détruites définitivement</option><option>inactivées réversiblement</option></select>. À haute T° (>60°C), elles sont <select class="bl" data-rep="dénaturées irréversiblement"><option value="">—</option><option>inactivées réversiblement</option><option>dénaturées irréversiblement</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Influence du pH (p.70)</h3><p style="font-size:.92rem">pH optimal : pepsine = <select class="bl" data-rep="2 (milieu acide de l'estomac)"><option value="">—</option><option>7</option><option>2 (milieu acide de l'estomac)</option></select>, amylase = <select class="bl" data-rep="7 (milieu neutre de la bouche)"><option value="">—</option><option>2</option><option>7 (milieu neutre de la bouche)</option></select>, trypsine = <select class="bl" data-rep="9 (milieu basique du pancréas)"><option value="">—</option><option>7</option><option>9 (milieu basique du pancréas)</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">5</span> La bile (p.70)</h3><p style="font-size:.92rem">La bile est sécrétée par le <select class="bl" data-rep="foie"><option value="">—</option><option>pancréas</option><option>foie</option></select>, stockée dans la <select class="bl" data-rep="vésicule biliaire"><option value="">—</option><option>vésicule biliaire</option><option>rate</option></select>. Elle <select class="bl" data-rep="émulsionne les lipides (ne contient pas d'enzymes)"><option value="">—</option><option>contient des enzymes</option><option>émulsionne les lipides (ne contient pas d'enzymes)</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">6</span> Absorption intestinale (p.71)</h3><p style="font-size:.92rem">Voie sanguine : <select class="bl" data-rep="oses, acides aminés, eau, sels, vitamines B et C"><option value="">—</option><option>acides gras, vitamines A,D,E,K</option><option>oses, acides aminés, eau, sels, vitamines B et C</option></select>. Voie lymphatique : <select class="bl" data-rep="acides gras, glycérol, vitamines liposolubles A,D,E,K"><option value="">—</option><option>oses, acides aminés</option><option>acides gras, glycérol, vitamines liposolubles A,D,E,K</option></select>.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 8 EXERCICES ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📝 Exercices — Manuel p.72</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.72)</h3>
+    <table>
+      <tr><td><strong>1. La réaction d'hydrolyse :</strong></td><td><select class="tcell" data-rep="a- ne peut avoir lieu qu'en présence de molécules d'eau, c- aboutit à la destruction d'une liaison covalente"><option value="">—</option><option>a uniquement</option><option>a + c</option></select></td></tr>
+      <tr><td><strong>2. Une enzyme est spécifique car :</strong></td><td><select class="tcell" data-rep="b- ne catalyse qu'un seul type de réaction, c- n'agit que sur un substrat donné"><option value="">—</option><option>a uniquement</option><option>b + c</option></select></td></tr>
+      <tr><td><strong>3. À 0°C, les enzymes sont :</strong></td><td><select class="tcell" data-rep="c- inactivées"><option value="">—</option><option>a- détruites</option><option>c- inactivées</option></select></td></tr>
+      <tr><td><strong>4. La spécificité est liée à :</strong></td><td><select class="tcell" data-rep="c- la complémentarité entre le site actif et le substrat"><option value="">—</option><option>a- complémentarité enzyme-substrat</option><option>c- complémentarité site actif-substrat</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">🧪 Ex.2 — Levure et enzymes (p.72)</h3>
+    <div class="ctx">Suspension de levure à 37°C : expérience 1 (saccharose → Fehling +), expérience 2 (amidon → Fehling −, eau iodée +).</div>
+    <p style="font-size:.88rem;margin-bottom:7px">La levure possède <select class="bl" data-rep="la saccharase mais pas l'amylase"><option value="">—</option><option>l'amylase mais pas la saccharase</option><option>la saccharase mais pas l'amylase</option></select>. Ceci illustre <select class="bl" data-rep="la spécificité enzymatique"><option value="">—</option><option>la sensibilité à la T°</option><option>la spécificité enzymatique</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">🧪 Ex.3 — Lipase pancréatique et bile (p.72)</h3>
+    <div class="ctx">Huile + eau + bile + lipase pancréatique. Graphique : variation des taux d'acides gras et de glycérol.</div>
+    <img src="images/T3Ch3_Doc21_graphique_exercice2.PNG" alt="Graphique ex.2 — levure" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.21 — Graphique Exercice 2 : levure + saccharose/amidon (p.72)</div>'">
+    <img src="images/T3Ch3_Doc22_graphique_exercice3_lipase_bile.PNG" alt="Graphique ex.3 — lipase/bile" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.22 — Graphique Exercice 3 : lipase pancréatique + bile (variation acides gras/glycérol) (p.72)</div>'">
+    <p style="font-size:.88rem;margin-bottom:7px">La bile <select class="bl" data-rep="émulsionne les lipides (facilite l'action de la lipase)"><option value="">—</option><option>contient des enzymes</option><option>émulsionne les lipides (facilite l'action de la lipase)</option></select>. La lipase <select class="bl" data-rep="hydrolyse les lipides en acides gras + glycérol"><option value="">—</option><option>hydrolyse l'amidon</option><option>hydrolyse les lipides en acides gras + glycérol</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex3')">↺</button><div class="mq-fb" id="ex3-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 9 BILAN RÉVISION ══ -->
+<div class="pan" id="p9">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.88rem;color:var(--mu);margin-bottom:14px">Exercice principal + bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Expliquer le mécanisme de la digestion</div><p style="font-size:.88rem;margin-bottom:7px">La digestion = <select class="bl" data-rep="simplification moléculaire (hydrolyse des macromolécules en nutriments)"><option value="">—</option><option>synthèse de macromolécules</option><option>simplification moléculaire (hydrolyse des macromolécules en nutriments)</option></select>. Les enzymes sont des <select class="bl" data-rep="catalyseurs biologiques protéiques spécifiques"><option value="">—</option><option>lipides</option><option>catalyseurs biologiques protéiques spécifiques</option></select>. La réaction nécessite <select class="bl" data-rep="de l'eau (hydrolyse)"><option value="">—</option><option>de l'ATP</option><option>de l'eau (hydrolyse)</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Préciser le rôle des glandes et sucs digestifs</div><p style="font-size:.88rem;margin-bottom:7px">Salive → <select class="bl" data-rep="amylase salivaire"><option value="">—</option><option>pepsine</option><option>amylase salivaire</option></select>. Suc gastrique → <select class="bl" data-rep="pepsine + HCl"><option value="">—</option><option>lipase</option><option>pepsine + HCl</option></select>. Bile → <select class="bl" data-rep="foie (émulsion des lipides)"><option value="">—</option><option>pancréas</option><option>foie (émulsion des lipides)</option></select>. Suc pancréatique → <select class="bl" data-rep="lipase, trypsine, saccharase"><option value="">—</option><option>amylase salivaire</option><option>lipase, trypsine, saccharase</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Reconnaître les conditions d'activité enzymatique</div><p style="font-size:.88rem;margin-bottom:7px">T° optimale = <select class="bl" data-rep="30-40°C"><option value="">—</option><option>0°C</option><option>30-40°C</option></select>. pH pepsine = <select class="bl" data-rep="2 (acide, estomac)"><option value="">—</option><option>7 (neutre)</option><option>2 (acide, estomac)</option></select>. pH trypsine = <select class="bl" data-rep="9 (basique, pancréas)"><option value="">—</option><option>2</option><option>9 (basique, pancréas)</option></select>. Modèle explicatif = <select class="bl" data-rep="clé-serrure (complémentarité site actif/substrat)"><option value="">—</option><option>substrat-catalyseur</option><option>clé-serrure (complémentarité site actif/substrat)</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">4</span> Identifier les voies d'absorption</div><p style="font-size:.88rem;margin-bottom:7px">Voie sanguine = <select class="bl" data-rep="oses + acides aminés + eau + sels + vitamines B,C"><option value="">—</option><option>acides gras + vitamines A,D,E,K</option><option>oses + acides aminés + eau + sels + vitamines B,C</option></select>. Voie lymphatique = <select class="bl" data-rep="acides gras + glycérol + vitamines A,D,E,K"><option value="">—</option><option>oses + acides aminés</option><option>acides gras + glycérol + vitamines A,D,E,K</option></select>. Les chylomicrons sont <select class="bl" data-rep="des lipoprotéines formées dans les entérocytes"><option value="">—</option><option>des enzymes digestives</option><option>des lipoprotéines formées dans les entérocytes</option></select>.</p><button class="bck" onclick="ckMQ('rev4')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev4-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 10 FLASHCARDS ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:14px">🃏 Flashcards — 8 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 11 QCM ══ -->
+<div class="pan" id="p11"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 3 — La Digestion · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch3tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch3tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p7 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p7 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"La <select class='fs' data-ans='digestion'>—|respiration|digestion|absorption|synthèse</select> est une <select class='fs' data-ans='simplification moléculaire'>—|synthèse|simplification moléculaire|oxydation|réduction</select> : macromolécules → nutriments."},{p:"L'<select class='fs' data-ans='amylase salivaire'>—|pepsine|amylase salivaire|lipase|trypsine</select> hydrolyse l'<select class='fs' data-ans='amidon'>—|amidon|protéine|lipide|saccharose</select> en <select class='fs' data-ans='maltose'>—|glucose|maltose|acide aminé|fructose</select>."},{p:"La <select class='fs' data-ans='pepsine'>—|amylase|pepsine|lipase|saccharase</select> agit dans l'estomac à pH <select class='fs' data-ans='2 (acide — grâce à HCl)'>—|7 (neutre)|2 (acide — grâce à HCl)|9 (basique)|5</select>. Elle hydrolyse les <select class='fs' data-ans='protéines'>—|glucides|protéines|lipides|acides nucléiques</select>."},{p:"Les enzymes sont des <select class='fs' data-ans='protéines (catalyseurs biologiques)'>—|lipides|protéines (catalyseurs biologiques)|glucides|acides nucléiques</select>. Le modèle <select class='fs' data-ans='clé-serrure'>—|clé-serrure|substrat-catalyseur|Michaelis-Menten|induction</select> explique leur <select class='fs' data-ans='spécificité'>—|sensibilité thermique|spécificité|dénaturation|couleur</select>."},{p:"Température optimale : <select class='fs' data-ans='30-40°C'>—|0-10°C|30-40°C|60-80°C|100°C</select>. À haute T° : <select class='fs' data-ans='dénaturation irréversible'>—|inactivation réversible|dénaturation irréversible|activation|rien</select>. À basse T° : <select class='fs' data-ans='inactivation réversible'>—|dénaturation irréversible|inactivation réversible|destruction|accélération</select>."},{p:"La <select class='fs' data-ans='bile'>—|salive|bile|suc gastrique|suc pancréatique</select> est produite par le <select class='fs' data-ans='foie'>—|pancréas|foie|estomac|intestin</select>. Elle <select class='fs' data-ans='émulsionne les lipides (ne contient pas d&apos;enzymes)'>—|contient des enzymes|émulsionne les lipides (ne contient pas d&apos;enzymes)|digère les protéines|neutralise l&apos;acidité</select>."},{p:"Voie <select class='fs' data-ans='sanguine'>—|lymphatique|sanguine|aérienne|nerveuse</select> : oses, acides aminés, eau, sels, vitamines B et C. Voie <select class='fs' data-ans='lymphatique'>—|sanguine|lymphatique|pulmonaire|rénale</select> : acides gras, glycérol, vitamines A,D,E,K."},{p:"Les <select class='fs' data-ans='chylomicrons'>—|enzymes|chylomicrons|ribosomes|lysosomes</select> sont des lipoprotéines formées dans les <select class='fs' data-ans='entérocytes (cellules intestinales)'>—|hépatocytes|entérocytes (cellules intestinales)|neurones|myocytes</select> et sécrétés dans la lymphe."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. La réaction d\'hydrolyse :',o:['Ne peut avoir lieu qu\'en présence d\'eau','Produit toujours une molécule d\'eau','Aboutit à la destruction d\'une liaison covalente','Est catalysée par des oxydases'],c:[0,2],fb:'Hydrolyse = réaction avec l\'eau (a) qui coupe une liaison covalente (c).'},{q:'Q2. Une enzyme est spécifique car :',o:['Elle n\'existe que dans une seule espèce','Elle ne catalyse qu\'un seul type de réaction','Elle n\'agit que sur un substrat donné','Elle résiste à toutes les températures'],c:[1,2],fb:'Spécificité = type de réaction (b) + substrat donné (c).'},{q:'Q3. À 0°C, les enzymes sont :',o:['Détruites définitivement','Dénaturées irréversiblement','Inactivées réversiblement','Plus actives qu\'à 37°C'],c:[2],fb:'À 0°C = inactivées réversiblement (c). L\'activité reprend à T° normale.'},{q:'Q4. La spécificité enzyme-substrat s\'explique par :',o:['La complémentarité site actif/substrat (modèle clé-serrure)','La nature lipidique des enzymes','La présence d\'ATP dans le milieu','La concentration en enzyme'],c:[0],fb:'Spécificité = complémentarité structurale site actif/substrat (a).'},{q:'Q5. L\'amylase salivaire a un pH optimal de :',o:['2 (acide — comme la pepsine)','7 (neutre — conditions de la bouche)','9 (basique — comme la trypsine)','4 (acide modéré)'],c:[1],fb:'Amylase salivaire (bouche) = pH 7 (b), milieu neutre.'},{q:'Q6. La pepsine :',o:['Agit dans l\'estomac à pH ≈ 2','Est activée par l\'acide chlorhydrique (HCl)','Hydrolyse l\'amidon en maltose','Est une enzyme pancréatique'],c:[0,1],fb:'Pepsine = estomac (a) + activée par HCl (b). pH optimal = 2. Spécifique des protéines.'},{q:'Q7. La bile :',o:['Est produite par le pancréas','Émulsionne les lipides pour faciliter l\'action de la lipase','Contient des enzymes digestives','Est stockée dans la vésicule biliaire'],c:[1,3],fb:'Bile = produite par le FOIE (pas pancréas), stockée dans vésicule (d), émulsionne lipides (b), SANS enzymes.'},{q:'Q8. À 65°C, une enzyme :',o:['Est inactivée réversiblement','Est dénaturée irréversiblement (perte de structure spatiale)','Voit son activité augmenter','Garde une activité normale'],c:[1],fb:'>60°C = dénaturation irréversible (b). Les enzymes sont des protéines thermosensibles.'},{q:'Q9. L\'absorption des acides gras à longue chaîne se fait par :',o:['La voie sanguine directement','La voie lymphatique (chylifères) après formation de chylomicrons','La voie urinaire','La voie respiratoire'],c:[1],fb:'Acides gras → chylomicrons → voie lymphatique (b). Molécules liposolubles.'},{q:'Q10. L\'intestin grêle offre une surface d\'échange de ≈ 400 m² grâce :',o:['Aux villosités intestinales','Aux microvillosités des entérocytes','À la longueur du tube digestif seul','Aux valvules conniventes'],c:[0,1,3],fb:'Surface = somme des replis : valvules + villosités + microvillosités (a,b,d).'},{q:'Q11. Spallanzani a prouvé que la digestion est :',o:['Un phénomène purement mécanique','Un phénomène chimique (action du suc gastrique)','Indépendante de la température','Due à l\'action de la bile'],c:[1],fb:'Spallanzani = digestion CHIMIQUE (b). Expérience du tube percé = preuve décisive.'},{q:'Q12. La trypsine est une enzyme :',o:['Du suc gastrique (pH 2)','Du suc pancréatique (pH 9)','Qui hydrolyse les protéines','Qui émulsionne les lipides'],c:[1,2],fb:'Trypsine = enzyme pancréatique (b), protéase (c), pH optimal basique ≈ 9.'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
