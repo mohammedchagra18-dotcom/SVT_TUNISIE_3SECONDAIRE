@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thème 2 · Partie II — Génie Génétique · Diversité · Transmission | SVT 3ème</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#047857;--em-d:#065f46;--em-lt:#ecfdf5;--em-md:#059669;
+  --teal:#0f766e;--teal-lt:#f0fdfa;
+  --purple:#7c3aed;--purple-lt:#f5f3ff;
+  --blue:#1e5fa3;--blue-lt:#eff6ff;
+  --red:#b91c1c;--red-lt:#fef2f2;
+  --amber:#d97706;--amber-lt:#fffbeb;
+  --gray1:#f8fafc;--gray2:#e2e8f0;--gray3:#cbd5e1;
+  --gray6:#475569;--gray8:#1e293b;
+  --shadow:0 2px 12px rgba(0,0,0,.07);--shadow-md:0 4px 20px rgba(0,0,0,.11);
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:#f0fdf4;color:var(--gray8);font-size:15px;line-height:1.7}
+
+header{background:linear-gradient(135deg,var(--em-d) 0%,var(--em) 60%,var(--teal) 100%);color:#fff;padding:24px 36px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(4,120,87,.35);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
+header::after{content:'';position:absolute;left:30%;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hdr-badge{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;line-height:1.2}
+.hdr-sub{opacity:.75;font-size:1rem;font-weight:400;margin-top:3px}
+.hdr-right{text-align:right;font-size:12px;opacity:.8;line-height:2;z-index:1}
+.hdr-right strong{display:block;font-size:13px;font-weight:700;opacity:1}
+
+.progress-wrap{background:rgba(0,0,0,.15);height:4px}
+.progress-bar{height:4px;background:linear-gradient(90deg,#6ee7b7,#34d399);width:0%;transition:width .4s}
+
+.tabs-nav{background:#fff;border-bottom:2px solid var(--gray2);display:flex;padding:0 28px;gap:2px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;overflow-x:auto}
+.tab-btn{padding:14px 16px;background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:12.5px;font-weight:600;color:var(--gray6);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--em);background:var(--em-lt);border-radius:6px 6px 0 0}
+.tab-btn.active{color:var(--em);border-bottom-color:var(--em)}
+
+.tab-panel{display:none;padding:28px 36px;max-width:1100px;margin:0 auto;animation:fadeIn .3s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.section-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--em-d);border-left:4px solid var(--em);padding-left:12px;margin:32px 0 16px;display:flex;align-items:center;gap:10px}
+.sub-title{font-size:1rem;font-weight:700;color:var(--teal);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sub-title::before{content:'';display:block;width:22px;height:2.5px;background:var(--teal);border-radius:2px}
+.sub-title.purple{color:var(--purple)}.sub-title.purple::before{background:var(--purple)}
+.sub-title.red{color:var(--red)}.sub-title.red::before{background:var(--red)}
+.sub-title.blue{color:var(--blue)}.sub-title.blue::before{background:var(--blue)}
+.sub-title.amber{color:var(--amber)}.sub-title.amber::before{background:var(--amber)}
+
+.def-box{background:var(--em-lt);border:1.5px solid #6ee7b7;border-radius:var(--radius);padding:14px 18px;margin:12px 0}
+.def-box .lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--em);margin-bottom:6px}
+.def-box p{font-size:14.5px}
+.info-box{border-left:4px solid var(--amber);background:var(--amber-lt);border-radius:0 var(--radius) var(--radius) 0;padding:11px 16px;margin:12px 0;font-size:13.5px}
+.info-box.blue{border-left-color:var(--blue);background:var(--blue-lt)}
+.info-box.red{border-left-color:var(--red);background:var(--red-lt)}
+.info-box.green{border-left-color:var(--em);background:var(--em-lt)}
+.info-box.teal{border-left-color:var(--teal);background:var(--teal-lt)}
+.info-box.purple{border-left-color:var(--purple);background:var(--purple-lt)}
+.info-box strong{color:var(--amber)}
+.info-box.blue strong{color:var(--blue)}
+.info-box.red strong{color:var(--red)}
+.info-box.green strong{color:var(--em)}
+.info-box.teal strong{color:var(--teal)}
+.info-box.purple strong{color:var(--purple)}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.card{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border-top:3px solid var(--em)}
+.card.teal{border-top-color:var(--teal)}.card.purple{border-top-color:var(--purple)}
+.card.amber{border-top-color:var(--amber)}.card.red{border-top-color:var(--red)}.card.blue{border-top-color:var(--blue)}
+.card h4{font-size:.9rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card ul{padding-left:18px;font-size:13.5px;color:var(--gray6)}.card ul li{margin-bottom:5px}
+.card p{font-size:13.5px;color:var(--gray6)}
+
+.img-wrap{background:var(--gray1);border:2px dashed var(--gray3);border-radius:var(--radius);padding:8px;margin:14px 0;text-align:center;overflow:hidden}
+.img-wrap img{max-width:100%;max-height:280px;border-radius:var(--radius-sm);display:block;margin:0 auto;object-fit:contain}
+.img-fallback{padding:20px 16px;color:var(--gray6);font-size:12.5px}
+.img-fallback .ico-ph{font-size:28px;display:block;margin-bottom:6px}
+.img-fallback strong{display:block;font-size:13px;color:var(--gray8);margin-bottom:4px}
+.img-caption{font-size:11.5px;color:var(--gray6);text-align:center;margin-top:5px;font-style:italic}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.img-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+
+.tbl-wrap{overflow-x:auto;margin:14px 0;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;background:#fff}
+th{background:var(--em-d);color:#fff;padding:10px 14px;font-size:12.5px;font-weight:600;text-align:left}
+th.teal{background:var(--teal)}th.purple{background:var(--purple)}th.blue{background:var(--blue)}
+th.amber{background:var(--amber)}th.red{background:var(--red)}
+td{padding:9px 14px;font-size:13px;border-bottom:1px solid var(--gray2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray1)}
+
+.activity{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin:18px 0;overflow:hidden;border:1.5px solid var(--gray2)}
+.activity-header{background:linear-gradient(135deg,var(--em-d) 0%,var(--em) 100%);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.activity-header.teal{background:linear-gradient(135deg,var(--teal) 0%,#0d9488 100%)}
+.activity-header.purple{background:linear-gradient(135deg,var(--purple) 0%,#6d28d9 100%)}
+.activity-header.amber{background:linear-gradient(135deg,var(--amber) 0%,#f59e0b 100%)}
+.activity-header.blue{background:linear-gradient(135deg,var(--blue) 0%,#2563eb 100%)}
+.activity-header.red{background:linear-gradient(135deg,var(--red) 0%,#dc2626 100%)}
+.activity-header h3{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.activity-header .toggle-ico{font-size:18px;transition:transform .3s}
+.activity-header.open .toggle-ico{transform:rotate(180deg)}
+.activity-body{padding:18px 20px;display:none}
+.activity-body.open{display:block}
+
+/* SCHEMA */
+.schema-expression{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0;padding:16px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+.schema-box{background:var(--em-lt);border:2px solid var(--em);border-radius:var(--radius-sm);padding:10px 16px;text-align:center;font-weight:700;font-size:13px;color:var(--em-d)}
+.schema-box.blue{background:var(--blue-lt);border-color:var(--blue);color:var(--blue)}
+.schema-box.purple{background:var(--purple-lt);border-color:var(--purple);color:var(--purple)}
+.schema-box.amber{background:var(--amber-lt);border-color:var(--amber);color:#92400e}
+.schema-box.teal{background:var(--teal-lt);border-color:var(--teal);color:var(--teal)}
+.schema-box.red{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.schema-arrow{font-size:22px;color:var(--gray3);font-weight:700}
+.schema-label{font-size:10px;color:var(--gray6);display:block;font-weight:400;margin-top:2px}
+
+/* QCM */
+.qcm-item{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.qcm-item .qnum{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--em);margin-bottom:8px}
+.qcm-item .qtxt{font-size:14.5px;font-weight:700;margin-bottom:14px;line-height:1.4;color:var(--gray8)}
+.qcm-opt{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:6px;font-size:13.5px;border:1.5px solid var(--gray2);transition:all .15s;user-select:none}
+.qcm-opt:hover{background:var(--em-lt);border-color:#6ee7b7}
+.qcm-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.qcm-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+.qcm-opt.missed{background:#fef9c3;border-color:#ca8a04;color:#854d0e;pointer-events:none}
+.qcm-opt input[type=radio]{accent-color:var(--em);width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.btn-verify{margin-top:12px;padding:9px 22px;background:var(--em);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s}
+.btn-verify:hover{background:var(--em-d)}
+.qcm-fb{margin-top:10px;padding:13px 16px;border-radius:var(--radius-sm);font-size:13.5px;display:none;line-height:1.7}
+.qcm-fb.show{display:block}
+.qcm-fb.ok{background:#d1fae5;color:#065f46;border:1px solid #059669}
+.qcm-fb.ko{background:#fff7ed;color:#7c2d12;border:1px solid #fb923c}
+
+/* GAP FILL */
+.gap-text{font-size:14.5px;line-height:2.8;background:#fff;border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.gap-select{display:inline-block;padding:2px 6px;border:1.5px solid var(--em);border-radius:4px;background:#fff;font-family:'Source Sans 3',sans-serif;font-size:13.5px;color:var(--gray8);cursor:pointer;vertical-align:middle;min-width:130px}
+.gap-select:focus{outline:none;border-color:var(--em-d)}
+.gap-select.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+.gap-select.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.btn-check-gap{margin-top:12px;padding:8px 20px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s;display:block}
+.btn-check-gap:hover{background:var(--em)}
+.gap-score{margin-top:10px;font-size:13.5px;font-weight:700;display:none}
+.gap-score.show{display:block}
+
+/* DNA */
+.dna-seq{font-family:'Courier New',monospace;font-size:13px;background:var(--gray1);border:1.5px solid var(--gray2);border-radius:var(--radius-sm);padding:10px 14px;margin:8px 0;letter-spacing:2px;overflow-x:auto;white-space:pre;line-height:1.9}
+
+/* FLASHCARDS */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:16px 0}
+.fc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);cursor:pointer;min-height:140px;perspective:900px;transition:transform .2s}
+.fc:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.fc-inner{position:relative;width:100%;min-height:140px;transform-style:preserve-3d;transition:transform .45s}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;padding:16px 18px;border-radius:var(--radius);backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:140px}
+.fc-front{background:linear-gradient(135deg,var(--em-d) 0%,var(--teal) 100%);color:#fff}
+.fc-back{background:#fff;color:var(--gray8);transform:rotateY(180deg);border:1.5px solid var(--gray2)}
+.fc-front .qlbl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;opacity:.65;margin-bottom:7px}
+.fc-front .qtxt{font-size:13.5px;font-weight:600;line-height:1.4}
+.fc-front .qhint{font-size:10px;opacity:.55;margin-top:8px}
+.fc-back .albl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--em);font-weight:700;margin-bottom:7px}
+.fc-back .atxt{font-size:13px;line-height:1.55}
+.cnt{font-size:10px;opacity:.4;align-self:flex-end}
+
+/* PREREQ */
+.prereq-q{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin:12px 0;border-left:4px solid var(--purple)}
+.prereq-q .qlbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px}
+.prereq-q .qtxt{font-size:14px;font-weight:600;margin-bottom:12px}
+.prereq-opt{padding:8px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:13.5px;border:1.5px solid var(--gray2);margin-bottom:6px;transition:all .2s;user-select:none;display:block;width:100%;text-align:left;background:#fff;font-family:'Source Sans 3',sans-serif}
+.prereq-opt:hover{background:var(--purple-lt);border-color:var(--purple)}
+.prereq-opt.correct-ans{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.prereq-opt.wrong-ans{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+
+/* SCORE GLOBAL */
+.score-wrap{background:var(--em-d);color:#fff;border-radius:var(--radius);padding:16px 22px;margin-top:18px;text-align:center;display:none}
+.score-wrap.show{display:block}
+.score-wrap .score-num{font-family:'Playfair Display',serif;font-size:2rem;margin:8px 0}
+
+footer{text-align:center;padding:20px 16px;color:var(--gray6);font-size:12px;border-top:1px solid var(--gray2);margin-top:40px;background:#fff}
+footer strong{color:var(--em)}
+
+@media(max-width:640px){
+  header{flex-direction:column;gap:12px;padding:18px 20px}
+  .hdr-right{text-align:left}
+  .tab-panel{padding:18px 16px}
+  .img-trio{grid-template-columns:1fr}
+  .schema-expression{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="hdr-badge">🧬 SVT · 3ème Année Secondaire · Thème 2 — Génétique</div>
+    <div class="hdr-title">Partie II — Génie Génétique, Diversité &amp; Transmission</div>
+    <div class="hdr-sub">Ch.3 : Génie Génétique &nbsp;·&nbsp; Ch.4 : Origine de la Diversité &nbsp;·&nbsp; Ch.5 : Transmission</div>
+  </div>
+  <div class="hdr-right">
+    <strong>INGÉNIEUR Mohamed CHAGRAOUI</strong>
+    Candidat CAPES SVT 2026<br>
+    Programme officiel tunisien · Fiche interactive
+  </div>
+</header>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('contexte',this)">🎯 Mise en contexte</button>
+  <button class="tab-btn" onclick="showTab('ch3',this)">🔧 Ch.3 — Génie Génétique</button>
+  <button class="tab-btn" onclick="showTab('ch4',this)">🌿 Ch.4 — Origine Diversité</button>
+  <button class="tab-btn" onclick="showTab('ch5',this)">🔬 Ch.5 — Transmission</button>
+  <button class="tab-btn" onclick="showTab('synthese',this)">🗺️ Synthèse</button>
+  <button class="tab-btn" onclick="showTab('eval',this)">✅ Exercices CAPES</button>
+</nav>
+
+<!-- ══════════════ TAB 1 — CONTEXTE ══════════════ -->
+<div class="tab-panel active" id="tab-contexte">
+
+  <h2 class="section-title">🧬 Thème 2 — Partie II : de la manipulation à la transmission des gènes</h2>
+  <div class="def-box">
+    <div class="lbl">Problématique générale</div>
+    <p>Après avoir compris comment l'ADN s'exprime en protéines (Ch.1-2), on se demande : <strong>comment peut-on manipuler les gènes</strong> (Ch.3) ? <strong>Pourquoi tous les individus sont-ils différents</strong> (Ch.4) ? Et <strong>selon quelles règles les caractères se transmettent-ils</strong> d'une génération à l'autre (Ch.5) ?</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card"><h4 style="color:var(--em)">🔧 Ch.3 — Génie Génétique</h4><p>OGM, enzymes de restriction, ligase, plasmide, ADNc, clonage bactérien, 5 étapes.</p></div>
+    <div class="card teal"><h4 style="color:var(--teal)">🌿 Ch.4 — Origine de la Diversité</h4><p>Mutations géniques et chromosomiques. Méiose. Brassages génétiques. Formation des gamètes.</p></div>
+    <div class="card blue"><h4 style="color:var(--blue)">🔬 Ch.5 — Transmission</h4><p>Lois de Mendel. Monohybridisme. Dominance et codominance. Test-cross. Hérédité liée au sexe.</p></div>
+  </div>
+
+  <div class="img-trio">
+    <div>
+      <div class="img-wrap">
+        <img src="images/ch3_insuline_ogm.png" alt="Insuline OGM" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_insuline_ogm.png</strong>Cristaux d'insuline produite par génie génétique (doc.6 p.192)</div>
+      </div>
+      <div class="img-caption">Doc.6 — Insuline produite par OGM</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/ch4_famille_tunisienne.png" alt="Famille tunisienne diversité" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_famille_tunisienne.png</strong>Une famille tunisienne — diversité individuelle (doc.1 p.206)</div>
+      </div>
+      <div class="img-caption">Doc.1 — Diversité individuelle</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/ch5_blé_hybride.png" alt="Blé hybride" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_blé_hybride.png</strong>Variété de blé hybride entre les deux variétés parentales pures (doc.5 p.235)</div>
+      </div>
+      <div class="img-caption">Doc.5 — Blé hybride : vigueur hybride</div>
+    </div>
+  </div>
+
+  <div class="info-box green">
+    <strong>Questions directrices :</strong> Comment transférer un gène dans une bactérie pour lui faire produire une protéine humaine ? Pourquoi aucun individu n'est identique à un autre (sauf vrais jumeaux) ? Comment prédire le résultat d'un croisement ?
+  </div>
+
+  <h2 class="section-title">📋 Préacquis — Testez vos connaissances</h2>
+  <div id="prereq-container"></div>
+
+</div>
+
+<!-- ══════════════ TAB 2 — CH.3 GÉNIE GÉNÉTIQUE ══════════════ -->
+<div class="tab-panel" id="tab-ch3">
+
+  <h2 class="section-title">🔧 Chapitre 3 — Génie Génétique : manipulations de l'information génétique</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>Le <strong>génie génétique</strong> = ensemble de techniques permettant la manipulation des gènes et leur transfert dans de nouveaux organismes → création d'<strong>OGM</strong> (Organismes Génétiquement Modifiés) ou organismes transgéniques. Objectif : produire des substances utiles à l'Homme en quantité industrielle.</p>
+  </div>
+
+  <!-- ACT 1 : Intérêts -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🏭 Activité 1 — Pourquoi le génie génétique ? Applications et intérêts</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch3_souris_transgénique.png" alt="Souris transgénique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_souris_transgénique.png</strong>Souris géante transgénique (gène hormone croissance humaine) vs souris normale (doc.C/D p.189)</div>
+          </div>
+          <div class="img-caption">Doc.C/D — Souris transgénique géante</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch3_tabac_transgénique.png" alt="Tabac transgénique résistant" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_tabac_transgénique.png</strong>Plante de tabac naturelle ravagée (4a) vs transgénique résistante (4b) (doc.4 p.190)</div>
+          </div>
+          <div class="img-caption">Doc.4a/4b — Tabac naturel vs transgénique</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Domaine</th><th class="teal">Application</th><th class="blue">Exemple concret</th></tr>
+          <tr><td><strong>Médical</strong></td><td>Production d'hormones thérapeutiques</td><td>Insuline humaine par E. coli (depuis 1979) · Hormone de croissance (1979)</td></tr>
+          <tr><td><strong>Médical</strong></td><td>Production de vaccins</td><td>Vaccin hépatite B via levures Saccharomyces (1986)</td></tr>
+          <tr><td><strong>Médical</strong></td><td>Thérapie génique</td><td>Correction déficit ADA (1990) — fillette isolée en «bulle stérile»</td></tr>
+          <tr><td><strong>Agronomie</strong></td><td>Résistance aux insectes</td><td>Tabac transgénique avec gène Bacillus thuringiensis (1987)</td></tr>
+          <tr><td><strong>Agroalimentaire</strong></td><td>Édulcorant naturel</td><td>Thaumatine (2000× pouvoir sucrant du saccharose) par levures</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box blue">
+        <strong>À noter (OGM) :</strong> Les organismes transgéniques divisent la communauté scientifique. Avantages : production médicale en quantité, résistance aux maladies. Risques : transfert non contrôlé de gènes de résistance aux antibiotiques, allergies, impact sur la biodiversité.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : 5 étapes -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>⚙️ Activité 2 — Les 5 étapes du génie génétique ★ (à maîtriser !)</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="info-box green">
+        <strong>Moyen mnémotechnique :</strong> <em>«On Insère Rapidement Ce Excellent gène»</em><br>
+        <strong>O</strong>btenir le gène · <strong>I</strong>nsérer dans un vecteur · <strong>R</strong>epérer les bactéries transformées · <strong>C</strong>loner · <strong>E</strong>xprimer &amp; Extraire la protéine
+      </div>
+
+      <div class="schema-expression">
+        <div class="schema-box">① Obtenir<br>le gène<span class="schema-label">ADN chromosomique<br>ou ARNm → ADNc</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box teal">② Insérer<br>dans plasmide<span class="schema-label">enzyme restriction<br>+ ligase</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box purple">③ Repérer<br>les transformées<span class="schema-label">marqueur résistance<br>antibiotique</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box amber">④ Cloner<br>(bipartition)<span class="schema-label">E. coli ÷ /20 min</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box blue">⑤ Exprimer<br>&amp; Extraire<span class="schema-label">choc osmotique<br>ou lyse</span></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Étape</th><th class="teal">Mécanisme</th><th class="blue">Outils / Détails</th></tr>
+          <tr><td><strong>① Obtention du gène</strong></td>
+            <td><strong>Voie A :</strong> ADN chromosomique → enzymes restriction → fragments → sonde radioactive repère le gène<br><strong>Voie B :</strong> ARNm du tissu producteur → transcriptase reverse → ADNc (sans introns !) </td>
+            <td>Enzymes de restriction + sonde radioactive (voie A)<br>Transcriptase reverse (voie B)<br>⚠️ ADNc = sans introns → mieux pour expression bactérienne</td></tr>
+          <tr><td><strong>② Insertion dans vecteur</strong></td>
+            <td>Même enzyme restriction ouvre le plasmide et découpe le gène → bouts cohésifs complémentaires → ligase «colle» le gène dans le plasmide → ADN recombiné</td>
+            <td>⚠️ Même enzyme restriction pour plasmide ET gène (bouts cohésifs complémentaires !)<br>Ligase = «colle moléculaire»</td></tr>
+          <tr><td><strong>③ Introduction + repérage</strong></td>
+            <td>Plasmides recombinés mis en contact avec E. coli → certaines bactéries intègrent le plasmide<br>Gène marqueur de résistance à un antibiotique → seules les bactéries transformées survivent sur milieu + antibiotique</td>
+            <td>E. coli choisie car : facile à cultiver, multiplication rapide (÷ /20 min), possède ribosomes pour synthèse protéique</td></tr>
+          <tr><td><strong>④ Clonage</strong></td>
+            <td>Bipartition de E. coli → multiplication exponentielle → clonage des bactéries ET du plasmide recombiné qu'elles contiennent</td>
+            <td>En 24h : millions de bactéries identiques contenant toutes le gène greffé</td></tr>
+          <tr><td><strong>⑤ Expression &amp; Extraction</strong></td>
+            <td>Le gène greffé est exprimé : transcription + traduction → protéine cible synthétisée<br>Extraction : choc osmotique (milieu hyper- puis hypotonique) OU lyse cellulaire</td>
+            <td>⚠️ Le gène doit être précédé d'un <em>promoteur</em> pour être transcrit dans la bactérie hôte</td></tr>
+        </table>
+      </div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch3_enzyme_restriction.png" alt="Enzyme de restriction" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_enzyme_restriction.png</strong>Action d'une enzyme de restriction — sites de coupure et bouts cohésifs (doc.11 p.197)</div>
+          </div>
+          <div class="img-caption">Doc.11 — Enzyme de restriction : coupure de l'ADN</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch3_plasmide_recombiné.png" alt="Plasmide recombiné" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_plasmide_recombiné.png</strong>Construction d'un plasmide recombiné — insertion du gène étranger (doc.13 p.198)</div>
+          </div>
+          <div class="img-caption">Doc.13 — Construction du plasmide recombiné</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch3_étapes_globales.png" alt="Étapes génie génétique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch3_étapes_globales.png</strong>Étapes de la synthèse d'une protéine par génie génétique — vue d'ensemble (doc.20 p.202)</div>
+          </div>
+          <div class="img-caption">Doc.20 — Vue globale des 5 étapes</div>
+        </div>
+      </div>
+
+      <div class="sub-title">Texte à trous — Les étapes du génie génétique</div>
+      <div class="gap-text" id="gap-gg">
+        Pour produire l'insuline humaine par génie génétique, les chercheurs ont d'abord prélevé l'<select class="gap-select" data-answer="ARNm"><option value="">…</option><option>ARNm</option><option>ADN chromosomique</option><option>ARNt</option></select> des cellules β du pancréas. Grâce à la <select class="gap-select" data-answer="transcriptase reverse"><option value="">…</option><option>transcriptase reverse</option><option>ARN polymérase</option><option>ligase</option></select>, ils ont obtenu un <select class="gap-select" data-answer="ADNc"><option value="">…</option><option>ADNc</option><option>ARNm</option><option>plasmide</option></select> (ADN complémentaire sans introns). Ce gène a été inséré dans un <select class="gap-select" data-answer="plasmide"><option value="">…</option><option>plasmide</option><option>ribosome</option><option>chromosome</option></select> ouvert par une <select class="gap-select" data-answer="enzyme de restriction"><option value="">…</option><option>enzyme de restriction</option><option>ligase</option><option>ARN polymérase</option></select>. La <select class="gap-select" data-answer="ligase"><option value="">…</option><option>ligase</option><option>enzyme de restriction</option><option>transcriptase reverse</option></select> a ensuite «collé» le gène dans le plasmide pour former un ADN <select class="gap-select" data-answer="recombiné"><option value="">…</option><option>recombiné</option><option>dégradé</option><option>muté</option></select>. Les bactéries transformées sont identifiées grâce à un gène de résistance à un <select class="gap-select" data-answer="antibiotique"><option value="">…</option><option>antibiotique</option><option>virus</option><option>sucre</option></select>.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-gg','score-gg')">Vérifier</button>
+      <div class="gap-score" id="score-gg"></div>
+    </div>
+  </div>
+
+  <!-- ACT 3 : Outils -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>🛠️ Activité 3 — Les outils du génie génétique</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="card-grid">
+        <div class="card"><h4 style="color:var(--em)">✂️ Enzyme de restriction</h4><ul><li>Origine : bactérienne</li><li>Rôle : coupe l'ADN à des séquences spécifiques</li><li>≥ 500 enzymes connues</li><li>= «ciseaux moléculaires»</li></ul></div>
+        <div class="card teal"><h4 style="color:var(--teal)">🔗 Enzyme ligase</h4><ul><li>Rôle : relie deux fragments d'ADN</li><li>Crée des liaisons covalentes</li><li>= «colle moléculaire»</li><li>Produit l'ADN recombiné</li></ul></div>
+        <div class="card purple"><h4 style="color:var(--purple)">🔄 Transcriptase reverse</h4><ul><li>Origine : virale</li><li>Rôle : ARNm → ADNc (brin complémentaire)</li><li>⚠️ ADNc = SANS introns</li><li>Idéal pour expression bactérienne</li></ul></div>
+        <div class="card amber"><h4 style="color:var(--amber)">🚌 Plasmide (vecteur)</h4><ul><li>Petite molécule d'ADN circulaire bactérienne</li><li>Rôle : «camion» transportant le gène cloné</li><li>Ouvert par enzyme restriction, refermé avec le gène par ligase</li></ul></div>
+        <div class="card blue"><h4 style="color:var(--blue)">🎯 Sonde moléculaire radioactive</h4><ul><li>Séquence de nucléotides radioactifs</li><li>Complémentaire au gène cible</li><li>S'hybride avec le gène → localisation par autoradiographie</li><li>= «hameçon moléculaire»</li></ul></div>
+        <div class="card red"><h4 style="color:var(--red)">🦠 E. coli (cellule hôte)</h4><ul><li>Facile à cultiver, non pathogène</li><li>Bipartition toutes les 20 min</li><li>4000 gènes, ribosomes → exprime le gène greffé</li><li>En 24h : milliards de copies du gène</li></ul></div>
+      </div>
+
+      <div class="info-box red">
+        <strong>Piège fréquent au CAPES :</strong> L'enzyme de restriction utilisée pour ouvrir le plasmide doit être <em>exactement la même</em> que celle utilisée pour extraire le gène → bouts cohésifs complémentaires → ligation possible. Si on utilise deux enzymes différentes, les extrémités ne sont pas compatibles.
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.3 — n°1</div>
+        <div class="qtxt">Pourquoi préfère-t-on utiliser la voie de l'ARNm (transcriptase reverse → ADNc) plutôt que la voie directe de l'ADN chromosomique pour produire l'insuline dans E. coli ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_1')"><input type="radio" name="q_ch3_1"> a. Parce que l'ARNm est plus stable que l'ADN chromosomique dans la bactérie</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_1')"><input type="radio" name="q_ch3_1"> b. Parce que l'ADNc ne contient pas d'introns — E. coli ne possède pas les enzymes pour les exciser</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_1')"><input type="radio" name="q_ch3_1"> c. Parce que la transcriptase reverse amplifie davantage le gène que les enzymes de restriction</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch3_1',1,'✅ Exact ! Le gène eucaryote contient des <strong>introns</strong> (séquences non codantes). E. coli, bactérie procaryote, ne possède pas les enzymes pour les exciser (épissage). En passant par l\'ARNm (déjà épissé) puis la transcriptase reverse, on obtient l\'ADNc qui ne contient QUE les exons → la bactérie peut le transcrire et le traduire correctement.','❌ Ce n\'est pas la raison principale. La clé est que l\'ADN chromosomique eucaryote contient des <strong>introns</strong> (séquences non codantes intercalées). Les bactéries procaryotes n\'ont pas de mécanisme d\'épissage pour les retirer. L\'ADNc, copié à partir de l\'ARNm déjà épissé, ne contient que les exons → lisible directement par E. coli.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch3_1"></div>
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.3 — n°2</div>
+        <div class="qtxt">Un chercheur veut insérer un gène humain dans un plasmide bactérien. Pour l'étape de ligation, il doit :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_2')"><input type="radio" name="q_ch3_2"> a. Utiliser une enzyme de restriction différente de celle qui a découpé le gène, pour créer plus de variété</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_2')"><input type="radio" name="q_ch3_2"> b. Utiliser la même enzyme de restriction pour ouvrir le plasmide, puis la ligase pour sceller l'ensemble</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch3_2')"><input type="radio" name="q_ch3_2"> c. Utiliser uniquement la ligase sans enzyme de restriction préalable pour le plasmide</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch3_2',1,'✅ Parfait ! Même enzyme restriction pour le gène ET le plasmide → les <strong>bouts cohésifs</strong> produits sont <strong>complémentaires</strong> (séquences inversement complémentaires) → ils peuvent s\'apparier spontanément. La ligase scelle ensuite les liaisons covalentes pour créer l\'ADN recombiné stable.','❌ La logique essentielle est la complémentarité des <strong>bouts cohésifs</strong>. Si on utilise deux enzymes différentes, les extrémités produites ne sont pas complémentaires → pas d\'appariement possible → la ligase ne peut pas créer l\'ADN recombiné. Il FAUT la même enzyme restriction pour les deux.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch3_2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB 3 — CH.4 DIVERSITÉ ══════════════ -->
+<div class="tab-panel" id="tab-ch4">
+
+  <h2 class="section-title">🌿 Chapitre 4 — Origine de la Diversité génétique</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>La diversité génétique des individus a deux origines principales : les <strong>mutations</strong> (créent de nouveaux allèles) et la <strong>reproduction sexuée</strong> (brassage des allèles existants par méiose + fécondation). C'est pourquoi chaque individu est <em>unique</em>.</p>
+  </div>
+
+  <!-- ACT 1 : Mutations -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🔴 Activité 1 — Les mutations, sources de nouveaux allèles</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title red">A — Mutations chromosomiques (structure ou nombre)</div>
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_oeil_bar.png" alt="Mutation œil bar drosophile" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_oeil_bar.png</strong>Aspect de l'œil et structure du chromosome X chez drosophile sauvage vs mutante «Bar» — région 16A dupliquée (doc.11 p.210)</div>
+          </div>
+          <div class="img-caption">Doc.11 — Mutation œil «Bar» : duplication région 16A</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_cri_du_chat.png" alt="Syndrome cri du chat" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_cri_du_chat.png</strong>Paire de chromosomes n°5 d'un enfant atteint du syndrome du cri du chat — délétion bras court (doc.12 p.210)</div>
+          </div>
+          <div class="img-caption">Doc.12 — Syndrome cri du chat : délétion chr.5</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type de mutation chr.</th><th class="teal">Mécanisme</th><th class="blue">Exemple</th></tr>
+          <tr><td><strong>Délétion</strong></td><td>Perte d'un fragment chromosomique</td><td>Syndrome du cri du chat (perte bras court chr.5)</td></tr>
+          <tr><td><strong>Duplication</strong></td><td>Répétition d'un segment</td><td>Œil «Bar» chez Drosophile (région 16A dupliquée)</td></tr>
+          <tr><td><strong>Translocation</strong></td><td>Échange entre chromosomes non homologues</td><td>Remaniements chromosomiques chez Drosophile (formation de nouvelles espèces)</td></tr>
+          <tr><td><strong>Fusion</strong></td><td>Deux paires → une seule</td><td>Réduction du nombre de chromosomes → barrière à l'interfécondité</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title red">B — Mutations géniques (séquence des bases d'un gène)</div>
+      <div class="info-box teal">
+        <strong>Rappel drépanocytose (Ch.2) :</strong> Remplacement d'une base (CTC → CAC) dans le triplet n°6 du gène de l'hémoglobine → Glu remplacé par Val → HbS anormale. C'est une substitution = mutation génique.
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type de mutation génique</th><th class="teal">Mécanisme</th><th class="blue">Conséquence</th></tr>
+          <tr><td><strong>Substitution</strong></td><td>Remplacement d'une base par une autre</td><td>Changement d'1 acide aminé (ex: drépanocytose, phénylcétonurie)</td></tr>
+          <tr><td><strong>Délétion</strong></td><td>Suppression d'un ou plusieurs nucléotides</td><td>Décalage du cadre de lecture → protéine tronquée ou non fonctionnelle</td></tr>
+          <tr><td><strong>Addition</strong></td><td>Insertion d'un ou plusieurs nucléotides</td><td>Décalage du cadre de lecture</td></tr>
+          <tr><td><strong>Silencieuse / neutre</strong></td><td>Substitution sans changement d'acide aminé</td><td>Aucun effet phénotypique (redondance du code génétique)</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box green">
+        <strong>Propriétés des mutations (à mémoriser) :</strong><br>
+        — <strong>Rares</strong> : fréquence 10⁻⁶ à 10⁻⁷ (augmente avec agents mutagènes : UV, rayons X, alcool)<br>
+        — <strong>Réversibles</strong> : une mutation peut être «révertée»<br>
+        — <strong>Héréditaires</strong> : si elles touchent les cellules germinales, elles se transmettent aux descendants<br>
+        — <strong>Spontanées</strong> dans les conditions naturelles<br>
+        — <strong>Létales, morbides ou avantageuses</strong> selon leur effet (ex: Phalène du bouleau en milieu pollué)
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.4 — n°1</div>
+        <div class="qtxt">Une mutation dans laquelle un nucléotide est remplacé par un autre sans changer l'acide aminé codé est appelée :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_1')"><input type="radio" name="q_ch4_1"> a. Mutation létale</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_1')"><input type="radio" name="q_ch4_1"> b. Mutation silencieuse (neutre)</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_1')"><input type="radio" name="q_ch4_1"> c. Translocation chromosomique</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch4_1',1,'✅ Correct ! La <strong>mutation silencieuse</strong> (ou neutre) est possible grâce à la <strong>redondance du code génétique</strong> : 64 codons codent pour seulement 20 acides aminés → plusieurs codons différents peuvent coder pour le même acide aminé. Exemple : GUU, GUC, GUA, GUG codent tous la Valine. Un changement de la 3ème base du codon (wobble position) ne change souvent pas l\'acide aminé → phénotype identique.','❌ Une mutation létale est celle qui provoque la mort de l\'individu porteur. Une translocation est une mutation <em>chromosomique</em> (échange entre chromosomes non homologues), pas génique. La bonne réponse est la <strong>mutation silencieuse</strong> : le code génétique est redondant (dégénéré) → plusieurs codons peuvent coder le même acide aminé → certaines substitutions de bases ne changent pas la protéine produite.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch4_1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : Méiose et brassages -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🔀 Activité 2 — La méiose : source de diversité par brassage génétique</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title blue">A — Les étapes de la méiose</div>
+      <div class="dna-seq">MÉIOSE — Résumé schématique
+══════════════════════════════════════════════════════
+INTERPHASE : duplication de l'ADN → chromosomes à 2 chromatides
+──────────────────────────────────────────────────────
+DIVISION I — RÉDUCTIONNELLE (2n → n)
+  Prophase I  : appariement homologues → bivalents → possibilité de CROSSING-OVER (chiasma)
+  Métaphase I : bivalents sur plaque équatoriale
+  Anaphase I  : séparation ALÉATOIRE des chromosomes homologues → BRASSAGE INTERCHROMOSOMIQUE
+  Télophase I : 2 cellules haploïdes (n) — chaque chr. encore à 2 chromatides
+──────────────────────────────────────────────────────
+DIVISION II — ÉQUATIONNELLE (n → n)
+  Anaphase II : séparation des chromatides sœurs
+  RÉSULTAT : 4 cellules haploïdes (n) = gamètes génétiquement DIVERSIFIÉS</div>
+
+      <div class="info-box green">
+        <strong>Analogie pour retenir :</strong> La méiose est une «loterie génétique» à deux niveaux :<br>
+        — <strong>1ère loterie</strong> : crossing-over (brassage intrachromosomique) — échange de morceaux entre chromosomes<br>
+        — <strong>2ème loterie</strong> : séparation aléatoire des homologues (brassage interchromosomique) — tirage au sort des chromosomes maternels/paternels
+      </div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_crossing_over.png" alt="Crossing over mécanisme" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_crossing_over.png</strong>Le crossing-over — échange de chromatides non-sœurs au niveau du chiasma, en prophase I (doc.38 p.224)</div>
+          </div>
+          <div class="img-caption">Doc.38 — Mécanisme du crossing-over (prophase I)</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_ségrégation_chromosomes.png" alt="Ségrégation aléatoire anaphase I" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_ségrégation_chromosomes.png</strong>Ségrégation aléatoire des chromosomes homologues à l'anaphase I — brassage interchromosomique (doc.37 p.224)</div>
+          </div>
+          <div class="img-caption">Doc.37 — Brassage interchromosomique (anaphase I)</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type de brassage</th><th class="blue">Quand ?</th><th class="teal">Mécanisme</th><th class="purple">Résultat</th></tr>
+          <tr>
+            <td><strong>Intrachromosomique</strong></td>
+            <td>Prophase I</td>
+            <td>Crossing-over : échange de fragments entre chromatides NON-sœurs de chromosomes homologues au niveau d'un chiasma</td>
+            <td>Chromatides recombinées (combinaisons nouvelles d'allèles sur un même chromosome)</td>
+          </tr>
+          <tr>
+            <td><strong>Interchromosomique</strong></td>
+            <td>Anaphase I</td>
+            <td>Séparation ALÉATOIRE des paires de chromosomes homologues (origines maternelle/paternelle mélangées)</td>
+            <td>2ⁿ combinaisons de gamètes différents (n = nbre de paires de chromosomes)<br>Chez l'Homme : 2²³ = 8,4 millions de types de gamètes !</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="sub-title blue">B — Formation des gamètes chez les Spermaphytes</div>
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_formation_pollen.png" alt="Formation grain de pollen" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_formation_pollen.png</strong>Étapes de formation du grain de pollen dans l'anthère — méiose + mitose (doc.30 p.221)</div>
+          </div>
+          <div class="img-caption">Doc.30 — Formation du grain de pollen (gamète ♂)</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch4_structure_ovule.png" alt="Structure ovule sac embryonnaire" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch4_structure_ovule.png</strong>Structure du sac embryonnaire — oosphère, synergides, antipodes, cellule centrale (doc.33 p.222)</div>
+          </div>
+          <div class="img-caption">Doc.33 — Structure du sac embryonnaire (gamète ♀)</div>
+        </div>
+      </div>
+
+      <div class="schema-expression">
+        <div class="schema-box">Cellule mère (2n)<span class="schema-label">Anthère ou Ovule</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box teal">MÉIOSE<span class="schema-label">réduction chromosomique</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box purple">4 microspores/mégaspores (n)<span class="schema-label">haploïdes</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box amber">MITOSE(s)<span class="schema-label">division conforme</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">Grain de pollen / Sac embryonnaire<span class="schema-label">gamètes matures</span></div>
+      </div>
+
+      <div class="info-box purple">
+        <strong>Double fécondation (Angiospermes) :</strong> Anthérozoïde n°1 + oosphère → œuf principal (2n) → embryon. Anthérozoïde n°2 + 2 noyaux du sac (n+n) → œuf accessoire (3n) → albumen (réserves nutritives). Caractéristique exclusive des angiospermes.
+      </div>
+
+      <div class="sub-title blue">C — Rôle de la fécondation dans la diversité</div>
+      <div class="def-box">
+        <div class="lbl">Amplification de la diversité</div>
+        <p>Si la méiose produit <strong>2ⁿ gamètes différents</strong>, la fécondation (rencontre au hasard de deux gamètes) donne <strong>2ⁿ × 2ⁿ = 2²ⁿ zygotes différents</strong> possibles.<br>
+        Chez l'Homme (2n=46) : 2⁴⁶ ≈ <strong>7 × 10¹³</strong> individus génétiquement différents possibles. <em>«Qui fait un œuf fait du neuf»</em> (André Langaney)</p>
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.4 — n°2</div>
+        <div class="qtxt">Le brassage intrachromosomique lors de la méiose se produit :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_2')"><input type="radio" name="q_ch4_2"> a. À l'anaphase I, par séparation aléatoire des chromosomes homologues vers les pôles opposés</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_2')"><input type="radio" name="q_ch4_2"> b. À la prophase I, par échange de fragments entre deux chromatides non-sœurs d'une même paire de chromosomes homologues</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch4_2')"><input type="radio" name="q_ch4_2"> c. À l'anaphase II, par séparation des chromatides sœurs</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch4_2',1,'✅ Exact ! Le <strong>crossing-over</strong> (enjambement) se produit à la <strong>prophase I</strong>, lors de l\'appariement des chromosomes homologues en bivalents. Deux chromatides non-sœurs (une de chaque homologue) s\'entrecroisent au niveau d\'un <strong>chiasma</strong>, puis échangent des segments. Résultat : des <strong>chromatides recombinées</strong> qui portent de nouvelles combinaisons d\'allèles = brassage INTRA-chromosomique.','❌ La séparation aléatoire des chromosomes homologues à l\'<em>anaphase I</em> est le brassage <strong>INTER</strong>chromosomique (pas intra). La séparation des chromatides sœurs à l\'anaphase II est la fin de la méiose II et ne crée pas de diversité en elle-même. C\'est bien à la <strong>prophase I</strong> que le crossing-over (brassage intrachromosomique) a lieu.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch4_2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB 4 — CH.5 TRANSMISSION ══════════════ -->
+<div class="tab-panel" id="tab-ch5">
+
+  <h2 class="section-title">🔬 Chapitre 5 — Transmission de l'Information Génétique</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>La <strong>génétique formelle</strong> (Mendel, 1865) établit des règles mathématiques qui régissent la transmission des caractères héréditaires. Ces lois expliquent comment les allèles paternels et maternels se comportent lors de la méiose et se réunissent à la fécondation.</p>
+  </div>
+
+  <!-- ACT 1 : Méthode croisements -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🐾 Activité 1 — Méthode des croisements : vocabulaire essentiel</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="card-grid">
+        <div class="card"><h4 style="color:var(--em)">🌿 Lignée pure</h4><ul><li>Se reproduit en donnant <strong>toujours le même phénotype</strong> à travers les générations</li><li>Génotype <strong>homozygote</strong> (A//A ou a//a)</li><li>Donne des gamètes tous identiques</li></ul></div>
+        <div class="card teal"><h4 style="color:var(--teal)">🔀 Hybridisme</h4><ul><li>Croisement entre <strong>deux lignées pures</strong> différentes</li><li>Hybride F1 : génotype <strong>hétérozygote</strong></li><li>Monohybridisme : 1 seul caractère étudié</li></ul></div>
+        <div class="card purple"><h4 style="color:var(--purple)">📊 Générations F1 et F2</h4><ul><li><strong>F1</strong> : 1ère génération issue du croisement P × P</li><li><strong>F2</strong> : 2ème génération (F1 × F1)</li><li><strong>Test-cross</strong> : F1 × lignée pure récessive</li></ul></div>
+        <div class="card amber"><h4 style="color:var(--amber)">🐭 Espèces modèles</h4><ul><li>Petit pois (Mendel) : cycle court, autofécondation</li><li>Drosophile (Morgan) : cycle 12 jours, 200-300 descendants</li><li>Maïs : fleurs ♂ et ♀ séparées → contrôle de la fécondation</li></ul></div>
+      </div>
+
+      <div class="sub-title">Texte à trous — Lignée pure et hybride</div>
+      <div class="gap-text" id="gap-lignee">
+        Une lignée pure est composée d'individus dont le génotype est <select class="gap-select" data-answer="homozygote"><option value="">…</option><option>homozygote</option><option>hétérozygote</option><option>haploïde</option></select>. Lorsqu'on croise deux lignées pures différentes, on obtient une <select class="gap-select" data-answer="F1 uniforme"><option value="">…</option><option>F1 uniforme</option><option>F1 hétérogène</option><option>F2 uniforme</option></select> : c'est la <select class="gap-select" data-answer="1ère loi de Mendel"><option value="">…</option><option>1ère loi de Mendel</option><option>2ème loi de Mendel</option><option>loi de Morgan</option></select>. Les individus F1 sont des <select class="gap-select" data-answer="hybrides hétérozygotes"><option value="">…</option><option>hybrides hétérozygotes</option><option>individus homozygotes dominants</option><option>individus de lignée pure</option></select>. La <select class="gap-select" data-answer="2ème loi de Mendel"><option value="">…</option><option>2ème loi de Mendel</option><option>1ère loi de Mendel</option><option>loi de Morgan</option></select> stipule que les gamètes d'un hybride sont <select class="gap-select" data-answer="purs"><option value="">…</option><option>purs</option><option>mélangés</option><option>identiques</option></select> : chaque gamète ne contient qu'un seul allèle du couple d'allèles.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-lignee','score-lignee')">Vérifier</button>
+      <div class="gap-score" id="score-lignee"></div>
+    </div>
+  </div>
+
+  <!-- ACT 2 : Monohybridisme codominance -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🐓 Activité 2 — Monohybridisme avec codominance (volailles)</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch5_plumages_volailles.png" alt="Plumages des volailles" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_plumages_volailles.png</strong>Trois phénotypes de plumage : noir (N), tacheté (T), blanc (B) chez les volailles (doc.13 p.240)</div>
+          </div>
+          <div class="img-caption">Doc.13 — Trois phénotypes de plumage</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch5_résultats_croisements.png" alt="Résultats 4ème croisement volailles" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_résultats_croisements.png</strong>Résultats du 4ème croisement : (T)×(T) → 30N : 62T : 31B (doc.14 p.240)</div>
+          </div>
+          <div class="img-caption">Doc.14 — Résultats du 4ème croisement</div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <strong>Hypothèse de codominance :</strong> Les allèles A (noir) et B (blanc) sont <strong>codominants</strong> — ils s'expriment simultanément dans le génotype hétérozygote A//B → phénotype <strong>tacheté (T)</strong> = juxtaposition de plumes noires et blanches.
+      </div>
+
+      <div class="dna-seq">ANALYSE DES CROISEMENTS — Volailles (codominance A = B)
+
+1er croisement : ♀(N) A//A × ♂(N) A//A → 100% (N) A//A → lignée pure noire ✓
+2ème croisement: ♀(B) B//B × ♂(B) B//B → 100% (B) B//B → lignée pure blanche ✓
+3ème croisement: ♀(N) A//A × ♂(B) B//B → 100% (T) A//B → F1 uniforme [1ère loi Mendel]
+4ème croisement: (T) A//B × (T) A//B
+    Gamètes :       A  B        A  B
+    Échiquier :
+       A  │ A//A (N) │ A//B (T) │
+       B  │ A//B (T) │ B//B (B) │
+    F2 : 1/4 A//A (N) · 1/2 A//B (T) · 1/4 B//B (B)
+       = 25% (N) : 50% (T) : 25% (B) → RATIO CARACTÉRISTIQUE de codominance
+    Vérification : 30,2 (N) · 61,5 (T) · 30,2 (B) théoriques ≈ 31 (N) · 62 (T) · 30 (B) réels ✓</div>
+
+      <div class="info-box blue">
+        <strong>Répartition caractéristique à retenir :</strong><br>
+        — <strong>Codominance</strong> → F2 : <strong>1/4 · 1/2 · 1/4</strong> (3 phénotypes)<br>
+        — <strong>Dominance complète</strong> → F2 : <strong>3/4 · 1/4</strong> (2 phénotypes)<br>
+        — <strong>Test-cross d'un hybride</strong> → <strong>1/2 · 1/2</strong> (2 phénotypes)
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.5 — n°1</div>
+        <div class="qtxt">Dans un croisement (T) × (T) entre volailles, on obtient 19 noires, 11 tachetées et 10 blanches. Quelle conclusion peut-on tirer ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_1')"><input type="radio" name="q_ch5_1"> a. Le résultat confirme parfaitement le ratio théorique 1:2:1 car l'écart est statistiquement acceptable</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_1')"><input type="radio" name="q_ch5_1"> b. Le résultat est incompatible avec la codominance car les proportions 19:11:10 ne correspondent pas à 1:2:1</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_1')"><input type="radio" name="q_ch5_1"> c. Le résultat indique une dominance complète de l'allèle noir sur l'allèle blanc</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch5_1',0,'✅ Exact ! Le ratio théorique 1:2:1 (codominance) prévoit ici : 10 N · 20 T · 10 B. Le résultat 19N · 11T · 10B s\'en écarte. Cependant avec un faible échantillon (40 individus), les <strong>écarts au hasard</strong> peuvent être importants. Si l\'échantillon était beaucoup plus grand (comme dans l\'expérience du manuel : 123 volailles → 30N·62T·31B), le ratio observé converge vers 1:2:1. En génétique, on compare toujours les résultats théoriques aux résultats réels en tenant compte de la taille de l\'échantillon.','❌ Cette réponse est incorrecte car elle néglige la variable cruciale : la <strong>taille de l\'échantillon</strong>. Avec seulement 40 individus, les écarts aléatoires peuvent être grands. Le ratio 19:11:10 s\'écarte du théorique 10:20:10 mais cette déviation est statistiquement acceptable avec un si petit effectif. En génétique expérimentale, plus l\'effectif est grand, plus le résultat observé converge vers le ratio théorique (loi des grands nombres).')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch5_1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 3 : Dominance -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>🌾 Activité 3 — Monohybridisme avec dominance (blé) + Test-cross</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-wrap">
+        <img src="images/ch5_croisements_blé.png" alt="Croisements blé taille haute vs courte" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_croisements_blé.png</strong>Interprétation chromosomique des croisements taille haute × taille courte chez le blé (doc.16 p.248)</div>
+      </div>
+      <div class="img-caption">Doc.16 — Interprétation chromosomique : blé taille haute × taille courte</div>
+
+      <div class="dna-seq">ANALYSE — Blé (dominance : A (H) > a (c))
+
+3ème croisement: (H) A//A × (c) a//a → F1 : 100% A//a → phénotype (H) ← [1ère loi Mendel]
+4ème croisement: (H) A//a × (H) A//a  [autofécondation F1]
+    F2 : 1/4 A//A (H) · 2/4 A//a (H) · 1/4 a//a (c)
+       = 3/4 (H) : 1/4 (c) → RATIO 3:1 caractéristique de dominance
+    Vérification : 754 (H) + 246 (c) = 1000 plantes
+                   3/4 × 1000 = 750 (H) ≈ 754 ✓  |  1/4 × 1000 = 250 (c) ≈ 246 ✓</div>
+
+      <div class="sub-title purple">Le Test-Cross : vérifier la pureté</div>
+      <div class="info-box purple">
+        <strong>Problème :</strong> Un individu à phénotype dominant peut être <em>A//A</em> (lignée pure) ou <em>A//a</em> (hybride). Comment distinguer les deux ?<br>
+        <strong>Solution — Test-cross :</strong> croiser l'individu à tester avec un individu de <strong>phénotype récessif</strong> (a//a).<br>
+        — Si <strong>100% phénotype dominant</strong> → individu testé est <em>A//A</em> (lignée pure)<br>
+        — Si <strong>50% dominant + 50% récessif</strong> → individu testé est <em>A//a</em> (hybride)
+      </div>
+      <div class="info-box red">
+        <strong>Piège CAPES :</strong> Le test-cross doit TOUJOURS se faire avec l'individu de phénotype <strong>récessif</strong> (a//a), jamais avec un individu de phénotype dominant (même de lignée pure A//A), car dans ce cas tous les descendants seraient dominants même si l'individu testé est hybride.
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.5 — n°2</div>
+        <div class="qtxt">Le croisement d'une souris grise (génotype ?) avec une souris blanche (aa, phénotype récessif) donne : 50% grises, 50% blanches. Quelle conclusion en tire-t-on ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_2')"><input type="radio" name="q_ch5_2"> a. La souris grise est de lignée pure (AA) car le gris est dominant</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_2')"><input type="radio" name="q_ch5_2"> b. La souris grise est hybride (Aa) car le test-cross donne un ratio 1:1</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_2')"><input type="radio" name="q_ch5_2"> c. Il est impossible de conclure avec un seul croisement</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch5_2',1,'✅ Parfait ! C\'est l\'application directe du <strong>test-cross</strong>. La souris grise (Aa) × souris blanche (aa) → gamètes souris grise : A ou a (50/50) · gamètes souris blanche : a uniquement → descendants : 50% Aa (gris) + 50% aa (blanc). Le ratio 1:1 est la <strong>signature du test-cross d\'un hybride</strong>. Si la souris grise avait été AA (pure), tous les descendants auraient été Aa (gris) → ratio 100% gris.','❌ Si la souris grise était AA (lignée pure), le test-cross donnerait : AA × aa → 100% Aa (gris) = 100% dominants. Or on observe 50% gris + 50% blancs → la souris grise DOIT être hétérozygote <strong>Aa</strong>. Le ratio 1:1 est la signature caractéristique du test-cross d\'un individu hybride hétérozygote.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch5_2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 4 : Hérédité liée au sexe -->
+  <div class="activity">
+    <div class="activity-header blue" onclick="toggleActivity(this)">
+      <h3>🧬 Activité 4 — Hérédité liée au sexe (Morgan 1910 — Drosophile)</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch5_caryotype_drosophile.png" alt="Caryotype drosophile mâle femelle" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_caryotype_drosophile.png</strong>Caryotypes de drosophiles mâle (XY) et femelle (XX) — 2n=8 (doc.18 p.250)</div>
+          </div>
+          <div class="img-caption">Doc.18 — Caryotypes ♂(XY) et ♀(XX) : 2n=8</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/ch5_chromosomes_XY.png" alt="Structure chromosomes X et Y" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>ch5_chromosomes_XY.png</strong>Structure des chromosomes X et Y — parties homologues et spécifiques (doc. p.251)</div>
+          </div>
+          <div class="img-caption">Doc. — Structure X et Y (parties homologues + spécifiques)</div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <strong>Contexte :</strong> En 1910, Morgan croise deux lignées de Drosophile :<br>
+        — Lignée sauvage : yeux rouges (dominant)<br>
+        — Lignée mutante «white» : yeux blancs (récessif)<br>
+        Il réalise le croisement DIRECT puis le croisement RÉCIPROQUE (sexes des parents inversés). Les résultats sont <strong>différents</strong> → indice que le gène est lié au sexe !
+      </div>
+
+      <div class="dna-seq">HÉRÉDITÉ LIÉE AU SEXE — Gène sur partie spécifique du chromosome X
+Notation : X^A (allèle sauvage, yeux rouges) · X^a (allèle white, yeux blancs) · A domine a
+
+1er CROISEMENT : ♀ sauvage (X^A//X^A) × ♂ white (X^a//Y)
+    Gamètes ♀ : X^A          Gamètes ♂ : X^a ou Y
+    Descendants : ♀ X^A//X^a (sauvage) + ♂ X^A//Y (sauvage) → 100% phénotype sauvage
+    [1ère loi Mendel respectée]
+
+2ème CROISEMENT RÉCIPROQUE : ♀ white (X^a//X^a) × ♂ sauvage (X^A//Y)
+    Gamètes ♀ : X^a          Gamètes ♂ : X^A ou Y
+    Descendants : ♀ X^A//X^a (sauvage) + ♂ X^a//Y (WHITE !)
+    → ♀ toutes sauvages · ♂ tous white ← RÉSULTAT DIFFÉRENT DU 1er CROISEMENT !!
+
+CONCLUSION : Le croisement réciproque ≠ croisement direct → HÉRÉDITÉ LIÉE AU SEXE (gène sur X spécifique)</div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Locus du gène</th><th class="blue">Mode de transmission</th><th class="teal">Particularités</th></tr>
+          <tr><td>Partie homologue X et Y</td><td>Autosomale classique</td><td>Caractère chez ♂ et ♀ — croisement direct = réciproque</td></tr>
+          <tr><td>Partie spécifique de Y</td><td>Holandro-dromique (père → fils)</td><td>Caractère UNIQUEMENT chez les ♂</td></tr>
+          <tr><td>Partie spécifique de X ★</td><td>Gonosomique (liée au sexe)</td><td>Croisement réciproque ≠ direct. ♂ hémizygote exprime toujours son allèle X unique</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box purple">
+        <strong>Piège CAPES — hémizygotie :</strong> Un mâle (XY) ne possède qu'une seule copie du gène sur son X (hémizygote). Il exprime TOUJOURS cet allèle, même s'il est récessif. Pas de «porteur sain» chez les mâles pour les gènes liés au X !
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question Ch.5 — n°3</div>
+        <div class="qtxt">Chez la Drosophile, une femelle de phénotype sauvage (yeux rouges) dont la mère avait les yeux blancs (white) est croisée avec un mâle à yeux blancs (white). Quel sera le résultat attendu pour les descendants mâles ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_3')"><input type="radio" name="q_ch5_3"> a. Tous les mâles auront les yeux rouges (sauvage)</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_3')"><input type="radio" name="q_ch5_3"> b. 50% des mâles auront les yeux rouges et 50% auront les yeux blancs</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'q_ch5_3')"><input type="radio" name="q_ch5_3"> c. Tous les mâles auront les yeux blancs (white)</div>
+        <button class="btn-verify" onclick="verifyQCM('q_ch5_3',1,'✅ Exact ! Déduisons le génotype de la femelle : elle a les yeux rouges (sauvage) donc au moins un X^A. Sa mère avait les yeux blancs (X^a//X^a) donc elle lui a transmis obligatoirement un X^a. La femelle est donc <strong>X^A//X^a</strong> (porteuse hétérozygote). Croisement : ♀ X^A//X^a × ♂ X^a//Y. Gamètes ♀ : X^A (50%) ou X^a (50%). Gamètes ♂ : X^a (50%) ou Y (50%). Mâles obtenus : X^A//Y (yeux rouges, 50%) + X^a//Y (yeux blancs, 50%) → <strong>50% rouges et 50% blancs</strong>.','❌ La clé est de déduire le génotype exact de la femelle : elle est sauvage (yeux rouges) mais sa mère avait les yeux blancs (X^a//X^a) → elle a obligatoirement reçu un X^a de sa mère. Donc la femelle est <strong>X^A//X^a</strong> (hétérozygote, porteuse). × ♂ X^a//Y → mâles : 50% X^A//Y (rouges) + 50% X^a//Y (blancs). Les deux types de mâles sont possibles.')">Vérifier</button>
+        <div class="qcm-fb" id="fb-q_ch5_3"></div>
+      </div>
+
+      <div class="sub-title">Les 2 Lois de Mendel — synthèse</div>
+      <div class="card-grid">
+        <div class="card amber">
+          <h4 style="color:var(--amber)">1ère Loi — Uniformité de la F1</h4>
+          <p>«La F1 issue du croisement de deux lignées pures différentes par un caractère est <strong>uniforme</strong> : même génotype et même phénotype» → tous des hybrides hétérozygotes.</p>
+        </div>
+        <div class="card blue">
+          <h4 style="color:var(--blue)">2ème Loi — Pureté des gamètes</h4>
+          <p>«Un hybride (A//a) forme deux types de gamètes : A ou a. Chaque gamète ne contient <strong>qu'un seul allèle</strong> → l'allèle garde son information intacte» → disjonction des allèles à la gamétogenèse (anaphase I de méiose).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB 5 — SYNTHÈSE ══════════════ -->
+<div class="tab-panel" id="tab-synthese">
+
+  <h2 class="section-title">🗺️ Synthèse — Partie II (Ch.3 · Ch.4 · Ch.5)</h2>
+
+  <div class="def-box">
+    <div class="lbl">Schéma bilan</div>
+    <p>Les chapitres 3, 4 et 5 forment un ensemble cohérent autour de la manipulation, de la diversité et de la transmission de l'information génétique (ADN).</p>
+  </div>
+
+  <canvas id="mindmap-canvas" style="width:100%;height:500px;cursor:pointer"></canvas>
+
+  <h2 class="section-title">📌 Connexions entre chapitres</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Concept</th><th class="teal">Ch.3 — Génie génétique</th><th class="amber">Ch.4 — Diversité</th><th class="blue">Ch.5 — Transmission</th></tr>
+      <tr><td><strong>ADNc</strong></td><td>Voie via ARNm + transcriptase reverse (sans introns)</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>Allèles</strong></td><td>Marqueur résistance antibiotique (outil)</td><td>Créés par mutations géniques</td><td>Transmis selon lois de Mendel</td></tr>
+      <tr><td><strong>Méiose</strong></td><td>—</td><td>Source de brassage génétique</td><td>Explique la pureté des gamètes (2ème loi)</td></tr>
+      <tr><td><strong>E. coli</strong></td><td>Cellule hôte — bipartition rapide</td><td>Exemple mutation résistance (streptomycine)</td><td>—</td></tr>
+      <tr><td><strong>Chromosomes sexuels</strong></td><td>—</td><td>—</td><td>Hérédité liée au X (Morgan)</td></tr>
+    </table>
+  </div>
+
+  <h2 class="section-title">🎓 Points prioritaires pour le CAPES</h2>
+  <div class="card-grid">
+    <div class="card"><h4 style="color:var(--em)">🔧 Génie Génétique</h4><ul><li>Schématiser les 5 étapes (OIRCE)</li><li>ADN chromosomique vs ADNc (introns !)</li><li>Pourquoi même enzyme restriction pour gène et plasmide</li><li>Rôle de chaque outil (tableau)</li></ul></div>
+    <div class="card teal"><h4 style="color:var(--teal)">🌿 Diversité</h4><ul><li>Mutation génique vs chromosomique</li><li>Crossing-over (prophase I)</li><li>Calcul 2ⁿ gamètes différents</li><li>Formation sac embryonnaire + double fécondation</li></ul></div>
+    <div class="card blue"><h4 style="color:var(--blue)">🔬 Transmission</h4><ul><li>Résoudre monohybridisme (dominance + codominance)</li><li>Identifier le croisement par son ratio</li><li>Test-cross (avec phénotype récessif !)</li><li>Hérédité liée au sexe : croisement réciproque</li></ul></div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB 6 — EXERCICES CAPES ══════════════ -->
+<div class="tab-panel" id="tab-eval">
+
+  <h2 class="section-title">✅ Exercices CAPES — QCM avec feedback explicatif</h2>
+  <div class="info-box teal">
+    <strong>Mode d'emploi :</strong> Chaque question comporte une seule réponse correcte. Cliquez sur votre réponse, puis sur «Vérifier» pour obtenir une explication détaillée. À la fin, cliquez sur «Voir mon score» pour évaluer votre niveau CAPES.
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°1 (Génie génétique)</div>
+    <div class="qtxt">En génie génétique, un biologiste veut produire une protéine humaine dans E. coli. Il choisit la voie via l'ARNm (transcriptase reverse → ADNc). Parmi les propositions suivantes, laquelle est correcte ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes1')"><input type="radio" name="capes1"> a. L'ADNc obtenu contient les introns et les exons, comme le gène chromosomique original</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes1')"><input type="radio" name="capes1"> b. L'ADNc obtenu ne contient que les exons — il correspond à la séquence traduite en protéine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes1')"><input type="radio" name="capes1"> c. La transcriptase reverse synthétise directement une protéine à partir de l'ARNm</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes1')"><input type="radio" name="capes1"> d. Le résultat est identique que l'on parte de l'ADN chromosomique ou de l'ARNm</div>
+    <button class="btn-verify" onclick="verifyQCM('capes1',1,'✅ Exact ! La voie ARNm → ADNc est fondamentale à comprendre. L\'ARNm est déjà «épissé» (les introns ont été retirés lors de la maturation post-transcriptionnelle dans le noyau eucaryote). Quand la transcriptase reverse copie l\'ARNm en ADNc, elle produit donc une séquence qui ne contient <strong>que les exons</strong> (séquences codantes). E. coli, procaryote, ne possède pas le mécanisme d\'épissage → ne peut pas utiliser un gène avec introns. L\'ADNc est donc la solution idéale.','❌ Attention ! L\'ADNc est une copie de l\'ARNm messager mûr (déjà épissé). L\'ARNm, produit après maturation dans le noyau eucaryote, a déjà perdu ses introns. L\'ADNc ne contient donc QUE les exons (séquences codantes). C\'est pourquoi il est utilisable directement par E. coli qui ne peut pas exciser les introns. La transcriptase reverse ne synthétise pas de protéine — elle fabrique un brin d\'ADN complémentaire à l\'ARNm.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°2 (Génie génétique)</div>
+    <div class="qtxt">Pour identifier les bactéries E. coli qui ont intégré le plasmide recombiné parmi celles qui ne l'ont pas intégré, on utilise :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes2')"><input type="radio" name="capes2"> a. Une sonde moléculaire radioactive complémentaire du gène greffé</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes2')"><input type="radio" name="capes2"> b. Un gène marqueur de résistance à un antibiotique, inséré conjointement avec le gène d'intérêt</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes2')"><input type="radio" name="capes2"> c. L'observation directe au microscope électronique de la taille des bactéries</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes2')"><input type="radio" name="capes2"> d. Le dosage de la quantité d'ADN dans les bactéries</div>
+    <button class="btn-verify" onclick="verifyQCM('capes2',1,'✅ Correct ! La technique de sélection est élégante : on insère simultanément dans le plasmide le gène d\'intérêt ET un <strong>gène marqueur de résistance à un antibiotique</strong> (ex: streptomycine). Ensuite, on cultive TOUTES les bactéries sur un milieu contenant l\'antibiotique. Seules les bactéries qui ont intégré le plasmide recombiné (portant le gène de résistance) survivront → elles sont automatiquement sélectionnées. Les bactéries sauvages (sans plasmide) meurent.','❌ La sonde radioactive est utilisée à l\'<em>étape de localisation du gène</em> dans l\'ADN chromosomique fragmenté, pas pour repérer les bactéries transformées. On ne peut pas distinguer les bactéries transformées au microscope (elles sont identiques visuellement). La méthode pratique est le <strong>marqueur de résistance à l\'antibiotique</strong> : cultivées en présence de l\'antibiotique, seules les bactéries ayant intégré le plasmide (portant le marqueur) survivront.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°3 (Mutations)</div>
+    <div class="qtxt">La Phalène du bouleau (Biston betularia) présente deux variétés : claire (sauvage) et sombre (mutante). Dans les régions industrialisées polluées (troncs d'arbres couverts de suie noire), la variété sombre est devenue prédominante à la fin du XIXème siècle. Cela illustre :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes3')"><input type="radio" name="capes3"> a. Que les mutations sont toujours létales</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes3')"><input type="radio" name="capes3"> b. Que la mutation peut être avantageuse et favorisée par la sélection naturelle selon le milieu</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes3')"><input type="radio" name="capes3"> c. Que la pollution a directement causé la mutation vers la forme sombre</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes3')"><input type="radio" name="capes3"> d. Que la lignée sauvage a disparu de toutes les régions industrialisées</div>
+    <button class="btn-verify" onclick="verifyQCM('capes3',1,'✅ Parfait ! C\'est l\'exemple classique de la <strong>sélection naturelle</strong> agissant sur une mutation. La mutation de la couleur sombre existait avant la pollution (elle est <strong>spontanée</strong>). En milieu non pollué (troncs blancs/lichens), la forme sombre est visible des prédateurs → désavantagée → rare. En milieu pollué (troncs noirs), la forme sombre est <strong>camouflée</strong> → avantagée par rapport à la forme claire visible → se multiplie davantage. La mutation elle-même n\'est pas causée par la pollution : la pollution ne fait que changer la valeur sélective de la mutation.','❌ La pollution n\'a PAS causé la mutation — c\'est une idée lamarckiste incorrecte. La mutation de la couleur sombre existait déjà spontanément. Ce que la pollution a changé, c\'est l\'<em>avantage sélectif</em> : sur troncs noirs, la forme sombre est mieux camouflée → moins prédatée → se reproduit davantage → devient prédominante. C\'est la <strong>sélection naturelle</strong> qui sélectionne une mutation préexistante selon le milieu.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°4 (Méiose et brassage)</div>
+    <div class="qtxt">Chez une espèce végétale avec n=3 (3 paires de chromosomes homologues), combien de types de gamètes génétiquement différents peut-on obtenir par méiose seule (sans tenir compte des crossing-over) ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes4')"><input type="radio" name="capes4"> a. 3 types de gamètes</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes4')"><input type="radio" name="capes4"> b. 6 types de gamètes</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes4')"><input type="radio" name="capes4"> c. 8 types de gamètes (2³ = 8)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes4')"><input type="radio" name="capes4"> d. 9 types de gamètes (3² = 9)</div>
+    <button class="btn-verify" onclick="verifyQCM('capes4',2,'✅ Exact ! La formule est <strong>2ⁿ</strong> où n = nombre de paires de chromosomes homologues. Pour n=3 : 2³ = <strong>8 types</strong> de gamètes différents. Pourquoi ? Chaque paire de chromosomes homologues se répartit de façon aléatoire à l\'anaphase I : pour chaque paire, le gamète reçoit soit le chromosome maternel, soit le paternel (2 choix). Avec 3 paires indépendantes : 2 × 2 × 2 = 8 combinaisons. Chez l\'Homme (n=23) : 2²³ ≈ 8,4 millions de types de gamètes différents (sans compter les crossing-over qui augmentent encore cette diversité).','❌ La formule correcte est <strong>2ⁿ</strong> (2 puissance n), où n est le nombre de paires de chromosomes homologues. Pour n=3 : 2³ = 8. À chaque paire, le gamète reçoit aléatoirement le chromosome maternel OU le paternel (2 choix). 3 paires indépendantes : 2×2×2 = 8 combinaisons possibles. La formule 2n (2×n = 6) est incorrecte — c\'est une erreur classique de confondre 2n (multiplication) et 2ⁿ (exposant).')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°5 (Monohybridisme)</div>
+    <div class="qtxt">Le croisement entre deux plantes à fleurs rouges donne en F2 : 387 plantes à fleurs rouges et 129 à fleurs blanches. Quelle interprétation est correcte ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes5')"><input type="radio" name="capes5"> a. Codominance — les parents F1 étaient hétérozygotes à fleurs roses (phénotype intermédiaire)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes5')"><input type="radio" name="capes5"> b. Dominance complète — les parents F1 à fleurs rouges étaient hétérozygotes (rouge dominant sur blanc)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes5')"><input type="radio" name="capes5"> c. Les plantes rouges F2 sont toutes de lignée pure</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes5')"><input type="radio" name="capes5"> d. Ce résultat contredit les lois de Mendel</div>
+    <button class="btn-verify" onclick="verifyQCM('capes5',1,'✅ Parfait ! Le ratio 387:129 ≈ <strong>3:1</strong>. Vérification : 387/(387+129) = 516 → 3/4 × 516 = 387 rouges · 1/4 × 516 = 129 blancs ✓. Ce ratio 3:1 est la <strong>signature de la dominance complète en F2</strong> (F1 × F1 avec un allèle rouge dominant sur blanc). Les parents F1 à fleurs rouges étaient tous hétérozygotes (R//b), et leur autofécondation donne : 1 R//R + 2 R//b + 1 b//b = 3 rouges : 1 blanc. À noter : les 3/4 plantes rouges comprennent 1/3 de lignée pure (R//R) et 2/3 d\'hybrides (R//b).','❌ La codominance donnerait un ratio 1:2:1 avec 3 phénotypes (rouge, rose, blanc). Ici on n\'observe que 2 phénotypes avec un ratio 3:1 → c\'est la <strong>dominance complète</strong>. Les parents F1 à fleurs rouges étaient hétérozygotes R//b (rouge dominant sur blanc). Le résultat 3:1 est parfaitement conforme aux lois de Mendel (2ème loi : pureté des gamètes → disjonction R et b à la gamétogenèse).')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°6 (Hérédité liée au sexe)</div>
+    <div class="qtxt">L'hémophilie A est une maladie récessive liée au chromosome X. Une femme saine (dont le père était hémophile) épouse un homme sain. Quelle est la probabilité d'avoir un fils hémophile ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes6')"><input type="radio" name="capes6"> a. 0% — aucun fils ne peut être hémophile car la mère est saine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes6')"><input type="radio" name="capes6"> b. 25% des enfants totaux, soit 50% des fils seront hémophiles</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes6')"><input type="radio" name="capes6"> c. 100% des fils seront hémophiles</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes6')"><input type="radio" name="capes6"> d. 50% des fils et 50% des filles seront hémophiles</div>
+    <button class="btn-verify" onclick="verifyQCM('capes6',1,'✅ Exact ! Déduisons le génotype de la mère. Elle est saine → au moins un X^H. Son père était hémophile → X^h//Y → il n\'a qu\'un X à donner (X^h) à ses filles. Donc la mère a reçu X^h de son père et est <strong>X^H//X^h</strong> (porteuse saine hétérozygote). Le père est sain → X^H//Y. Croisement : ♀ X^H//X^h × ♂ X^H//Y. Gamètes ♀ : X^H ou X^h. Gamètes ♂ : X^H ou Y. Fils obtenus : X^H//Y (sain, 50%) + X^h//Y (hémophile, 50%) → <strong>50% des fils sont hémophiles</strong> = 25% de tous les enfants.','❌ La clé est de déduire que la mère est <strong>porteuse saine</strong> (X^H//X^h). Comment ? Son père était hémophile (X^h//Y) → il n\'a transmis qu\'un X^h à sa fille. La mère a donc reçu X^h de son père. Comme elle est saine (non hémophile), elle a aussi un X^H → X^H//X^h. × ♂ X^H//Y → fils : 50% X^H//Y (sains) + 50% X^h//Y (hémophiles). Les filles ne peuvent pas être hémophiles dans ce croisement.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°7 (Génie génétique + synthèse protéique)</div>
+    <div class="qtxt">Pour que le gène humain greffé dans E. coli puisse s'exprimer, quelle condition supplémentaire doit être respectée lors de la construction du plasmide recombiné ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes7')"><input type="radio" name="capes7"> a. Le gène doit être inséré à l'intérieur d'un autre gène bactérien pour bénéficier de sa régulation</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes7')"><input type="radio" name="capes7"> b. Le gène doit être précédé d'une séquence régulatrice (promoteur bactérien) reconnue par l'ARN polymérase d'E. coli</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes7')"><input type="radio" name="capes7"> c. Le gène doit être transcrit en ARNm avant d'être inséré dans le plasmide</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes7')"><input type="radio" name="capes7"> d. Il suffit que le gène soit inséré correctement pour qu'il s'exprime automatiquement</div>
+    <button class="btn-verify" onclick="verifyQCM('capes7',1,'✅ Excellent ! Un gène ne peut être transcrit que si l\'ARN polymérase reconnaît son <strong>promoteur</strong> (séquence régulatrice en amont du gène, côté 5\'). Or les promoteurs eucaryotes et procaryotes sont structurellement différents → l\'ARN polymérase d\'E. coli ne reconnaît pas le promoteur humain. Pour que le gène humain soit transcrit dans E. coli, il faut lui adjoindre un <strong>promoteur bactérien</strong> fonctionnel. C\'est pourquoi les chercheurs construisent des «cassettes d\'expression» : promoteur bactérien + gène d\'intérêt (ADNc) + signal de terminaison de la transcription.','❌ Un gène inséré dans un plasmide ne s\'exprime pas «automatiquement». La transcription nécessite que l\'ARN polymérase de la cellule hôte reconnaisse la <strong>séquence promotrice</strong> en amont du gène. Les promoteurs eucaryotes humains sont différents des promoteurs procaryotes d\'E. coli → l\'ARN polymérase bactérienne ne reconnaît pas le promoteur humain. Solution : construire une cassette d\'expression avec un <strong>promoteur bactérien</strong> placé en amont de l\'ADNc humain.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°8 (Mutations géniques)</div>
+    <div class="qtxt">Chez 4 individus (A, B, C, D), on compare la séquence d'un même gène. L'individu A est normal. B, C, D sont malades. Les triplets modifiés sont respectivement : B: GAA→AAA, C: GAA→GAC, D: GAA (délétion du G). Quelle affirmation est correcte ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes8')"><input type="radio" name="capes8"> a. La mutation de C est probablement silencieuse car un seul nucléotide est changé</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes8')"><input type="radio" name="capes8"> b. La mutation de D (délétion du G) provoque le décalage de tout le cadre de lecture en aval</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes8')"><input type="radio" name="capes8"> c. La mutation de B ne peut pas causer de maladie car Lys (AAA) et Glu (GAA) sont des acides aminés de même nature</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes8')"><input type="radio" name="capes8"> d. Aucune de ces mutations ne peut être transmise à la descendance</div>
+    <button class="btn-verify" onclick="verifyQCM('capes8',1,'✅ Exact ! La <strong>délétion d\'un seul nucléotide</strong> (ici le G du début du triplet) est particulièrement grave car elle <strong>décale le cadre de lecture</strong> de tous les triplets suivants (mutation frameshift). Tous les acides aminés codés après la délétion sont modifiés → protéine complètement différente et non fonctionnelle à partir du site de délétion. C\'est plus grave qu\'une simple substitution qui ne change qu\'un acide aminé. La mutation de C (GAA→GAC) code Asp au lieu de Glu — peut être fonctionnelle ou non selon l\'importance de cette position.','❌ La délétion d\'un seul nucléotide est une mutation particulièrement grave car elle décale le <strong>cadre de lecture</strong> (frameshift). Tous les codons lus après la délétion sont modifiés → séquence protéique totalement différente. C\'est plus grave qu\'une substitution d\'une base. La mutation de B (GAA→AAA) remplace Glu par Lys — ces deux acides aminés de charges différentes (Glu acide, Lys basique) peuvent perturber la structure 3D de la protéine.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°9 (Reproduction sexuée + diversité)</div>
+    <div class="qtxt">La double fécondation est caractéristique des angiospermes. Elle produit :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes9')"><input type="radio" name="capes9"> a. Deux embryons diploïdes (2n) à partir de deux anthérozoïdes et de l'oosphère</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes9')"><input type="radio" name="capes9"> b. Un œuf principal diploïde (2n) → embryon, et un œuf accessoire triploïde (3n) → albumen (réserves nutritives)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes9')"><input type="radio" name="capes9"> c. Un œuf diploïde (2n) → embryon, et l'autre anthérozoïde rejoint les antipodes pour former l'albumen</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes9')"><input type="radio" name="capes9"> d. Deux graines identiques à partir d'un seul ovule</div>
+    <button class="btn-verify" onclick="verifyQCM('capes9',1,'✅ Exact ! La double fécondation est exclusive aux angiospermes. Le grain de pollen germe et forme un tube pollinique contenant 2 anthérozoïdes (n) :<br>— Anthérozoïde n°1 (n) + oosphère (n) → <strong>œuf principal (2n)</strong> → embryon (futur individu)<br>— Anthérozoïde n°2 (n) + 2 noyaux de la cellule centrale (n + n) → <strong>œuf accessoire (3n)</strong> → albumen (tissu nourricier riche en réserves qui nourrit l\'embryon pendant la germination)<br>Cette double fécondation est unique dans le règne végétal et caractérise les plantes à fleurs (angiospermes).','❌ La double fécondation des angiospermes implique bien deux anthérozoïdes : l\'un féconde l\'oosphère (→ embryon diploïde 2n), l\'autre fusionne avec les deux noyaux de la cellule centrale (n+n) → œuf accessoire <strong>triploïde (3n)</strong> qui donnera l\'albumen (réserves nutritives). Ce n\'est pas deux embryons qui se forment, et les antipodes ne sont pas impliquées dans la fécondation.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°10 (Monohybridisme — analyse)</div>
+    <div class="qtxt">Le croisement de deux souris grises (phénotype dominant) donne : 47 grises, 0 noires. L'autofécondation des souris grises F1 avec une souris noire donne : 23 grises et 21 noires. Quelle est la composition génotypique des deux souris grises parentales ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes10')"><input type="radio" name="capes10"> a. Les deux parents sont homozygotes dominants (AA × AA)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes10')"><input type="radio" name="capes10"> b. Les deux parents sont hétérozygotes (Aa × Aa)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes10')"><input type="radio" name="capes10"> c. Un parent est homozygote dominant et l'autre est hétérozygote (AA × Aa)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes10')"><input type="radio" name="capes10"> d. Les deux parents sont homozygotes récessifs (aa × aa)</div>
+    <button class="btn-verify" onclick="verifyQCM('capes10',2,'✅ Exact ! Analysons les indices :<br><strong>Indice 1 :</strong> Le 1er croisement donne 47 grises et 0 noires → pas de ségrégation (tous gris) → la F1 est uniforme → un parent au moins est homozygote. Mais ça ne permet pas de conclure si les deux sont AA ou si l\'un est AA et l\'autre Aa (car AA×Aa → 100% dominants aussi).<br><strong>Indice 2 :</strong> Le test-cross des souris F1 grises avec une souris noire (aa) donne 23 grises : 21 noires ≈ 1:1 → la souris grise testée est <strong>Aa</strong> (hybride). Si elle était AA, le test-cross aurait donné 100% gris.<br>Donc les parents étaient AA × Aa → tous les descendants F1 sont soit AA (50%) soit Aa (50%), tous gris. Mais les Aa sont révélés par le test-cross.','❌ Il faut analyser les deux expériences ensemble. Le 1er croisement (100% gris) est compatible avec AA×AA, AA×Aa, ou Aa×Aa (si l\'échantillon est petit et par chance 0 récessif). Le test-cross est décisif : une descendance 1:1 (23 gris : 21 noirs) révèle que les souris F1 testées sont <strong>Aa</strong>. Or si les deux parents étaient AA, tous les descendants F1 seraient AA (100% gris au test-cross). Si les deux parents étaient Aa×Aa, on attendrait 3/4 gris en F1 mais certains (1/4) seraient aa (noirs). La seule explication : un parent est <strong>AA</strong> et l\'autre est <strong>Aa</strong> → F1 : 50% AA + 50% Aa, tous gris. Le test-cross des Aa donne 50%:50%.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes10"></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°11 (Génie génétique — applications)</div>
+    <div class="qtxt">En 1990, la «thérapie génique» a permis de corriger un déficit immunitaire sévère chez une fillette. Cette thérapie consiste à :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes11')"><input type="radio" name="capes11"> a. Remplacer chirurgicalement l'ADN déficient par un ADN normal prélevé d'un donneur compatible</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes11')"><input type="radio" name="capes11"> b. Prélever des lymphocytes du malade, introduire le gène normal dans ces cellules en culture, puis réinjecter les cellules corrigées</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes11')"><input type="radio" name="capes11"> c. Administrer directement la protéine manquante (l'enzyme ADA) par injection périodique</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes11')"><input type="radio" name="capes11"> d. Injecter des bactéries E. coli transgéniques productrices de l'enzyme ADA dans le sang du patient</div>
+    <button class="btn-verify" onclick="verifyQCM('capes11',1,'✅ Exact ! La thérapie génique de 1990 est une étape historique. La fillette souffrait d\'un déficit en enzyme ADA (adénosine désaminase) causé par un gène muté → système immunitaire déficient → isolement en «bulle stérile». La technique utilisée :<br>1. Prélèvement de lymphocytes (cellules immunitaires) de la fillette<br>2. Introduction ex vivo du gène ADA normal dans ces lymphocytes via un vecteur viral<br>3. Multiplication des lymphocytes corrigés en culture<br>4. Réinjection des lymphocytes corrigés → ils produisent l\'enzyme ADA → correction partielle du déficit immunitaire.<br>C\'est la première thérapie génique réussie chez l\'Homme.','❌ On ne peut pas «remplacer chirurgicalement l\'ADN» — ce n\'est pas techniquement réalisable. Injecter des bactéries E. coli directement dans le sang serait fatal (septicémie). La technique correcte est la thérapie génique ex vivo : les cellules du patient sont prélevées, modifiées génétiquement en laboratoire (introduction du gène normal), puis réintroduites dans le patient. C\'est une approche individuelle et personnalisée.')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes11"></div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qcm-item">
+    <div class="qnum">Question CAPES — n°12 (Synthèse : méiose + fécondation)</div>
+    <div class="qtxt">Chez une espèce animale avec 2n=6 (3 paires de chromosomes). Sans crossing-over, combien de génotypes différents de zygotes peut-on obtenir par fécondation ?</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes12')"><input type="radio" name="capes12"> a. 8 génotypes différents</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes12')"><input type="radio" name="capes12"> b. 64 génotypes différents (2³ × 2³ = 8 × 8 = 64)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes12')"><input type="radio" name="capes12"> c. 36 génotypes différents (6² = 36)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'capes12')"><input type="radio" name="capes12"> d. 6 génotypes différents (n = 3, donc 2n = 6)</div>
+    <button class="btn-verify" onclick="verifyQCM('capes12',1,'✅ Exact ! Raisonnement en deux étapes :<br><strong>Étape 1 — Méiose :</strong> avec n=3 paires de chromosomes et sans crossing-over → 2ⁿ = 2³ = 8 types de gamètes différents (brassage interchromosomique seul).<br><strong>Étape 2 — Fécondation :</strong> rencontre au hasard d\'un gamète ♀ parmi 8 types et d\'un gamète ♂ parmi 8 types → 8 × 8 = <strong>64 génotypes différents</strong> possibles.<br>Formule générale : 2ⁿ × 2ⁿ = 2²ⁿ. Ici : 2⁶ = 64.<br>Avec les crossing-over, le nombre réel est encore beaucoup plus grand (infini théoriquement).','❌ La fécondation <strong>multiplie</strong> les combinaisons créées par la méiose. La méiose produit 2ⁿ = 2³ = 8 types de gamètes différents. La fécondation combine un gamète parmi 8 (♀) avec un gamète parmi 8 (♂) → 8 × 8 = <strong>64</strong> génotypes de zygotes différents. La formule est 2ⁿ × 2ⁿ = 2²ⁿ. Pour l\'Homme : 2²³ × 2²³ = 2⁴⁶ ≈ 7×10¹³ zygotes différents possibles !')">Vérifier</button>
+    <div class="qcm-fb" id="fb-capes12"></div>
+  </div>
+
+  <button class="btn-verify" style="font-size:14px;padding:12px 32px;margin-top:8px;display:block" onclick="showScore()">📊 Voir mon score global</button>
+  <div class="score-wrap" id="score-global">
+    <div>Votre score :</div>
+    <div class="score-num" id="score-num">—</div>
+    <div id="score-msg"></div>
+  </div>
+
+</div><!-- fin tab-eval -->
+
+<footer>
+  <strong>INGÉNIEUR Mohamed CHAGRAOUI</strong><br>
+  Enseignant SVT · Candidat CAPES SVT 2026 · Tunisie<br>
+  Thème 2 — Partie II : Ch.3 Génie Génétique · Ch.4 Origine Diversité · Ch.5 Transmission
+</footer>
+
+<!--
+══════════════════════════════════════════════
+LISTE DES IMAGES — placer dans dossier images/
+══════════════════════════════════════════════
+Mise en contexte :
+  ch3_insuline_ogm.png           → Doc.6 p.192 : cristaux insuline par génie génétique
+  ch4_famille_tunisienne.png     → Doc.1 p.206 : famille tunisienne (diversité individuelle)
+  ch5_blé_hybride.png            → Doc.5 p.235 : variété blé hybride entre deux variétés pures
+
+Ch.3 Génie Génétique :
+  ch3_souris_transgénique.png    → Doc.C/D p.189 : souris géante transgénique vs normale
+  ch3_tabac_transgénique.png     → Doc.4 p.190 : tabac naturel (4a) vs transgénique (4b)
+  ch3_enzyme_restriction.png     → Doc.11 p.197 : action enzyme de restriction
+  ch3_plasmide_recombiné.png     → Doc.13 p.198 : construction plasmide recombiné
+  ch3_étapes_globales.png        → Doc.20 p.202 : étapes synthèse protéine par génie génétique
+
+Ch.4 Origine Diversité :
+  ch4_oeil_bar.png               → Doc.11 p.210 : mutation œil Bar drosophile (duplication 16A)
+  ch4_cri_du_chat.png            → Doc.12 p.210 : chromosomes 5 cri du chat (délétion)
+  ch4_crossing_over.png          → Doc.38 p.224 : mécanisme crossing-over (brassage intra)
+  ch4_ségrégation_chromosomes.png→ Doc.37 p.224 : brassage interchromosomique (anaphase I)
+  ch4_formation_pollen.png       → Doc.30 p.221 : étapes formation grain de pollen
+  ch4_structure_ovule.png        → Doc.33 p.222 : structure sac embryonnaire
+
+Ch.5 Transmission :
+  ch5_plumages_volailles.png     → Doc.13 p.240 : trois phénotypes de plumage (N, T, B)
+  ch5_résultats_croisements.png  → Doc.14 p.240 : résultats 4ème croisement volailles
+  ch5_croisements_blé.png        → Doc.16 p.248 : interprétation chromosomique blé
+  ch5_caryotype_drosophile.png   → Doc.18 p.250 : caryotypes ♂(XY) et ♀(XX) drosophile
+  ch5_chromosomes_XY.png         → Doc. p.251 : structure chromosomes X et Y
+══════════════════════════════════════════════
+-->
+
+<script>
+/* ── TABS ── */
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  updateProgress();
+  if(id==='synthese')setTimeout(drawMindMap,120);
+}
+function toggleActivity(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+function updateProgress(){
+  const tabs=document.querySelectorAll('.tab-btn');
+  const idx=Array.from(tabs).indexOf(document.querySelector('.tab-btn.active'));
+  document.getElementById('progress-bar').style.width=((idx+1)/tabs.length*100)+'%';
+}
+updateProgress();
+
+/* ── PREREQ ── */
+const prereqData=[
+  {q:"Le génie génétique utilise des enzymes bactériennes pour couper l'ADN à des séquences spécifiques. Ces enzymes sont :",opts:["Les ligases","Les enzymes de restriction ✓","Les ARN polymérases"],ans:1},
+  {q:"Les mutations géniques sont :",opts:["Toujours létales pour l'individu porteur","Des modifications de la séquence des bases dans un gène ✓","Uniquement causées par des rayons X"],ans:1},
+  {q:"La 1ère loi de Mendel stipule que :",opts:["La F2 est uniforme","La F1 issue du croisement de deux lignées pures est uniforme ✓","Les gamètes contiennent toujours deux allèles"],ans:1},
+  {q:"Dans l'hérédité liée au sexe (gène sur partie spécifique du X), un indice diagnostic est :",opts:["La F1 est toujours uniforme quel que soit le sens du croisement","Le résultat du croisement change quand on inverse les sexes des parents ✓","Seuls les mâles peuvent être malades"],ans:1},
+];
+const pc=document.getElementById('prereq-container');
+prereqData.forEach((d,i)=>{
+  const div=document.createElement('div');div.className='prereq-q';
+  div.innerHTML=`<div class="qlbl">Préacquis ${i+1}</div><div class="qtxt">${d.q}</div>`
+    +d.opts.map((o,j)=>`<button class="prereq-opt" onclick="answerPrereq(this,${j===d.ans})">${o.replace(' ✓','')}</button>`).join('');
+  pc.appendChild(div);
+});
+function answerPrereq(btn,correct){
+  if(btn.parentElement.querySelector('.correct-ans,.wrong-ans'))return;
+  btn.classList.add(correct?'correct-ans':'wrong-ans');
+  if(!correct){
+    const items=document.querySelectorAll('.prereq-q');
+    const qIdx=Array.from(items).indexOf(btn.parentElement);
+    btn.parentElement.querySelectorAll('.prereq-opt')[prereqData[qIdx].ans].classList.add('correct-ans');
+  }
+}
+
+/* ── QCM avec feedback explicatif ── */
+function selectOpt(opt,group){
+  const parent=opt.closest('.qcm-item');
+  if(parent.querySelector('.correct,.wrong,.missed'))return;
+  const inp=opt.querySelector('input');
+  if(inp&&inp.type==='radio'){parent.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);inp.checked=true;}
+}
+function verifyQCM(group,correctIdx,msgOk,msgKo){
+  const btn=document.querySelector(`.btn-verify[onclick*="'${group}'"]`);
+  const parent=btn.closest('.qcm-item');
+  const opts=parent.querySelectorAll('.qcm-opt');
+  let chosen=-1;
+  opts.forEach((o,i)=>{if(o.querySelector('input')&&o.querySelector('input').checked)chosen=i;});
+  if(chosen===-1)return;
+  opts.forEach((o,i)=>{
+    if(i===correctIdx)o.classList.add('correct');
+    else if(i===chosen)o.classList.add('wrong');
+    o.style.pointerEvents='none';
+  });
+  btn.disabled=true;btn.style.opacity='.5';
+  const fb=document.getElementById('fb-'+group);
+  const isOk=chosen===correctIdx;
+  fb.classList.add('show',isOk?'ok':'ko');
+  fb.innerHTML=isOk?(msgOk||'✅ Correct !'):(msgKo||'❌ Incorrect. La bonne réponse est surlignée en vert.');
+  // track score
+  if(!window._scores)window._scores={};
+  if(window._scores[group]===undefined){window._scores[group]=isOk?1:0;}
+}
+
+/* ── GAP FILL ── */
+function checkGap(cid,sid){
+  const c=document.getElementById(cid);
+  const sels=c.querySelectorAll('.gap-select');
+  let correct=0;
+  sels.forEach(s=>{
+    s.classList.remove('correct','wrong');
+    if(s.value==='')return;
+    if(s.value===s.dataset.answer){s.classList.add('correct');correct++;}
+    else s.classList.add('wrong');
+  });
+  const sc=document.getElementById(sid);
+  sc.classList.add('show');
+  sc.style.color=correct===sels.length?'var(--em)':'var(--red)';
+  sc.textContent=`Score : ${correct} / ${sels.length} ${correct===sels.length?'🎉 Parfait !':'— Corrections en rouge.'}`;
+}
+
+/* ── SCORE GLOBAL ── */
+function showScore(){
+  if(!window._scores)window._scores={};
+  const entries=Object.values(window._scores);
+  const total=entries.length,ok=entries.reduce((a,b)=>a+b,0);
+  const pct=total?Math.round(ok/total*100):0;
+  document.getElementById('score-num').textContent=`${ok} / ${total}  (${pct}%)`;
+  const msgs=['📚 À réviser — Reprends les activités','👍 Passable — Quelques points à revoir','✅ Bien — Continue !','🎉 Excellent ! Niveau CAPES atteint'];
+  document.getElementById('score-msg').textContent=msgs[pct<40?0:pct<60?1:pct<80?2:3];
+  document.getElementById('score-global').classList.add('show');
+  document.getElementById('score-global').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── FLASHCARDS ── */
+const fcData=[
+  {q:"Définir : génie génétique, OGM, transgénique.",a:"Génie génétique : ensemble de techniques de manipulation et transfert de gènes. OGM (Organisme Génétiquement Modifié) = organisme transgénique ayant reçu un gène étranger."},
+  {q:"Quels sont les 5 outils du génie génétique et leur rôle ?",a:"1. Enzyme de restriction (ciseaux) : coupe ADN à séquences spécifiques. 2. Ligase (colle) : relie fragments d'ADN. 3. Transcriptase reverse : ARNm→ADNc. 4. Plasmide (vecteur/camion) : transporte le gène. 5. Sonde radioactive (hameçon) : localise le gène cible."},
+  {q:"Pourquoi préfère-t-on passer par l'ARNm pour cloner un gène eucaryote dans E. coli ?",a:"L'ARNm est déjà épissé → sans introns. L'ADNc obtenu par transcriptase reverse ne contient que les exons. E. coli (procaryote) n'a pas le mécanisme d'épissage → ne peut pas utiliser un gène avec introns."},
+  {q:"Quel est le signe caractéristique de la codominance en F2 ?",a:"Trois phénotypes avec le ratio 1/4 : 1/2 : 1/4. Ex: 25% Noir + 50% Tacheté + 25% Blanc chez les volailles. En codominance, les 2 allèles s'expriment simultanément dans l'hétérozygote."},
+  {q:"Quelle est la différence entre brassage intra et interchromosomique ?",a:"Intrachromosomique (prophase I) : crossing-over = échange de chromatides non-sœurs → nouvelles combinaisons d'allèles sur un même chromosome. Interchromosomique (anaphase I) : séparation aléatoire des homologues → 2ⁿ gamètes différents."},
+  {q:"Qu'est-ce que le test-cross et à quoi sert-il ?",a:"Croisement d'un individu à phénotype dominant (génotype inconnu) avec un individu de phénotype récessif (aa). Si 100% dominant → individu pur (AA). Si 50% dominant + 50% récessif → individu hybride (Aa)."},
+  {q:"Comment reconnaître l'hérédité liée au sexe (gène sur X spécifique) ?",a:"Le résultat du croisement change quand on inverse les sexes des parents (croisement réciproque ≠ direct). Les mâles (hémizygotes XY) expriment toujours leur allèle X unique, même s'il est récessif."},
+  {q:"Quelles sont les 2 lois de Mendel ?",a:"1ère : Uniformité de la F1 — le croisement de deux lignées pures différant par un caractère donne 100% d'hybrides de même génotype et phénotype. 2ème : Pureté des gamètes — un hybride (A//a) donne des gamètes A ou a, un allèle par gamète."},
+  {q:"Quelles sont les propriétés des mutations ?",a:"Rares (10⁻⁶ à 10⁻⁷ / génération), Réversibles, Héréditaires (si cellules germinales), Spontanées dans la nature. Peuvent être létales, morbides, neutres ou avantageuses selon le milieu (ex: Phalène du bouleau)."},
+  {q:"Qu'est-ce que l'ADNc et comment diffère-t-il de l'ADN chromosomique ?",a:"ADNc (ADN complémentaire) = copie d'un ARNm par transcriptase reverse. Contient UNIQUEMENT les exons (séquences codantes) — sans introns. L'ADN chromosomique eucaryote contient exons ET introns."},
+  {q:"Pourquoi utilise-t-on E. coli comme cellule hôte en génie génétique ?",a:"E. coli : facile à cultiver, non pathogène, bipartition toutes les 20 min (millions de copies en 24h), possède des ribosomes pour exprimer le gène greffé. 4000 gènes propres. Economique et sûr."},
+  {q:"Double fécondation des angiospermes : mécanisme et produits.",a:"2 anthérozoïdes (n) issus du grain de pollen. Ant.1 + oosphère (n) → œuf principal (2n) → embryon. Ant.2 + cellule centrale (2 noyaux : n+n) → œuf accessoire (3n) → albumen (réserves nutritives)."},
+];
+const fcGrid=document.getElementById('fc-grid');
+if(fcGrid)fcData.forEach((d,i)=>{
+  fcGrid.innerHTML+=`<div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front"><div class="qlbl">Question</div><div class="qtxt">${d.q}</div><div class="qhint">Cliquer pour la réponse</div></div>
+      <div class="fc-back"><div class="albl">Réponse</div><div class="atxt">${d.a}</div><div class="cnt">${i+1}/${fcData.length}</div></div>
+    </div></div>`;
+});
+
+/* ── MIND MAP ── */
+function drawMindMap(){
+  const canvas=document.getElementById('mindmap-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||1000;
+  canvas.width=W;canvas.height=500;
+  ctx.clearRect(0,0,W,500);
+  const cx=W/2;
+
+  const nodes=[
+    {id:'root',x:cx,y:250,text:'THÈME 2\nPartie II',color:'#047857',tc:'#fff',w:130,h:50,bold:true},
+    // CH3
+    {id:'ch3',x:cx-270,y:130,text:'Ch.3\nGénie Génétique',color:'#065f46',tc:'#fff',w:150,h:46},
+    {id:'gg1',x:cx-430,y:70,text:'5 étapes (OIRCE)',color:'#6ee7b7',tc:'#064e3b',w:145,h:28},
+    {id:'gg2',x:cx-430,y:110,text:'ADNc (sans introns)',color:'#6ee7b7',tc:'#064e3b',w:155,h:28},
+    {id:'gg3',x:cx-430,y:150,text:'Outils : ligase, RE',color:'#6ee7b7',tc:'#064e3b',w:145,h:28},
+    {id:'gg4',x:cx-430,y:190,text:'OGM & risques',color:'#b91c1c',tc:'#fff',w:120,h:28},
+    // CH4
+    {id:'ch4',x:cx+270,y:130,text:'Ch.4\nOrigine Diversité',color:'#0f766e',tc:'#fff',w:150,h:46},
+    {id:'mut1',x:cx+430,y:70,text:'Mutations géniques',color:'#99f6e4',tc:'#134e4a',w:150,h:28},
+    {id:'mut2',x:cx+430,y:110,text:'Mutations chr.',color:'#99f6e4',tc:'#134e4a',w:140,h:28},
+    {id:'bras1',x:cx+430,y:150,text:'Crossing-over (intra)',color:'#99f6e4',tc:'#134e4a',w:155,h:28},
+    {id:'bras2',x:cx+430,y:190,text:'Ségrégation (inter)',color:'#99f6e4',tc:'#134e4a',w:155,h:28},
+    // CH5
+    {id:'ch5',x:cx,y:420,text:'Ch.5\nTransmission',color:'#1e5fa3',tc:'#fff',w:140,h:46},
+    {id:'men1',x:cx-160,y:470,text:'Lois de Mendel',color:'#bfdbfe',tc:'#1e3a5f',w:130,h:28},
+    {id:'men2',x:cx+30,y:470,text:'Dominance/Codominance',color:'#bfdbfe',tc:'#1e3a5f',w:175,h:28},
+    {id:'men3',x:cx+220,y:470,text:'Hérédité liée au sexe',color:'#7c3aed',tc:'#fff',w:160,h:28},
+  ];
+
+  const links=[
+    ['root','ch3'],['root','ch4'],['root','ch5'],
+    ['ch3','gg1'],['ch3','gg2'],['ch3','gg3'],['ch3','gg4'],
+    ['ch4','mut1'],['ch4','mut2'],['ch4','bras1'],['ch4','bras2'],
+    ['ch5','men1'],['ch5','men2'],['ch5','men3'],
+  ];
+
+  ctx.lineWidth=1.5;
+  links.forEach(([a,b])=>{
+    const nA=nodes.find(n=>n.id===a),nB=nodes.find(n=>n.id===b);
+    ctx.beginPath();ctx.strokeStyle='#d1fae5';
+    ctx.moveTo(nA.x,nA.y);
+    ctx.bezierCurveTo((nA.x+nB.x)/2,nA.y,(nA.x+nB.x)/2,nB.y,nB.x,nB.y);
+    ctx.stroke();
+  });
+
+  nodes.forEach(n=>{
+    ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(n.x-n.w/2,n.y-n.h/2,n.w,n.h,8);
+    else ctx.rect(n.x-n.w/2,n.y-n.h/2,n.w,n.h);
+    ctx.fillStyle=n.color;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=n.tc;
+    const lines=n.text.split('\n');
+    lines.forEach((line,li)=>{
+      ctx.font=`${n.bold?'bold ':''}12px 'Source Sans 3',sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(line,n.x,n.y+(li-(lines.length-1)/2)*14);
+    });
+  });
+}
+</script>
+
+<!-- Flashcards container -->
+<div style="display:none"><div id="fc-grid" class="fc-grid"></div></div>
+<!-- Note: fc-grid is inside synthèse tab in a real build; here JS populates it dynamically when tab is shown -->
+<script>
+// Move fc-grid into synthèse tab after page load
+document.addEventListener('DOMContentLoaded',function(){
+  const synthTab=document.getElementById('tab-synthese');
+  if(synthTab){
+    const h=document.createElement('h2');
+    h.className='section-title';h.innerHTML='🃏 Flashcards — Cliquer pour retourner';
+    synthTab.appendChild(h);
+    const grid=document.getElementById('fc-grid');
+    grid.style.display='grid';
+    synthTab.appendChild(grid);
+    // Now populate flashcards
+    fcData.forEach((d,i)=>{
+      grid.innerHTML+=`<div class="fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="qlbl">Question</div><div class="qtxt">${d.q}</div><div class="qhint">Cliquer pour la réponse</div></div>
+          <div class="fc-back"><div class="albl">Réponse</div><div class="atxt">${d.a}</div><div class="cnt">${i+1}/${fcData.length}</div></div>
+        </div></div>`;
+    });
+  }
+});
+</script>
+</body>
+</html>
