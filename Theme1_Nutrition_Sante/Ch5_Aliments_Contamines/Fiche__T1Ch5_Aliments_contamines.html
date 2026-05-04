@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch5 — Risques liés aux Aliments Contaminés</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#2E7D32;--cl:#388E3C;--cbg:#f1f8e9;--cs:#e8f5e9;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#f1f8e9;--tx:#1a1a1a;--mu:#777;
+  --brd:#c8e6c9;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:18px;line-height:1.7;}
+header{background:linear-gradient(135deg,#0D5300,#2E7D32 50%,#388E3C);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.55rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#c8e6c9;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#c8e6c9;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 9px;font-size:.72rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:1100px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--c);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#0D5300,#2E7D32);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.tip{background:#fdf6ec;border:2px solid var(--j);border-radius:11px;margin:12px 0;overflow:hidden;}
+.tip-head{padding:10px 16px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:.9rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:13px 16px 15px;font-size:.89rem;line-height:1.8;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+.tab-scroll{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--c);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.ret{background:var(--jl);border:2px solid var(--j);border-radius:10px;padding:12px 15px;margin:12px 0;}
+.ret h4{color:var(--o);font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-50{display:block;max-width:50%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--cs);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--cs);border-radius:8px;border-left:5px solid var(--c);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:340px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#0D5300;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--c);margin-bottom:8px;display:flex;align-items:center;}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--cs);border-radius:10px;border-left:5px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+footer{background:linear-gradient(135deg,#0D5300,#2E7D32 50%,#388E3C);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#0D5300,#2E7D32 50%,#388E3C);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#c8e6c9;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:2.2rem;margin-bottom:7px;}
+.cnode .cn-title{font-size:.82rem;font-weight:700;margin-bottom:4px;}
+.cnode .cn-sub{font-size:.72rem;opacity:.88;line-height:1.4;}
+.cn-a{background:linear-gradient(135deg,#B71C1C,#C62828);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#4A148C,#6A1B9A);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#E65100,#F57F17);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid #B71C1C;}
+.cn-panel.b{border-left:6px solid #4A148C;}
+.cn-panel.c{border-left:6px solid #E65100;}
+.cn-panel.d{border-left:6px solid #0277BD;}
+.cn-panel.e{border-left:6px solid #37474F;}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 4px;font-size:.62rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 5 — Les Risques liés à la Consommation des Aliments Contaminés</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie III · Pages 93–106 · 5 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">🦠 Act.1 — Infections</button>
+  <button class="t"     onclick="showTab(3)">🪱 Act.2 — Parasitoses</button>
+  <button class="t"     onclick="showTab(4)">☣️ Act.3 — Polluants</button>
+  <button class="t"     onclick="showTab(5)">🧪 Act.4 — Pesticides</button>
+  <button class="t"     onclick="showTab(6)">💊 Act.5 — Élevage</button>
+  <button class="t"     onclick="showTab(7)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(8)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(9)">📋 Révision</button>
+  <button class="t"     onclick="showTab(10)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(11)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#0D5300,#2E7D32 50%,#388E3C);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#c8e6c9;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie III), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #c8e6c9;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#c8e6c9;color:#0D5300;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Expliquer l'origine des <strong>toxi-infections alimentaires</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #c8e6c9;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#c8e6c9;color:#0D5300;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">2</span> Expliquer le <strong>mode d'infestation</strong> par des parasites</div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #c8e6c9;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#c8e6c9;color:#0D5300;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">3</span> Faire la relation entre <strong>contamination chimique</strong> et troubles de la santé</div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #c8e6c9;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#c8e6c9;color:#0D5300;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">4</span> Établir des <strong>règles d'hygiène</strong> pour protéger les aliments</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.93-94)</h2>
+    <p class="expl-text">Les aliments que nous consommons — qu'ils soient <strong>frais, conservés ou fabriqués</strong> — peuvent être contaminés par des substances chimiques toxiques (pesticides, hormones, antibiotiques) ou par des <strong>microorganismes pathogènes</strong> (bactéries, parasites). Leur consommation peut causer des <strong>maladies graves</strong> pour la santé.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch5_Doc01_aliments_frais.PNG" alt="Aliments frais" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — 1. Aliments frais (p.93)</div>'">
+      <img src="images/T3Ch5_Doc02_aliments_conserves.PNG" alt="Aliments conservés" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — 2. Aliments conservés (p.93)</div>'">
+    </div>
+    <img src="images/T3Ch5_Doc03_aliments_fabriques.PNG" alt="Aliments fabriqués" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.3 — 3. Aliments fabriqués (p.93)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis (p.95)</h2>
+    <p class="expl-text">L'organisme est protégé contre les maladies infectieuses grâce à deux types d'immunité : <strong>naturelle</strong> (barrières physiques, réaction inflammatoire) et <strong>acquise</strong> (spécifique, avec mémoire). Certaines maladies sont d'origine bactérienne (tétanos), virale (poliomyélite, rougeole, SIDA) ou parasitaire (amibiase). Tous les microorganismes ne sont pas pathogènes — certains sont même <strong>utiles</strong> (levure de bière, lactobacilles).</p>
+    <img src="images/T3Ch5_Doc06_reseau_alimentaire.PNG" alt="Réseau alimentaire" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.6 — 6. Réseau alimentaire (schéma montrant l&apos;accumulation des pesticides le long des chaînes alimentaires) (p.95)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Préacquis</div><div id="mq0-q">
+      <p>1. L'immunité acquise se caractérise par sa <select class="bl" data-rep="spécificité et sa mémoire"><option value="">—</option><option>rapidité immédiate</option><option>spécificité et sa mémoire</option></select>.</p>
+      <p>2. Les pesticides s'accumulent le long des chaînes alimentaires : leurs concentrations <select class="bl" data-rep="augmentent (bioamplification)"><option value="">—</option><option>diminuent</option><option>augmentent (bioamplification)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq0')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq0')">↺</button><div class="mq-fb" id="mq0-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La contamination des aliments peut être <strong>biologique</strong> (bactéries, virus, parasites) ou <strong>chimique</strong> (pesticides, métaux lourds, hormones, antibiotiques). La <strong>bioamplification</strong> est le phénomène par lequel les polluants se concentrent de plus en plus le long des chaînes alimentaires, atteignant des doses toxiques chez les prédateurs terminaux, dont l'Homme.</div></div>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 4 Questions directrices (p.94)</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Quelles sont les différentes <strong>sources de contamination</strong> des aliments ?</li>
+      <li>Quelles sont les <strong>conséquences</strong> de la consommation d'aliments contaminés sur la santé ?</li>
+      <li>Quels sont les <strong>modes d'infestation</strong> par les parasites ?</li>
+      <li>Quelles sont les <strong>mesures d'hygiène</strong> requises pour protéger notre santé ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>Les aliments peuvent être contaminés par des <strong>agents biologiques</strong> (bactéries responsables de toxi-infections : salmonellose, botulisme, listériose ; parasites : amibes, oxyures, ténia) ou par des <strong>agents chimiques</strong> (pesticides, métaux lourds, dioxines, nitrates, hormones, antibiotiques). La contamination peut survenir à toutes les étapes : production (pesticides, élevage aux antibiotiques), conservation (conserves, réfrigération) ou préparation (manque d'hygiène). La prévention repose sur des <strong>règles d'hygiène strictes</strong> et une <strong>réglementation</strong> des produits utilisés en agriculture et en élevage.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🦠</div><div class="cn-title">Toxi-infections</div><div class="cn-sub">Salmonellose · Botulisme · Listériose</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🪱</div><div class="cn-title">Parasitoses</div><div class="cn-sub">Amibiase · Oxyurose · Échinococcose</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">☣️</div><div class="cn-title">Polluants chimiques</div><div class="cn-sub">Métaux · Dioxines · Nitrates</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">🧪</div><div class="cn-title">Pesticides</div><div class="cn-sub">Insecticides · Herbicides · Fongicides</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">💊</div><div class="cn-title">Élevage</div><div class="cn-sub">Antibiotiques · Hormones</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:#B71C1C">🦠 Toxi-infections alimentaires</h3><p class="expl-text">Maladies causées par l'ingestion d'aliments contaminés par des <strong>bactéries pathogènes</strong> ou leurs toxines. Les plus fréquentes : <strong>salmonellose</strong> (œufs, volailles), <strong>botulisme</strong> (conserves), <strong>listériose</strong> (lait, fromage). Symptômes : diarrhées, vomissements, fièvre, troubles nerveux.</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:#4A148C">🪱 Parasitoses</h3><p class="expl-text">Infections causées par des <strong>parasites</strong> (protozoaires ou vers) présents dans les aliments contaminés. <strong>Amibiase</strong> (eau souillée, kystes), <strong>oxyurose</strong> (mains sales, légumes), <strong>échinococcose</strong> (viande contaminée par larves de ténia). Les parasites ont des cycles de développement complexes avec des hôtes intermédiaires.</p></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:#E65100">☣️ Polluants chimiques</h3><p class="expl-text"><strong>Mercure</strong> (maladie de Minamata — atteintes neurologiques), <strong>dioxines/furanes</strong> (cancers, malformations congénitales), <strong>nitrates</strong> (transformation en nitrites cancérigènes). Ces polluants s'accumulent dans les tissus vivants et se concentrent le long des chaînes alimentaires.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:#0277BD">🧪 Pesticides</h3><p class="expl-text">Substances chimiques utilisées en agriculture : <strong>insecticides</strong> (insectes), <strong>fongicides</strong> (champignons), <strong>herbicides</strong> (mauvaises herbes), <strong>rodenticides</strong> (rongeurs). Les organochlorés (DDT) sont interdits car persistants. Les organophosphorés sont plus dégradables mais restent toxiques.</p></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:#37474F">💊 Élevage industriel</h3><p class="expl-text"><strong>Antibiotiques</strong> : utilisés pour prévenir les maladies et accélérer la croissance. Risque = sélection de <strong>bactéries résistantes</strong> transmissibles à l'Homme. <strong>Hormones</strong> : utilisées pour accélérer la croissance du bétail. Risques = perturbations endocriniennes, cancers. Interdites dans l'UE, autorisées aux USA.</p></div>
+
+  <h3 style="margin-top:18px;">⚠️ 3 Pièges du CAPES</h3>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Ne pas confondre toxi-infection et parasitose <span style="margin-left:auto">▼</span></div><div class="piege-body">Les <strong>toxi-infections</strong> sont causées par des <strong>bactéries</strong> ou leurs toxines (salmonellose, botulisme). Les <strong>parasitoses</strong> sont causées par des <strong>protozoaires</strong> (amibes) ou des <strong>vers</strong> (oxyures, ténia). Les symptômes, les traitements et les modes de prévention diffèrent considérablement.</div></div>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Distinguer contamination chimique et contamination biologique <span style="margin-left:auto">▼</span></div><div class="piege-body">La contamination <strong>chimique</strong> (pesticides, hormones, métaux lourds) laisse des <strong>résidus toxiques</strong> non vivants. La contamination <strong>biologique</strong> implique des <strong>agents infectieux vivants</strong> (bactéries, parasites) capables de se multiplier dans l'organisme. Les stratégies de prévention sont différentes : lavage/cuisson pour le biologique, réglementation des doses pour le chimique.</div></div>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Antibiotiques en élevage : le danger n'est pas la toxicité directe <span style="margin-left:auto">▼</span></div><div class="piege-body">Le risque principal des antibiotiques en élevage n'est PAS la toxicité des résidus dans la viande, mais la <strong>sélection de bactéries résistantes</strong>. Ces bactéries résistantes peuvent être transmises à l'Homme par l'alimentation et rendre les traitements antibiotiques humains <strong>inefficaces</strong>. C'est un problème majeur de santé publique mondiale.</div></div>
+
+  <h3 style="margin-top:18px;">🔗 Connexions</h3>
+  <div class="connexion-grid">
+    <div class="conn-item" style="border-color:var(--c);background:var(--cs)"><div class="conn-ch" style="color:var(--c)">← Ch.2 — Besoins nutritionnels</div><p style="font-size:.86rem">Le choix des aliments (Ch.2) doit intégrer les risques de contamination étudiés ici.</p></div>
+    <div class="conn-item" style="border-color:#0277BD;background:#e1f5fe"><div class="conn-ch" style="color:#0277BD">→ Ch.6 — Microorganismes utiles</div><p style="font-size:.86rem">Tous les microbes ne sont pas pathogènes — le Ch.6 montrera leur utilisation dans l'industrie alimentaire.</p></div>
+  </div>
+
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi les prédateurs situés au sommet des chaînes alimentaires (comme l'Homme) sont-ils les plus exposés aux polluants comme le mercure ou les pesticides ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">C'est le phénomène de <strong>bioamplification</strong> (ou bioaccumulation) : les polluants non dégradables s'accumulent dans les tissus des organismes. À chaque niveau trophique, la concentration augmente car le prédateur consomme plusieurs proies contaminées. L'Homme, au sommet des chaînes alimentaires, concentre ainsi dans son organisme les polluants présents chez tous les organismes qu'il consomme (poissons, viande, légumes).</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — TOXI-INFECTIONS ══ -->
+<div class="pan" id="p2">
+  <div class="sech">🦠 Activité 1 — Les toxi-infections alimentaires (p.96)</div>
+  <div class="card"><h3 style="color:var(--c);">Salmonellose, Botulisme, Listériose</h3>
+    <p class="expl-text">Les <strong>toxi-infections alimentaires</strong> sont des maladies causées par l'ingestion d'aliments contaminés par des <strong>bactéries pathogènes</strong> ou par leurs <strong>toxines</strong>. Les trois plus fréquentes sont la salmonellose, le botulisme et la listériose. Elles représentent un problème majeur de santé publique, aussi bien dans les pays développés que dans les pays en développement.</p>
+    <img src="images/T3Ch5_Doc07_bacterie_salmonella.PNG" alt="Bactérie Salmonella" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — 7. Bactérie Salmonella — agent de la salmonellose (p.96)</div>'">
+    <div class="tab-scroll"><table><tr><th>Maladie</th><th>Agent infectieux</th><th>Aliments contaminés</th><th>Symptômes</th><th>Particularité</th></tr>
+      <tr class="hl"><td><strong>Salmonellose</strong></td><td>Salmonella (bactérie)</td><td>Œufs, volailles, lait, viandes</td><td>Diarrhées, crampes, fièvre 40°C, vomissements (48h après)</td><td>Très contagieuse — résiste aux cuissons modérées</td></tr>
+      <tr><td><strong>Botulisme</strong></td><td>Clostridium botulinum (bactérie anaérobie)</td><td>Conserves mal stérilisées, viandes, poissons</td><td>Nausées, troubles nerveux, paralysie respiratoire → mort</td><td><strong>Toxine sécrétée</strong> dans l'aliment — très grave, parfois mortel</td></tr>
+      <tr class="hl"><td><strong>Listériose</strong></td><td>Listeria monocytogenes (bactérie)</td><td>Lait cru, fromages, viande hachée, poisson fumé</td><td>Fièvre, douleurs musculaires. Risque : avortement, méningite</td><td>Grave chez femmes enceintes, personnes âgées, immunodéprimés</td></tr>
+    </table></div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. La salmonellose est causée par une <select class="bl" data-rep="bactérie (Salmonella)"><option value="">—</option><option>bactérie (Salmonella)</option><option>toxine uniquement</option></select>.</p>
+      <p>2. Le botulisme est particulièrement dangereux car <select class="bl" data-rep="la bactérie sécrète une toxine paralysante dans l'aliment"><option value="">—</option><option>il est bénin</option><option>la bactérie sécrète une toxine paralysante dans l'aliment</option></select>.</p>
+      <p>3. La listériose est grave chez <select class="bl" data-rep="les femmes enceintes et les personnes immunodéprimées"><option value="">—</option><option>les sportifs</option><option>les femmes enceintes et les personnes immunodéprimées</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les toxi-infections alimentaires partagent des caractéristiques communes : contamination par ingestion, symptômes digestifs et généraux, et prévention par des <strong>règles d'hygiène strictes</strong> (lavage des mains, cuisson suffisante, respect de la chaîne du froid, contrôle des conserves). La distinction entre infection (bactérie vivante) et intoxication (toxine préformée) est fondamentale pour le traitement.</div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — PARASITOSES ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🪱 Activité 2 — Les parasitoses alimentaires (p.97-98)</div>
+  <div class="card"><h3 style="color:var(--c);">Amibiase, Oxyurose, Échinococcose alvéolaire</h3>
+    <p class="expl-text">Les <strong>parasitoses</strong> sont des maladies causées par des <strong>parasites</strong> (organismes qui vivent aux dépens d'un hôte). Certains parasites sont transmis par l'alimentation : protozoaires (amibes) ou vers (oxyures, ténia échinocoque). Leur cycle de développement est souvent complexe, impliquant un ou plusieurs hôtes.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch5_Doc08_amibe.PNG" alt="Amibe" onerror="this.outerHTML='<div class=img-fb>📷 Doc.8 — 8. Amibe dysentérique (Entamoeba histolytica) (p.97)</div>'">
+      <img src="images/T3Ch5_Doc09_cycle_amibe.PNG" alt="Cycle de l'amibe" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — 9. Schéma montrant le cycle de l&apos;amibe et le mode d&apos;infestation de l&apos;homme (p.97)</div>'">
+    </div>
+    <p class="expl-text"><strong>L'amibiase :</strong> L'amibe (Entamoeba histolytica) se trouve sous forme libre ou <strong>enkystée</strong> (forme de résistance). Les kystes sont ingérés avec de l'eau ou des aliments souillés. Dans l'intestin, ils libèrent des amibes actives qui se multiplient et provoquent des diarrhées sanglantes (dysenterie amibienne).</p>
+    <div class="img-grid">
+      <img src="images/T3Ch5_Doc10_oxyure.PNG" alt="Oxyure" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10 — 10. Oxyure (Enterobius vermicularis) — ver nématode parasite de l&apos;intestin (p.97)</div>'">
+      <img src="images/T3Ch5_Doc11_cycle_oxyure.PNG" alt="Cycle de l'oxyure" onerror="this.outerHTML='<div class=img-fb>📷 Doc.11 — 11. Schéma du cycle biologique de l&apos;oxyure et le mode d&apos;infestation de l&apos;homme (p.97)</div>'">
+    </div>
+    <p class="expl-text"><strong>L'oxyurose :</strong> L'oxyure (Enterobius vermicularis) est un petit ver blanc (femelle ≈ 10 mm). Les œufs sont ingérés par des aliments souillés ou par les mains sales. Les femelles pondent dans la région anale, causant des <strong>démangeaisons</strong> caractéristiques, surtout la nuit.</p>
+    <img src="images/T3Ch5_Doc12_lesions_foie.PNG" alt="Lésions du foie" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.12 — 12. Les lésions du foie donnent un aspect alvéolaire, d&apos;où le nom de la maladie (p.98)</div>'">
+    <img src="images/T3Ch5_Doc13_cycle_tenia.PNG" alt="Cycle du ténia" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — 13. Cycle de développement du ténia échinocoque (Echinococcus multilocularis) (p.98)</div>'">
+    <p class="expl-text"><strong>L'échinococcose alvéolaire :</strong> C'est une parasitose <strong>mortelle</strong> causée par la larve d'un petit ténia (Echinococcus multilocularis). L'Homme s'infeste en ingérant des aliments souillés par les œufs du parasite (provenant des excréments de chiens ou de renards infectés). La larve se développe lentement dans le foie (parfois poumons, cerveau) en formant des lésions alvéolaires destructrices. Maladie silencieuse pendant 10 ans en moyenne.</p>
+    <div class="focus-box"><strong>🔍 Cycle de l'échinocoque :</strong> Hôte définitif = chien/renard (adulte dans l'intestin). Hôte intermédiaire = rongeur (larve dans le foie). L'Homme est un hôte <strong>accidentel</strong> (impasse parasitaire). Contamination humaine = ingestion d'œufs via aliments souillés par excréments canins.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 2</div><div id="mq2-q">
+      <p>1. L'amibiase se transmet par <select class="bl" data-rep="l'eau ou les aliments souillés par des kystes"><option value="">—</option><option>les piqûres d'insectes</option><option>l'eau ou les aliments souillés par des kystes</option></select>.</p>
+      <p>2. L'oxyurose se caractérise par <select class="bl" data-rep="des démangeaisons anales"><option value="">—</option><option>des maux de tête</option><option>des démangeaisons anales</option></select>.</p>
+      <p>3. L'échinococcose alvéolaire est une parasitose <select class="bl" data-rep="mortelle qui touche principalement le foie"><option value="">—</option><option>bénigne qui guérit spontanément</option><option>mortelle qui touche principalement le foie</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2')">↺</button><div class="mq-fb" id="mq2-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les parasitoses alimentaires partagent des modes de contamination communs : ingestion d'aliments ou d'eau souillés par des formes de résistance (kystes, œufs). Leur prévention repose sur : lavage soigneux des fruits et légumes, cuisson suffisante des viandes, hygiène des mains, traitement de l'eau de boisson, vermifugation des animaux domestiques. Le cycle parasitaire complexe explique la difficulté d'éradication de ces maladies.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — POLLUANTS CHIMIQUES ══ -->
+<div class="pan" id="p4">
+  <div class="sech">☣️ Activité 3 — La pollution contamine nos aliments (p.99)</div>
+  <div class="card"><h3 style="color:var(--c);">Métaux lourds, Dioxines, Nitrates</h3>
+    <p class="expl-text">Les <strong>polluants industriels</strong> rejetés dans l'environnement (air, eau, sol) peuvent contaminer les aliments que nous consommons. Certains sont particulièrement dangereux car ils s'<strong>accumulent</strong> dans les tissus vivants et ne sont pas dégradés par l'organisme. Ils se concentrent le long des chaînes alimentaires (bioamplification).</p>
+    <div class="tab-scroll"><table><tr><th>Polluant</th><th>Source</th><th>Effets sur la santé</th><th>Exemple</th></tr>
+      <tr class="hl"><td><strong>Mercure (Hg)</strong></td><td>Rejets industriels (usines chimiques)</td><td>Troubles neurologiques : picotements, faiblesse musculaire, troubles de la vision, de l'audition, comportements anormaux</td><td><strong>Maladie de Minamata</strong> (Japon, 1960) : intoxication au méthylmercure via consommation de poissons contaminés</td></tr>
+      <tr><td><strong>Dioxines et Furanes</strong></td><td>Incinération des ordures, industries chimiques</td><td>Cancers, malformations congénitales, perturbation du système immunitaire</td><td>Trouvés dans le lait maternel, les viandes, les produits laitiers</td></tr>
+      <tr class="hl"><td><strong>Nitrates (NO₃⁻)</strong></td><td>Engrais agricoles, élevages intensifs</td><td>Transformation en <strong>nitrites</strong> (NO₂⁻) cancérigènes. Méthémoglobinémie (bloque le transport d'O₂ par l'hémoglobine)</td><td>Contamination des eaux souterraines et de surface ; aliments (légumes, eau de boisson)</td></tr>
+    </table></div>
+    <div class="focus-box"><strong>🔍 La bioamplification :</strong> Dans la baie de Minamata, les poissons avaient accumulé le mercure sans en mourir. Mais les humains qui les consommaient régulièrement ont développé des troubles neurologiques graves car le mercure se concentrait à chaque niveau de la chaîne alimentaire : eau → plancton → petits poissons → gros poissons → <strong>Homme</strong> (concentration maximale).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 3</div><div id="mq3-q">
+      <p>1. La maladie de Minamata est due à l'intoxication par <select class="bl" data-rep="le mercure (méthylmercure)"><option value="">—</option><option>les nitrates</option><option>le mercure (méthylmercure)</option></select>.</p>
+      <p>2. Les nitrates sont dangereux car ils se transforment en <select class="bl" data-rep="nitrites cancérigènes"><option value="">—</option><option>ammoniac inoffensif</option><option>nitrites cancérigènes</option></select>.</p>
+      <p>3. La bioamplification signifie que les polluants <select class="bl" data-rep="se concentrent de plus en plus le long des chaînes alimentaires"><option value="">—</option><option>se diluent progressivement</option><option>se concentrent de plus en plus le long des chaînes alimentaires</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les polluants chimiques industriels représentent une menace invisible mais persistante pour la santé. Contrairement aux toxi-infections qui agissent rapidement, leur toxicité est souvent <strong>chronique</strong> (effets à long terme : cancers, troubles neurologiques). La prévention passe par le <strong>contrôle des rejets industriels</strong>, le traitement des eaux usées, et la surveillance des teneurs en polluants dans les aliments commercialisés.</div></div>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — PESTICIDES ══ -->
+<div class="pan" id="p5">
+  <div class="sech">🧪 Activité 4 — Alerte contre les pesticides (p.100)</div>
+  <div class="card"><h3 style="color:var(--c);">Diversité, Évolution et Risques des pesticides</h3>
+    <p class="expl-text">Les <strong>pesticides</strong> sont des substances chimiques toxiques fabriquées industriellement et utilisées en agriculture pour éliminer les organismes nuisibles aux cultures. Le terme « pesticide » regroupe une grande diversité de produits classés selon leur cible : <strong>insecticides</strong> (insectes), <strong>fongicides</strong> (champignons), <strong>herbicides</strong> (plantes adventices) et <strong>rodenticides</strong> (rongeurs).</p>
+    <img src="images/T3Ch5_Doc14_traitement_pesticides.PNG" alt="Traitement aux pesticides" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.14 — 14. Traitement aux pesticides d&apos;une culture (p.100)</div>'">
+    <p class="expl-text">Les premiers pesticides développés étaient les <strong>organochlorés</strong> (comme le DDT), des molécules très stables — qualifiées de <strong>Polluants Organiques Persistants (POPS)</strong>. Leur persistance dans l'environnement et leur toxicité ont conduit à leur <strong>interdiction en 1972</strong>. Ils ont été remplacés par les <strong>organophosphorés</strong>, plus efficaces et plus rapidement dégradables, mais qui restent toxiques pour l'Homme.</p>
+    <div class="focus-box"><strong>🔍 Répartition ubiquitaire :</strong> Les pesticides sont présents <strong>partout</strong> : dans le sol, l'eau, l'air, les aliments (végétaux et animaux) et dans l'organisme humain (cerveau, sang, lait maternel, foie, sperme, placenta, fœtus). L'OMS estime à <strong>1 million</strong> le nombre d'empoisonnements graves par an, avec <strong>220 000 décès</strong>. Les effets touchent la peau, les muqueuses, l'appareil digestif, respiratoire, nerveux, reproducteur et immunitaire.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 4</div><div id="mq4-q">
+      <p>1. Les pesticides organochlorés (DDT) ont été interdits car ils sont <select class="bl" data-rep="très persistants dans l'environnement (POPS)"><option value="">—</option><option>inefficaces</option><option>très persistants dans l'environnement (POPS)</option></select>.</p>
+      <p>2. Un herbicide est un pesticide qui cible <select class="bl" data-rep="les plantes adventices (mauvaises herbes)"><option value="">—</option><option>les insectes</option><option>les plantes adventices (mauvaises herbes)</option></select>.</p>
+      <p>3. Les concentrations de pesticides chez l'Homme sont <select class="bl" data-rep="supérieures à celles des aliments (bioamplification)"><option value="">—</option><option>inférieures à celles des aliments</option><option>supérieures à celles des aliments (bioamplification)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4')">↺</button><div class="mq-fb" id="mq4-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les pesticides illustrent le <strong>paradoxe</strong> entre bénéfices agricoles (protection des récoltes, augmentation des rendements) et risques sanitaires (toxicité aiguë et chronique). La solution réside dans : l'<strong>information</strong> des agriculteurs, le <strong>respect des doses</strong> prescrites, le <strong>délai avant récolte</strong>, le <strong>lavage</strong> des fruits et légumes, et le développement de la <strong>lutte biologique</strong> (utilisation de prédateurs naturels) comme alternative aux pesticides chimiques.</div></div>
+  </div>
+</div>
+
+<!-- ══ 6 ACT.5 — ÉLEVAGE (Antibiotiques + Hormones) ══ -->
+<div class="pan" id="p6">
+  <div class="sech">💊 Activité 5 — Antibiotiques et Hormones en élevage (p.101-102)</div>
+
+  <div class="card"><h3 style="color:var(--c);">A — Les antibiotiques en élevage (p.101)</h3>
+    <p class="expl-text">Les <strong>antibiotiques</strong> sont utilisés dans les élevages intensifs pour deux raisons : <strong>prévenir/traiter</strong> les maladies infectieuses favorisées par la promiscuité des animaux, et <strong>accélérer la croissance</strong> des animaux traités (effet promoteur de croissance). Or ces antibiotiques sont souvent les <strong>mêmes</strong> que ceux utilisés en médecine humaine.</p>
+    <div class="focus-box"><strong>🔍 Le vrai danger : la résistance bactérienne.</strong> L'utilisation répétée d'antibiotiques en élevage ne laisse pas que des résidus dans la viande — elle <strong>sélectionne des bactéries résistantes</strong> à ces antibiotiques. Ces bactéries résistantes peuvent être transmises à l'Homme par la consommation de viande insuffisamment cuite. Résultat : des infections humaines (ex : salmonellose) deviennent <strong>impossibles à traiter</strong> avec les antibiotiques habituels. Aux USA, on a recensé 2000 cas de salmonellose en une année, dont 312 causés par des souches résistantes, avec une <strong>mortalité 20 fois supérieure</strong>.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 5A</div><div id="mq5a-q">
+      <p>1. Le principal danger des antibiotiques en élevage est <select class="bl" data-rep="la sélection de bactéries résistantes transmissibles à l'Homme"><option value="">—</option><option>la toxicité directe des résidus</option><option>la sélection de bactéries résistantes transmissibles à l'Homme</option></select>.</p>
+      <p>2. Les souches bactériennes résistantes entraînent une mortalité <select class="bl" data-rep="plus élevée car les antibiotiques habituels sont inefficaces"><option value="">—</option><option>identique aux souches normales</option><option>plus élevée car les antibiotiques habituels sont inefficaces</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5a')">↺</button><div class="mq-fb" id="mq5a-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le risque des antibiotiques en élevage n'est pas toxicologique mais <strong>écologique et évolutif</strong> : il s'agit d'une <strong>pression de sélection</strong> qui favorise l'émergence de bactéries résistantes. Ce phénomène est aggravé par le fait que les gènes de résistance peuvent être transférés entre différentes espèces bactériennes. La solution préconisée est l'<strong>interdiction des antibiotiques comme promoteurs de croissance</strong> (déjà appliquée dans l'Union Européenne depuis 2006).</div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">B — Les hormones en élevage (p.102)</h3>
+    <p class="expl-text">Cinq <strong>hormones de croissance</strong> (3 naturelles + 2 de synthèse) sont utilisées dans certains pays (USA, Canada) pour accélérer la production de viande et de lait chez les bovins et les volailles. Cette pratique est <strong>interdite</strong> dans l'Union Européenne (dont la Tunisie suit les recommandations) en vertu du <strong>principe de précaution</strong>.</p>
+    <img src="images/T3Ch5_Doc05_elevage_bovins_hormones.PNG" alt="Élevage bovins aux hormones" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — 5. Élevage de bovins aux hormones (p.94)</div>'">
+    <div class="tab-scroll"><table><tr><th>Arguments POUR</th><th>Arguments CONTRE</th></tr>
+      <tr class="hl"><td>Améliore la production de viande et de lait</td><td>Résidus hormonaux dans la viande et le lait</td></tr>
+      <tr><td>Réduit les dépenses d'alimentation des éleveurs</td><td>Risques de <strong>troubles neurologiques</strong> et de <strong>cancers</strong></td></tr>
+      <tr class="hl"><td>Rend ces aliments accessibles aux couches modestes</td><td>Troubles de la croissance chez les <strong>enfants pré-pubères</strong></td></tr>
+      <tr><td>Ce sont des hormones naturelles rapidement dégradées</td><td>Absence de contrôle dans les pays où c'est autorisé</td></tr>
+      <tr class="hl"><td>Les décès liés aux aliments sont très rares</td><td><strong>Principe de précaution</strong> : dans le doute, protéger la santé publique</td></tr>
+    </table></div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 5B</div><div id="mq5b-q">
+      <p>1. L'utilisation des hormones en élevage est <select class="bl" data-rep="interdite dans l'UE (et en Tunisie) par principe de précaution"><option value="">—</option><option>autorisée partout dans le monde</option><option>interdite dans l'UE (et en Tunisie) par principe de précaution</option></select>.</p>
+      <p>2. Le principal risque des hormones pour la santé est <select class="bl" data-rep="l'apparition de cancers et de troubles de la croissance"><option value="">—</option><option>la résistance bactérienne</option><option>l'apparition de cancers et de troubles de la croissance</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5b')">↺</button><div class="mq-fb" id="mq5b-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le débat sur les hormones en élevage illustre la tension entre <strong>intérêts économiques</strong> (production accrue, prix bas) et <strong>protection de la santé publique</strong>. Le <strong>principe de précaution</strong>, adopté par l'UE, stipule que l'absence de preuve scientifique absolue de danger ne doit pas retarder les mesures de protection. La Tunisie, alignée sur les normes européennes, interdit l'importation de viandes aux hormones.</div></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 BILAN — Pages 103-105 (5 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> Contamination biologique (p.103)</h3><p style="font-size:.92rem">Les <strong>toxi-infections</strong> sont causées par des <select class="bl" data-rep="bactéries pathogènes ou leurs toxines"><option value="">—</option><option>virus uniquement</option><option>bactéries pathogènes ou leurs toxines</option></select>. Les principales : <select class="bl" data-rep="salmonellose, botulisme, listériose"><option value="">—</option><option>grippe, rhume, SIDA</option><option>salmonellose, botulisme, listériose</option></select>. Les aliments les plus contaminés : <select class="bl" data-rep="viandes, volailles, œufs, lait, conserves"><option value="">—</option><option>fruits secs uniquement</option><option>viandes, volailles, œufs, lait, conserves</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Parasitoses (p.103)</h3><p style="font-size:.92rem">Les parasitoses sont causées par <select class="bl" data-rep="des protozoaires (amibes) ou des vers (oxyures, ténia)"><option value="">—</option><option>des bactéries</option><option>des protozoaires (amibes) ou des vers (oxyures, ténia)</option></select>. L'infestation se fait par <select class="bl" data-rep="ingestion d'aliments ou d'eau souillés par des formes de résistance"><option value="">—</option><option>voie aérienne</option><option>ingestion d'aliments ou d'eau souillés par des formes de résistance</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Contamination chimique (p.103-104)</h3><p style="font-size:.92rem">Les polluants chimiques incluent les <select class="bl" data-rep="métaux lourds (mercure, plomb), pesticides, dioxines, nitrates"><option value="">—</option><option>vitamines et minéraux</option><option>métaux lourds (mercure, plomb), pesticides, dioxines, nitrates</option></select>. Ils s'accumulent par <select class="bl" data-rep="bioamplification le long des chaînes alimentaires"><option value="">—</option><option>dilution</option><option>bioamplification le long des chaînes alimentaires</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Antibiotiques et hormones (p.104)</h3><p style="font-size:.92rem">Les antibiotiques en élevage favorisent <select class="bl" data-rep="la sélection de bactéries résistantes"><option value="">—</option><option>la croissance humaine</option><option>la sélection de bactéries résistantes</option></select>. Les hormones de croissance sont <select class="bl" data-rep="interdites en Europe et en Tunisie (principe de précaution)"><option value="">—</option><option>autorisées partout</option><option>interdites en Europe et en Tunisie (principe de précaution)</option></select>. Leurs risques : <select class="bl" data-rep="cancers, troubles de la croissance, perturbations endocriniennes"><option value="">—</option><option>simple allergie passagère</option><option>cancers, troubles de la croissance, perturbations endocriniennes</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">5</span> Prévention (p.104-105)</h3><p style="font-size:.92rem">Se protéger contre la contamination biologique : <select class="bl" data-rep="cuisson suffisante, hygiène des mains, respect de la chaîne du froid"><option value="">—</option><option>consommer plus de conserves</option><option>cuisson suffisante, hygiène des mains, respect de la chaîne du froid</option></select>. Se protéger contre la contamination chimique : <select class="bl" data-rep="réglementation des produits, contrôle des doses, lavage des fruits et légumes"><option value="">—</option><option>supprimer tous les aliments</option><option>réglementation des produits, contrôle des doses, lavage des fruits et légumes</option></select>.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 8 EXERCICES ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📝 Exercices — Manuel p.106</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.106)</h3>
+    <table>
+      <tr><td><strong>1. Les pesticides sont des molécules :</strong></td><td><select class="tcell" data-rep="b- à base de chlore, c- à base de phosphore"><option value="">—</option><option>a uniquement</option><option>b + c</option></select></td></tr>
+      <tr><td><strong>2. Salmonellose, Botulisme, Listériose :</strong></td><td><select class="tcell" data-rep="a- provoquées par des bactéries"><option value="">—</option><option>a- provoquées par des bactéries</option><option>b- par des virus</option></select></td></tr>
+      <tr><td><strong>3. Les salmonelles contaminent :</strong></td><td><select class="tcell" data-rep="a- les aliments d'origine animale"><option value="">—</option><option>a- les aliments d'origine animale</option><option>b- les aliments végétaux</option></select></td></tr>
+      <tr><td><strong>4. Antibiotiques en élevage :</strong></td><td><select class="tcell" data-rep="a- mêmes que chez l'Homme, b- favorisent bactéries résistantes"><option value="">—</option><option>a + b</option><option>c- tuent toutes les bactéries</option></select></td></tr>
+      <tr><td><strong>5. Hormones en élevage :</strong></td><td><select class="tcell" data-rep="a- activent la croissance, c- sont nuisibles pour l'Homme"><option value="">—</option><option>a + c</option><option>b- protègent des maladies</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">🥫 Ex.2 — Conserves bombées (p.106)</h3>
+    <div class="ctx">On déconseille la consommation d'aliments dans des boîtes de conserve bombées ou des pots de yaourt gonflés, même si la date d'expiration n'est pas dépassée.</div>
+    <p style="font-size:.88rem;margin-bottom:7px">Le gonflement indique une production de gaz par <select class="bl" data-rep="des bactéries anaérobies (ex : Clostridium botulinum)"><option value="">—</option><option>une réaction chimique inoffensive</option><option>des bactéries anaérobies (ex : Clostridium botulinum)</option></select>. La toxi-infection suspectée est le <select class="bl" data-rep="botulisme"><option value="">—</option><option>botulisme</option><option>rhume</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">🏥 Ex.3 — Salmonellose en maternité (p.106)</h3>
+    <div class="ctx">Une femme enceinte atteinte de salmonellose après avoir mangé de la viande de bœuf saignante met au monde un nouveau-né également atteint. La plupart des nouveau-nés de la maternité ont ensuite été infectés.</div>
+    <p style="font-size:.88rem;margin-bottom:7px">L'infection s'est propagée aux autres nouveau-nés par <select class="bl" data-rep="transmission manuportée (mains du personnel soignant)"><option value="">—</option><option>voie aérienne</option><option>transmission manuportée (mains du personnel soignant)</option></select>. La salmonellose est une <select class="bl" data-rep="toxi-infection alimentaire très contagieuse"><option value="">—</option><option>parasitose</option><option>toxi-infection alimentaire très contagieuse</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex3')">↺</button><div class="mq-fb" id="ex3-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 9 BILAN RÉVISION ══ -->
+<div class="pan" id="p9">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.88rem;color:var(--mu);margin-bottom:14px">Exercice principal + bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Expliquer l'origine des toxi-infections alimentaires</div><p style="font-size:.88rem;margin-bottom:7px">Salmonellose = <select class="bl" data-rep="bactérie Salmonella (œufs, volailles)"><option value="">—</option><option>virus</option><option>bactérie Salmonella (œufs, volailles)</option></select>. Botulisme = <select class="bl" data-rep="toxine de Clostridium botulinum (conserves)"><option value="">—</option><option>toxine de Clostridium botulinum (conserves)</option><option>parasite intestinal</option></select>. Listériose = <select class="bl" data-rep="bactérie Listeria (lait, fromage)"><option value="">—</option><option>bactérie Listeria (lait, fromage)</option><option>champignon microscopique</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Expliquer le mode d'infestation par les parasites</div><p style="font-size:.88rem;margin-bottom:7px">Amibiase → <select class="bl" data-rep="kystes dans l'eau souillée"><option value="">—</option><option>kystes dans l'eau souillée</option><option>piqûre d'insecte</option></select>. Oxyurose → <select class="bl" data-rep="œufs sur aliments souillés ou mains sales"><option value="">—</option><option>œufs sur aliments souillés ou mains sales</option><option>voie sanguine</option></select>. Échinococcose → <select class="bl" data-rep="œufs de ténia via aliments souillés par excréments canins"><option value="">—</option><option>œufs de ténia via aliments souillés par excréments canins</option><option>contact cutané</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Relation contamination chimique et santé</div><p style="font-size:.88rem;margin-bottom:7px">Mercure → <select class="bl" data-rep="maladie de Minamata (troubles neurologiques)"><option value="">—</option><option>maladie de Minamata (troubles neurologiques)</option><option>simple allergie</option></select>. Pesticides organochlorés → <select class="bl" data-rep="interdits car persistants (POPS)"><option value="">—</option><option>interdits car persistants (POPS)</option><option>encore autorisés</option></select>. Nitrates → <select class="bl" data-rep="transformés en nitrites cancérigènes"><option value="">—</option><option>transformés en nitrites cancérigènes</option><option>vitamines essentielles</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">4</span> Règles d'hygiène pour protéger les aliments</div><p style="font-size:.88rem;margin-bottom:7px">Contamination biologique → <select class="bl" data-rep="cuisson suffisante, hygiène, chaîne du froid"><option value="">—</option><option>cuisson suffisante, hygiène, chaîne du froid</option><option>ajouter plus de conservateurs</option></select>. Contamination chimique → <select class="bl" data-rep="réglementation, contrôle, lavage, lutte biologique"><option value="">—</option><option>réglementation, contrôle, lavage, lutte biologique</option><option>supprimer tous les fruits et légumes</option></select>. Hormones en élevage → <select class="bl" data-rep="interdites (principe de précaution)"><option value="">—</option><option>interdites (principe de précaution)</option><option>recommandées pour tous</option></select>.</p><button class="bck" onclick="ckMQ('rev4')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev4-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 10 FLASHCARDS ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:14px">🃏 Flashcards — 8 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 11 QCM ══ -->
+<div class="pan" id="p11"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 5 — Risques liés aux Aliments Contaminés · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch5tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch5tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p7 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p7 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"La <select class='fs' data-ans='salmonellose'>—|salmonellose|botulisme|listériose|amibiase</select> est une toxi-infection due à <select class='fs' data-ans='Salmonella (bactérie)'>—|Salmonella (bactérie)|un virus|un parasite|un champignon</select>. Elle contamine surtout <select class='fs' data-ans='les œufs et les volailles'>—|les fruits|les œufs et les volailles|l&apos;eau du robinet</select>."},{p:"Le <select class='fs' data-ans='botulisme'>—|botulisme|paludisme|tétanos|scorbut</select> est dû à <select class='fs' data-ans='Clostridium botulinum'>—|Clostridium botulinum|Listeria|Salmonella</select>. Il est lié aux <select class='fs' data-ans='conserves mal stérilisées'>—|conserves mal stérilisées|fruits frais|eaux minérales</select>."},{p:"L'<select class='fs' data-ans='amibiase'>—|amibiase|salmonellose|listériose|grippe</select> est une parasitose causée par <select class='fs' data-ans='Entamoeba histolytica (amibe)'>—|Entamoeba histolytica (amibe)|un ver|une bactérie|un virus</select>. Les formes de résistance sont les <select class='fs' data-ans='kystes'>—|spores|kystes|œufs|larves</select>."},{p:"L'<select class='fs' data-ans='échinococcose alvéolaire'>—|échinococcose alvéolaire|oxyurose|amibiase|salmonellose</select> est une parasitose <select class='fs' data-ans='mortelle'>—|bénigne|mortelle|guérissable spontanément</select> due à la larve d&apos;un <select class='fs' data-ans='ténia (Echinococcus)'>—|ténia (Echinococcus)|oxyure|amibe|virus</select>."},{p:"Les <select class='fs' data-ans='pesticides organochlorés'>—|pesticides organochlorés|vitamines|antibiotiques</select> comme le DDT sont interdits car ce sont des <select class='fs' data-ans='POPS (Polluants Organiques Persistants)'>—|POPS (Polluants Organiques Persistants)|nutriments|médicaments</select>."},{p:"La <select class='fs' data-ans='bioamplification'>—|bioamplification|biodégradation|biodiversité</select> est le phénomène par lequel les polluants <select class='fs' data-ans='se concentrent le long des chaînes alimentaires'>—|se diluent|se concentrent le long des chaînes alimentaires|disparaissent</select>."},{p:"Les <select class='fs' data-ans='antibiotiques'>—|antibiotiques|hormones|pesticides|vitamines</select> en élevage favorisent la <select class='fs' data-ans='sélection de bactéries résistantes'>—|croissance humaine|sélection de bactéries résistantes|photosynthèse</select>."},{p:"Les <select class='fs' data-ans='hormones de croissance'>—|hormones de croissance|antibiotiques|enzymes|vitamines</select> en élevage sont <select class='fs' data-ans='interdites en Tunisie et en Europe'>—|autorisées partout|interdites en Tunisie et en Europe|obligatoires</select> par principe de précaution."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. Les pesticides sont des molécules :',o:['Minérales','À base de chlore (organochlorés)','À base de phosphore (organophosphorés)','Toujours inoffensives pour l\'Homme'],c:[1,2],fb:'Pesticides = organochlorés (b) et organophosphorés (c).'},{q:'Q2. Salmonellose, Botulisme et Listériose sont causées par :',o:['Des bactéries','Des virus','Des champignons','Des parasites'],c:[0],fb:'Ce sont des toxi-infections bactériennes (a).'},{q:'Q3. Les salmonelles contaminent essentiellement :',o:['Les aliments d\'origine animale (œufs, volailles, lait)','Les aliments d\'origine végétale','L\'eau stagnante uniquement','Les fruits secs'],c:[0],fb:'Salmonelles = aliments d\'origine animale (a).'},{q:'Q4. Les antibiotiques en élevage :',o:['Sont les mêmes que ceux utilisés chez l\'Homme','Favorisent le développement de bactéries résistantes','Tuent tous les types de bactéries sans exception','Sont sans aucun danger'],c:[0,1],fb:'Mêmes molécules (a) → sélection de résistances (b).'},{q:'Q5. Les hormones utilisées en élevage :',o:['Activent la croissance des animaux','Protègent les animaux des maladies','Sont potentiellement nuisibles pour l\'Homme (cancers, troubles de croissance)','Sont autorisées dans tous les pays'],c:[0,2],fb:'Hormones = croissance (a), risques cancers (c). Interdites dans l\'UE et en Tunisie.'},{q:'Q6. Le botulisme est particulièrement dangereux car :',o:['Il est toujours bénin','La bactérie sécrète une toxine paralysante dans l\'aliment','Il est lié aux conserves mal stérilisées','Il se transmet par voie aérienne'],c:[1,2],fb:'Botulisme = toxine paralysante (b), conserves (c).'},{q:'Q7. La bioamplification des polluants signifie :',o:['Les polluants se diluent dans l\'environnement','Les polluants se concentrent de plus en plus le long des chaînes alimentaires','L\'Homme est le moins exposé','Les concentrations sont maximales chez les prédateurs terminaux'],c:[1,3],fb:'Bioamplification = concentration croissante (b), maximale chez prédateurs finaux (d).'},{q:'Q8. L\'échinococcose alvéolaire :',o:['Est une parasitose bénigne','Est causée par la larve d\'un ténia (Echinococcus)','Peut être mortelle (lésions du foie)','Se transmet par les piqûres de moustiques'],c:[1,2],fb:'Échinococcose = ténia (b), mortelle (c). Hôte définitif = chien/renard.'},{q:'Q9. Pour se protéger des toxi-infections alimentaires, il faut :',o:['Cuire suffisamment les aliments','Respecter la chaîne du froid','Se laver les mains avant de cuisiner','Consommer les aliments crus'],c:[0,1,2],fb:'Prévention = cuisson (a) + froid (b) + hygiène mains (c).'},{q:'Q10. La maladie de Minamata est due à :',o:['L\'intoxication au mercure via la consommation de poissons contaminés','Une infection bactérienne','Une carence vitaminique','L\'accumulation du mercure dans le tissu nerveux'],c:[0,3],fb:'Minamata = mercure (a), accumulation dans tissu nerveux (d).'},{q:'Q11. Les nitrates sont dangereux car :',o:['Ils se transforment en nitrites cancérigènes','Ils provoquent la méthémoglobinémie (blocage O₂)','Ils proviennent des engrais et élevages intensifs','Ils sont des vitamines essentielles'],c:[0,1,2],fb:'Nitrates → nitrites cancérigènes (a), méthémoglobinémie (b), engrais (c).'},{q:'Q12. Concernant les hormones en élevage, l\'UE et la Tunisie :',o:['Les interdisent par principe de précaution','Les autorisent sans restriction','Interdisent l\'importation de viandes aux hormones','Considèrent qu\'elles sont sans danger prouvé'],c:[0,2],fb:'UE/Tunisie = interdiction (a), refus importation (c). Principe de précaution.'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
