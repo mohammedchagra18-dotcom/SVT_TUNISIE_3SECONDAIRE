@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch7 — Le Milieu Intérieur et ses Caractéristiques</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#1565C0;--cl:#1976D2;--cbg:#f5f8fc;--cs:#e3f2fd;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#f5f8fc;--tx:#1a1a1a;--mu:#777;
+  --brd:#bbdefb;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:18px;line-height:1.7;}
+header{background:linear-gradient(135deg,#0D47A1,#1565C0 50%,#1976D2);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.45rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#bbdefb;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#bbdefb;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 10px;font-size:.72rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:1100px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--c);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.tip{background:#fdf6ec;border:2px solid var(--j);border-radius:11px;margin:12px 0;overflow:hidden;}
+.tip-head{padding:10px 16px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:.9rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:13px 16px 15px;font-size:.89rem;line-height:1.8;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+.table-scroll{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--c);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.ret{background:var(--jl);border:2px solid var(--j);border-radius:10px;padding:12px 15px;margin:12px 0;}
+.ret h4{color:var(--o);font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-50{display:block;max-width:50%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--cs);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--cs);border-radius:8px;border-left:5px solid var(--c);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:420px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#0D47A1;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--c);margin-bottom:8px;display:flex;align-items:center;}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--cs);border-radius:10px;border-left:5px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+footer{background:linear-gradient(135deg,#0D47A1,#1565C0 50%,#1976D2);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#0D47A1,#1565C0 50%,#1976D2);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#bbdefb;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:2.2rem;margin-bottom:7px;}
+.cnode .cn-title{font-size:.82rem;font-weight:700;margin-bottom:4px;}
+.cnode .cn-sub{font-size:.7rem;opacity:.88;line-height:1.4;}
+.cn-a{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#E65100,#F57F17);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#B71C1C,#C62828);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid #0277BD;}
+.cn-panel.b{border-left:6px solid #1B5E20;}
+.cn-panel.c{border-left:6px solid #E65100;}
+.cn-panel.d{border-left:6px solid #B71C1C;}
+.cn-panel.e{border-left:6px solid #37474F;}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 4px;font-size:.62rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 7 — Le Milieu Intérieur et ses Caractéristiques</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie IV · Pages 117–126 · 3 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">💧 Act.1 — Compartiments</button>
+  <button class="t"     onclick="showTab(3)">🧪 Act.2 — Composition</button>
+  <button class="t"     onclick="showTab(4)">📊 Act.3 — Constantes</button>
+  <button class="t"     onclick="showTab(5)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(6)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(7)">📋 Révision</button>
+  <button class="t"     onclick="showTab(8)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(9)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#0D47A1,#1565C0 50%,#1976D2);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#bbdefb;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie IV), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #bbdefb;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bbdefb;color:#0D47A1;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Distinguer les <strong>compartiments liquidiens</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #bbdefb;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bbdefb;color:#0D47A1;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">2</span> Reconnaître la <strong>composition du milieu intérieur</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #bbdefb;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bbdefb;color:#0D47A1;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">3</span> Saisir la signification de <strong>« constance du milieu intérieur »</strong></div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #bbdefb;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#bbdefb;color:#0D47A1;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">4</span> Argumenter la <strong>nécessité de cette constance</strong></div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.117)</h2>
+    <p class="expl-text">La notion de <strong>milieu intérieur</strong> a été introduite en 1859 par le physiologiste français <strong>Claude Bernard</strong> (1813-1878). Les cellules du sang baignent dans le <strong>plasma</strong>. Toutes les autres cellules de l'organisme baignent dans le <strong>liquide interstitiel</strong> (ou lymphe interstitielle), qui provient du plasma. L'ensemble de ces compartiments liquidiens constitue le <strong>milieu intérieur</strong>. Les cellules y puisent O₂ et nutriments, et y rejettent CO₂ et déchets. Sa caractéristique fondamentale est sa <strong>constance</strong> (ou <strong>homéostasie</strong>) — volume, température, pression, pH, composition chimique. Des variations anormales provoquent des troubles et des maladies pouvant être mortelles.</p>
+    <img src="images/T3Ch7_Doc01_constituants_sang.PNG" alt="Constituants du sang" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — 1. Constituants du sang : hématies, leucocytes, thrombocytes, plasma (p.117)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis (p.119)</h2>
+    <p class="expl-text">Le <strong>plasma</strong> est la fraction liquide du sang obtenue par centrifugation avec anticoagulant. Le <strong>sérum</strong> est le liquide obtenu après coagulation (plasma SANS fibrinogène). L'<strong>absorption intestinale</strong> (Ch.3) fait passer les nutriments dans le sang et la lymphe au niveau des villosités intestinales. Le <strong>sang artériel</strong> (riche en O₂) provient du cœur et va vers les organes ; le <strong>sang veineux</strong> (riche en CO₂) revient des organes vers le cœur.</p>
+    <img src="images/T3Ch7_Doc02_separation_sang.PNG" alt="Séparation constituants sang" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — 3. Séparation de quelques constituants du sang : sérum, caillot, plasma, globules (p.119)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Préacquis</div><div id="mq0-q">
+      <p>1. Le plasma s'obtient par centrifugation avec <select class="bl" data-rep="anticoagulant"><option value="">—</option><option>anticoagulant</option><option>chauffage</option></select>.</p>
+      <p>2. Le sérum = plasma privé de <select class="bl" data-rep="fibrinogène (après coagulation)"><option value="">—</option><option>fibrinogène (après coagulation)</option><option>globules rouges</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq0')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq0')">↺</button><div class="mq-fb" id="mq0-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Claude Bernard disait : « La fixité du milieu intérieur est la condition de la vie libre. » Contrairement aux animaux à sang froid (température variable selon le milieu), les mammifères et les oiseaux maintiennent leur milieu intérieur constant, ce qui leur permet une activité indépendante des conditions extérieures. Cette <strong>homéostasie</strong> est une conquête évolutive majeure.</div></div>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 2 Questions directrices (p.118)</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Quelles sont les <strong>constantes biologiques</strong> du milieu intérieur ?</li>
+      <li>Quelles <strong>relations</strong> y a-t-il entre ces constantes et la <strong>santé</strong> de l'organisme ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>Le <strong>milieu intérieur</strong> est constitué des liquides extracellulaires : <strong>plasma</strong> (sang), <strong>lymphe</strong> (canalisée) et <strong>liquide interstitiel</strong> (entre les cellules). Ces compartiments communiquent entre eux et assurent les échanges avec les cellules. Le milieu intérieur se caractérise par la <strong>constance</strong> (homéostasie) de ses paramètres physico-chimiques : <strong>glycémie</strong> (0,7-1,1 g/l), <strong>calcémie</strong> (0,10 g/l), <strong>pH</strong> (7,35-7,45), <strong>température</strong> (37°C), <strong>pression artérielle</strong> (12,5/8), <strong>volémie</strong> (≈70 ml/kg). Toute variation anormale de ces constantes est à l'origine de pathologies parfois mortelles.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">💧</div><div class="cn-title">Compartiments</div><div class="cn-sub">Plasma · Lymphe · Interstitiel</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🧪</div><div class="cn-title">Composition</div><div class="cn-sub">Eau · Sels · Protéines · Glucose</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">📊</div><div class="cn-title">Constantes</div><div class="cn-sub">Glycémie · pH · T° · Pression</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges</div><div class="cn-sub">Erreurs fréquentes</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">🔗</div><div class="cn-title">Connexions</div><div class="cn-sub">Ch.3 · Ch.4 · Ch.8</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:#0277BD">💧 Les compartiments du milieu intérieur</h3><p class="expl-text">Le milieu intérieur = <strong>liquides extracellulaires</strong> : Plasma (sang) → Lymphe canalisée → Liquide interstitiel (entre les cellules). Le milieu <strong>intracellulaire</strong> (cytosol) n'en fait PAS partie. Échanges : Plasma ↔ Lymphe interstitielle ↔ Cellules.</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:#1B5E20">🧪 Composition du plasma</h3><table><tr><th style="background:#1B5E20">Constituant</th><th style="background:#1B5E20">Pourcentage</th></tr><tr class="hl"><td>Eau</td><td>≈ 90%</td></tr><tr><td>Sels minéraux (Na⁺, K⁺, Ca²⁺, Cl⁻...)</td><td>≈ 0,9%</td></tr><tr class="hl"><td>Protéines (albumine, globulines, fibrinogène)</td><td>65-75 g/l</td></tr><tr><td>Glucose</td><td>0,8-1,1 g/l</td></tr></table></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:#E65100">📊 Les principales constantes biologiques</h3><table><tr><th style="background:#E65100">Constante</th><th style="background:#E65100">Valeur normale</th><th style="background:#E65100">Pathologies</th></tr><tr class="hl"><td>Glycémie</td><td>0,7-1,1 g/l</td><td>Hyperglycémie (diabète) / Hypoglycémie (coma)</td></tr><tr><td>Calcémie</td><td>0,10 g/l</td><td>Hypercalcémie (dépôts) / Hypocalcémie (tétanie)</td></tr><tr class="hl"><td>pH sanguin</td><td>7,35-7,45</td><td>Acidose / Alcalose</td></tr><tr><td>Température</td><td>37°C (36,4-37,2)</td><td>Hyperthermie (fièvre) / Hypothermie</td></tr><tr class="hl"><td>Pression artérielle</td><td>12,5/8</td><td>Hypertension (AVC) / Hypotension (syncope)</td></tr><tr><td>Volémie</td><td>≈ 70 ml/kg</td><td>Hémorragie → chute pression</td></tr></table></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:#B71C1C">⚠️ 3 Pièges du CAPES</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Ne pas confondre plasma et sérum <span style="margin-left:auto">▼</span></div><div class="piege-body">Le <strong>plasma</strong> = liquide sanguin AVEC fibrinogène (obtenu par centrifugation avec anticoagulant). Le <strong>sérum</strong> = plasma SANS fibrinogène (obtenu après coagulation). Le sérum ne coagule plus ; le plasma, si.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Milieu intérieur ≠ Milieu intracellulaire <span style="margin-left:auto">▼</span></div><div class="piege-body">Le <strong>milieu intérieur</strong> = liquides <strong>extracellulaires</strong> uniquement (plasma + lymphe + liquide interstitiel). Le <strong>milieu intracellulaire</strong> (cytosol) n'en fait PAS partie. C'est une distinction fondamentale posée par Claude Bernard.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Constance ≠ fixité absolue <span style="margin-left:auto">▼</span></div><div class="piege-body">Les constantes fluctuent dans une <strong>fourchette de valeurs normales</strong>. La glycémie varie après un repas sans être pathologique. C'est le <strong>dépassement durable</strong> des bornes (ex : glycémie > 1,26 g/l à jeun) qui signe la pathologie. L'homéostasie = stabilité dynamique, pas fixité.</div></div></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:#37474F">🔗 Connexions</h3><div class="connexion-grid"><div class="conn-item" style="border-color:#1565C0;background:#e3f2fd"><div class="conn-ch" style="color:#1565C0">← Ch.3 — Absorption</div><p style="font-size:.86rem">Les nutriments absorbés (Ch.3) passent dans le sang et la lymphe → milieu intérieur.</p></div><div class="conn-item" style="border-color:#1B5E20;background:#e8f5e9"><div class="conn-ch" style="color:#1B5E20">→ Ch.8 — Excrétion urinaire</div><p style="font-size:.86rem">Le rein (Ch.8) régule la composition du milieu intérieur en éliminant les déchets.</p></div></div></div>
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi une hémorragie grave peut-elle entraîner un arrêt cardiaque ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">L'hémorragie diminue la <strong>volémie</strong> (volume sanguin). La baisse de volémie entraîne une <strong>chute de la pression artérielle</strong> (hypotension). Le cœur et le cerveau sont alors moins irrigués → moins d'O₂ et de glucose → le cœur peut s'arrêter (syncope cardiaque). C'est une illustration dramatique de la nécessité de maintenir constant le volume du milieu intérieur.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — COMPARTIMENTS ══ -->
+<div class="pan" id="p2">
+  <div class="sech">💧 Activité 1 — Les différents compartiments liquidiens (p.120)</div>
+  <div class="card"><h3 style="color:var(--c);">Plasma, Lymphe, Liquide interstitiel</h3>
+    <p class="expl-text">L'organisme contient trois compartiments liquidiens extracellulaires en perpétuelle communication : le <strong>plasma</strong> (sang), la <strong>lymphe</strong> (circule dans les vaisseaux lymphatiques) et le <strong>liquide interstitiel</strong> (ou lymphe interstitielle, entre les cellules). Ces liquides constituent ensemble le <strong>milieu intérieur</strong>.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch7_Doc05_systeme_circulatoire.PNG" alt="Système circulatoire" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — 6. Système circulatoire — sang (coloration rouge et bleue) (p.120)</div>'">
+      <img src="images/T3Ch7_Doc06_circulation_lymphatique.PNG" alt="Circulation lymphatique" onerror="this.outerHTML='<div class=img-fb>📷 Doc.6 — 7. La circulation lymphatique (coloration violette) (p.120)</div>'">
+    </div>
+    <img src="images/T3Ch7_Doc07_liquides_extracellulaires.PNG" alt="Liquides extracellulaires" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — 8. Les liquides extra-cellulaires : schéma des compartiments (p.120)</div>'">
+    <img src="images/T3Ch7_Doc08_composition_lymphe_sang.PNG" alt="Composition lymphe et sang" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.8 — 9. Composition comparée : Lymphe et plasma sanguin (p.120)</div>'">
+    <p class="expl-text"><strong>Comparaison plasma/lymphe :</strong> La lymphe a une composition très proche du plasma, MAIS elle est <strong>dépourvue de protéines</strong> (0 g/l contre 70 g/l dans le plasma). Les concentrations en ions (Na⁺, K⁺, Ca²⁺, Cl⁻) et en glucose sont quasiment identiques. Cette différence en protéines s'explique par la filtration : les grosses molécules protéiques ne traversent pas la paroi des capillaires sanguins.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. Le milieu intérieur comprend <select class="bl" data-rep="le plasma, la lymphe et le liquide interstitiel"><option value="">—</option><option>le plasma, la lymphe et le liquide interstitiel</option><option>le sang, les cellules et la lymphe</option></select>.</p>
+      <p>2. La lymphe diffère du plasma par l'absence de <select class="bl" data-rep="protéines"><option value="">—</option><option>protéines</option><option>sels minéraux</option></select>.</p>
+      <p>3. Le liquide interstitiel se situe <select class="bl" data-rep="entre les cellules (il les baigne)"><option value="">—</option><option>entre les cellules (il les baigne)</option><option>dans les vaisseaux sanguins</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La <strong>circulation</strong> (sanguine et lymphatique) assure le renouvellement permanent du milieu intérieur. Le plasma filtré à travers les capillaires donne le liquide interstitiel, qui est drainé par les vaisseaux lymphatiques pour former la lymphe canalisée. Celle-ci est finalement déversée dans le sang au niveau de la veine cave supérieure. Ce <strong>cycle perpétuel</strong> maintient l'homéostasie et permet les échanges cellulaires.</div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — COMPOSITION DU PLASMA ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🧪 Activité 2 — Mise en évidence des constituants du plasma (p.121)</div>
+  <div class="card"><h3 style="color:var(--c);">Les substances minérales et organiques du plasma</h3>
+    <p class="expl-text">Le plasma est une solution aqueuse complexe contenant environ <strong>90% d'eau</strong>, des <strong>sels minéraux</strong> (chlorures, phosphates, sulfates, calcium, potassium, sodium) et des <strong>substances organiques</strong> (protéines, glucose, urée, lipides). Sa composition est remarquablement constante chez un individu sain.</p>
+    <div class="table-scroll"><table><tr><th colspan="2" style="text-align:center">Substances MINÉRALES</th></tr><tr><td><strong>Eau</strong></td><td>Mise en évidence par chauffage du plasma (dépôt sur paroi froide)</td></tr><tr><td><strong>Chlorures (Cl⁻)</strong></td><td>Ajout de HNO₃ puis AgNO₃ → précipité blanc de AgCl</td></tr><tr class="hl"><td><strong>Phosphates (PO₄³⁻)</strong></td><td>Réactif nitromolybdique + chauffage léger → précipité jaune</td></tr><tr><td><strong>Sulfates (SO₄²⁻)</strong></td><td>HCl concentré + BaCl₂ → précipité blanc de BaSO₄</td></tr><tr class="hl"><td><strong>Calcium (Ca²⁺)</strong></td><td>Solution d'oxalate d'ammonium → précipité blanc</td></tr><tr><td><strong>Potassium (K⁺)</strong></td><td>Acide picrique → précipité jaune caractéristique</td></tr></table></div>
+    <div class="table-scroll"><table><tr><th colspan="2" style="text-align:center">Substances ORGANIQUES</th></tr><tr class="hl"><td><strong>Protéines</strong></td><td>Chauffage (coagulation) · Réaction xanthoprotéique (HNO₃ → coloration jaune) · Réaction de Biuret (NaOH + CuSO₄ → bleu violacé)</td></tr><tr><td><strong>Glucose</strong></td><td>Liqueur de Fehling à chaud → précipité rouge brique (sucre réducteur)</td></tr></table></div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 2</div><div id="mq2-q">
+      <p>1. La réaction de Biuret met en évidence <select class="bl" data-rep="les protéines (liaisons peptidiques)"><option value="">—</option><option>les protéines (liaisons peptidiques)</option><option>le glucose</option></select>.</p>
+      <p>2. Le glucose est mis en évidence par <select class="bl" data-rep="la liqueur de Fehling (précipité rouge brique à chaud)"><option value="">—</option><option>la liqueur de Fehling (précipité rouge brique à chaud)</option><option>l'eau iodée</option></select>.</p>
+      <p>3. Les ions chlorures (Cl⁻) sont détectés par <select class="bl" data-rep="AgNO₃ en présence de HNO₃ (précipité blanc)"><option value="">—</option><option>AgNO₃ en présence de HNO₃ (précipité blanc)</option><option>la chaleur seule</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2')">↺</button><div class="mq-fb" id="mq2-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> L'analyse du plasma sanguin constitue un <strong>outil diagnostique</strong> fondamental en médecine. La présence anormale de certaines molécules (glucose en excès = diabète, créatinine élevée = insuffisance rénale) ou l'absence d'autres (protéines = malnutrition) oriente le diagnostic. Les <strong>tests biochimiques</strong> de mise en évidence sont les mêmes que ceux utilisés pour les aliments (Ch.2-3) — logique puisque les nutriments absorbés se retrouvent dans le plasma.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — CONSTANTES BIOLOGIQUES ══ -->
+<div class="pan" id="p4">
+  <div class="sech">📊 Activité 3 — Les constantes biologiques (p.122-124)</div>
+  <div class="card"><h3 style="color:var(--c);">Indicateurs de l'état de santé</h3>
+    <p class="expl-text">Les <strong>constantes biologiques</strong> sont des paramètres physico-chimiques du milieu intérieur qui restent remarquablement <strong>stables</strong> chez l'individu sain. Leur mesure permet d'évaluer l'état de santé : toute variation anormale signale une pathologie.</p>
+    <img src="images/T3Ch7_Doc09_examen_chimique_sang.PNG" alt="Examen chimique du sang" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — 10. Examen chimique du sang humain — Zone bleue : Valeurs moyennes normales dans le plasma (p.122)</div>'">
+
+    <div class="table-scroll"><table><tr><th>Constante</th><th>Valeur normale</th><th>Pathologie par excès</th><th>Pathologie par défaut</th></tr>
+      <tr class="hl"><td><strong>Fer sanguin</strong></td><td>—</td><td><strong>Hémochromatose</strong> : surcharge en fer, fibrose hépatique</td><td><strong>Anémie ferriprive</strong> : hématies pâles et peu nombreuses, manque d'O₂</td></tr>
+      <tr><td><strong>Pression artérielle</strong></td><td>12,5/8 (max/min)</td><td><strong>Hypertension</strong> : risque d'hémorragie cérébrale (AVC)</td><td><strong>Hypotension</strong> : syncope, arrêt cardiaque</td></tr>
+      <tr class="hl"><td><strong>Calcémie</strong></td><td>0,10 g/l</td><td><strong>Hypercalcémie</strong> : dépôts calcaires dans tissus mous, reins</td><td><strong>Hypocalcémie</strong> : hyperexcitabilité nerveuse et musculaire, tétanie</td></tr>
+      <tr><td><strong>Glycémie</strong></td><td>0,9-1,1 g/l</td><td><strong>Hyperglycémie</strong> : diabète sucré</td><td><strong>Hypoglycémie</strong> : troubles vision, évanouissement, coma, mort</td></tr>
+      <tr class="hl"><td><strong>Température</strong></td><td>37°C (36,4-37,2)</td><td><strong>Hyperthermie</strong> (fièvre) : accélération pouls et respiration, délire</td><td><strong>Hypothermie</strong> : ralentissement fonctions organes, arrêt cardiaque</td></tr>
+      <tr><td><strong>pH sanguin</strong></td><td>7,35-7,45</td><td><strong>Alcalose</strong> : troubles respiratoires, faiblesse musculaire, troubles nerveux</td><td><strong>Acidose</strong> : diminution fonction cardiaque, troubles respiratoires</td></tr>
+      <tr class="hl"><td><strong>Volémie</strong></td><td>≈ 70 ml/kg</td><td>Surcharge volémique (œdème)</td><td><strong>Hypovolémie</strong> (hémorragie) : chute pression, syncope</td></tr>
+    </table></div>
+
+    <div class="focus-box"><strong>🔍 Notion de constante biologique :</strong> Une constante biologique est une valeur physiologique de référence qui fluctue dans une <strong>fourchette étroite</strong>. Les variations physiologiques (repas pour la glycémie, exercice pour la température) sont normales. C'est le <strong>dépassement durable</strong> des valeurs limites qui définit l'état pathologique. Exemple : glycémie à jeun > 1,26 g/l = diabète.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 3</div><div id="mq3-q">
+      <p>1. La glycémie normale est de <select class="bl" data-rep="0,7 à 1,1 g/l"><option value="">—</option><option>0,7 à 1,1 g/l</option><option>0,01 g/l</option></select>.</p>
+      <p>2. Une température de 39°C correspond à une <select class="bl" data-rep="hyperthermie (fièvre)"><option value="">—</option><option>hyperthermie (fièvre)</option><option>hypothermie</option></select>.</p>
+      <p>3. Le pH sanguin normal est <select class="bl" data-rep="légèrement basique (7,35-7,45)"><option value="">—</option><option>légèrement basique (7,35-7,45)</option><option>acide (≈3)</option></select>.</p>
+      <p>4. Une carence en fer entraîne <select class="bl" data-rep="une anémie (baisse du transport d'O₂)"><option value="">—</option><option>une anémie (baisse du transport d'O₂)</option><option>une hypercalcémie</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Les constantes biologiques sont regroupées en constantes <strong>chimiques</strong> (glycémie, calcémie, pH, fer) et constantes <strong>physiques</strong> (température, pression artérielle, volémie). Leur maintien — l'<strong>homéostasie</strong> — est assuré par des mécanismes de régulation complexes (nerveux et hormonaux) qui seront étudiés dans les chapitres suivants (Ch.8 : régulation rénale, Ch.9 : régulation de la glycémie).</div></div>
+  </div>
+</div>
+
+<!-- ══ 5 BILAN ══ -->
+<div class="pan" id="p5">
+  <div class="sech">📋 BILAN — Synthèse du manuel (4 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> Le milieu intérieur</h3><p style="font-size:.92rem">Le milieu intérieur est constitué des <select class="bl" data-rep="liquides extracellulaires (plasma + lymphe + liquide interstitiel)"><option value="">—</option><option>liquides extracellulaires (plasma + lymphe + liquide interstitiel)</option><option>liquides intracellulaires</option></select>. Il <select class="bl" data-rep="permet les échanges entre cellules et milieu extérieur"><option value="">—</option><option>permet les échanges entre cellules et milieu extérieur</option><option>isole complètement les cellules</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Composition du plasma</h3><p style="font-size:.92rem">Le plasma contient : <select class="bl" data-rep="90% d'eau, sels minéraux, protéines (65-75 g/l), glucose (0,8-1,1 g/l), urée, lipides"><option value="">—</option><option>90% d'eau, sels minéraux, protéines (65-75 g/l), glucose (0,8-1,1 g/l), urée, lipides</option><option>uniquement de l'eau et du glucose</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Les constantes biologiques</h3><p style="font-size:.92rem">Glycémie normale = <select class="bl" data-rep="0,7-1,1 g/l"><option value="">—</option><option>0,7-1,1 g/l</option><option>5-6 g/l</option></select>. Calcémie = <select class="bl" data-rep="0,10 g/l"><option value="">—</option><option>0,10 g/l</option><option>1 g/l</option></select>. pH sanguin = <select class="bl" data-rep="7,35-7,45"><option value="">—</option><option>7,35-7,45</option><option>5,5</option></select>. Température = <select class="bl" data-rep="37°C"><option value="">—</option><option>37°C</option><option>30°C</option></select>. Pression artérielle = <select class="bl" data-rep="12,5/8"><option value="">—</option><option>12,5/8</option><option>6/3</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Pathologies liées aux variations</h3><p style="font-size:.92rem">Hyperglycémie → <select class="bl" data-rep="diabète sucré"><option value="">—</option><option>diabète sucré</option><option>rachitisme</option></select>. Hypocalcémie → <select class="bl" data-rep="tétanie (hyperexcitabilité musculaire)"><option value="">—</option><option>tétanie (hyperexcitabilité musculaire)</option><option>hypertension</option></select>. Acidose → <select class="bl" data-rep="diminution fonction cardiaque et troubles respiratoires"><option value="">—</option><option>diminution fonction cardiaque et troubles respiratoires</option><option>fièvre</option></select>. Hémorragie → <select class="bl" data-rep="hypovolémie → chute pression → syncope"><option value="">—</option><option>hypovolémie → chute pression → syncope</option><option>hyperthermie</option></select>.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 6 EXERCICES ══ -->
+<div class="pan" id="p6">
+  <div class="sech">📝 Exercices — Manuel p.126</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.126)</h3>
+    <table>
+      <tr><td><strong>1. Milieu intérieur constitué :</strong></td><td><select class="tcell" data-rep="b- des liquides extracellulaires"><option value="">—</option><option>a- plasma + lymphe</option><option>b- des liquides extracellulaires</option></select></td></tr>
+      <tr><td><strong>2. Le sérum :</strong></td><td><select class="tcell" data-rep="d- liquide obtenu après coagulation du sang"><option value="">—</option><option>a- obtenu après sédimentation</option><option>d- liquide obtenu après coagulation du sang</option></select></td></tr>
+      <tr><td><strong>3. La lymphe :</strong></td><td><select class="tcell" data-rep="a- provient du sang, b- circule dans des vaisseaux"><option value="">—</option><option>a + b</option><option>c- a la même composition que le sang</option></select></td></tr>
+      <tr><td><strong>4. Le milieu intérieur :</strong></td><td><select class="tcell" data-rep="a- perpétuel renouvellement, b- échanges cellules-extérieur, c- constantes physico-chimiques constantes, d- transport nutriments"><option value="">—</option><option>a + b + c + d</option><option>a uniquement</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">💧 Ex.2 — Compartiments liquidiens (p.126)</h3>
+    <div class="ctx">Le document ci-contre représente les différents compartiments liquidiens de l'organisme.</div>
+    <img src="images/T3Ch7_Doc20_compartiments_liquidiens.PNG" alt="Compartiments liquidiens" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.20 — 14. Compartiments liquidiens de l&apos;organisme — Exercice 2 (p.126)</div>'">
+    <p style="font-size:.88rem;margin-bottom:7px">Les compartiments formant le milieu intérieur sont <select class="bl" data-rep="plasma + lymphe + liquide interstitiel"><option value="">—</option><option>plasma + lymphe + liquide interstitiel</option><option>sang + cellules</option></select>. Les échanges se font dans le sens : <select class="bl" data-rep="plasma → liquide interstitiel → cellules"><option value="">—</option><option>plasma → liquide interstitiel → cellules</option><option>cellules → plasma directement</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN RÉVISION ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.88rem;color:var(--mu);margin-bottom:14px">Bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Distinguer les compartiments liquidiens</div><p style="font-size:.88rem;margin-bottom:7px">Plasma = <select class="bl" data-rep="liquide sanguin avec fibrinogène"><option value="">—</option><option>liquide sanguin avec fibrinogène</option><option>liquide après coagulation</option></select>. Lymphe = <select class="bl" data-rep="liquide circulant dans les vaisseaux lymphatiques"><option value="">—</option><option>liquide circulant dans les vaisseaux lymphatiques</option><option>sang dilué</option></select>. Liquide interstitiel = <select class="bl" data-rep="liquide entre les cellules (lymphe interstitielle)"><option value="">—</option><option>liquide entre les cellules (lymphe interstitielle)</option><option>plasma concentré</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Reconnaître la composition du milieu intérieur</div><p style="font-size:.88rem;margin-bottom:7px">Eau = <select class="bl" data-rep="≈ 90%"><option value="">—</option><option>≈ 90%</option><option>≈ 10%</option></select>. Protéines = <select class="bl" data-rep="65-75 g/l dans le plasma"><option value="">—</option><option>65-75 g/l dans le plasma</option><option>absentes</option></select>. Glucose = <select class="bl" data-rep="0,8-1,1 g/l"><option value="">—</option><option>0,8-1,1 g/l</option><option>10 g/l</option></select>. Différence plasma/lymphe = <select class="bl" data-rep="absence de protéines dans la lymphe"><option value="">—</option><option>absence de protéines dans la lymphe</option><option>absence d'eau</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Saisir la signification de la constance</div><p style="font-size:.88rem;margin-bottom:7px">Homéostasie = <select class="bl" data-rep="maintien de la stabilité des constantes du milieu intérieur"><option value="">—</option><option>maintien de la stabilité des constantes du milieu intérieur</option><option>variation permanente</option></select>. Constance = <select class="bl" data-rep="stabilité dynamique dans une fourchette de valeurs"><option value="">—</option><option>stabilité dynamique dans une fourchette de valeurs</option><option>fixité absolue</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">4</span> Argumenter la nécessité de la constance</div><p style="font-size:.88rem;margin-bottom:7px">Hyperglycémie → <select class="bl" data-rep="diabète (complications rénales, rétiniennes, cardiovasculaires)"><option value="">—</option><option>diabète (complications rénales, rétiniennes, cardiovasculaires)</option><option>simple fatigue</option></select>. Acidose → <select class="bl" data-rep="troubles cardiaques et respiratoires"><option value="">—</option><option>troubles cardiaques et respiratoires</option><option>amélioration des fonctions</option></select>. Hypothermie sévère → <select class="bl" data-rep="ralentissement des fonctions vitales, arrêt cardiaque"><option value="">—</option><option>ralentissement des fonctions vitales, arrêt cardiaque</option><option>accélération du métabolisme</option></select>.</p><button class="bck" onclick="ckMQ('rev4')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev4-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 8 FLASHCARDS ══ -->
+<div class="pan" id="p8"><h2 style="margin-bottom:14px">🃏 Flashcards — 8 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 9 QCM ══ -->
+<div class="pan" id="p9"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 7 — Le Milieu Intérieur et ses Caractéristiques · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch7tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch7tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p5 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p5 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"Le <select class='fs' data-ans='milieu intérieur'>—|milieu intérieur|milieu extérieur|cytosol|sang total</select> comprend le <select class='fs' data-ans='plasma, la lymphe et le liquide interstitiel'>—|plasma, la lymphe et le liquide interstitiel|sang, cellules et lymphe|plasma uniquement|sérum</select>."},{p:"Le <select class='fs' data-ans='plasma'>—|sérum|plasma|caillot|globule</select> est le liquide sanguin AVEC fibrinogène. Le <select class='fs' data-ans='sérum'>—|plasma|sérum|caillot|fibrinogène</select> est le liquide APRÈS coagulation."},{p:"La lymphe diffère du plasma par l'absence de <select class='fs' data-ans='protéines'>—|protéines|sels minéraux|glucose|eau</select>. Les ions (Na⁺, K⁺, Cl⁻…) ont des concentrations <select class='fs' data-ans='quasiment identiques'>—|quasiment identiques|très différentes|10 fois supérieures</select>."},{p:"La <select class='fs' data-ans='glycémie'>—|glycémie|calcémie|pression|température</select> normale est de <select class='fs' data-ans='0,7-1,1 g/l'>—|0,7-1,1 g/l|0,01 g/l|5 g/l|10 g/l</select>. Son élévation chronique = <select class='fs' data-ans='diabète sucré'>—|diabète sucré|rachitisme|anémie|scorbut</select>."},{p:"Le <select class='fs' data-ans='pH sanguin'>—|pH sanguin|volume|fer|glucose</select> normal est de <select class='fs' data-ans='7,35-7,45 (légèrement basique)'>—|7,35-7,45 (légèrement basique)|5,5 (acide)|9 (basique)|neutre</select>. Une baisse = <select class='fs' data-ans='acidose'>—|acidose|alcalose|diabète|anémie</select>."},{p:"La <select class='fs' data-ans='température corporelle'>—|température corporelle|pression|volémie|calcémie</select> normale est de <select class='fs' data-ans='37°C'>—|37°C|30°C|40°C|25°C</select>. La fièvre = <select class='fs' data-ans='hyperthermie'>—|hyperthermie|hypothermie|normothermie|thermolyse</select>."},{p:"Une <select class='fs' data-ans='hémorragie'>—|hémorragie|infection|fièvre|diarrhée</select> entraîne une <select class='fs' data-ans='hypovolémie (baisse du volume sanguin)'>—|hypovolémie (baisse du volume sanguin)|hypervolémie|hyperthermie|hypercalcémie</select> → chute de pression → syncope."},{p:"L'<select class='fs' data-ans='homéostasie'>—|homéostasie|osmose|diffusion|photosynthèse</select> = maintien des constantes du milieu intérieur. C'est une <select class='fs' data-ans='stabilité dynamique (fluctuations dans une fourchette)'>—|stabilité dynamique (fluctuations dans une fourchette)|fixité absolue|absence de régulation</select>."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. Le milieu intérieur est constitué :',o:['Du plasma et de la lymphe','Des liquides extracellulaires','Du liquide intracellulaire, du sang et de la lymphe','Du liquide intracellulaire et du liquide extracellulaire'],c:[1],fb:'Milieu intérieur = liquides EXTRACELLULAIRES (b). Le milieu intracellulaire N\'en fait PAS partie.'},{q:'Q2. Le sérum :',o:['Est obtenu après sédimentation du sang','Contient les mêmes protéines que le plasma','Est un liquide qui circule dans les vaisseaux','Est un liquide obtenu après coagulation du sang'],c:[3],fb:'Sérum = liquide APRÈS coagulation (d). Plasma = AVANT coagulation (avec fibrinogène).'},{q:'Q3. La lymphe :',o:['Provient du sang','Circule dans des vaisseaux','Possède la même composition que le sang','Est toujours stagnante dans l\'espace intercellulaire'],c:[0,1],fb:'Lymphe = provient du sang (a), circule dans vaisseaux lymphatiques (b). PAS les protéines.'},{q:'Q4. Le milieu intérieur :',o:['Est en perpétuel renouvellement','Permet les échanges entre cellules et milieu extérieur','Possède des caractéristiques physico-chimiques constantes','Assure le transport des nutriments et déchets'],c:[0,1,2,3],fb:'Toutes les propositions sont vraies (a,b,c,d).'},{q:'Q5. La glycémie normale est de :',o:['0,7 à 1,1 g/l','3,88 à 6,10 mmol/l','0,01 g/l','10 g/l'],c:[0,1],fb:'Glycémie = 0,7-1,1 g/l (a) = 3,88-6,10 mmol/l (b).'},{q:'Q6. L\'hyperglycémie chronique est un signe de :',o:['Diabète sucré','Rachitisme','Anémie','Scorbut'],c:[0],fb:'Hyperglycémie = diabète sucré (a).'},{q:'Q7. Le pH sanguin normal est de :',o:['7,35-7,45','5,5','9','7,0 exactement'],c:[0],fb:'pH sanguin = 7,35-7,45, légèrement basique (a).'},{q:'Q8. Une baisse du pH sanguin (acidose) provoque :',o:['Une diminution de la fonction cardiaque','Des troubles respiratoires','Une meilleure oxygénation des tissus','Une accélération de la croissance'],c:[0,1],fb:'Acidose = troubles cardiaques (a) et respiratoires (b).'},{q:'Q9. La température corporelle normale est de :',o:['37°C exactement','Entre 36,4°C et 37,2°C','30°C','40°C'],c:[1],fb:'Température normale = 36,4-37,2°C (b). 37°C = moyenne, pas valeur fixe.'},{q:'Q10. La pression artérielle normale est d\'environ :',o:['12,5/8','6/3','20/15','8/12,5'],c:[0],fb:'Pression artérielle normale ≈ 12,5 (max) / 8 (min) (a).'},{q:'Q11. L\'homéostasie désigne :',o:['La fixité absolue des constantes','Le maintien de la stabilité du milieu intérieur','L\'ensemble des mécanismes régulateurs','Une variation anarchique des paramètres'],c:[1,2],fb:'Homéostasie = maintien stabilité (b) par mécanismes régulateurs (c). PAS fixité absolue (a).'},{q:'Q12. Une hémorragie grave provoque :',o:['Une hypovolémie','Une chute de la pression artérielle','Un risque de syncope cardiaque','Une hyperthermie'],c:[0,1,2],fb:'Hémorragie = hypovolémie (a) → hypotension (b) → syncope (c). PAS hyperthermie (d).'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
