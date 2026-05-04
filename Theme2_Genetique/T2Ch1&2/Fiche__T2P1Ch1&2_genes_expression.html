@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thème 2 · Partie I — Des caractères aux gènes & Expression | SVT 3ème</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#047857;--em-d:#065f46;--em-lt:#ecfdf5;--em-md:#059669;
+  --teal:#0f766e;--teal-lt:#f0fdfa;
+  --purple:#7c3aed;--purple-lt:#f5f3ff;
+  --blue:#1e5fa3;--blue-lt:#eff6ff;
+  --red:#b91c1c;--red-lt:#fef2f2;
+  --amber:#d97706;--amber-lt:#fffbeb;
+  --gray1:#f8fafc;--gray2:#e2e8f0;--gray3:#cbd5e1;
+  --gray6:#475569;--gray8:#1e293b;
+  --shadow:0 2px 12px rgba(0,0,0,.07);--shadow-md:0 4px 20px rgba(0,0,0,.11);
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:#f0fdf4;color:var(--gray8);font-size:15px;line-height:1.7}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--em-d) 0%,var(--em) 60%,var(--teal) 100%);color:#fff;padding:24px 36px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(4,120,87,.35);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
+header::after{content:'';position:absolute;left:30%;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hdr-badge{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;line-height:1.2}
+.hdr-sub{opacity:.75;font-size:1rem;font-weight:400;margin-top:3px}
+.hdr-right{text-align:right;font-size:12px;opacity:.8;line-height:2;z-index:1}
+.hdr-right strong{display:block;font-size:13px;font-weight:700;opacity:1}
+
+/* PROGRESS */
+.progress-wrap{background:rgba(0,0,0,.15);height:4px}
+.progress-bar{height:4px;background:linear-gradient(90deg,#6ee7b7,#34d399);width:0%;transition:width .4s}
+
+/* TABS */
+.tabs-nav{background:#fff;border-bottom:2px solid var(--gray2);display:flex;padding:0 28px;gap:2px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;overflow-x:auto}
+.tab-btn{padding:14px 16px;background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:12.5px;font-weight:600;color:var(--gray6);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--em);background:var(--em-lt);border-radius:6px 6px 0 0}
+.tab-btn.active{color:var(--em);border-bottom-color:var(--em)}
+
+/* PANELS */
+.tab-panel{display:none;padding:28px 36px;max-width:1100px;margin:0 auto;animation:fadeIn .3s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* TYPOGRAPHY */
+.section-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--em-d);border-left:4px solid var(--em);padding-left:12px;margin:32px 0 16px;display:flex;align-items:center;gap:10px}
+.sub-title{font-size:1rem;font-weight:700;color:var(--teal);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sub-title::before{content:'';display:block;width:22px;height:2.5px;background:var(--teal);border-radius:2px}
+.sub-title.purple{color:var(--purple)}.sub-title.purple::before{background:var(--purple)}
+.sub-title.red{color:var(--red)}.sub-title.red::before{background:var(--red)}
+.sub-title.blue{color:var(--blue)}.sub-title.blue::before{background:var(--blue)}
+
+/* BOXES */
+.def-box{background:var(--em-lt);border:1.5px solid #6ee7b7;border-radius:var(--radius);padding:14px 18px;margin:12px 0}
+.def-box .lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--em);margin-bottom:6px}
+.def-box p{font-size:14.5px}
+.info-box{border-left:4px solid var(--amber);background:var(--amber-lt);border-radius:0 var(--radius) var(--radius) 0;padding:11px 16px;margin:12px 0;font-size:13.5px}
+.info-box.blue{border-left-color:var(--blue);background:var(--blue-lt)}
+.info-box.red{border-left-color:var(--red);background:var(--red-lt)}
+.info-box.green{border-left-color:var(--em);background:var(--em-lt)}
+.info-box.teal{border-left-color:var(--teal);background:var(--teal-lt)}
+.info-box.purple{border-left-color:var(--purple);background:var(--purple-lt)}
+.info-box strong{color:var(--amber)}
+.info-box.blue strong{color:var(--blue)}
+.info-box.red strong{color:var(--red)}
+.info-box.green strong{color:var(--em)}
+.info-box.teal strong{color:var(--teal)}
+.info-box.purple strong{color:var(--purple)}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.card{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border-top:3px solid var(--em)}
+.card.teal{border-top-color:var(--teal)}.card.purple{border-top-color:var(--purple)}
+.card.amber{border-top-color:var(--amber)}.card.red{border-top-color:var(--red)}
+.card.blue{border-top-color:var(--blue)}
+.card h4{font-size:.9rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card ul{padding-left:18px;font-size:13.5px;color:var(--gray6)}.card ul li{margin-bottom:5px}
+.card p{font-size:13.5px;color:var(--gray6)}
+
+/* IMAGES */
+.img-wrap{background:var(--gray1);border:2px dashed var(--gray3);border-radius:var(--radius);padding:8px;margin:14px 0;text-align:center;overflow:hidden}
+.img-wrap img{max-width:100%;max-height:280px;border-radius:var(--radius-sm);display:block;margin:0 auto;object-fit:contain}
+.img-fallback{padding:20px 16px;color:var(--gray6);font-size:12.5px}
+.img-fallback .ico-ph{font-size:28px;display:block;margin-bottom:6px}
+.img-fallback strong{display:block;font-size:13px;color:var(--gray8);margin-bottom:4px}
+.img-caption{font-size:11.5px;color:var(--gray6);text-align:center;margin-top:5px;font-style:italic}
+.img-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.img-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:14px 0;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;background:#fff}
+th{background:var(--em-d);color:#fff;padding:10px 14px;font-size:12.5px;font-weight:600;text-align:left}
+th.teal{background:var(--teal)}th.purple{background:var(--purple)}th.blue{background:var(--blue)}
+th.amber{background:var(--amber)}th.red{background:var(--red)}
+td{padding:9px 14px;font-size:13px;border-bottom:1px solid var(--gray2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray1)}
+
+/* ACTIVITY */
+.activity{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin:18px 0;overflow:hidden;border:1.5px solid var(--gray2)}
+.activity-header{background:linear-gradient(135deg,var(--em-d) 0%,var(--em) 100%);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.activity-header.teal{background:linear-gradient(135deg,var(--teal) 0%,#0d9488 100%)}
+.activity-header.purple{background:linear-gradient(135deg,var(--purple) 0%,#6d28d9 100%)}
+.activity-header.amber{background:linear-gradient(135deg,var(--amber) 0%,#f59e0b 100%)}
+.activity-header.blue{background:linear-gradient(135deg,var(--blue) 0%,#2563eb 100%)}
+.activity-header h3{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.activity-header .toggle-ico{font-size:18px;transition:transform .3s}
+.activity-header.open .toggle-ico{transform:rotate(180deg)}
+.activity-body{padding:18px 20px;display:none}
+.activity-body.open{display:block}
+
+/* QCM */
+.qcm-item{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.qcm-item .qnum{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--em);margin-bottom:8px}
+.qcm-item .qtxt{font-size:14.5px;font-weight:700;margin-bottom:14px;line-height:1.4;color:var(--gray8)}
+.qcm-opt{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:6px;font-size:13.5px;border:1.5px solid var(--gray2);transition:all .15s;user-select:none}
+.qcm-opt:hover{background:var(--em-lt);border-color:#6ee7b7}
+.qcm-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.qcm-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+.qcm-opt.missed{background:#fef9c3;border-color:#ca8a04;color:#854d0e;pointer-events:none}
+.qcm-opt input[type=radio]{accent-color:var(--em);width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.btn-verify{margin-top:12px;padding:9px 22px;background:var(--em);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s}
+.btn-verify:hover{background:var(--em-d)}
+.qcm-fb{margin-top:10px;padding:11px 14px;border-radius:var(--radius-sm);font-size:13.5px;display:none}
+.qcm-fb.show{display:block}
+.qcm-fb.ok{background:#d1fae5;color:#065f46;border:1px solid #059669}
+.qcm-fb.ko{background:#fee2e2;color:#991b1b;border:1px solid #dc2626}
+
+/* PREREQ */
+.prereq-q{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin:12px 0;border-left:4px solid var(--purple)}
+.prereq-q .qlbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px}
+.prereq-q .qtxt{font-size:14px;font-weight:600;margin-bottom:12px}
+.prereq-opt{padding:8px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:13.5px;border:1.5px solid var(--gray2);margin-bottom:6px;transition:all .2s;user-select:none;display:block;width:100%;text-align:left;background:#fff;font-family:'Source Sans 3',sans-serif}
+.prereq-opt:hover{background:var(--purple-lt);border-color:var(--purple)}
+.prereq-opt.correct-ans{background:#d1fae5;border-color:#059669;color:#065f46;pointer-events:none}
+.prereq-opt.wrong-ans{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none}
+
+/* GAP FILL */
+.gap-text{font-size:14.5px;line-height:2.8;background:#fff;border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);margin:14px 0;border:1.5px solid var(--gray2)}
+.gap-select{display:inline-block;padding:2px 6px;border:1.5px solid var(--em);border-radius:4px;background:#fff;font-family:'Source Sans 3',sans-serif;font-size:13.5px;color:var(--gray8);cursor:pointer;vertical-align:middle;min-width:130px}
+.gap-select:focus{outline:none;border-color:var(--em-d)}
+.gap-select.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+.gap-select.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.btn-check-gap{margin-top:12px;padding:8px 20px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:13px;font-family:'Source Sans 3',sans-serif;transition:background .2s;display:block}
+.btn-check-gap:hover{background:var(--em)}
+.gap-score{margin-top:10px;font-size:13.5px;font-weight:700;display:none}
+.gap-score.show{display:block}
+td select{padding:4px 8px;border:1.5px solid var(--gray3);border-radius:4px;font-family:'Source Sans 3',sans-serif;font-size:12.5px;background:#fff;min-width:120px}
+td select.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+td select.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+
+/* DNA SEQUENCE */
+.dna-seq{font-family:'Courier New',monospace;font-size:13px;background:var(--gray1);border:1.5px solid var(--gray2);border-radius:var(--radius-sm);padding:10px 14px;margin:8px 0;letter-spacing:2px;overflow-x:auto;white-space:nowrap}
+.dna-seq .base-A{color:#16a34a;font-weight:700}
+.dna-seq .base-T{color:#dc2626;font-weight:700}
+.dna-seq .base-G{color:#2563eb;font-weight:700}
+.dna-seq .base-C{color:#d97706;font-weight:700}
+.dna-seq .base-U{color:#7c3aed;font-weight:700}
+
+/* SCHEMA EXPRESSION */
+.schema-expression{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0;padding:16px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+.schema-box{background:var(--em-lt);border:2px solid var(--em);border-radius:var(--radius-sm);padding:10px 16px;text-align:center;font-weight:700;font-size:13px;color:var(--em-d)}
+.schema-box.blue{background:var(--blue-lt);border-color:var(--blue);color:var(--blue)}
+.schema-box.purple{background:var(--purple-lt);border-color:var(--purple);color:var(--purple)}
+.schema-box.amber{background:var(--amber-lt);border-color:var(--amber);color:#92400e}
+.schema-arrow{font-size:22px;color:var(--gray3);font-weight:700}
+.schema-label{font-size:10px;color:var(--gray6);display:block;font-weight:400;margin-top:2px}
+
+/* CODE TABLE */
+.code-table-wrap{font-size:11px;overflow-x:auto;margin:14px 0}
+.code-table-wrap table{min-width:400px}
+.code-table-wrap th{font-size:11px;padding:6px 8px;background:var(--em-d)}
+.code-table-wrap td{padding:5px 8px;font-size:11px;font-family:'Courier New',monospace}
+
+/* FLASHCARDS */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:16px 0}
+.fc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);cursor:pointer;min-height:140px;perspective:900px;transition:transform .2s}
+.fc:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.fc-inner{position:relative;width:100%;min-height:140px;transform-style:preserve-3d;transition:transform .45s}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;padding:16px 18px;border-radius:var(--radius);backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:140px}
+.fc-front{background:linear-gradient(135deg,var(--em-d) 0%,var(--teal) 100%);color:#fff}
+.fc-back{background:#fff;color:var(--gray8);transform:rotateY(180deg);border:1.5px solid var(--gray2)}
+.fc-front .qlbl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;opacity:.65;margin-bottom:7px}
+.fc-front .qtxt{font-size:13.5px;font-weight:600;line-height:1.4}
+.fc-front .qhint{font-size:10px;opacity:.55;margin-top:8px}
+.fc-back .albl{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--em);font-weight:700;margin-bottom:7px}
+.fc-back .atxt{font-size:13px;line-height:1.55}
+.cnt{font-size:10px;opacity:.4;align-self:flex-end}
+
+/* CANVAS */
+#mindmap-canvas{border-radius:var(--radius);background:#fff;box-shadow:var(--shadow);display:block;margin:0 auto;max-width:100%}
+
+/* FOOTER */
+footer{text-align:center;padding:20px 16px;color:var(--gray6);font-size:12px;border-top:1px solid var(--gray2);margin-top:40px;background:#fff}
+footer strong{color:var(--em)}
+
+@media(max-width:640px){
+  header{flex-direction:column;gap:12px;padding:18px 20px}
+  .hdr-right{text-align:left}
+  .tab-panel{padding:18px 16px}
+  .img-trio{grid-template-columns:1fr}
+  .schema-expression{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="hdr-badge">🧬 SVT · 3ème Année Secondaire · Thème 2 — Génétique</div>
+    <div class="hdr-title">Partie I — De l'information génétique au phénotype</div>
+    <div class="hdr-sub">Ch.1 : Des caractères aux gènes &nbsp;·&nbsp; Ch.2 : Mécanisme de l'expression génétique</div>
+  </div>
+  <div class="hdr-right">
+    <strong>Sciences de la Vie et de la Terre</strong>
+    Programme officiel tunisien<br>
+    Fiche interactive · Thème 2 · Partie I
+  </div>
+</header>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('contexte',this)">🎯 Mise en contexte</button>
+  <button class="tab-btn" onclick="showTab('ch1',this)">🔬 Ch.1 — Caractères aux gènes</button>
+  <button class="tab-btn" onclick="showTab('ch2',this)">⚗️ Ch.2 — Expression génétique</button>
+  <button class="tab-btn" onclick="showTab('synthese',this)">🗺️ Synthèse</button>
+  <button class="tab-btn" onclick="showTab('eval',this)">✅ Exercices</button>
+</nav>
+
+<!-- ══════════════ TAB 1 — CONTEXTE ══════════════ -->
+<div class="tab-panel active" id="tab-contexte">
+
+  <h2 class="section-title">🧬 Thème 2 — La Génétique</h2>
+  <div class="def-box">
+    <div class="lbl">Problématique générale</div>
+    <p>Le monde vivant présente une <strong>diversité</strong> remarquable (≈ 30 millions d'espèces) et en même temps une <strong>constance</strong> de chaque espèce. La <strong>génétique</strong> étudie la nature, la structure, la transmission et l'expression de l'<strong>information génétique</strong> (ADN) qui contrôle les caractères héréditaires.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card"><h4 style="color:var(--em)">🔬 Ch.1 — Des caractères aux gènes</h4><p>Espèce, lignée, phénotype, génotype, gène, allèle, drépanocytose.</p></div>
+    <div class="card teal"><h4 style="color:var(--teal)">⚗️ Ch.2 — Expression génétique</h4><p>ADN → ARNm → protéine. Transcription, traduction, code génétique.</p></div>
+    <div class="card purple"><h4 style="color:var(--purple)">🧪 Ch.3 — Génie génétique</h4><p>OGM, enzymes de restriction, plasmides, ADNc, clonage bactérien.</p></div>
+    <div class="card amber"><h4 style="color:var(--amber)">🌿 Ch.4 — Origine de la diversité</h4><p>Mutations chromosomiques et géniques. Méiose. Brassage génétique.</p></div>
+    <div class="card blue"><h4 style="color:var(--blue)">🔗 Ch.5 — Transmission</h4><p>Lois de Mendel. Hérédité liée au sexe. Génétique des populations.</p></div>
+  </div>
+
+  <h2 class="section-title">🔭 Situation Problème</h2>
+  <div class="img-trio">
+    <div>
+      <div class="img-wrap">
+        <img src="images/t2_fig1_polymorphisme.png" alt="Polymorphisme humain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig1_polymorphisme.png</strong>Polymorphisme humain — enfants d'une même classe (doc.1 manuel p.157)</div>
+      </div>
+      <div class="img-caption">Doc.1 — Polymorphisme individuel</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/t2_fig2_races_ovines.png" alt="Races ovines tunisiennes" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig2_races_ovines.png</strong>Race Barbarine et race noire de Tibar (doc.5 manuel p.157)</div>
+      </div>
+      <div class="img-caption">Doc.5 — Deux races ovines tunisiennes</div>
+    </div>
+    <div>
+      <div class="img-wrap">
+        <img src="images/t2_fig3_mais_ogm.png" alt="Maïs transgénique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig3_mais_ogm.png</strong>Maïs transgénique vs maïs naturel (doc.3 manuel p.157)</div>
+      </div>
+      <div class="img-caption">Doc.3 — Maïs transgénique (OGM)</div>
+    </div>
+  </div>
+  <div class="info-box green">
+    <strong>Problème scientifique :</strong> Comment la reproduction sexuée assure-t-elle la constance de la formule chromosomique ? Comment l'information génétique (ADN) détermine-t-elle les phénotypes ? Comment s'exprime-t-elle concrètement dans la cellule ?
+  </div>
+
+  <h2 class="section-title">📋 Préacquis — Testez vos connaissances</h2>
+  <div id="prereq-container"></div>
+
+</div>
+
+<!-- ══════════════ TAB 2 — CH.1 CARACTÈRES AUX GÈNES ══════════════ -->
+<div class="tab-panel" id="tab-ch1">
+
+  <h2 class="section-title">🔬 Chapitre 1 — L'information génétique : des caractères aux gènes</h2>
+  <div class="def-box">
+    <div class="lbl">Concept clé</div>
+    <p>Chaque être vivant est un ensemble de <strong>caractères héréditaires</strong> déterminés par des <strong>informations génétiques</strong> (gènes) localisées dans l'ADN des chromosomes. L'<strong>information génétique</strong> est une séquence de bases azotées qui contrôle la synthèse d'une protéine déterminant le phénotype.</p>
+  </div>
+
+  <!-- ACT 1 -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 1 — Espèce, lignée et caractères héréditaires</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title">A — L'espèce : constance de la formule chromosomique</div>
+      <div class="info-box green"><strong>Interfécondité :</strong> critère principal de l'espèce. Seuls les individus de même espèce produisent des descendants fertiles. La formule chromosomique (2n) est <strong>constante</strong> pour tous les individus d'une même espèce.</div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig4_caryotype_drosophile.png" alt="Caryotype drosophile" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig4_caryotype_drosophile.png</strong>Caryotypes de drosophiles mâle et femelle — 2n=8 (doc.15 manuel p.163)</div>
+          </div>
+          <div class="img-caption">Doc.15 — Caryotypes de drosophiles : 2n = 8</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig5_formules_chromosomiques.png" alt="Formules chromosomiques" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig5_formules_chromosomiques.png</strong>Formules chromosomiques de quelques espèces (doc.16 manuel p.163)</div>
+          </div>
+          <div class="img-caption">Doc.16 — Formule chromosomique = caractéristique d'espèce</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Espèce</th><th>2n</th><th>Espèce</th><th>2n</th></tr>
+          <tr><td>Homme</td><td><strong>46</strong></td><td>Chien</td><td><strong>78</strong></td></tr>
+          <tr><td>Drosophile</td><td><strong>8</strong></td><td>Cheval</td><td><strong>64</strong></td></tr>
+          <tr><td>Blé dur</td><td><strong>28</strong></td><td>Olivier</td><td><strong>46</strong></td></tr>
+          <tr><td>Blé tendre</td><td><strong>42</strong></td><td>Palmier dattier</td><td><strong>36</strong></td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title">B — Comment la reproduction sexuée maintient-elle 2n ?</div>
+      <div class="schema-expression">
+        <div class="schema-box">Individu (2n)<span class="schema-label">cellules diploïdes</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box teal">Gamétogenèse (méiose)<span class="schema-label">réduction chromosomique</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box purple">Gamètes (n)<span class="schema-label">haploïdes</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box amber">Fécondation (n+n)<span class="schema-label">rétablit la diploïdie</span></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">Œuf (2n)<span class="schema-label">diploïde</span></div>
+      </div>
+
+      <div class="sub-title">C — Lignée, race, variété</div>
+      <div class="card-grid">
+        <div class="card">
+          <h4 style="color:var(--em)">🌿 Espèce</h4>
+          <ul><li>Interféconds entre eux</li><li>Formule chromosomique fixe (2n)</li><li>Ex : Homo sapiens, Drosophila melanogaster</li></ul>
+        </div>
+        <div class="card teal">
+          <h4 style="color:var(--teal)">🐑 Lignée / Race / Variété</h4>
+          <ul><li>Sous-groupe d'une espèce</li><li>Caractères stables sur plusieurs générations</li><li>Ex : Barbarine, Noire de Tibar (ovins)</li><li>Ex : Chemlali, Chétoui (olivier)</li></ul>
+        </div>
+        <div class="card purple">
+          <h4 style="color:var(--purple)">🧬 Lignée sauvage & mutante</h4>
+          <ul><li>Lignée originale = <strong>sauvage</strong></li><li>Nouvelles lignées = <strong>mutantes</strong></li><li>Enrichissent la biodiversité</li></ul>
+        </div>
+      </div>
+
+      <div class="sub-title">Texte à trous — Espèce et formule chromosomique</div>
+      <div class="gap-text" id="gap-espece">
+        L'<select class="gap-select" data-answer="interfécondité"><option value="">…</option><option>interfécondité</option><option>hétérozygotie</option><option>homozygotie</option></select> est le principal critère de définition de l'espèce. Tous les individus d'une même espèce possèdent la même <select class="gap-select" data-answer="formule chromosomique"><option value="">…</option><option>formule chromosomique</option><option>séquence d'acides aminés</option><option>taille corporelle</option></select>. La drosophile a 2n = <select class="gap-select" data-answer="8"><option value="">…</option><option>8</option><option>46</option><option>78</option></select> chromosomes. Les cellules sexuelles (gamètes) sont <select class="gap-select" data-answer="haploïdes"><option value="">…</option><option>haploïdes</option><option>diploïdes</option><option>triploïdes</option></select> à n chromosomes. La <select class="gap-select" data-answer="fécondation"><option value="">…</option><option>fécondation</option><option>mitose</option><option>méiose</option></select> rétablit la diploïdie (n + n = 2n). Une <select class="gap-select" data-answer="lignée pure"><option value="">…</option><option>lignée pure</option><option>espèce hybride</option><option>cellule mutante</option></select> transmet les mêmes caractères sans modification à travers les générations successives.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-espece','score-espece')">Vérifier</button>
+      <div class="gap-score" id="score-espece"></div>
+    </div>
+  </div>
+
+  <!-- ACT 2 -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 2 — Phénotype, génotype et allèles</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="sub-title blue">Définitions essentielles</div>
+      <div class="card-grid">
+        <div class="card blue">
+          <h4 style="color:var(--blue)">👁️ Phénotype</h4>
+          <ul><li>Aspect <strong>observable</strong> d'un caractère héréditaire</li><li>Expression d'un génotype</li><li>Ex : œil rouge / blanc chez drosophile</li><li>Ex : HbA (normal) / HbS (drépanocytose)</li></ul>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--em)">🧬 Génotype</h4>
+          <ul><li>Information génétique qui détermine le phénotype</li><li>Ensemble des gènes (couple d'allèles) d'un individu</li><li>Localisé dans l'ADN des chromosomes</li></ul>
+        </div>
+        <div class="card purple">
+          <h4 style="color:var(--purple)">🔗 Gène et Allèle</h4>
+          <ul><li><strong>Gène :</strong> séquence de bases ADN → synthèse d'une protéine</li><li><strong>Locus :</strong> emplacement précis du gène sur le chromosome</li><li><strong>Allèle :</strong> forme particulière d'un gène</li><li><strong>Couple d'allèles :</strong> 2 allèles sur chromosomes homologues</li></ul>
+        </div>
+        <div class="card amber">
+          <h4 style="color:var(--amber)">⚖️ Homo / Hétérozygote</h4>
+          <ul><li><strong>Homozygote :</strong> les 2 allèles identiques (A//A)</li><li><strong>Hétérozygote :</strong> les 2 allèles différents (A//S)</li><li>Chez les diploïdes : 2 chromosomes homologues → 2 allèles</li></ul>
+        </div>
+      </div>
+
+      <div class="img-wrap">
+        <img src="images/t2_fig6_genes_chromosomes.png" alt="Gènes sur chromosomes humains" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig6_genes_chromosomes.png</strong>Localisation de gènes humains sur 2 chromosomes — loci multiples (doc.26 manuel p.169)</div>
+      </div>
+      <div class="img-caption">Doc.26 — Des gènes humains localisés sur leurs chromosomes</div>
+
+      <div class="sub-title">Associez concept → définition</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th class="teal">Terme</th><th class="teal">Définition correcte</th></tr>
+          <tr><td><strong>Gène</strong></td>
+            <td><select id="def1"><option value="">—</option><option value="ok">Séquence de bases ADN contrôlant la synthèse d'une protéine ✓</option><option value="ko1">Emplacement précis sur un chromosome</option><option value="ko2">Ensemble des caractères visibles d'un individu</option></select></td></tr>
+          <tr><td><strong>Locus</strong></td>
+            <td><select id="def2"><option value="">—</option><option value="ok">Emplacement précis et fixe d'un gène sur un chromosome ✓</option><option value="ko1">Forme particulière d'un gène</option><option value="ko2">Séquence de bases ADN</option></select></td></tr>
+          <tr><td><strong>Allèle</strong></td>
+            <td><select id="def3"><option value="">—</option><option value="ok">Forme particulière (version) d'un gène ✓</option><option value="ko1">Séquence de bases ADN contrôlant la synthèse d'une protéine</option><option value="ko2">Emplacement précis d'un gène</option></select></td></tr>
+          <tr><td><strong>Génome</strong></td>
+            <td><select id="def4"><option value="">—</option><option value="ok">Ensemble de tous les gènes répartis sur tous les chromosomes d'une espèce ✓</option><option value="ko1">Ensemble des allèles d'un seul gène</option><option value="ko2">Aspect observable d'un caractère</option></select></td></tr>
+        </table>
+      </div>
+      <button class="btn-check-gap" onclick="checkDefs()">Vérifier</button>
+      <div class="gap-score" id="score-defs"></div>
+    </div>
+  </div>
+
+  <!-- ACT 3 -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 3 — Exemple fil conducteur : la Drépanocytose</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="def-box">
+        <div class="lbl">La drépanocytose</div>
+        <p>Maladie héréditaire qui affecte l'hémoglobine (protéine de transport de l'O₂). Elle illustre parfaitement la relation <strong>ADN → protéine → phénotype</strong>.</p>
+      </div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig7_hematies_normales.png" alt="Hématies normales" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig7_hematies_normales.png</strong>Hématies normales (disques biconcaves) (doc.19 manuel p.165)</div>
+          </div>
+          <div class="img-caption">Hématies normales — HbA</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig8_hematies_faucilles.png" alt="Hématies drépanocytose" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig8_hematies_faucilles.png</strong>Hématies en faucilles — drépanocytose (doc.19 manuel p.165)</div>
+          </div>
+          <div class="img-caption">Hématies en faucilles — HbS</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Niveau</th><th class="blue">Personne saine (HbA)</th><th class="red">Personne malade (HbS)</th></tr>
+          <tr><td><strong>Phénotype</strong></td><td>État normal — hématies discoïdes</td><td>Anémie, douleurs, hématies en faucilles</td></tr>
+          <tr><td><strong>Protéine</strong></td><td>HbA — hémoglobine normale soluble</td><td>HbS — hémoglobine anormale peu soluble</td></tr>
+          <tr><td><strong>Séquence AA (position 6)</strong></td><td>…Thr – Pro – <strong>Glu</strong> – Glu…</td><td>…Thr – Pro – <strong>Val</strong> – Glu…</td></tr>
+          <tr><td><strong>ADN (triplet n°6)</strong></td><td>…CTC <strong>CTC</strong> TGG…</td><td>…CTC <strong>CAC</strong> TGG…</td></tr>
+          <tr><td><strong>Génotype</strong></td><td>A // A (homozygote normal)</td><td>S // S (homozygote malade)</td></tr>
+          <tr><td><strong>Génotype hétérozygote</strong></td><td colspan="2" style="text-align:center">A // S : phénotype intermédiaire (légère anémie) — porteur sain</td></tr>
+        </table>
+      </div>
+
+      <div class="info-box red"><strong>Mutation :</strong> remplacement d'une seule base (CTC → CAC) au niveau du 6ème triplet → Glu remplacé par Val → protéine anormale HbS → phénotype malade. Une seule base modifiée suffit à changer le phénotype !</div>
+
+      <div class="sub-title">Texte à trous — Drépanocytose</div>
+      <div class="gap-text" id="gap-drep">
+        La drépanocytose est une maladie <select class="gap-select" data-answer="héréditaire"><option value="">…</option><option>héréditaire</option><option>infectieuse</option><option>nutritionnelle</option></select> qui affecte l'<select class="gap-select" data-answer="hémoglobine"><option value="">…</option><option>hémoglobine</option><option>insuline</option><option>tyrosinase</option></select>. La mutation consiste en le remplacement du 6ème acide aminé de la chaîne : l'acide <select class="gap-select" data-answer="glutamique (Glu)"><option value="">…</option><option>glutamique (Glu)</option><option>valine (Val)</option><option>proline (Pro)</option></select> est remplacé par la <select class="gap-select" data-answer="valine (Val)"><option value="">…</option><option>valine (Val)</option><option>thréonine (Thr)</option><option>leucine (Leu)</option></select>. Cette modification est due à un changement d'une seule <select class="gap-select" data-answer="base azotée"><option value="">…</option><option>base azotée</option><option>acide aminé</option><option>liaison peptidique</option></select> dans l'ADN. L'individu hétérozygote (A//S) présente un phénotype <select class="gap-select" data-answer="intermédiaire"><option value="">…</option><option>intermédiaire</option><option>normal</option><option>identique au malade</option></select>. On parle de <select class="gap-select" data-answer="co-dominance"><option value="">…</option><option>co-dominance</option><option>dominance complète</option><option>mutation silencieuse</option></select>.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-drep','score-drep')">Vérifier</button>
+      <div class="gap-score" id="score-drep"></div>
+
+      <div class="qcm-item" style="margin-top:16px">
+        <div class="qnum">Question 1</div>
+        <div class="qtxt">Un individu de génotype S//S est atteint de drépanocytose sévère. Quel est son phénotype moléculaire ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q1')"><input type="radio" name="c1q1"> a. Il possède uniquement de l'hémoglobine normale HbA soluble</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q1')"><input type="radio" name="c1q1"> b. Il possède uniquement de l'hémoglobine anormale HbS peu soluble, qui précipite dans les hématies ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q1')"><input type="radio" name="c1q1"> c. Il possède un mélange de HbA et HbS en proportions égales</div>
+        <button class="btn-verify" onclick="verifyQCM('c1q1',1)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c1q1"></div>
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question 2</div>
+        <div class="qtxt">Deux parents porteurs sains (A//S) peuvent-ils avoir un enfant pleinement malade (S//S) ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q2')"><input type="radio" name="c1q2"> a. Non, deux porteurs sains ont toujours des enfants sains</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q2')"><input type="radio" name="c1q2"> b. Oui, car chaque parent peut transmettre l'allèle S à l'enfant → S//S possible ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c1q2')"><input type="radio" name="c1q2"> c. Non, il faudrait qu'un des parents soit S//S</div>
+        <button class="btn-verify" onclick="verifyQCM('c1q2',1)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c1q2"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TAB 3 — CH.2 EXPRESSION GÉNÉTIQUE ══════════════ -->
+<div class="tab-panel" id="tab-ch2">
+
+  <h2 class="section-title">⚗️ Chapitre 2 — Mécanisme de l'expression génétique</h2>
+  <div class="def-box">
+    <div class="lbl">Principe fondamental</div>
+    <p>Chaque phénotype résulte de l'expression d'un génotype via la <strong>synthèse d'une protéine</strong>. Cette synthèse se fait en deux étapes : <strong>transcription</strong> (ADN → ARNm dans le noyau) et <strong>traduction</strong> (ARNm → protéine dans le cytoplasme).</p>
+  </div>
+
+  <!-- ACT 1 -->
+  <div class="activity">
+    <div class="activity-header open" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 1 — Une information génétique, une protéine</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title blue">A — L'albinisme : absence de tyrosinase</div>
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig9_albinisme.png" alt="Individu normal et albinos" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig9_albinisme.png</strong>Individu normal (gauche) et albinos africain (droite) (doc.10 manuel p.174)</div>
+          </div>
+          <div class="img-caption">Doc.10 — Individu normal et albinos</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig10_chaine_melanine.png" alt="Chaîne biosynthèse mélanine" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig10_chaine_melanine.png</strong>Chaîne de biosynthèse de la mélanine — enzymes E1 et E2 (doc.12 manuel p.174)</div>
+          </div>
+          <div class="img-caption">Doc.12 — Chaîne de biosynthèse de la mélanine</div>
+        </div>
+      </div>
+
+      <div class="schema-expression">
+        <div class="schema-box amber">Phénylalanine<span class="schema-label">Aliments</span></div>
+        <div style="text-align:center"><div class="schema-arrow">→</div><div style="font-size:10px;color:var(--blue)">E1 = phénylalanine hydroxylase<br>(info. génétique 1)</div></div>
+        <div class="schema-box teal">Tyrosine<span class="schema-label">intermédiaire</span></div>
+        <div style="text-align:center"><div class="schema-arrow">→</div><div style="font-size:10px;color:var(--purple)">E2 = tyrosinase<br>(info. génétique 2)</div></div>
+        <div class="schema-box">Mélanine<span class="schema-label">pigment cutané</span></div>
+      </div>
+
+      <div class="info-box red"><strong>Albinisme :</strong> mutation du gène de la <strong>tyrosinase</strong> (E2) → enzyme absente → tyrosine ne peut pas être transformée en mélanine → peau totalement dépigmentée.</div>
+      <div class="info-box blue"><strong>Phénylcétonurie :</strong> mutation du gène de la <strong>phénylalanine hydroxylase</strong> (E1) → enzyme absente → accumulation de phénylalanine → corps cétoniques dans l'urine → <strong>arriération mentale</strong>. Ces malades ne sont pas obligatoirement albinos car E2 peut encore être fonctionnelle.</div>
+
+      <div class="sub-title blue">Texte à trous — Albinisme et phénylcétonurie</div>
+      <div class="gap-text" id="gap-alb">
+        L'albinisme est lié à l'absence d'un pigment : la <select class="gap-select" data-answer="mélanine"><option value="">…</option><option>mélanine</option><option>kératine</option><option>hémoglobine</option></select>, produite par les cellules de la peau appelées <select class="gap-select" data-answer="mélanocytes"><option value="">…</option><option>mélanocytes</option><option>hépatocytes</option><option>lymphocytes</option></select>. Cette absence résulte de l'incapacité à synthétiser l'enzyme <select class="gap-select" data-answer="tyrosinase"><option value="">…</option><option>tyrosinase</option><option>phénylalanine hydroxylase</option><option>ligase</option></select>. La phénylcétonurie est due à l'absence de l'enzyme <select class="gap-select" data-answer="phénylalanine hydroxylase"><option value="">…</option><option>phénylalanine hydroxylase</option><option>tyrosinase</option><option>ADN polymérase</option></select>, ce qui provoque une accumulation de <select class="gap-select" data-answer="phénylalanine"><option value="">…</option><option>phénylalanine</option><option>tyrosine</option><option>mélanine</option></select> dans le tissu nerveux. Un individu atteint de phénylcétonurie n'est <select class="gap-select" data-answer="pas obligatoirement albinos"><option value="">…</option><option>pas obligatoirement albinos</option><option>toujours albinos</option><option>jamais malade</option></select> car la tyrosinase peut rester fonctionnelle.
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-alb','score-alb')">Vérifier</button>
+      <div class="gap-score" id="score-alb"></div>
+
+      <div class="qcm-item" style="margin-top:16px">
+        <div class="qnum">Question 3</div>
+        <div class="qtxt">La correspondance "une information génétique → une protéine" signifie :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q3')"><input type="radio" name="c2q3"> a. Chaque gène code pour une enzyme uniquement, jamais pour une protéine de structure</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q3')"><input type="radio" name="c2q3"> b. Chaque gène (séquence de bases ADN) contrôle la synthèse d'une protéine spécifique qui détermine un phénotype ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q3')"><input type="radio" name="c2q3"> c. Toutes les cellules de l'organisme produisent les mêmes protéines</div>
+        <button class="btn-verify" onclick="verifyQCM('c2q3',1)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c2q3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2 -->
+  <div class="activity">
+    <div class="activity-header teal" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 2 — La transcription : ADN → ARNm</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+      <div class="def-box">
+        <div class="lbl">La transcription</div>
+        <p>Synthèse de l'<strong>ARN messager</strong> (ARNm) à partir d'un brin d'ADN (brin transcrit). Se déroule dans le <strong>noyau</strong>, grâce à l'<strong>ARN polymérase</strong>. L'ARNm copie fidèlement l'information génétique de l'ADN selon la complémentarité des bases.</p>
+      </div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig11_synthese_arnm.png" alt="Synthèse ARNm" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig11_synthese_arnm.png</strong>Synthèse de l'ARNm en contact avec un brin d'ADN dans le noyau (doc.17 manuel p.178)</div>
+          </div>
+          <div class="img-caption">Doc.17 — Synthèse de l'ARNm dans le noyau</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig12_structure_arnm.png" alt="Structure ARNm" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig12_structure_arnm.png</strong>Structure de l'ARNm : nucléotides à ribose, bases AGCU (doc.18 manuel p.178)</div>
+          </div>
+          <div class="img-caption">Doc.18 — Structure de l'ARNm</div>
+        </div>
+      </div>
+
+      <div class="sub-title blue">Comparaison ADN / ARNm</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Critère</th><th class="blue">ADN</th><th class="teal">ARNm</th></tr>
+          <tr><td>Nombre de brins</td><td>Double brin (double hélice)</td><td>Simple brin</td></tr>
+          <tr><td>Sucre (ose)</td><td>Désoxyribose (C5)</td><td>Ribose (C5)</td></tr>
+          <tr><td>Bases azotées</td><td>A, T, G, C</td><td>A, <strong>U</strong> (Uracile), G, C</td></tr>
+          <tr><td>Localisation</td><td>Noyau (chromosomes)</td><td>Noyau → Cytoplasme</td></tr>
+          <tr><td>Rôle</td><td>Support de l'information génétique</td><td>Messager : transporte l'info vers les ribosomes</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title blue">Règle de complémentarité ADN → ARNm</div>
+      <div class="info-box teal">
+        <strong>ADN (brin transcrit) → ARNm :</strong><br>
+        A (adénine) → U (uracile) &nbsp;|&nbsp; T (thymine) → A (adénine)<br>
+        G (guanine) → C (cytosine) &nbsp;|&nbsp; C (cytosine) → G (guanine)
+      </div>
+
+      <div class="sub-title blue">Exercice — Compléter la séquence ARNm</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th class="blue">Brin d'ADN transcrit</th><th class="teal">ARNm correspondant</th></tr>
+          <tr><td class="dna-seq">T – A – C – G – A – C – C – A – C</td>
+            <td><select id="seq1"><option value="">—</option><option value="ok">A – U – G – C – U – G – G – U – G ✓</option><option value="ko">A – T – G – C – T – G – G – T – G</option><option value="ko2">T – A – C – G – A – C – C – A – C</option></select></td></tr>
+          <tr><td class="dna-seq">C – T – C – C – T – C – T – G – G</td>
+            <td><select id="seq2"><option value="">—</option><option value="ok">G – A – G – G – A – G – A – C – C ✓</option><option value="ko">C – T – C – C – T – C – T – G – G</option><option value="ko2">G – A – G – G – A – G – A – T – T</option></select></td></tr>
+        </table>
+      </div>
+      <button class="btn-check-gap" onclick="checkSeq()">Vérifier</button>
+      <div class="gap-score" id="score-seq"></div>
+
+      <div class="qcm-item" style="margin-top:16px">
+        <div class="qnum">Question 4</div>
+        <div class="qtxt">Quelle base de l'ARNm est complémentaire de l'adénine (A) de l'ADN ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q4')"><input type="radio" name="c2q4"> a. Thymine (T)</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q4')"><input type="radio" name="c2q4"> b. Uracile (U) ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q4')"><input type="radio" name="c2q4"> c. Cytosine (C)</div>
+        <button class="btn-verify" onclick="verifyQCM('c2q4',1)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c2q4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 3 -->
+  <div class="activity">
+    <div class="activity-header purple" onclick="toggleActivity(this)">
+      <h3>🔬 Activité 3 — La traduction : ARNm → protéine</h3>
+      <span class="toggle-ico">▼</span>
+    </div>
+    <div class="activity-body open">
+
+      <div class="sub-title purple">A — Les acteurs de la traduction</div>
+      <div class="card-grid">
+        <div class="card purple">
+          <h4 style="color:var(--purple)">🔩 Ribosome</h4>
+          <ul><li>Organite cytoplasmique</li><li>Grande + petite sous-unités</li><li>Composé de protéines (20%) et ARNr (80%)</li><li>Site de la synthèse protéique</li><li>Cellules actives (ex: cellules pancréatiques) = ribosomes +++</li></ul>
+        </div>
+        <div class="card teal">
+          <h4 style="color:var(--teal)">🚛 ARN de transfert (ARNt)</h4>
+          <ul><li>Molécule de 75 nucléotides</li><li>Chaque ARNt est spécifique d'un acide aminé</li><li>Porte un <strong>anticodon</strong> (triplet complémentaire du codon)</li><li>20 types d'ARNt (1 par acide aminé)</li></ul>
+        </div>
+        <div class="card">
+          <h4>⚡ Énergie et enzymes</h4>
+          <ul><li>ATP indispensable</li><li>Enzymes (ATPases, peptidases)</li><li>Ions Mg²⁺, PO₄³⁻</li></ul>
+        </div>
+      </div>
+
+      <div class="sub-title purple">B — Le code génétique</div>
+      <div class="info-box purple">
+        <strong>Codon :</strong> triplet de 3 bases consécutives de l'ARNm qui détermine le positionnement d'un acide aminé dans un polypeptide.<br>
+        <strong>Codon d'initiation :</strong> AUG → méthionine (Met) — début de la traduction.<br>
+        <strong>Codons stop :</strong> UAA, UAG, UGA → arrêt de la traduction (ne codent pour aucun AA).<br>
+        <strong>Code universel :</strong> identique pour tous les êtres vivants. <strong>Code dégénéré :</strong> plusieurs codons pour un même acide aminé.
+      </div>
+
+      <div class="info-box teal"><strong>Nécessité d'un triplet :</strong> avec 4 bases et 20 acides aminés → 1 base : 4¹=4 combinaisons (insuffisant) · 2 bases : 4²=16 (insuffisant) · 3 bases : 4³=<strong>64</strong> combinaisons (>20 acides aminés ✓)</div>
+
+      <div class="img-wrap">
+        <img src="images/t2_fig13_code_genetique.png" alt="Table du code génétique" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig13_code_genetique.png</strong>Table du code génétique — 64 codons (doc.22 manuel p.181)</div>
+      </div>
+      <div class="img-caption">Doc.22 — Table du code génétique (64 codons pour 20 acides aminés)</div>
+
+      <div class="sub-title purple">C — Les 3 phases de la traduction</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Phase</th><th>Événements</th></tr>
+          <tr><td><strong>1. Initiation</strong></td><td>Petite sous-unité ribosomale + ARNm au niveau du codon AUG → ARNt-Met se fixe (site P) → Grande sous-unité s'associe</td></tr>
+          <tr><td><strong>2. Élongation</strong></td><td>Lecture codon par codon → ARNt portant AA spécifique (site A) → liaison peptidique entre AA → translocation du ribosome → répétition</td></tr>
+          <tr><td><strong>3. Terminaison</strong></td><td>Codon stop (UAA, UAG ou UGA) → dissociation des sous-unités ribosomales → libération du polypeptide</td></tr>
+        </table>
+      </div>
+
+      <div class="img-row">
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig14_initiation.png" alt="Phase initiation traduction" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig14_initiation.png</strong>Phase d'initiation : ribosome + ARNm + ARNt-Met (doc.24 manuel p.182)</div>
+          </div>
+          <div class="img-caption">Doc.24 — Phase d'initiation</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig15_elongation.png" alt="Phase élongation traduction" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig15_elongation.png</strong>Phase d'élongation : croissance de la chaîne polypeptidique (doc.25 manuel p.183)</div>
+          </div>
+          <div class="img-caption">Doc.25 — Phase d'élongation</div>
+        </div>
+        <div>
+          <div class="img-wrap">
+            <img src="images/t2_fig16_polysome.png" alt="Polysome" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="img-fallback" style="display:none"><span class="ico-ph">🖼️</span><strong>t2_fig16_polysome.png</strong>Un polysome : plusieurs ribosomes sur un même ARNm (doc.16 manuel p.177)</div>
+          </div>
+          <div class="img-caption">Doc.16 — Polysome : ribosomes en série sur ARNm</div>
+        </div>
+      </div>
+
+      <div class="sub-title purple">Texte à trous — La traduction</div>
+      <div class="gap-text" id="gap-trad">
+        La traduction se déroule dans le <select class="gap-select" data-answer="cytoplasme"><option value="">…</option><option>cytoplasme</option><option>noyau</option><option>mitochondrie</option></select> au niveau des <select class="gap-select" data-answer="ribosomes"><option value="">…</option><option>ribosomes</option><option>noyaux</option><option>mitochondries</option></select>. Elle débute au niveau du codon <select class="gap-select" data-answer="AUG"><option value="">…</option><option>AUG</option><option>UAA</option><option>UGA</option></select> (codon d'initiation) qui code pour la <select class="gap-select" data-answer="méthionine"><option value="">…</option><option>méthionine</option><option>valine</option><option>leucine</option></select>. Chaque triplet de bases de l'ARNm est appelé <select class="gap-select" data-answer="codon"><option value="">…</option><option>codon</option><option>anticodon</option><option>triplet ADN</option></select>. L'ARNt possède un <select class="gap-select" data-answer="anticodon"><option value="">…</option><option>anticodon</option><option>codon</option><option>ribosome</option></select> complémentaire du codon. La liaison entre deux acides aminés consécutifs est une liaison <select class="gap-select" data-answer="peptidique"><option value="">…</option><option>peptidique</option><option>ionique</option><option>hydrogène</option></select>. La traduction s'arrête au niveau d'un codon <select class="gap-select" data-answer="stop"><option value="">…</option><option>stop</option><option>AUG</option><option>GUG</option></select> (UAA, UAG ou UGA).
+      </div>
+      <button class="btn-check-gap" onclick="checkGap('gap-trad','score-trad')">Vérifier</button>
+      <div class="gap-score" id="score-trad"></div>
+
+      <div class="qcm-item" style="margin-top:16px">
+        <div class="qnum">Question 5</div>
+        <div class="qtxt">Un polysome est constitué de :</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q5')"><input type="radio" name="c2q5"> a. Un seul ribosome lié à un ARNm, produisant une protéine à la fois</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q5')"><input type="radio" name="c2q5"> b. Plusieurs ribosomes liés à un même ARNm, permettant la synthèse simultanée de plusieurs chaînes polypeptidiques identiques ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q5')"><input type="radio" name="c2q5"> c. Un ribosome lié à plusieurs ARNm différents</div>
+        <button class="btn-verify" onclick="verifyQCM('c2q5',1)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c2q5"></div>
+      </div>
+
+      <div class="qcm-item">
+        <div class="qnum">Question 6</div>
+        <div class="qtxt">Quelle est la séquence d'acides aminés correspondant au fragment d'ARNm : AUG – GUU – CCU – UGA ?</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q6')"><input type="radio" name="c2q6"> a. Met – Val – Pro – Stop (3 acides aminés) ✓</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q6')"><input type="radio" name="c2q6"> b. Met – Val – Pro – Glu (4 acides aminés)</div>
+        <div class="qcm-opt" onclick="selectOpt(this,'c2q6')"><input type="radio" name="c2q6"> c. Val – Pro – Stop (2 acides aminés, AUG non traduit)</div>
+        <button class="btn-verify" onclick="verifyQCM('c2q6',0)">Vérifier</button>
+        <div class="qcm-fb" id="fb-c2q6"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ TAB 4 — SYNTHÈSE ══════════════ -->
+<div class="tab-panel" id="tab-synthese">
+
+  <h2 class="section-title">🗺️ Carte conceptuelle — Thème 2 · Partie I</h2>
+  <canvas id="mindmap-canvas" width="1000" height="520"></canvas>
+
+  <h2 class="section-title">📊 Schéma bilan — De l'ADN au phénotype</h2>
+  <div style="background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)">
+    <div class="schema-expression" style="flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center">
+        <div class="schema-box" style="min-width:130px">🧬 ADN<span class="schema-label">Gène / Brin transcrit</span></div>
+        <div style="text-align:center"><div class="schema-arrow">↓</div><div style="font-size:10px;color:var(--em);font-weight:600">TRANSCRIPTION<br><span style="color:var(--gray6);font-weight:400">Noyau · ARN polymérase</span></div></div>
+        <div class="schema-box teal" style="min-width:130px">📜 ARNm<span class="schema-label">Codons (triplets A,U,G,C)</span></div>
+        <div style="text-align:center"><div class="schema-arrow">↓</div><div style="font-size:10px;color:var(--teal);font-weight:600">TRADUCTION<br><span style="color:var(--gray6);font-weight:400">Cytoplasme · Ribosomes · ARNt</span></div></div>
+        <div class="schema-box purple" style="min-width:130px">🔗 Protéine<span class="schema-label">Chaîne d'acides aminés</span></div>
+        <div style="text-align:center"><div class="schema-arrow">↓</div><div style="font-size:10px;color:var(--purple);font-weight:600">EXPRESSION</div></div>
+        <div class="schema-box amber" style="min-width:130px">👁️ Phénotype<span class="schema-label">Caractère observable</span></div>
+      </div>
+      <div class="info-box green" style="width:100%;text-align:center"><strong>Un gène → une protéine → un phénotype</strong></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">📋 Tableau de synthèse — Transcription vs Traduction</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Critère</th><th class="blue">Transcription</th><th class="purple">Traduction</th></tr>
+      <tr><td><strong>Lieu</strong></td><td>Noyau (chromosomes)</td><td>Cytoplasme (ribosomes)</td></tr>
+      <tr><td><strong>Matrice</strong></td><td>Brin d'ADN (brin transcrit)</td><td>ARNm</td></tr>
+      <tr><td><strong>Produit</strong></td><td>ARNm (simple brin)</td><td>Chaîne polypeptidique</td></tr>
+      <tr><td><strong>Enzyme principale</strong></td><td>ARN polymérase</td><td>Ribosome (ARNr + protéines)</td></tr>
+      <tr><td><strong>Acteurs moléculaires</strong></td><td>ADN, ARN polymérase, nucléotides ARN (A,U,G,C)</td><td>ARNm, ARNt, ribosomes, ATP, acides aminés</td></tr>
+      <tr><td><strong>Règle</strong></td><td>Complémentarité ADN → ARNm (T→A, A→U, G→C, C→G)</td><td>Codon (ARNm) ↔ Anticodon (ARNt)</td></tr>
+      <tr><td><strong>Énergie</strong></td><td>Oui (ATP)</td><td>Oui (ATP indispensable)</td></tr>
+    </table>
+  </div>
+
+  <h2 class="section-title">🃏 Flashcards — Partie I</h2>
+  <p style="font-size:13px;color:var(--gray6);margin-bottom:14px">Cliquez sur une carte pour révéler la réponse.</p>
+  <div class="fc-grid" id="fc-grid"></div>
+
+</div>
+
+<!-- ══════════════ TAB 5 — EXERCICES ══════════════ -->
+<div class="tab-panel" id="tab-eval">
+
+  <h2 class="section-title">✅ QCM — Bilan Partie I</h2>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 1</div>
+    <div class="qtxt">Un gène est défini comme :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev1')"><input type="radio" name="ev1"> a. L'emplacement d'un caractère héréditaire sur le chromosome</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev1')"><input type="radio" name="ev1"> b. Une séquence de bases de l'ADN contrôlant la synthèse d'une protéine ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev1')"><input type="radio" name="ev1"> c. L'ensemble des allèles d'une espèce</div>
+    <button class="btn-verify" onclick="verifyQCM('ev1',1)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev1"></div>
+  </div>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 2</div>
+    <div class="qtxt">La transcription consiste en :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev2')"><input type="radio" name="ev2"> a. La synthèse d'une protéine à partir de l'ARNm dans le cytoplasme</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev2')"><input type="radio" name="ev2"> b. La synthèse d'une copie d'ARNm à partir d'un brin d'ADN dans le noyau ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev2')"><input type="radio" name="ev2"> c. La duplication de l'ADN avant la mitose</div>
+    <button class="btn-verify" onclick="verifyQCM('ev2',1)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev2"></div>
+  </div>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 3</div>
+    <div class="qtxt">L'ARNm diffère de l'ADN par :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev3')"><input type="radio" name="ev3"> a. La présence de ribose (au lieu du désoxyribose) et d'Uracile (au lieu de Thymine) ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev3')"><input type="radio" name="ev3"> b. La présence de deux brins et de thymine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev3')"><input type="radio" name="ev3"> c. Sa localisation uniquement dans le cytoplasme</div>
+    <button class="btn-verify" onclick="verifyQCM('ev3',0)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev3"></div>
+  </div>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 4</div>
+    <div class="qtxt">Le code génétique est dit "dégénéré" car :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev4')"><input type="radio" name="ev4"> a. Il ne fonctionne que chez les organismes dégradés (vieux)</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev4')"><input type="radio" name="ev4"> b. Plusieurs codons différents peuvent coder pour le même acide aminé ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev4')"><input type="radio" name="ev4"> c. Un seul codon code pour plusieurs acides aminés différents</div>
+    <button class="btn-verify" onclick="verifyQCM('ev4',1)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev4"></div>
+  </div>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 5</div>
+    <div class="qtxt">L'ARNt joue le rôle de :</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev5')"><input type="radio" name="ev5"> a. Matrice pour la synthèse de la protéine</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev5')"><input type="radio" name="ev5"> b. Adaptateur : il transporte un acide aminé spécifique et reconnaît le codon correspondant sur l'ARNm ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev5')"><input type="radio" name="ev5"> c. Enzyme qui forme les liaisons peptidiques</div>
+    <button class="btn-verify" onclick="verifyQCM('ev5',1)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev5"></div>
+  </div>
+
+  <div class="qcm-item">
+    <div class="qnum">Question 6</div>
+    <div class="qtxt">Deux parents porteurs sains de la drépanocytose (A//S) peuvent avoir :
+    </div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev6')"><input type="radio" name="ev6"> a. Uniquement des enfants sains</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev6')"><input type="radio" name="ev6"> b. Des enfants sains (A//A), des porteurs (A//S) et des malades (S//S) dans des proportions 1:2:1 ✓</div>
+    <div class="qcm-opt" onclick="selectOpt(this,'ev6')"><input type="radio" name="ev6"> c. Uniquement des porteurs sains (A//S)</div>
+    <button class="btn-verify" onclick="verifyQCM('ev6',1)">Vérifier</button>
+    <div class="qcm-fb" id="fb-ev6"></div>
+  </div>
+
+  <h2 class="section-title">📝 Texte à trous — Bilan Partie I</h2>
+  <div class="gap-text" id="gap-bilan">
+    La génétique étudie la nature et l'expression de l'information génétique portée par l'<select class="gap-select" data-answer="ADN"><option value="">…</option><option>ADN</option><option>ARNm</option><option>protéine</option></select>. Chaque <select class="gap-select" data-answer="gène"><option value="">…</option><option>gène</option><option>allèle</option><option>codon</option></select> est une séquence de bases qui contrôle la synthèse d'une protéine. Les formes différentes d'un même gène sont des <select class="gap-select" data-answer="allèles"><option value="">…</option><option>allèles</option><option>codons</option><option>ribosomes</option></select>. L'expression du gène commence par la <select class="gap-select" data-answer="transcription"><option value="">…</option><option>transcription</option><option>traduction</option><option>réplication</option></select> dans le noyau : l'ADN est copié en <select class="gap-select" data-answer="ARNm"><option value="">…</option><option>ARNm</option><option>ARNt</option><option>ADN complémentaire</option></select>. Puis dans le cytoplasme, la <select class="gap-select" data-answer="traduction"><option value="">…</option><option>traduction</option><option>transcription</option><option>réplication</option></select> permet la synthèse d'une protéine grâce aux <select class="gap-select" data-answer="ribosomes"><option value="">…</option><option>ribosomes</option><option>mitochondries</option><option>noyaux</option></select>. Dans la drépanocytose, une seule <select class="gap-select" data-answer="base azotée"><option value="">…</option><option>base azotée</option><option>liaison peptidique</option><option>acide aminé</option></select> modifiée dans l'ADN suffit à changer le phénotype.
+  </div>
+  <button class="btn-check-gap" onclick="checkGap('gap-bilan','score-bilan')">Vérifier</button>
+  <div class="gap-score" id="score-bilan"></div>
+
+</div>
+
+<footer>
+  <strong>INGÉNIEUR Mohamed CHAGRAOUI</strong><br>
+  Enseignant SVT · Candidat CAPES SVT 2026 · École Al-Shu'la, Ariana · Tunisie
+</footer>
+
+<script>
+/* ── TABS ── */
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  updateProgress();
+  if(id==='synthese') setTimeout(drawMindMap,120);
+}
+function toggleActivity(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+function updateProgress(){
+  const tabs=document.querySelectorAll('.tab-btn');
+  const idx=Array.from(tabs).indexOf(document.querySelector('.tab-btn.active'));
+  document.getElementById('progress-bar').style.width=((idx+1)/tabs.length*100)+'%';
+}
+updateProgress();
+
+/* ── PREREQ ── */
+const prereqData=[
+  {q:"L'ADN est composé de deux brins enroulés en double hélice. Ses bases azotées sont :",opts:["A, U, G, C","A, T, G, C ✓","A, T, G, U"],ans:1},
+  {q:"La méiose est une division cellulaire qui aboutit à :",opts:["2 cellules diploïdes (2n)","4 cellules haploïdes (n) ✓","2 cellules haploïdes (n)"],ans:1},
+  {q:"La fécondation réunit :",opts:["Deux cellules diploïdes (2n+2n)","Un spermatozoïde (n) et un ovule (n) pour former un œuf (2n) ✓","Deux cellules haploïdes produisant une cellule haploïde"],ans:1},
+  {q:"Les protéines sont des chaînes d'acides aminés liés par :",opts:["Des liaisons ioniques","Des liaisons peptidiques ✓","Des liaisons ADN"],ans:1},
+];
+const pc=document.getElementById('prereq-container');
+prereqData.forEach((d,i)=>{
+  const div=document.createElement('div');div.className='prereq-q';
+  div.innerHTML=`<div class="qlbl">Préacquis ${i+1}</div><div class="qtxt">${d.q}</div>`
+    +d.opts.map((o,j)=>`<button class="prereq-opt" onclick="answerPrereq(this,${j===d.ans})">${o.replace(' ✓','')}</button>`).join('');
+  pc.appendChild(div);
+});
+function answerPrereq(btn,correct){
+  if(btn.parentElement.querySelector('.correct-ans,.wrong-ans'))return;
+  btn.classList.add(correct?'correct-ans':'wrong-ans');
+  if(!correct){
+    const items=document.querySelectorAll('.prereq-q');
+    const qIdx=Array.from(items).indexOf(btn.parentElement);
+    btn.parentElement.querySelectorAll('.prereq-opt')[prereqData[qIdx].ans].classList.add('correct-ans');
+  }
+}
+
+/* ── QCM ── */
+function selectOpt(opt,group){
+  const parent=opt.closest('.qcm-item');
+  if(parent.querySelector('.correct,.wrong,.missed'))return;
+  const inp=opt.querySelector('input');
+  if(inp&&inp.type==='radio'){parent.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);inp.checked=true;}
+}
+function verifyQCM(group,correctIdx){
+  const btn=document.querySelector(`.btn-verify[onclick*="'${group}'"]`);
+  const parent=btn.closest('.qcm-item');
+  const opts=parent.querySelectorAll('.qcm-opt');
+  let chosen=-1;
+  opts.forEach((o,i)=>{if(o.querySelector('input')&&o.querySelector('input').checked)chosen=i;});
+  if(chosen===-1)return;
+  opts.forEach((o,i)=>{
+    if(i===correctIdx)o.classList.add('correct');
+    else if(i===chosen)o.classList.add('wrong');
+    o.style.pointerEvents='none';
+  });
+  const fb=document.getElementById('fb-'+group);
+  fb.classList.add('show',chosen===correctIdx?'ok':'ko');
+  fb.textContent=chosen===correctIdx?'✅ Correct !':'❌ Incorrect. La bonne réponse est surlignée en vert.';
+}
+
+/* ── GAP FILL ── */
+function checkGap(cid,sid){
+  const c=document.getElementById(cid);
+  const sels=c.querySelectorAll('.gap-select');
+  let correct=0;
+  sels.forEach(s=>{
+    s.classList.remove('correct','wrong');
+    if(s.value==='')return;
+    if(s.value===s.dataset.answer){s.classList.add('correct');correct++;}
+    else s.classList.add('wrong');
+  });
+  const sc=document.getElementById(sid);
+  sc.classList.add('show');
+  sc.style.color=correct===sels.length?'var(--em)':'var(--red)';
+  sc.textContent=`Score : ${correct} / ${sels.length} ${correct===sels.length?'🎉 Parfait !':'— Corrections en rouge.'}`;
+}
+
+/* ── TABLE CHECKS ── */
+function checkDefs(){
+  const ans={def1:'ok',def2:'ok',def3:'ok',def4:'ok'};
+  let c=0,t=4;
+  for(const[id,a] of Object.entries(ans)){
+    const s=document.getElementById(id);s.classList.remove('correct','wrong');
+    if(s.value===a){s.classList.add('correct');c++;}
+    else if(s.value!=='')s.classList.add('wrong');
+  }
+  const sc=document.getElementById('score-defs');
+  sc.classList.add('show');sc.style.color=c===t?'var(--em)':'var(--red)';
+  sc.textContent=`Score : ${c} / ${t} ${c===t?'🎉 Parfait !':'— Erreurs en rouge.'}`;
+}
+function checkSeq(){
+  const ans={seq1:'ok',seq2:'ok'};
+  let c=0,t=2;
+  for(const[id,a] of Object.entries(ans)){
+    const s=document.getElementById(id);s.classList.remove('correct','wrong');
+    if(s.value===a){s.classList.add('correct');c++;}
+    else if(s.value!=='')s.classList.add('wrong');
+  }
+  const sc=document.getElementById('score-seq');
+  sc.classList.add('show');sc.style.color=c===t?'var(--em)':'var(--red)';
+  sc.textContent=`Score : ${c} / ${t} ${c===t?'🎉 Parfait !':'— Corrections en rouge.'}`;
+}
+
+/* ── FLASHCARDS ── */
+const fcData=[
+  {q:"Définir : gène, locus, allèle, génotype.",a:"Gène : séquence ADN → synthèse d'une protéine. Locus : emplacement fixe du gène sur le chromosome. Allèle : forme particulière d'un gène. Génotype : ensemble des allèles d'un individu."},
+  {q:"Quelle est la différence entre phénotype et génotype ?",a:"Phénotype = aspect observable d'un caractère (morphologique, cellulaire, moléculaire). Génotype = information génétique (ADN) qui détermine ce phénotype."},
+  {q:"Qu'est-ce que la drépanocytose ? Quelle est sa cause moléculaire ?",a:"Maladie héréditaire de l'hémoglobine. Cause : remplacement d'une base ADN (CTC→CAC) → Glu remplacé par Val en position 6 → HbS anormale → hématies en faucilles."},
+  {q:"Définir homozygote et hétérozygote.",a:"Homozygote : les 2 allèles d'un locus sont identiques (ex: A//A ou S//S). Hétérozygote : les 2 allèles sont différents (ex: A//S = porteur sain de la drépanocytose)."},
+  {q:"Quelles sont les 2 étapes de l'expression génétique ?",a:"1. Transcription (noyau) : ADN → ARNm par l'ARN polymérase selon la complémentarité. 2. Traduction (cytoplasme) : ARNm → protéine grâce aux ribosomes, ARNt et ATP."},
+  {q:"Comment diffère l'ARNm de l'ADN ?",a:"ARNm : simple brin, ribose, bases AGCU (U remplace T). ADN : double brin, désoxyribose, bases ATGC. L'ARNm copie le brin transcrit de l'ADN."},
+  {q:"Définir codon, anticodon, codon stop.",a:"Codon : triplet de bases de l'ARNm → 1 acide aminé. Anticodon : triplet complémentaire sur l'ARNt. Codon stop (UAA, UAG, UGA) : aucun AA — arrête la traduction."},
+  {q:"Pourquoi un triplet de bases est-il nécessaire pour le code génétique ?",a:"4 bases → 4¹=4 combinaisons (insuffisant pour 20 AA). 4²=16 (insuffisant). 4³=64 (>20 AA ✓). Un triplet (codon) est la solution minimale pour coder tous les 20 acides aminés."},
+  {q:"Albinisme vs phénylcétonurie : quelle enzyme est absente dans chaque cas ?",a:"Albinisme : absence de tyrosinase (E2) → tyrosine ne devient pas mélanine → peau dépigmentée. Phénylcétonurie : absence de phénylalanine hydroxylase (E1) → accumulation de phénylalanine → arriération mentale."},
+  {q:"Qu'est-ce qu'un polysome ?",a:"Ensemble de plusieurs ribosomes fixés sur un même ARNm, permettant la synthèse simultanée de nombreuses copies d'une même protéine. Présent dans les cellules à forte activité de synthèse."},
+  {q:"Définir espèce et lignée en génétique.",a:"Espèce : groupe d'individus interféconds produisant des descendants fertiles, même formule chromosomique (2n). Lignée (race/variété) : sous-groupe d'une espèce avec des caractères stables transmis sur plusieurs générations."},
+  {q:"Comment la reproduction sexuée maintient-elle 2n ?",a:"La méiose réduit de 2n à n (haploïdie). La fécondation réunit 2 gamètes à n chromosomes → rétablit 2n. Ainsi chaque génération reçoit n chromosomes de chaque parent = 2n au total."},
+];
+const fcGrid=document.getElementById('fc-grid');
+fcData.forEach((d,i)=>{
+  fcGrid.innerHTML+=`<div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front"><div class="qlbl">Question</div><div class="qtxt">${d.q}</div><div class="qhint">Cliquer pour la réponse</div></div>
+      <div class="fc-back"><div class="albl">Réponse</div><div class="atxt">${d.a}</div><div class="cnt">${i+1}/${fcData.length}</div></div>
+    </div></div>`;
+});
+
+/* ── MIND MAP ── */
+function drawMindMap(){
+  const canvas=document.getElementById('mindmap-canvas');
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||1000; canvas.width=W; canvas.height=500;
+  ctx.clearRect(0,0,W,500);
+  const cx=W/2;
+
+  const nodes=[
+    {id:'root',x:cx,y:250,text:'THÈME 2\nGénétique',color:'#047857',tc:'#fff',w:130,h:50,bold:true},
+    // CH1
+    {id:'ch1',x:cx-230,y:120,text:'Ch.1\nCaractères→Gènes',color:'#059669',tc:'#fff',w:140,h:46},
+    {id:'espece',x:cx-400,y:65,text:'Espèce / Lignée',color:'#6ee7b7',tc:'#064e3b',w:130,h:28},
+    {id:'pheno',x:cx-400,y:105,text:'Phénotype / Génotype',color:'#6ee7b7',tc:'#064e3b',w:155,h:28},
+    {id:'gene',x:cx-400,y:145,text:'Gène / Allèle / Locus',color:'#6ee7b7',tc:'#064e3b',w:150,h:28},
+    {id:'drep',x:cx-400,y:185,text:'Drépanocytose',color:'#b91c1c',tc:'#fff',w:120,h:28},
+    // CH2
+    {id:'ch2',x:cx+230,y:120,text:'Ch.2\nExpression génétique',color:'#0f766e',tc:'#fff',w:150,h:46},
+    {id:'transc',x:cx+400,y:55,text:'Transcription',color:'#99f6e4',tc:'#134e4a',w:120,h:28},
+    {id:'arnm',x:cx+490,y:55,text:'ADN → ARNm',color:'#99f6e4',tc:'#134e4a',w:105,h:28},
+    {id:'trad',x:cx+400,y:100,text:'Traduction',color:'#99f6e4',tc:'#134e4a',w:110,h:28},
+    {id:'proto',x:cx+490,y:100,text:'ARNm → Protéine',color:'#99f6e4',tc:'#134e4a',w:125,h:28},
+    {id:'code',x:cx+400,y:145,text:'Code génétique',color:'#99f6e4',tc:'#134e4a',w:120,h:28},
+    {id:'codon',x:cx+490,y:145,text:'64 codons · triplets',color:'#99f6e4',tc:'#134e4a',w:130,h:28},
+    {id:'alb',x:cx+400,y:190,text:'Albinisme / PKU',color:'#7c3aed',tc:'#fff',w:120,h:28},
+    // ADN
+    {id:'adn',x:cx,y:390,text:'ADN\n(information génétique)',color:'#1e5fa3',tc:'#fff',w:165,h:46},
+    {id:'phentot',x:cx-120,y:450,text:'→ Phénotype',color:'#d97706',tc:'#fff',w:115,h:28},
+    {id:'prot',x:cx+120,y:450,text:'→ Protéine',color:'#7c3aed',tc:'#fff',w:110,h:28},
+  ];
+
+  const links=[
+    ['root','ch1'],['root','ch2'],['root','adn'],
+    ['ch1','espece'],['ch1','pheno'],['ch1','gene'],['ch1','drep'],
+    ['ch2','transc'],['ch2','trad'],['ch2','code'],['ch2','alb'],
+    ['transc','arnm'],['trad','proto'],['code','codon'],
+    ['adn','phentot'],['adn','prot'],
+  ];
+
+  ctx.lineWidth=1.5;
+  links.forEach(([a,b])=>{
+    const nA=nodes.find(n=>n.id===a),nB=nodes.find(n=>n.id===b);
+    ctx.beginPath();ctx.strokeStyle='#d1fae5';
+    ctx.moveTo(nA.x,nA.y);
+    ctx.bezierCurveTo((nA.x+nB.x)/2,nA.y,(nA.x+nB.x)/2,nB.y,nB.x,nB.y);
+    ctx.stroke();
+  });
+
+  nodes.forEach(n=>{
+    ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(n.x-n.w/2,n.y-n.h/2,n.w,n.h,8);
+    else ctx.rect(n.x-n.w/2,n.y-n.h/2,n.w,n.h);
+    ctx.fillStyle=n.color;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=n.tc;
+    const lines=n.text.split('\n');
+    lines.forEach((line,li)=>{
+      ctx.font=`${n.bold?'bold ':''}12px 'Source Sans 3',sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(line,n.x,n.y+(li-(lines.length-1)/2)*14);
+    });
+  });
+}
+</script>
+</body>
+</html>
