@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch6 — Microorganismes et Production d'Aliments</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#6A1B9A;--cl:#7B1FA2;--cbg:#faf5ff;--cs:#f3e5f5;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#faf5ff;--tx:#1a1a1a;--mu:#888;
+  --brd:#e1bee7;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:18px;line-height:1.7;}
+header{background:linear-gradient(135deg,#311B92,#6A1B9A 50%,#7B1FA2);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#e1bee7;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#e1bee7;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 10px;font-size:.72rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:1100px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--c);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#311B92,#6A1B9A);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.tip{background:#fdf6ec;border:2px solid var(--j);border-radius:11px;margin:12px 0;overflow:hidden;}
+.tip-head{padding:10px 16px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:.9rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:13px 16px 15px;font-size:.89rem;line-height:1.8;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+.table-scroll{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--c);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.ret{background:var(--jl);border:2px solid var(--j);border-radius:10px;padding:12px 15px;margin:12px 0;}
+.ret h4{color:var(--o);font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-50{display:block;max-width:50%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--cs);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--cs);border-radius:8px;border-left:5px solid var(--c);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:400px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#311B92;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--c);margin-bottom:8px;display:flex;align-items:center;}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--cs);border-radius:10px;border-left:5px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+footer{background:linear-gradient(135deg,#311B92,#6A1B9A 50%,#7B1FA2);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#311B92,#6A1B9A 50%,#7B1FA2);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#e1bee7;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:2.2rem;margin-bottom:7px;}
+.cnode .cn-title{font-size:.85rem;font-weight:700;margin-bottom:4px;}
+.cnode .cn-sub{font-size:.74rem;opacity:.88;line-height:1.4;}
+.cn-a{background:linear-gradient(135deg,#E65100,#F57F17);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid #E65100;}
+.cn-panel.b{border-left:6px solid #0277BD;}
+.cn-panel.c{border-left:6px solid #1B5E20;}
+.cn-panel.d{border-left:6px solid #37474F;}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 4px;font-size:.62rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 6 — Des Microorganismes au Service de la Production des Aliments</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie III · Pages 107–114 · 3 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">🍞 Act.1 — Le Pain</button>
+  <button class="t"     onclick="showTab(3)">🥛 Act.2 — Le Yaourt</button>
+  <button class="t"     onclick="showTab(4)">🧀 Act.3 — Le Fromage</button>
+  <button class="t"     onclick="showTab(5)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(6)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(7)">📋 Révision</button>
+  <button class="t"     onclick="showTab(8)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(9)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#311B92,#6A1B9A 50%,#7B1FA2);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#e1bee7;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie III), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #e1bee7;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#e1bee7;color:#311B92;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Montrer le <strong>rôle des levures et des bactéries</strong> dans la production d'aliments (pain, yaourt, fromage)</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.107)</h2>
+    <p class="expl-text">L'environnement n'est pas seulement source de nuisance pour la santé. L'<strong>industrie alimentaire</strong> exploite divers <strong>microorganismes</strong> pour fabriquer des aliments très consommés : <strong>pain, yaourt, fromage</strong>. La découverte de microorganismes utiles et la sélection de souches performantes est une préoccupation majeure de la recherche en agroalimentaire. <strong>Louis Pasteur</strong> (1822-1895) fut le premier à démontrer l'intervention de microorganismes dans ces productions et mit au point la <strong>pasteurisation</strong>. En 1929, Daniel Carasso créa le premier yaourt industriel (Danone).</p>
+    <div class="img-grid">
+      <img src="images/T3Ch6_Doc01_morceaux_fromage.PNG" alt="Morceaux de fromage" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — 1. Des morceaux de fromage (p.107)</div>'">
+      <img src="images/T3Ch6_Doc02_baguette_pain.PNG" alt="Baguette de pain" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — 2. Une baguette de pain (p.107)</div>'">
+    </div>
+    <img src="images/T3Ch6_Doc03_pot_yaourt.PNG" alt="Pot de yaourt" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.3 — 3. Un pot de yaourt (p.107)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis — Bilan Ch.4 (Respiration) et Ch.5 (Microorganismes)</h2>
+    <p class="expl-text">La <strong>respiration cellulaire</strong> (Ch.4) dégrade complètement le glucose en présence d'O₂ (CO₂ + H₂O + 36 ATP). En <strong>absence d'O₂</strong>, certains organismes réalisent des <strong>fermentations</strong> : dégradation incomplète du glucose produisant peu d'ATP mais des molécules utiles (éthanol, acide lactique). Tous les microorganismes ne sont pas pathogènes (Ch.5) — certains sont <strong>indispensables</strong> à l'industrie alimentaire.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Préacquis</div><div id="mq0-q">
+      <p>1. La fermentation se déroule <select class="bl" data-rep="en absence d'O₂ (anaérobie)"><option value="">—</option><option>en présence d'O₂</option><option>en absence d'O₂ (anaérobie)</option></select>.</p>
+      <p>2. La pasteurisation consiste à <select class="bl" data-rep="chauffer brièvement (55-80°C) pour détruire les microbes sans altérer le goût"><option value="">—</option><option>stériliser à 120°C</option><option>chauffer brièvement (55-80°C) pour détruire les microbes sans altérer le goût</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq0')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq0')">↺</button><div class="mq-fb" id="mq0-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Contrairement au Ch.5 qui traitait des microorganismes <strong>pathogènes</strong>, ce chapitre montre leur <strong>utilité</strong>. Les fermentations sont des processus métaboliques ancestraux qui permettent aux microorganismes de survivre sans O₂. L'Homme a appris à les exploiter pour transformer et conserver les aliments.</div></div>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 2 Questions directrices (p.108)</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Comment l'Homme exploite-t-il les <strong>microorganismes</strong> pour produire des aliments ?</li>
+      <li>Y a-t-il une relation entre l'<strong>activité cellulaire</strong> du microorganisme et les qualités des aliments fabriqués ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>De nombreux microorganismes — <strong>champignons</strong> (levures, moisissures) et <strong>bactéries</strong> (lactiques) — sont utilisés dans la fabrication d'aliments. Le pain résulte de la <strong>fermentation alcoolique</strong> par la levure (<em>Saccharomyces cerevisiae</em>) : dégagement de CO₂ qui fait lever la pâte. Le yaourt provient de la <strong>fermentation lactique</strong> par des bactéries (<em>Lactobacillus bulgaricus</em>, <em>Streptococcus thermophilus</em>) : transformation du lactose en acide lactique qui fait cailler le lait. Les fromages doivent leur diversité à l'action de champignons (<em>Pénicillium roqueforti</em>) et à la présure pendant l'affinage.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🍞</div><div class="cn-title">Pain</div><div class="cn-sub">Fermentation alcoolique</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🥛</div><div class="cn-title">Yaourt</div><div class="cn-sub">Fermentation lactique</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">🧀</div><div class="cn-title">Fromage</div><div class="cn-sub">Affinage · Présure</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges</div><div class="cn-sub">Erreurs fréquentes</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:#E65100">🍞 Le Pain — Fermentation alcoolique</h3><p class="expl-text">La levure de boulangerie (<em>Saccharomyces cerevisiae</em>) est un <strong>champignon unicellulaire</strong> eucaryote. Mélangée à la pâte, elle hydrolyse l'amidon de la farine en maltose puis glucose, puis fermente ce glucose en <strong>éthanol + CO₂</strong>. Le CO₂ gazeux fait <strong>lever la pâte</strong> en formant des alvéoles. L'éthanol s'évapore à la cuisson. Si la fermentation est trop longue → goût aigre (production d'acide).</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:#0277BD">🥛 Le Yaourt — Fermentation lactique</h3><p class="expl-text">Les <strong>bactéries lactiques</strong> (<em>Lactobacillus bulgaricus</em>, <em>Streptococcus thermophilus</em>) sont des <strong>procaryotes</strong>. Elles transforment le <strong>lactose</strong> (sucre du lait) en <strong>acide lactique</strong>. L'acidification provoque la <strong>coagulation</strong> des protéines du lait (caséine) → formation du gel caractéristique du yaourt. Le yaourt au « bifidus » utilise d'autres souches (<em>Bifidobacterium</em>).</p></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:#1B5E20">🧀 Le Fromage — Diversité microbienne</h3><p class="expl-text">La <strong>présure</strong> (enzyme) fait cailler le lait. L'ajout de souches de <strong>champignons</strong> (<em>Pénicillium roqueforti</em> pour le Roquefort) et l'<strong>affinage</strong> en cave (T° constante, humidité) permettent le développement de moisissures qui donnent au fromage sa texture, son goût et son arôme uniques. La diversité des souches utilisées explique la diversité des fromages.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:var(--r)">⚠️ 3 Pièges du CAPES</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Ne pas confondre fermentation et respiration <span style="margin-left:auto">▼</span></div><div class="piege-body">La <strong>fermentation</strong> est une dégradation <strong>incomplète</strong> du glucose <strong>sans O₂</strong>, produisant peu d'ATP (2 ATP) et des déchets organiques (éthanol ou acide lactique). La <strong>respiration</strong> est complète, nécessite O₂, produit 36 ATP et des déchets minéraux (CO₂ + H₂O).</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Distinguer fermentation alcoolique et lactique <span style="margin-left:auto">▼</span></div><div class="piege-body"><strong>Alcoolique</strong> = levures (champignons) → produit de l'<strong>éthanol + CO₂</strong> (pain, vin, bière). <strong>Lactique</strong> = bactéries → produit de l'<strong>acide lactique</strong> (yaourt, fromage, choucroute). Deux types de microorganismes différents, deux produits différents.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ La levure n'est PAS une bactérie <span style="margin-left:auto">▼</span></div><div class="piege-body">La levure (<em>Saccharomyces cerevisiae</em>) est un <strong>champignon unicellulaire EUCARYOTE</strong> (possède un noyau, des mitochondries). Les bactéries lactiques sont des <strong>PROCARYOTES</strong> (pas de noyau). Cette distinction cellulaire est fondamentale en microbiologie.</div></div></div>
+
+  <h3 style="margin-top:18px;">🔗 Connexions</h3>
+  <div class="connexion-grid">
+    <div class="conn-item" style="border-color:var(--c);background:var(--cs)"><div class="conn-ch" style="color:var(--c)">← Ch.4 — Respiration</div><p style="font-size:.86rem">La fermentation est une voie métabolique anaérobie alternative à la respiration cellulaire (Ch.4).</p></div>
+    <div class="conn-item" style="border-color:#B71C1C;background:#ffebee"><div class="conn-ch" style="color:#B71C1C">← Ch.5 — Microorganismes pathogènes</div><p style="font-size:.86rem">Contrairement aux microbes dangereux du Ch.5, ceux-ci sont <strong>utiles</strong> et exploités par l'industrie alimentaire.</p></div>
+  </div>
+
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi la pâte à pain lève-t-elle grâce à la levure, mais pas avec de la levure bouillie ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">La levure <strong>vivante</strong> fermente le glucose en produisant du <strong>CO₂ gazeux</strong> qui gonfle la pâte. La levure <strong>bouillie</strong> est morte : ses enzymes (zymases) sont dénaturées par la chaleur, la fermentation ne peut plus avoir lieu → pas de CO₂ → pas de levée de la pâte. C'est la même logique que l'expérience du filtrat bouilli au Ch.3.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — LE PAIN ══ -->
+<div class="pan" id="p2">
+  <div class="sech">🍞 Activité 1 — Le Pain à la Levure (p.109)</div>
+  <div class="card"><h3 style="color:var(--c);">La fermentation alcoolique par Saccharomyces cerevisiae</h3>
+    <p class="expl-text">Pour fabriquer du bon pain, on mélange de la <strong>levure de boulangerie</strong> diluée dans de l'eau avec la pâte de farine légèrement salée, puis on laisse reposer à 20-30°C jusqu'à ce que la pâte « lève ». Si l'attente est insuffisante, la pâte ne lève pas assez ; si elle est trop longue, le pain aura un goût aigre. La levure est un <strong>champignon microscopique unicellulaire</strong> eucaryote qui se reproduit par bourgeonnement.</p>
+    <img src="images/T3Ch6_Doc04_pain_couleur_texture.PNG" alt="Le pain : couleur, texture, goût" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.4 — 4. Le pain : une couleur, une texture et un goût (p.109)</div>'">
+    <img src="images/T3Ch6_Doc05_levure_bourgeonnement.PNG" alt="Levure en bourgeonnement" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — 5. Levure en bourgeonnement — observation microscopique (p.109)</div>'">
+    <p class="expl-text">En présence d'O₂, les cellules de levure <strong>respirent</strong> : glucose → CO₂ + H₂O + 36 ATP. Mais lorsque le milieu devient <strong>riche en glucose</strong> (> 8 g/l) ou <strong>dépourvu d'O₂</strong>, les levures survivent en réalisant la <strong>fermentation alcoolique</strong> : glucose → <strong>2 éthanol + 2 CO₂ + 2 ATP</strong>. C'est le CO₂ dégagé qui fait gonfler la pâte. Au four, la chaleur évapore l'éthanol et coagule les protéines de la pâte, fixant la structure alvéolée du pain.</p>
+    <img src="images/T3Ch6_Doc12_ultrastructure_levure.PNG" alt="Ultrastructure levure" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.12 — 12. Schéma de l&apos;ultrastructure d&apos;une cellule de levure (p.113)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. La levure de boulanger est un <select class="bl" data-rep="champignon unicellulaire eucaryote"><option value="">—</option><option>champignon unicellulaire eucaryote</option><option>bactérie procaryote</option></select>.</p>
+      <p>2. La fermentation alcoolique produit <select class="bl" data-rep="éthanol + CO₂ + 2 ATP"><option value="">—</option><option>acide lactique uniquement</option><option>éthanol + CO₂ + 2 ATP</option></select>.</p>
+      <p>3. La pâte lève grâce au dégagement de <select class="bl" data-rep="CO₂ (dioxyde de carbone)"><option value="">—</option><option>CO₂ (dioxyde de carbone)</option><option>O₂ (dioxygène)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La levure <em>Saccharomyces cerevisiae</em> possède un <strong>métabolisme flexible</strong> : en présence d'O₂ elle respire (rentable : 36 ATP), en absence d'O₂ ou en excès de glucose elle fermente (peu rentable : 2 ATP, mais permet la survie). Ce basculement métabolique, appelé <strong>effet Crabtree</strong> chez la levure (répression de la respiration par le glucose), illustre l'adaptation métabolique des microorganismes aux conditions du milieu. L'Homme exploite ce phénomène depuis des millénaires pour la panification.</div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — LE YAOURT ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🥛 Activité 2 — Le Yaourt (p.110-111)</div>
+  <div class="card"><h3 style="color:var(--c);">La fermentation lactique par les bactéries</h3>
+    <p class="expl-text">On peut fabriquer du yaourt à la maison : on remplit de <strong>lait bouilli</strong> quelques pots, on rajoute une cuillère de yaourt du commerce (qui apporte les ferments), et on laisse reposer dans un endroit tiède (≈ 40°C). Cette opération aboutit à la <strong>coagulation du lait</strong>. Le lait est bouilli au préalable pour éliminer les microorganismes indésirables et éviter toute contamination.</p>
+    <img src="images/T3Ch6_Doc06_technique_frottis_yaourt.PNG" alt="Technique frottis yaourt" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.6 — 6. Technique de préparation d&apos;un frottis coloré de Yaourt (p.110)</div>'">
+    <img src="images/T3Ch6_Doc07_lactobacillus_lait.PNG" alt="Lactobacillus du lait" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — 7. Lactobacillus du lait — observation microscopique (p.110)</div>'">
+    <p class="expl-text">L'observation microscopique d'un frottis de yaourt révèle la présence de <strong>lactobacilles</strong> (bactéries en forme de bâtonnets) et de <strong>streptocoques</strong> (bactéries en chaînette). Ces <strong>bactéries lactiques</strong> sécrètent des enzymes qui catalysent l'hydrolyse du <strong>lactose</strong> (C₁₂H₂₂O₁₁) en glucose puis la transformation du glucose en <strong>acide lactique</strong> (C₃H₆O₃). L'acidification abaisse le pH et provoque la <strong>coagulation des protéines du lait</strong> (caséine), formant le gel caractéristique du yaourt.</p>
+    <img src="images/T3Ch6_Doc08_fabrication_yaourt_industriel.PNG" alt="Fabrication yaourt industriel" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.8 — 8. Fabrication de Yaourt industriel — schéma du procédé (p.111)</div>'">
+    <p class="expl-text">Le yaourt industriel suit le même principe : lait pasteurisé (chauffé brièvement à 55-80°C pour éliminer les microbes sans altérer le goût), ensemencé avec des souches sélectionnées de <strong>Streptococcus thermophilus</strong> et <strong>Lactobacillus bulgaricus</strong>, puis placé en cuve de fermentation hermétique (anaérobiose). On peut ajouter du sucre, des arômes ou des fruits stérilisés. Les pots sont remplis et fermés de façon <strong>aseptique</strong> (sans contamination). Les yaourts au « bifidus » utilisent d'autres souches (<em>Bifidobacterium bifidum</em>) qui leur confèrent une onctuosité particulière.</p>
+    <div class="focus-box"><strong>🔍 Pourquoi le yaourt est-il plus digeste que le lait ?</strong> Le lactose du lait est hydrolysé par les bactéries lactiques — le yaourt contient donc moins de lactose et plus d'acide lactique. Les personnes intolérantes au lactose digèrent ainsi mieux le yaourt que le lait frais.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 2</div><div id="mq2-q">
+      <p>1. Les bactéries lactiques sont des <select class="bl" data-rep="procaryotes (pas de noyau)"><option value="">—</option><option>procaryotes (pas de noyau)</option><option>eucaryotes (avec noyau)</option></select>.</p>
+      <p>2. La fermentation lactique transforme le lactose en <select class="bl" data-rep="acide lactique"><option value="">—</option><option>éthanol</option><option>acide lactique</option></select>.</p>
+      <p>3. La pasteurisation consiste à <select class="bl" data-rep="chauffer à 55-80°C pour éliminer les microbes indésirables"><option value="">—</option><option>stériliser à 120°C</option><option>chauffer à 55-80°C pour éliminer les microbes indésirables</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2')">↺</button><div class="mq-fb" id="mq2-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> La fermentation lactique est réalisée exclusivement par des <strong>bactéries</strong> (procaryotes), contrairement à la fermentation alcoolique réalisée par des <strong>levures</strong> (champignons eucaryotes). Le produit final — l'acide lactique — abaisse le pH du lait jusqu'à environ 4,5, ce qui provoque la <strong>coagulation de la caséine</strong> (protéine majoritaire du lait). Cette acidification contribue aussi à la <strong>conservation</strong> du yaourt en inhibant le développement de bactéries pathogènes.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — LE FROMAGE ══ -->
+<div class="pan" id="p4">
+  <div class="sech">🧀 Activité 3 — Le Fromage (p.111-112)</div>
+  <div class="card"><h3 style="color:var(--c);">La diversité des fromages : l'exemple du Roquefort</h3>
+    <p class="expl-text">L'industrie alimentaire fabrique des centaines de types de fromages qui se distinguent par leur aspect et leur goût. Chaque fromage résulte d'un <strong>procédé de fabrication spécifique</strong> faisant intervenir des microorganismes variés. L'exemple du <strong>Roquefort</strong> illustre parfaitement cette diversité.</p>
+    <img src="images/T3Ch6_Doc09_fabrication_roquefort.PNG" alt="Fabrication du Roquefort" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — 9. Fabrication du Roquefort — schéma/texte explicatif (p.111)</div>'">
+    <p class="expl-text"><strong>Étapes de fabrication du Roquefort :</strong> On utilise du <strong>lait de brebis</strong> chauffé à 30°C. On y ajoute de la <strong>présure</strong> (enzyme qui fait cailler le lait) et un champignon microscopique : <strong>Penicillium roqueforti</strong>. Le fromage est égoutté (privé d'eau) puis placé dans des <strong>caves d'affinage</strong> aux conditions idéales pour le développement des champignons : température constante de <strong>8°C</strong> et <strong>taux d'humidité élevé</strong>. L'affineur pique le fromage de petits trous pour évacuer le CO₂ produit par la fermentation du champignon. On emballe ensuite chaque Roquefort dans une feuille d'<strong>étain</strong> pour arrêter l'entrée d'O₂ — le champignon, privé d'O₂, ralentit son métabolisme et se conserve.</p>
+    <img src="images/T3Ch6_Doc10_affinage_fromage.PNG" alt="Affinage du fromage" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10 — 10. Affinage du fromage — photographie des caves (p.112)</div>'">
+    <p class="expl-text"><strong>Rôle des microorganismes dans la diversité des fromages :</strong> Les réactions de fermentation qui se déroulent dans le lait caillé produisent des substances (CO₂, acides, composés aromatiques) qui transforment le goût, l'arôme et la texture du lait de départ. La <strong>diversité des souches</strong> de champignons et de bactéries utilisées, combinée aux conditions d'affinage (température, humidité, durée), explique la <strong>grande variété des fromages</strong> existants dans le monde.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 3</div><div id="mq3-q">
+      <p>1. La présure est une <select class="bl" data-rep="enzyme qui fait cailler le lait (coagulation de la caséine)"><option value="">—</option><option>enzyme qui fait cailler le lait (coagulation de la caséine)</option><option>bactérie lactique</option></select>.</p>
+      <p>2. Le champignon utilisé pour le Roquefort est <select class="bl" data-rep="Penicillium roqueforti"><option value="">—</option><option>Saccharomyces cerevisiae</option><option>Penicillium roqueforti</option></select>.</p>
+      <p>3. L'affinage consiste à <select class="bl" data-rep="laisser le fromage en cave à T° et humidité contrôlées pour développer arômes et texture"><option value="">—</option><option>pasteuriser le lait</option><option>laisser le fromage en cave à T° et humidité contrôlées pour développer arômes et texture</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le fromage illustre la <strong>coopération</strong> entre les enzymes et les microorganismes dans la transformation alimentaire. La <strong>présure</strong> (extrait de l'estomac de veau) contient une enzyme — la <strong>chymosine</strong> — qui hydrolyse spécifiquement la caséine, provoquant la coagulation du lait. Les <strong>champignons</strong> (Penicillium) apportent ensuite les propriétés organoleptiques (goût, arôme, texture) par leurs activités fermentaires pendant l'affinage. L'emballage en feuille d'étain, en limitant l'O₂, ralentit le métabolisme du champignon et permet une <strong>conservation prolongée</strong>.</div></div>
+  </div>
+</div>
+
+<!-- ══ 5 BILAN ══ -->
+<div class="pan" id="p5">
+  <div class="sech">📋 BILAN — Pages 113 (3 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> Le pain — Fermentation alcoolique (p.113)</h3><p style="font-size:.92rem">La levure <em>Saccharomyces cerevisiae</em> est un <select class="bl" data-rep="champignon unicellulaire eucaryote"><option value="">—</option><option>champignon unicellulaire eucaryote</option><option>bactérie procaryote</option></select>. Elle réalise la fermentation <select class="bl" data-rep="alcoolique (glucose → éthanol + CO₂)"><option value="">—</option><option>alcoolique (glucose → éthanol + CO₂)</option><option>lactique (lactose → acide lactique)</option></select>. Le <select class="bl" data-rep="CO₂"><option value="">—</option><option>CO₂</option><option>O₂</option></select> dégagé fait <select class="bl" data-rep="lever la pâte"><option value="">—</option><option>lever la pâte</option><option>colorer la croûte</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Le yaourt — Fermentation lactique (p.113)</h3><p style="font-size:.92rem">Les bactéries <select class="bl" data-rep="Lactobacillus bulgaricus et Streptococcus thermophilus"><option value="">—</option><option>Lactobacillus bulgaricus et Streptococcus thermophilus</option><option>Saccharomyces cerevisiae</option></select> transforment le <select class="bl" data-rep="lactose"><option value="">—</option><option>lactose</option><option>saccharose</option></select> en <select class="bl" data-rep="acide lactique"><option value="">—</option><option>acide lactique</option><option>éthanol</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Le fromage — Diversité (p.113)</h3><p style="font-size:.92rem">Le lait est caillé par la <select class="bl" data-rep="présure (enzyme chymosine)"><option value="">—</option><option>présure (enzyme chymosine)</option><option>chaleur uniquement</option></select>. L'affinage fait intervenir des <select class="bl" data-rep="champignons (ex : Penicillium roqueforti)"><option value="">—</option><option>champignons (ex : Penicillium roqueforti)</option><option>levures uniquement</option></select>. La diversité des souches explique la <select class="bl" data-rep="diversité des fromages"><option value="">—</option><option>diversité des fromages</option><option>pasteurisation</option></select>.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 6 EXERCICES ══ -->
+<div class="pan" id="p6">
+  <div class="sech">📝 Exercices — Manuel p.114</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.114)</h3>
+    <table>
+      <tr><td><strong>1. Les fermentations :</strong></td><td><select class="tcell" data-rep="a- se manifestent lorsque l&apos;O₂ fait défaut, b- s&apos;accompagnent d&apos;une libération d&apos;énergie, c- exigent la présence de microorganismes ou de leurs sécrétions"><option value="">—</option><option>a uniquement</option><option>a + b + c</option></select></td></tr>
+      <tr><td><strong>2. Produit fermentation alcoolique :</strong></td><td><select class="tcell" data-rep="b- l&apos;éthanol"><option value="">—</option><option>a- l&apos;acide lactique</option><option>b- l&apos;éthanol</option></select></td></tr>
+      <tr><td><strong>3. En présence d&apos;O₂ :</strong></td><td><select class="tcell" data-rep="c- les levures respirent et fermentent lorsque le taux de glucose est élevé"><option value="">—</option><option>a- ne peuvent que fermenter</option><option>c- respirent et fermentent si glucose &gt; 8 g/l</option></select></td></tr>
+      <tr><td><strong>4. La pasteurisation :</strong></td><td><select class="tcell" data-rep="a- détruit les microorganismes par la chaleur"><option value="">—</option><option>a- détruit les microorganismes par la chaleur</option><option>b- par voie chimique</option></select></td></tr>
+      <tr><td><strong>5. Qualité d&apos;un yaourt liée à :</strong></td><td><select class="tcell" data-rep="a- choix des souches, b- qualité du lait, c- durée de fabrication"><option value="">—</option><option>a + b + c</option><option>a uniquement</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">🧪 Ex.2 — Fabrication du vinaigre (p.114)</h3>
+    <div class="ctx">Le vinaigre est produit à partir de fruits mûrs écrasés. Les levures naturelles fermentent les sucres en éthanol. L'éthanol exposé à l'air est oxydé en acide acétique par des bactéries Acétobacter.</div>
+    <p style="font-size:.88rem;margin-bottom:7px">1ère étape (levures) : glucose → <select class="bl" data-rep="éthanol + CO₂ (fermentation alcoolique)"><option value="">—</option><option>acide lactique</option><option>éthanol + CO₂ (fermentation alcoolique)</option></select>. 2ème étape (Acétobacter) : éthanol + O₂ → <select class="bl" data-rep="acide acétique (oxydation aérobie)"><option value="">—</option><option>acide acétique (oxydation aérobie)</option><option>CO₂ + H₂O</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">📈 Ex.3 — Croissance de levure (p.115)</h3>
+    <div class="ctx">Courbe de croissance de levure et variation des concentrations en glucose, levures et éthanol.</div>
+    <img src="images/T3Ch6_Doc13_courbe_croissance_levure.PNG" alt="Courbe croissance levure" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — Courbe de la croissance de la levure et variation des substrats (Exercice 3, p.115)</div>'">
+    <p style="font-size:.88rem;margin-bottom:7px">Phase 0-10h : le glucose <select class="bl" data-rep="diminue (consommé)"><option value="">—</option><option>diminue (consommé)</option><option>augmente</option></select>, l'éthanol <select class="bl" data-rep="augmente (produit par fermentation)"><option value="">—</option><option>diminue</option><option>augmente (produit par fermentation)</option></select>, les levures <select class="bl" data-rep="se multiplient (phase de croissance)"><option value="">—</option><option>meurent</option><option>se multiplient (phase de croissance)</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex3')">↺</button><div class="mq-fb" id="ex3-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN RÉVISION ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.88rem;color:var(--mu);margin-bottom:14px">Exercice principal + bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Fermentation alcoolique — Pain</div><p style="font-size:.88rem;margin-bottom:7px">Microorganisme = <select class="bl" data-rep="levure Saccharomyces cerevisiae (champignon eucaryote)"><option value="">—</option><option>levure Saccharomyces cerevisiae (champignon eucaryote)</option><option>bactérie lactique</option></select>. Substrat = <select class="bl" data-rep="glucose (issu de l&apos;hydrolyse de l&apos;amidon)"><option value="">—</option><option>glucose (issu de l&apos;hydrolyse de l&apos;amidon)</option><option>lactose</option></select>. Produits = <select class="bl" data-rep="éthanol + CO₂ + 2 ATP"><option value="">—</option><option>acide lactique</option><option>éthanol + CO₂ + 2 ATP</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Fermentation lactique — Yaourt</div><p style="font-size:.88rem;margin-bottom:7px">Microorganismes = <select class="bl" data-rep="bactéries lactiques (Lactobacillus, Streptococcus)"><option value="">—</option><option>bactéries lactiques (Lactobacillus, Streptococcus)</option><option>levures</option></select>. Substrat = <select class="bl" data-rep="lactose (sucre du lait)"><option value="">—</option><option>lactose (sucre du lait)</option><option>saccharose</option></select>. Produit = <select class="bl" data-rep="acide lactique (fait cailler le lait)"><option value="">—</option><option>éthanol</option><option>acide lactique (fait cailler le lait)</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Fromage — Diversité microbienne</div><p style="font-size:.88rem;margin-bottom:7px">Coagulation du lait = <select class="bl" data-rep="présure (enzyme chymosine)"><option value="">—</option><option>présure (enzyme chymosine)</option><option>chaleur uniquement</option></select>. Affinage = <select class="bl" data-rep="cave à T° et humidité contrôlées"><option value="">—</option><option>cave à T° et humidité contrôlées</option><option>cuisson au four</option></select>. Diversité des fromages = <select class="bl" data-rep="diversité des souches microbiennes utilisées"><option value="">—</option><option>diversité des souches microbiennes utilisées</option><option>pasteurisation seule</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 8 FLASHCARDS ══ -->
+<div class="pan" id="p8"><h2 style="margin-bottom:14px">🃏 Flashcards — 7 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 9 QCM ══ -->
+<div class="pan" id="p9"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 6 — Microorganismes et Production d'Aliments · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch6tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch6tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p5 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p5 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"La <select class='fs' data-ans='fermentation alcoolique'>—|fermentation alcoolique|fermentation lactique|respiration|photosynthèse</select> est réalisée par la <select class='fs' data-ans='levure Saccharomyces cerevisiae'>—|levure Saccharomyces cerevisiae|bactérie lactique|amibe|algue</select>. Elle produit <select class='fs' data-ans='éthanol + CO₂'>—|acide lactique|éthanol + CO₂|H₂O|O₂</select>."},{p:"La <select class='fs' data-ans='fermentation lactique'>—|fermentation lactique|fermentation alcoolique|respiration|glycolyse</select> est réalisée par des <select class='fs' data-ans='bactéries (Lactobacillus, Streptococcus)'>—|bactéries (Lactobacillus, Streptococcus)|levures|champignons filamenteux|virus</select>. Elle produit <select class='fs' data-ans='acide lactique'>—|éthanol|acide lactique|CO₂ seul|glucose</select>."},{p:"La levure est un <select class='fs' data-ans='champignon unicellulaire EUCARYOTE'>—|champignon unicellulaire EUCARYOTE|bactérie PROCARYOTE|virus|protozoaire</select>. Les bactéries lactiques sont des <select class='fs' data-ans='PROCARYOTES (pas de noyau)'>—|PROCARYOTES (pas de noyau)|EUCARYOTES (avec noyau)|virus|champignons</select>."},{p:"La <select class='fs' data-ans='présure'>—|présure|levure|bactérie|amylase</select> est une enzyme qui fait <select class='fs' data-ans='cailler le lait (coagulation de la caséine)'>—|cailler le lait (coagulation de la caséine)|lever la pâte|fermenter le lactose|colorer le fromage</select>."},{p:"L'<select class='fs' data-ans='affinage'>—|affinage|pasteurisation|stérilisation|congélation</select> du fromage se fait en <select class='fs' data-ans='cave à T° et humidité contrôlées'>—|cave à T° et humidité contrôlées|four à 200°C|congélateur|eau bouillante</select>."},{p:"La <select class='fs' data-ans='pasteurisation'>—|pasteurisation|stérilisation|fermentation|congélation</select> consiste à chauffer à <select class='fs' data-ans='55-80°C (élimine les microbes sans altérer le goût)'>—|55-80°C (élimine les microbes sans altérer le goût)|120°C (stérilisation)|0°C|200°C</select>."},{p:"Le <select class='fs' data-ans='CO₂'>—|CO₂|O₂|éthanol|glucose</select> dégagé par la fermentation alcoolique fait <select class='fs' data-ans='lever la pâte à pain'>—|lever la pâte à pain|cailler le lait|stériliser la farine|colorer la croûte</select>."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. Les fermentations :',o:['Se manifestent lorsque l\'O₂ fait défaut','S\'accompagnent d\'une libération d\'énergie','Exigent la présence de microorganismes ou de leurs sécrétions','Produisent 36 ATP par glucose'],c:[0,1,2],fb:'Fermentation = anaérobie (a), libère énergie (b), microorganismes/enzymes (c). 2 ATP seulement, pas 36 (d).'},{q:'Q2. Le produit de la fermentation alcoolique est :',o:['L\'acide lactique','L\'éthanol','Le CO₂','L\'acide acétique'],c:[1,2],fb:'Alcoolique = éthanol (b) + CO₂ (c). Acide lactique = fermentation lactique (a).'},{q:'Q3. En présence d\'O₂, les levures :',o:['Ne peuvent que fermenter','Ne peuvent que respirer','Respirent et fermentent si le glucose dépasse 8 g/l','Meurent instantanément'],c:[2],fb:'Levure = métabolisme flexible (c). Effet Crabtree : répression respiration par excès glucose.'},{q:'Q4. La pasteurisation :',o:['Détruit les microorganismes par la chaleur (55-80°C)','Détruit les microorganismes par voie chimique','Est identique à la stérilisation (120°C)','Conserve le goût et les qualités nutritives de l\'aliment'],c:[0,3],fb:'Pasteurisation = chauffage modéré (a), conserve le goût (d). ≠ stérilisation (c).'},{q:'Q5. La qualité d\'un yaourt est liée :',o:['Au choix des souches bactériennes utilisées','À la qualité du lait utilisé','À la durée de sa fabrication','À la couleur du pot'],c:[0,1,2],fb:'Qualité yaourt = souches (a) + lait (b) + durée fermentation (c).'},{q:'Q6. La levure Saccharomyces cerevisiae est :',o:['Une bactérie procaryote','Un champignon unicellulaire eucaryote','L\'agent de la fermentation alcoolique','L\'agent de la fermentation lactique'],c:[1,2],fb:'Levure = champignon EUCARYOTE (b), fermentation alcoolique (c). PAS une bactérie (a).'},{q:'Q7. Les bactéries lactiques (Lactobacillus) :',o:['Sont des procaryotes','Sont des eucaryotes','Transforment le lactose en acide lactique','Produisent de l\'éthanol'],c:[0,2],fb:'Bactéries lactiques = PROCARYOTES (a), lactose → acide lactique (c).'},{q:'Q8. La présure utilisée en fromagerie :',o:['Est une enzyme qui fait cailler le lait','Est une bactérie lactique','Est extraite de l\'estomac de veau','Contient de la chymosine'],c:[0,2,3],fb:'Présure = enzyme (a), extrait estomac veau (c), chymosine (d). PAS une bactérie (b).'},{q:'Q9. Le CO₂ produit lors de la panification :',o:['Provient de la respiration de la levure','Provient de la fermentation alcoolique','Fait lever la pâte','Est identique au CO₂ de la respiration humaine'],c:[1,2],fb:'CO₂ du pain = fermentation alcoolique (b), fait lever pâte (c). PAS respiration (a).'},{q:'Q10. Le Roquefort doit son goût à :',o:['La fermentation lactique uniquement','La moisissure Penicillium roqueforti','L\'affinage en cave','La pasteurisation du lait de brebis'],c:[1,2],fb:'Roquefort = Penicillium (b) + affinage (c). PAS uniquement lactique (a).'},{q:'Q11. La fermentation se distingue de la respiration par :',o:['L\'absence d\'O₂','Une production d\'ATP plus faible (2 vs 36)','La production de déchets organiques (éthanol, acide lactique)','L\'absence de glucose'],c:[0,1,2],fb:'Fermentation = anaérobie (a), 2 ATP (b), déchets organiques (c).'},{q:'Q12. L\'affinage du fromage consiste à :',o:['Le placer en cave à température et humidité contrôlées','Le cuire au four','Permettre le développement de moisissures','Le stériliser pour éliminer tous les microbes'],c:[0,2],fb:'Affinage = cave contrôlée (a) + moisissures (c). PAS de cuisson (b) ni stérilisation (d).'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
