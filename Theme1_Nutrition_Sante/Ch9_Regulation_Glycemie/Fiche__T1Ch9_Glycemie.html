@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch9 — La Régulation de la Glycémie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#C62828;--cl:#B71C1C;--cbg:#fff5f5;--cs:#ffebee;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#B71C1C;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#fff5f5;--tx:#1a1a1a;--mu:#888;
+  --brd:#ffcdd2;--sh:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:18px;line-height:1.7;}
+header{background:linear-gradient(135deg,#7F0000,#C62828 50%,#E53935);color:#fff;padding:24px 30px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+header h1{font-family:'Playfair Display',serif;font-size:1.45rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.88;}
+.signature-header{font-size:.78rem;opacity:.72;margin-top:5px;font-style:italic;letter-spacing:.7px;color:#ffcdd2;}
+.pb{height:5px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:11px;}
+.pf{height:100%;background:#ffcdd2;border-radius:3px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:106px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:12px 8px;font-size:.68rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:1100px;margin:0 auto;padding:22px 22px 70px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--sh);border-left:6px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:12px;color:var(--c);}
+h3{font-size:.95rem;font-weight:700;margin:12px 0 7px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#7F0000,#C62828);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;margin-bottom:16px;font-size:.95rem;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:16px;margin:14px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.86rem;letter-spacing:.9px;text-transform:uppercase;margin-bottom:12px;}
+.mq p{margin-bottom:9px;font-size:.92rem;line-height:2;}
+select.bl{border:2px solid var(--vi);border-radius:6px;padding:3px 8px;font-size:.88rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.86rem;padding:8px 13px;border-radius:8px;margin-top:9px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.84rem;margin-top:10px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:.84rem;margin-top:10px;margin-left:7px;}
+.table-scroll{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.87rem;}
+th{background:var(--c);color:#fff;padding:9px 11px;text-align:left;}
+td{padding:8px 11px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff8e1 !important;font-weight:700;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+.img-grid img{width:100%;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:16px auto;border-radius:10px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:16px auto;padding:28px 20px;background:var(--cs);border:2px dashed var(--brd);border-radius:12px;text-align:center;font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.7;}
+.al{list-style:none;display:grid;gap:7px;}
+.al li{padding:9px 14px;background:var(--cs);border-radius:8px;border-left:5px solid var(--c);font-size:.89rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700;font-size:.92rem;margin-right:10px;flex-shrink:0;}
+.gfb{font-size:.87rem;padding:9px 13px;border-radius:9px;margin-top:10px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:12px;padding:18px;margin-bottom:13px;box-shadow:var(--sh);border-left:5px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:8px;padding:10px 15px;margin-bottom:11px;font-size:.88rem;border-left:4px solid var(--ar);}
+select.tcell{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.85rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:420px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:12px 0;}
+.fcc{background:#fff;border-radius:10px;padding:15px;box-shadow:var(--sh);border-top:5px solid var(--c);}
+.fcp{font-size:.89rem;line-height:2.1;margin-bottom:9px;}
+select.fs{border:2px solid var(--vi);border-radius:6px;padding:3px 7px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.btn{padding:9px 17px;border-radius:9px;border:none;cursor:pointer;font-weight:600;font-size:.87rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#7F0000;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:12px;padding:16px;margin-bottom:13px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:10px;font-size:.93rem;}
+.qo{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:.9rem;border:2px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:4px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.84rem;margin-top:4px;display:none;line-height:1.6;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.qcm-ctrl .btn{font-size:.82rem;}
+.qcm-score{font-size:.86rem;padding:8px 13px;border-radius:8px;font-weight:600;display:inline-block;margin-left:10px;}
+.bilan-rev{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:6px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:1rem;margin-bottom:14px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:10px;padding:15px;margin-bottom:15px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.82rem;margin-right:9px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.9rem;color:var(--c);margin-bottom:8px;display:flex;align-items:center;}
+.expl-text{font-size:.92rem;line-height:1.95;color:var(--tx);margin-bottom:14px;padding:13px 17px;background:var(--cs);border-radius:10px;border-left:5px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:12px;padding:16px;margin:14px 0;font-size:.9rem;line-height:1.9;}
+.focus-box strong{color:var(--b);}
+.note-conclu{background:var(--sal);border:2px solid var(--sa);border-radius:11px;padding:15px;margin:14px 0;font-size:.9rem;line-height:1.8;color:#7B5800;}
+.note-conclu strong{color:var(--sa);}
+footer{background:linear-gradient(135deg,#7F0000,#C62828 50%,#E53935);color:#fff;text-align:center;padding:18px 22px;font-size:.84rem;opacity:.92;margin-top:40px;border-radius:14px 14px 0 0;}
+footer .ft-sig{font-size:.8rem;opacity:.78;font-style:italic;letter-spacing:.7px;margin-top:6px;}
+.resume-hero{background:linear-gradient(135deg,#7F0000,#C62828 50%,#E53935);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;}
+.resume-hero h2{color:#ffcdd2;font-size:1.25rem;margin-bottom:10px;}
+.resume-hero p{font-size:.94rem;line-height:1.85;opacity:.94;}
+.resume-hero .sub{font-size:.84rem;opacity:.72;margin-top:8px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
+.cnode{border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.cnode .cn-icon{font-size:2rem;margin-bottom:6px;}
+.cnode .cn-title{font-size:.8rem;font-weight:700;margin-bottom:3px;}
+.cnode .cn-sub{font-size:.68rem;opacity:.88;line-height:1.35;}
+.cn-a{background:linear-gradient(135deg,#C62828,#E53935);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#B71C1C,#880000);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:6px solid #C62828;}
+.cn-panel.b{border-left:6px solid #1B5E20;}
+.cn-panel.c{border-left:6px solid #0277BD;}
+.cn-panel.d{border-left:6px solid #B71C1C;}
+.cn-panel.e{border-left:6px solid #37474F;}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
+.conn-item{border-radius:10px;padding:14px;border:2px solid;font-size:.88rem;line-height:1.7;}
+.conn-item .conn-ch{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px;opacity:.78;}
+.piege-item{border-radius:11px;padding:15px;margin-bottom:11px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:.92rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:12px;font-size:.9rem;line-height:1.8;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:12px;padding:17px;margin:15px 0;}
+.reflex h4{color:var(--vi);font-size:.89rem;font-weight:700;margin-bottom:13px;}
+.reflex-q{background:#fff;border-radius:9px;padding:13px;margin-bottom:10px;}
+.reflex-q .rq{font-size:.92rem;line-height:1.8;font-weight:600;margin-bottom:9px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:.83rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:10px;padding:11px 15px;background:var(--vil);border-radius:8px;font-size:.89rem;line-height:1.8;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.9rem;}.t{padding:10px 3px;font-size:.58rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 9 — La Régulation de la Glycémie</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie IV · Pages 139–154 · 5 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">📊 Act.1 — Glycémie</button>
+  <button class="t"     onclick="showTab(3)">🫁 Act.2 — Foie</button>
+  <button class="t"     onclick="showTab(4)">🧬 Act.3 — Pancréas</button>
+  <button class="t"     onclick="showTab(5)">⚡ Act.4 — Hormones</button>
+  <button class="t"     onclick="showTab(6)">🩺 Act.5 — Diabète</button>
+  <button class="t"     onclick="showTab(7)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(8)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(9)">📋 Révision</button>
+  <button class="t"     onclick="showTab(10)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(11)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#7F0000,#C62828 50%,#E53935);color:#fff;border-radius:16px;padding:26px;margin-bottom:20px;">
+    <h2 style="color:#ffcdd2;font-size:1.3rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:14px;opacity:.94;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie IV), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #ffcdd2;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffcdd2;color:#7F0000;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">1</span> Identifier les <strong>organes, cellules et molécules</strong> impliqués dans la régulation de la glycémie</div>
+      <div style="background:rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:.88rem;line-height:1.65;border-left:3px solid #ffcdd2;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffcdd2;color:#7F0000;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;">2</span> Expliquer les <strong>mécanismes de cette régulation</strong></div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.139-140)</h2>
+    <p class="expl-text">La <strong>glycémie</strong> (concentration de glucose dans le sang) est une constante biologique : <strong>0,7 à 1,10 g/l</strong> (3,88 à 6,10 mmol/l). L'organisme sain dispose de mécanismes régulateurs qui maintiennent cette constance malgré la variation des apports alimentaires et de la consommation cellulaire. Le <strong>diabète</strong> est une maladie liée à un trouble de la glycémie, très répandu en Tunisie (≈ 10% de la population). Cette maladie inguérissable est due à une hyperglycémie chronique.</p>
+    <img src="images/T3Ch9_Doc01_glucometre.PNG" alt="Glucomètre" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — 1. Glucomètre : appareil pour la mesure de la glycémie (p.139)</div>'">
+    <img src="images/T3Ch9_Doc02_mesure_continue_glycemie.PNG" alt="Mesure continue glycémie" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — 2. Mesure en continu du taux de glucose sanguin chez un individu sain (repas, exercice) (p.140)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis (p.141)</h2>
+    <p class="expl-text">Le <strong>glucose</strong> provient de la digestion des glucides alimentaires : amidon → maltose → glucose (Ch.3). Il est absorbé au niveau intestinal et transporté par le sang. Il est dégradé par la <strong>respiration cellulaire</strong> (Ch.4) : C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O + 36 ATP. Le glucose ne figure normalement pas dans les urines grâce à sa <strong>réabsorption rénale totale</strong> (Ch.8).</p>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 2 Questions directrices (p.140)</h2>
+    <ol style="margin-left:20px;line-height:2.8;font-size:.98rem">
+      <li>Comment se fait la <strong>régulation de la glycémie</strong> chez les individus sains ?</li>
+      <li>Pourquoi chez les <strong>diabétiques</strong> cette régulation n'est-elle pas efficace ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>La glycémie est régulée principalement par deux hormones pancréatiques antagonistes : <strong>l'insuline</strong> (hypoglycémiante, sécrétée par les cellules β) et le <strong>glucagon</strong> (hyperglycémiant, sécrété par les cellules α). Le <strong>foie</strong> joue un rôle central : en cas d'hyperglycémie, il stocke le glucose sous forme de <strong>glycogène</strong> (glycogénogenèse) ; en cas d'hypoglycémie, il libère du glucose par <strong>glycogénolyse</strong> et <strong>néoglucogenèse</strong>. L'insuline favorise aussi l'entrée du glucose dans les cellules (muscles, tissu adipeux) et la <strong>lipogenèse</strong>. Le <strong>diabète de type I</strong> résulte d'un déficit en insuline (destruction des cellules β). Le <strong>diabète de type II</strong> est dû à une <strong>insulinorésistance</strong> des cellules cibles.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🫁</div><div class="cn-title">Foie</div><div class="cn-sub">Glycogène·Glycogénolyse</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🧬</div><div class="cn-title">Pancréas</div><div class="cn-sub">Cellules α·β·Hormones</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">⚡</div><div class="cn-title">Insuline</div><div class="cn-sub">Hypoglycémiante·Stockage</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚠️</div><div class="cn-title">3 Pièges</div><div class="cn-sub">Erreurs fréquentes</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">🔗</div><div class="cn-title">Connexions</div><div class="cn-sub">Ch.2·3·7·8</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:#C62828">🫁 Rôle central du foie</h3><p class="expl-text"><strong>Hyperglycémie</strong> (après repas) → Stockage glucose en <strong>glycogène</strong> (glycogénogenèse). <strong>Hypoglycémie</strong> (jeûne, exercice) → <strong>Glycogénolyse</strong> (hydrolyse glycogène → glucose libre) + <strong>Néoglucogenèse</strong> (synthèse glucose à partir d'acides aminés, acides gras).</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:#1B5E20">🧬 Pancréas : dualité structurale et fonctionnelle</h3><p class="expl-text"><strong>Acini</strong> = fonction exocrine (suc pancréatique digestif). <strong>Îlots de Langerhans</strong> = fonction endocrine. <strong>Cellules β</strong> (centre) → <strong>INSULINE</strong> (hypoglycémiante). <strong>Cellules α</strong> (périphérie) → <strong>GLUCAGON</strong> (hyperglycémiant).</p></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:#0277BD">⚡ Mécanisme d'action</h3><p class="expl-text"><strong>Insuline</strong> : active glycogénogenèse (foie), captage glucose (muscle, tissu adipeux), lipogenèse. <strong>Glucagon</strong> : active glycogénolyse (foie), néoglucogenèse, lipolyse. Les deux hormones agissent via des <strong>récepteurs membranaires</strong> spécifiques sur les cellules cibles.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:#B71C1C">⚠️ 3 Pièges du CAPES</h3><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Insuline ≠ hormone qui « brûle » le glucose <span style="margin-left:auto">▼</span></div><div class="piege-body">L'insuline ne dégrade PAS le glucose. Elle est une hormone de <strong>stockage</strong> : elle favorise l'entrée du glucose dans les cellules et sa mise en réserve (glycogène, lipides).</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Diabète type I ≠ Diabète type II <span style="margin-left:auto">▼</span></div><div class="piege-body"><strong>Type I</strong> (maigre, jeune) = déficit en insuline (destruction cellules β). Traitement = insuline à vie. <strong>Type II</strong> (gras, > 40 ans) = insulinorésistance (l'insuline est produite mais inefficace). Traitement = régime, exercice, médicaments.</div></div><div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Glucagon n'agit PAS sur le muscle <span style="margin-left:auto">▼</span></div><div class="piege-body">Le glucagon agit principalement sur le <strong>foie</strong> (glycogénolyse hépatique). Il n'a pas d'effet sur le glycogène musculaire car les cellules musculaires ne possèdent pas de récepteurs au glucagon. Le muscle utilise son glycogène pour sa propre contraction.</div></div></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:#37474F">🔗 Connexions</h3><div class="connexion-grid"><div class="conn-item" style="border-color:#C62828;background:#ffebee"><div class="conn-ch" style="color:#C62828">← Ch.2 — Besoins nutritionnels</div><p style="font-size:.86rem">Les glucides alimentaires sont la source du glucose sanguin (Ch.2).</p></div><div class="conn-item" style="border-color:#0277BD;background:#e1f5fe"><div class="conn-ch" style="color:#0277BD">← Ch.7-8 — Milieu intérieur et rein</div><p style="font-size:.86rem">La glycémie est une constante (Ch.7). Le glucose est réabsorbé par le rein si < 1,7 g/l (Ch.8).</p></div></div></div>
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi un diabétique de type I maigrit-il malgré une alimentation abondante (polyphagie) ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">Sans insuline, le glucose ne peut pas entrer dans les cellules (muscles, tissu adipeux). Les cellules, privées de glucose, utilisent les <strong>lipides</strong> et les <strong>protéines</strong> comme source d'énergie → fonte du tissu adipeux et musculaire → <strong>amaigrissement</strong>. Le glucose s'accumule dans le sang (hyperglycémie) et est éliminé dans les urines (glucosurie).</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — GLYCÉMIE ══ -->
+<div class="pan" id="p2">
+  <div class="sech">📊 Activité 1 — La Glycémie : une constante qui varie (p.142)</div>
+  <div class="card"><h3 style="color:var(--c);">Effet de l'alimentation et de l'exercice</h3>
+    <p class="expl-text">Chez l'individu sain, la glycémie fluctue modérément : elle <strong>augmente</strong> après un repas (hyperglycémie post-prandiale), puis revient à la normale. Elle <strong>baisse</strong> pendant un exercice physique (consommation de glucose par les muscles). La glycémie reste toujours dans la fourchette <strong>0,7-1,1 g/l</strong>.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 1</div><div id="mq1-q">
+      <p>1. Après un repas riche en glucides, la glycémie <select class="bl" data-rep="augmente (hyperglycémie post-prandiale)"><option value="">—</option><option>augmente (hyperglycémie post-prandiale)</option><option>diminue fortement</option></select>.</p>
+      <p>2. Pendant un exercice physique, la glycémie <select class="bl" data-rep="baisse (consommation musculaire de glucose)"><option value="">—</option><option>augmente</option><option>baisse (consommation musculaire de glucose)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1')">↺</button><div class="mq-fb" id="mq1-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — RÔLE DU FOIE ══ -->
+<div class="pan" id="p3">
+  <div class="sech">🫁 Activité 2 — Le Foie, Organe Régulateur (p.142-144)</div>
+  <div class="card"><h3 style="color:var(--c);">Le foie stocke et libère le glucose</h3>
+    <p class="expl-text">Le <strong>foie</strong> est un organe clé de la régulation glycémique. Il reçoit le sang de la <strong>veine porte</strong> (riche en nutriments absorbés par l'intestin) et libère le glucose dans les <strong>veines sus-hépatiques</strong>.</p>
+    <img src="images/T3Ch9_Doc05_vascularisation_hepatique.PNG" alt="Vascularisation hépatique" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — 5. Vascularisation hépatique : veine porte → foie → veines sus-hépatiques (p.142)</div>'">
+    <div class="table-scroll"><table><tr><th>Condition</th><th>Sang veine porte (entrée foie)</th><th>Sang veines sus-hépatiques (sortie foie)</th><th>Action du foie</th></tr>
+      <tr class="hl"><td>Jeûne</td><td>0,20 g/l</td><td>0,95 g/l</td><td>Libération de glucose</td></tr>
+      <tr><td>Après repas (30 min)</td><td>2,85 g/l</td><td>1,25 g/l</td><td>Stockage de glucose</td></tr>
+      <tr class="hl"><td>Après repas (180 min)</td><td>0,20 g/l</td><td>0,95 g/l</td><td>Retour à la normale</td></tr>
+    </table></div>
+    <p class="expl-text">L'<strong>expérience du foie lavé</strong> (Claude Bernard, 1850) a démontré le rôle glycogénique du foie : un foie de chien lavé à l'eau tiède pour éliminer tout le glucose, puis laissé à température ambiante 24h, se retrouve à nouveau <strong>riche en glucose</strong>. Ce glucose provient de l'<strong>hydrolyse du glycogène</strong> hépatique (glycogénolyse).</p>
+    <div class="focus-box"><strong>🔍 Bilan expérimental :</strong> Animal hépatectomisé (sans foie) → <strong>hypoglycémie rapide → coma → mort</strong>. Le foie est donc indispensable au maintien de la glycémie.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 2</div><div id="mq2-q">
+      <p>1. En période de jeûne, le foie <select class="bl" data-rep="libère du glucose dans le sang (glycogénolyse)"><option value="">—</option><option>libère du glucose dans le sang (glycogénolyse)</option><option>stocke le glucose en glycogène</option></select>.</p>
+      <p>2. Après un repas, le foie <select class="bl" data-rep="stocke le glucose sous forme de glycogène (glycogénogenèse)"><option value="">—</option><option>libère du glucose</option><option>stocke le glucose sous forme de glycogène (glycogénogenèse)</option></select>.</p>
+      <p>3. Un animal sans foie meurt d'hypoglycémie car <select class="bl" data-rep="le foie ne peut plus libérer de glucose"><option value="">—</option><option>le foie ne peut plus libérer de glucose</option><option>le glucose est détruit</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2')">↺</button><div class="mq-fb" id="mq2-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le foie agit comme un <strong>tampon glycémique</strong> : il prélève le glucose en excès après les repas (glycogénogenèse) et le restitue entre les repas ou pendant l'effort (glycogénolyse). La <strong>néoglucogenèse</strong> (synthèse de glucose à partir d'acides aminés ou de lipides) est activée en cas de jeûne prolongé.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — RÔLE DU PANCRÉAS ══ -->
+<div class="pan" id="p4">
+  <div class="sech">🧬 Activité 3 — Le Pancréas et ses Hormones (p.144-147)</div>
+  <div class="card"><h3 style="color:var(--c);">A — Dualité structurale et fonctionnelle</h3>
+    <p class="expl-text">Le pancréas est une glande <strong>amphicrine</strong> : une fonction <strong>exocrine</strong> (acini → suc pancréatique digestif) et une fonction <strong>endocrine</strong> (îlots de Langerhans → hormones). Les îlots contiennent deux types cellulaires : <strong>cellules β</strong> (centre, 70%) sécrétant l'<strong>INSULINE</strong>, et <strong>cellules α</strong> (périphérie, 20%) sécrétant le <strong>GLUCAGON</strong>.</p>
+    <img src="images/T3Ch9_Doc09_acini_ilots_langerhans.PNG" alt="Acini et îlots" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — 11. Schéma des acini et des îlots de Langerhans dans le pancréas (p.145)</div>'">
+  </div>
+  <div class="card"><h3 style="color:var(--c);">B — Effets de l'ablation et de la greffe</h3>
+    <p class="expl-text">L'<strong>ablation du pancréas</strong> chez le chien provoque un <strong>diabète mortel</strong> : hyperglycémie à 3,5 g/l, glucosurie, polyurie, polydipsie, polyphagie, amaigrissement. La <strong>greffe de pancréas</strong> sous la peau rétablit une glycémie normale — preuve que le pancréas produit une substance hypoglycémiante libérée dans le sang.</p>
+    <img src="images/T3Ch9_Doc10_ablation_greffe_pancreas.PNG" alt="Ablation greffe pancréas" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10 — 12. Effet de l&apos;ablation et de la greffe du pancréas sur la glycémie (p.145)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 3A</div><div id="mq3a-q">
+      <p>1. Les cellules β sécrètent <select class="bl" data-rep="l'insuline (hypoglycémiante)"><option value="">—</option><option>l'insuline (hypoglycémiante)</option><option>le glucagon (hyperglycémiant)</option></select>.</p>
+      <p>2. L'ablation du pancréas entraîne <select class="bl" data-rep="une hyperglycémie mortelle (diabète)"><option value="">—</option><option>une hyperglycémie mortelle (diabète)</option><option>une hypoglycémie</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3a')">↺</button><div class="mq-fb" id="mq3a-fb"></div></div>
+  </div>
+  <div class="card"><h3 style="color:var(--c);">C — Hormones antagonistes</h3>
+    <p class="expl-text">L'<strong>insuline</strong> (protéine de 51 acides aminés) est hypoglycémiante : son injection abaisse la glycémie. Le <strong>glucagon</strong> (protéine de 29 acides aminés) est hyperglycémiant : son injection élève la glycémie. Ces deux hormones sont <strong>antagonistes</strong>.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch9_Doc13_modele_insuline.PNG" alt="Modèle insuline" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — 15. Modèle de la molécule d&apos;insuline (p.146)</div>'">
+      <img src="images/T3Ch9_Doc14_modele_glucagon.PNG" alt="Modèle glucagon" onerror="this.outerHTML='<div class=img-fb>📷 Doc.14 — 16. Modèle de la molécule de glucagon (p.146)</div>'">
+    </div>
+    <div class="img-grid">
+      <img src="images/T3Ch9_Doc16_injection_insuline.PNG" alt="Effet insuline" onerror="this.outerHTML='<div class=img-fb>📷 Doc.16 — 18. Effet de l&apos;injection d&apos;insuline à un chien normal (p.147)</div>'">
+      <img src="images/T3Ch9_Doc17_injection_glucagon.PNG" alt="Effet glucagon" onerror="this.outerHTML='<div class=img-fb>📷 Doc.17 — 19. Effet de l&apos;injection du glucagon à un chien normal (p.147)</div>'">
+    </div>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — EFFETS BIOLOGIQUES ══ -->
+<div class="pan" id="p5">
+  <div class="sech">⚡ Activité 4 — Effets biologiques des Hormones Pancréatiques (p.148)</div>
+  <div class="card"><h3 style="color:var(--c);">Cellules cibles et actions métaboliques</h3>
+    <p class="expl-text"><strong>Insuline :</strong> Elle agit sur le <strong>foie</strong> (glycogénogenèse), les <strong>muscles</strong> (captage du glucose, glycogénogenèse) et le <strong>tissu adipeux</strong> (lipogenèse — stockage des graisses). Elle active l'entrée du glucose dans les cellules via le recrutement de transporteurs GLUT4 à la membrane.</p>
+    <img src="images/T3Ch9_Doc20_mode_action_glucagon.PNG" alt="Mode action glucagon" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.20 — 22. Mode d&apos;action du glucagon : glycogénolyse (R1), glycogénogenèse (R2), néoglucogenèse (R3) (p.150)</div>'">
+    <p class="expl-text"><strong>Glucagon :</strong> Il agit principalement sur le <strong>foie</strong>. Il active la <strong>glycogénolyse</strong> (hydrolyse du glycogène → glucose libre dans le sang) et la <strong>néoglucogenèse</strong> (synthèse de glucose à partir de composés non glucidiques : acides aminés, acides gras, lactate).</p>
+    <div class="focus-box"><strong>🔍 Souris sans cellules β (alloxane) :</strong> Sans insuline → le glucose n'entre pas dans les cellules musculaires → le muscle ne consomme plus de glucose → hyperglycémie. Le glycogène hépatique et musculaire n'est plus synthétisé. La lipogenèse est bloquée → amaigrissement (pas de stockage des graisses).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 4</div><div id="mq4-q">
+      <p>1. L'insuline favorise <select class="bl" data-rep="la glycogénogenèse et l'entrée du glucose dans les cellules"><option value="">—</option><option>la glycogénogenèse et l'entrée du glucose dans les cellules</option><option>la glycogénolyse</option></select>.</p>
+      <p>2. Le glucagon active <select class="bl" data-rep="la glycogénolyse et la néoglucogenèse hépatiques"><option value="">—</option><option>la glycogénolyse et la néoglucogenèse hépatiques</option><option>la lipogenèse</option></select>.</p>
+      <p>3. Sans insuline, le muscle <select class="bl" data-rep="ne peut pas capter le glucose (amaigrissement)"><option value="">—</option><option>ne peut pas capter le glucose (amaigrissement)</option><option>stocke plus de glycogène</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4')">↺</button><div class="mq-fb" id="mq4-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> L'insuline est l'hormone de l'<strong>abondance</strong> (stockage post-prandial). Le glucagon est l'hormone du <strong>jeûne</strong> (mobilisation des réserves). Le rapport insuline/glucagon détermine l'orientation du métabolisme : stockage (ratio élevé) ou mobilisation (ratio faible).</div></div>
+  </div>
+</div>
+
+<!-- ══ 6 ACT.5 — DIABÈTE ══ -->
+<div class="pan" id="p6">
+  <div class="sech">🩺 Activité 5 — Le Diabète (p.148-152)</div>
+  <div class="card"><h3 style="color:var(--c);">Types, symptômes et mécanismes</h3>
+    <p class="expl-text">Le diabète se caractérise par les <strong>4 symptômes cardinaux</strong> : <strong>polyurie</strong> (urines abondantes), <strong>polydipsie</strong> (soif intense), <strong>polyphagie</strong> (faim excessive) et <strong>amaigrissement</strong>. La <strong>glucosurie</strong> (glucose dans les urines) est le signe biologique caractéristique.</p>
+    <img src="images/T3Ch9_Doc18_glycemie_sain_vs_diabetique.PNG" alt="Glycémie sain vs diabétique" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.18 — 20. Variation de la glycémie chez un sujet sain et un diabétique après ingestion de sirop (p.149)</div>'">
+    <img src="images/T3Ch9_Doc19_glycemie_insulinemie_diabetiques.PNG" alt="Glycémie insulinémie" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.19 — 21. Variation de la glycémie et de l&apos;insulinémie chez un sujet sain (A) et 2 diabétiques (B et C) (p.149)</div>'">
+    <div class="table-scroll"><table><tr><th>Caractéristique</th><th>Diabète Type I (maigre)</th><th>Diabète Type II (gras)</th></tr>
+      <tr class="hl"><td>Âge</td><td>Enfants, jeunes adultes</td><td>> 40 ans</td></tr>
+      <tr><td>Poids</td><td>Normal ou maigre</td><td>Obèse ou surpoids</td></tr>
+      <tr class="hl"><td>Cause</td><td>Destruction des cellules β → déficit en insuline</td><td>Insulinorésistance des cellules cibles</td></tr>
+      <tr><td>Insulinémie</td><td>Effondrée (pas d'insuline)</td><td>Normale ou élevée (inefficace)</td></tr>
+      <tr class="hl"><td>Traitement</td><td>Insuline à vie (DID)</td><td>Régime, exercice, médicaments (DNID)</td></tr>
+    </table></div>
+    <div class="focus-box"><strong>🔍 Insulinorésistance :</strong> Dans le diabète de type II, les cellules cibles possèdent moins de récepteurs à l'insuline ou des récepteurs défectueux. L'insuline est produite mais ne peut pas agir → le glucose reste dans le sang. L'obésité et la sédentarité sont les principaux facteurs de risque.</div>
+    <img src="images/T3Ch9_Doc21_schema_regulation_glycemie.PNG" alt="Schéma régulation glycémie" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.21 — 23. Schéma du mécanisme de la régulation de la glycémie (p.151)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Activité 5</div><div id="mq5-q">
+      <p>1. Le diabète de type I est dû à <select class="bl" data-rep="un déficit en insuline (destruction cellules β)"><option value="">—</option><option>un déficit en insuline (destruction cellules β)</option><option>une insulinorésistance</option></select>.</p>
+      <p>2. Le diabète de type II est lié à <select class="bl" data-rep="une insulinorésistance des cellules cibles"><option value="">—</option><option>une insulinorésistance des cellules cibles</option><option>l'absence de pancréas</option></select>.</p>
+      <p>3. La glucosurie apparaît quand la glycémie dépasse <select class="bl" data-rep="le seuil rénal de réabsorption (≈ 1,7 g/l)"><option value="">—</option><option>le seuil rénal de réabsorption (≈ 1,7 g/l)</option><option>0,5 g/l</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5')">↺</button><div class="mq-fb" id="mq5-fb"></div>
+    <div class="note-conclu"><strong>💡 À retenir :</strong> Le diabète de type II représente <strong>≈ 80%</strong> des cas. Il est favorisé par l'obésité, la sédentarité et l'hérédité. Sa prévention repose sur une <strong>alimentation équilibrée</strong>, une <strong>activité physique régulière</strong> et un <strong>contrôle régulier de la glycémie</strong>. Le diabète de type I nécessite un traitement à vie par injections d'insuline.</div></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 BILAN — Pages 150-152 (5 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> La glycémie (p.150)</h3><p style="font-size:.92rem">La glycémie normale = <select class="bl" data-rep="0,7 à 1,1 g/l"><option value="">—</option><option>0,7 à 1,1 g/l</option><option>5 à 6 g/l</option></select>. L'hypoglycémie (< 0,7 g/l) → <select class="bl" data-rep="coma, mort"><option value="">—</option><option>coma, mort</option><option>simple fatigue</option></select>. L'hyperglycémie chronique = <select class="bl" data-rep="diabète (complications cardiovasculaires, rénales, oculaires)"><option value="">—</option><option>diabète (complications cardiovasculaires, rénales, oculaires)</option><option>hypoglycémie</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Régulation hormonale (p.150)</h3><p style="font-size:.92rem">L'<select class="bl" data-rep="insuline"><option value="">—</option><option>insuline</option><option>glucagon</option></select> est la seule hormone <select class="bl" data-rep="hypoglycémiante"><option value="">—</option><option>hypoglycémiante</option><option>hyperglycémiante</option></select>. Sécrétée par les cellules <select class="bl" data-rep="β"><option value="">—</option><option>β</option><option>α</option></select>. Le <select class="bl" data-rep="glucagon"><option value="">—</option><option>glucagon</option><option>cortisol</option></select> est hyperglycémiant, sécrété par les cellules α.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Rôle du foie (p.150)</h3><p style="font-size:.92rem">Hyperglycémie → <select class="bl" data-rep="glycogénogenèse (stockage glucose en glycogène)"><option value="">—</option><option>glycogénogenèse (stockage glucose en glycogène)</option><option>glycogénolyse</option></select>. Hypoglycémie → <select class="bl" data-rep="glycogénolyse + néoglucogenèse"><option value="">—</option><option>glycogénolyse + néoglucogenèse</option><option>lipogenèse</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> Diabète type I (p.152)</h3><p style="font-size:.92rem">Touche <select class="bl" data-rep="enfants et jeunes adultes (maigre)"><option value="">—</option><option>enfants et jeunes adultes (maigre)</option><option>personnes > 40 ans (obèses)</option></select>. Cause = <select class="bl" data-rep="destruction cellules β → déficit insuline"><option value="">—</option><option>destruction cellules β → déficit insuline</option><option>insulinorésistance</option></select>. Traitement = <select class="bl" data-rep="insuline à vie"><option value="">—</option><option>insuline à vie</option><option>régime seul</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">5</span> Diabète type II (p.152)</h3><p style="font-size:.92rem">Touche <select class="bl" data-rep="personnes > 40 ans (obèses)"><option value="">—</option><option>personnes > 40 ans (obèses)</option><option>enfants</option></select>. Cause = <select class="bl" data-rep="insulinorésistance des cellules cibles"><option value="">—</option><option>insulinorésistance des cellules cibles</option><option>absence de pancréas</option></select>. Prévention = <select class="bl" data-rep="alimentation équilibrée + activité physique"><option value="">—</option><option>alimentation équilibrée + activité physique</option><option>insuline obligatoire</option></select>.</p></div>
+  <div style="margin-top:18px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 8 EXERCICES ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📝 Exercices — Manuel p.153-154</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:10px">✏️ Ex.1 — QCM du manuel (p.153)</h3>
+    <table>
+      <tr><td><strong>1. Le foie :</strong></td><td><select class="tcell" data-rep="a- néoglucogenèse, b- fixe glucose excédentaire, c- libère glucose, d- stocke en glycogène"><option value="">—</option><option>a + b + c + d</option><option>a uniquement</option></select></td></tr>
+      <tr><td><strong>2. Le pancréas :</strong></td><td><select class="tcell" data-rep="a- sécrète insuline, b- sécrète glucagon"><option value="">—</option><option>a + b</option><option>c- produit glucose</option></select></td></tr>
+      <tr><td><strong>3. L'insuline :</strong></td><td><select class="tcell" data-rep="b- hormone protidique, c- hypoglycémiante"><option value="">—</option><option>a- hormone lipidique</option><option>b + c</option></select></td></tr>
+      <tr><td><strong>4. Le glucagon :</strong></td><td><select class="tcell" data-rep="b- hyperglycémiant, c- sécrété lors hypoglycémie"><option value="">—</option><option>a- enzyme</option><option>b + c</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 9 BILAN RÉVISION ══ -->
+<div class="pan" id="p9">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Identifier organes, cellules, molécules</div><p style="font-size:.88rem;margin-bottom:7px">Foie = <select class="bl" data-rep="stockage (glycogène) et libération glucose"><option value="">—</option><option>stockage (glycogène) et libération glucose</option><option>production insuline</option></select>. Cellules β = <select class="bl" data-rep="insuline (hypoglycémiante)"><option value="">—</option><option>insuline (hypoglycémiante)</option><option>glucagon</option></select>. Cellules α = <select class="bl" data-rep="glucagon (hyperglycémiant)"><option value="">—</option><option>glucagon (hyperglycémiant)</option><option>insuline</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Expliquer la régulation glycémique</div><p style="font-size:.88rem;margin-bottom:7px">Hyperglycémie → <select class="bl" data-rep="sécrétion insuline → stockage glucose"><option value="">—</option><option>sécrétion insuline → stockage glucose</option><option>sécrétion glucagon → libération glucose</option></select>. Hypoglycémie → <select class="bl" data-rep="sécrétion glucagon → glycogénolyse hépatique"><option value="">—</option><option>sécrétion insuline</option><option>sécrétion glucagon → glycogénolyse hépatique</option></select>. Diabète type I = <select class="bl" data-rep="déficit en insuline"><option value="">—</option><option>déficit en insuline</option><option>insulinorésistance</option></select>. Diabète type II = <select class="bl" data-rep="insulinorésistance"><option value="">—</option><option>insulinorésistance</option><option>absence de pancréas</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.76rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 10 FLASHCARDS ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:14px">🃏 Flashcards — 8 Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 11 QCM ══ -->
+<div class="pan" id="p11"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC) — 4 options</h2><p style="margin-bottom:8px;font-size:.88rem;color:var(--mu)">Une ou plusieurs réponses correctes par question</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.82rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.82rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 9 — La Régulation de la Glycémie · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch9tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch9tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p7 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p7 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"La <select class='fs' data-ans='glycémie'>—|glycémie|calcémie|pression|température</select> normale est de <select class='fs' data-ans='0,7-1,1 g/l'>—|0,7-1,1 g/l|5 g/l|0,01 g/l|10 g/l</select>. Elle est régulée par le <select class='fs' data-ans='foie et le pancréas'>—|foie et le pancréas|rein uniquement|cœur|poumon</select>."},{p:"L'<select class='fs' data-ans='insuline'>—|insuline|glucagon|cortisol|adrénaline</select> est une hormone <select class='fs' data-ans='hypoglycémiante'>—|hypoglycémiante|hyperglycémiante|neutre|digestive</select>. Sécrétée par les cellules <select class='fs' data-ans='β des îlots de Langerhans'>—|β des îlots de Langerhans|α|acini|hépatiques</select>."},{p:"Le <select class='fs' data-ans='glucagon'>—|glucagon|insuline|cortisol|GH</select> est une hormone <select class='fs' data-ans='hyperglycémiante'>—|hyperglycémiante|hypoglycémiante|neutre|digestive</select>. Sécrété par les cellules <select class='fs' data-ans='α des îlots de Langerhans'>—|α des îlots de Langerhans|β|acini|rénales</select>."},{p:"Le <select class='fs' data-ans='foie'>—|foie|rein|pancréas|cœur</select> stocke le glucose sous forme de <select class='fs' data-ans='glycogène'>—|glycogène|amidon|cellulose|glucose libre</select>. L'hydrolyse du glycogène = <select class='fs' data-ans='glycogénolyse'>—|glycogénolyse|glycogénogenèse|néoglucogenèse|lipolyse</select>."},{p:"La <select class='fs' data-ans='glycogénogenèse'>—|glycogénogenèse|glycogénolyse|néoglucogenèse|lipolyse</select> = synthèse de glycogène à partir du glucose. Activée par l'<select class='fs' data-ans='insuline'>—|insuline|glucagon|adrénaline|cortisol</select>."},{p:"Le diabète de <select class='fs' data-ans='type I'>—|type I|type II|gestationnel|insipide</select> est dû à un <select class='fs' data-ans='déficit en insuline'>—|déficit en insuline|excès d&apos;insuline|insulinorésistance|défaut de glucagon</select>. Traitement = <select class='fs' data-ans='insuline à vie'>—|insuline à vie|régime seul|exercice seul|rien</select>."},{p:"Le diabète de <select class='fs' data-ans='type II'>—|type II|type I|insipide|néonatal</select> est dû à une <select class='fs' data-ans='insulinorésistance'>—|insulinorésistance|absence de pancréas|destruction cellules β|infection virale</select>. Favorisé par <select class='fs' data-ans='l&apos;obésité et la sédentarité'>—|l&apos;obésité et la sédentarité|la maigreur|le sport intensif|le jeûne</select>."},{p:"La <select class='fs' data-ans='néoglucogenèse'>—|néoglucogenèse|glycogénolyse|glycogénogenèse|lipogenèse</select> = synthèse de glucose à partir de <select class='fs' data-ans='composés non glucidiques (acides aminés, lipides)'>—|composés non glucidiques (acides aminés, lipides)|glycogène|amidon|cellulose</select>. Activée par le glucagon."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions — 4 options
+const QS=[{q:'Q1. Le foie est le seul organe qui :',o:['Réalise la néoglucogenèse','Fixe le glucose excédentaire','Libère du glucose dans le sang','Stocke le glucose sous forme de glycogène'],c:[0,1,2,3],fb:'Toutes les propositions sont vraies. Le foie est l&apos;organe central de la régulation glycémique.'},{q:'Q2. Le pancréas :',o:['Sécrète l&apos;insuline','Sécrète le glucagon','Produit le glucose en cas d&apos;hypoglycémie','Stocke le glucose sous forme de graisses'],c:[0,1],fb:'Pancréas = insuline (a) + glucagon (b). Le FOIE produit et stocke le glucose, pas le pancréas.'},{q:'Q3. L&apos;insuline :',o:['Est une hormone lipidique','Est une hormone protidique','Est une hormone hypoglycémiante','Est une hormone hyperglycémiante'],c:[1,2],fb:'Insuline = protéine (b), hypoglycémiante (c). Seule hormone hypoglycémiante.'},{q:'Q4. Le glucagon :',o:['Est une enzyme pancréatique','Est une hormone hyperglycémiante','Est sécrété lors d&apos;une hypoglycémie','Stimule la glycogénolyse au niveau du muscle'],c:[1,2],fb:'Glucagon = hormone hyperglycémiante (b), sécrété si hypoglycémie (c). N&apos;agit PAS sur le muscle (d faux).'},{q:'Q5. Les organes régulateurs de la glycémie sont :',o:['Le foie','Les reins','Le pancréas','Les muscles'],c:[0,2],fb:'Foie (a) et pancréas (c). Rein = réabsorption, pas régulation hormonale directe.'},{q:'Q6. La glycogénogenèse est :',o:['La synthèse de glycogène à partir du glucose','L&apos;hydrolyse du glycogène en glucose','Activée par l&apos;insuline','Activée par le glucagon'],c:[0,2],fb:'Glycogénogenèse = synthèse glycogène (a), activée par insuline (c).'},{q:'Q7. La glycogénolyse est :',o:['L&apos;hydrolyse du glycogène hépatique en glucose libre','La synthèse de glycogène','Activée par le glucagon','Inhibée par l&apos;insuline'],c:[0,2],fb:'Glycogénolyse = hydrolyse (a), activée par glucagon (c).'},{q:'Q8. Le diabète de type I (maigre) :',o:['Touche les enfants et jeunes adultes','Est lié à une insulinorésistance','Est dû à un déficit en insuline','Se traite par injections d&apos;insuline à vie'],c:[0,2,3],fb:'Type I = jeune (a), déficit insuline (c), traitement insuline (d). Insulinorésistance = type II.'},{q:'Q9. Le diabète de type II (gras) :',o:['Est la forme la plus fréquente (≈ 80%)','Est lié à une insulinorésistance','Apparaît souvent après 40 ans','Se traite uniquement par insuline'],c:[0,1,2],fb:'Type II = fréquent (a), insulinorésistance (b), > 40 ans (c). Traitement = régime, pas insuline.'},{q:'Q10. La glucosurie (glucose dans les urines) apparaît quand :',o:['La glycémie dépasse 1,7 g/l','Le seuil rénal de réabsorption est dépassé','Les transporteurs de glucose du néphron sont saturés','Le pancréas sécrète trop de glucagon'],c:[0,1,2],fb:'Glucosurie = glycémie > seuil (a,b), saturation transporteurs (c).'},{q:'Q11. L&apos;insulinorésistance signifie :',o:['Les cellules cibles ne répondent plus à l&apos;insuline','L&apos;insuline est absente','Les récepteurs à l&apos;insuline sont défectueux ou moins nombreux','Le pancréas est détruit'],c:[0,2],fb:'Insulinorésistance = cellules ne répondent pas (a), récepteurs défectueux (c). L&apos;insuline est présente mais inefficace.'},{q:'Q12. La néoglucogenèse :',o:['Synthétise du glucose à partir de composés non glucidiques','Est activée par le glucagon','A lieu principalement dans le foie','Est activée par l&apos;insuline'],c:[0,1,2],fb:'Néoglucogenèse = glucose à partir de non-glucides (a), glucagon (b), foie (c). Insuline l&apos;INHIBE.'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:.86rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:8px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
