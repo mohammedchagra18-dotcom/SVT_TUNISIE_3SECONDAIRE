@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-Ch4 — La Respiration Cellulaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#B71C1C;--cl:#C62828;--cbg:#fff5f5;--cs:#ffeaea;
+  --g:#1B5E20;--gl:#e8f5e9;
+  --b:#0277BD;--bl:#e1f5fe;
+  --ar:#37474F;--arl:#eceff1;
+  --sa:#F57F17;--sal:#fffde7;
+  --r:#880000;--rl:#ffebee;
+  --vi:#4A148C;--vil:#f3e5f5;
+  --j:#F9A825;--jl:#fffde7;
+  --o:#E65100;--ol:#fff3e0;
+  --bg:#fff5f5;--tx:#1a1a1a;--mu:#777;
+  --brd:#f5c6c6;--sh:0 2px 12px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tx);font-size:16px;line-height:1.65;}
+header{background:linear-gradient(135deg,#5D0000,#B71C1C 50%,#C62828);color:#fff;padding:20px 28px 15px;position:sticky;top:0;z-index:100;box-shadow:0 3px 16px rgba(0,0,0,.3);}
+header h1{font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:3px;}
+header p{font-size:.82rem;opacity:.85;}
+.signature-header{font-size:.72rem;opacity:.7;margin-top:4px;font-style:italic;letter-spacing:.6px;color:#ffcdd2;}
+.pb{height:4px;background:rgba(255,255,255,.3);border-radius:2px;margin-top:9px;}
+.pf{height:100%;background:#ffcdd2;border-radius:2px;transition:width .4s;width:7%;}
+.tw{background:#fff;border-bottom:2px solid var(--brd);position:sticky;top:91px;z-index:99;overflow-x:auto;}
+.ts{display:flex;min-width:max-content;}
+.t{padding:11px 8px;font-size:.68rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s;}
+.t:hover{color:var(--cl);background:var(--cs);}
+.t.on{color:var(--c);border-bottom-color:var(--c);}
+.content{max-width:880px;margin:0 auto;padding:20px 20px 60px;}
+.pan{display:none;}.pan.on{display:block;}
+.card{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:var(--sh);border-left:5px solid var(--cl);}
+h2{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:10px;color:var(--c);}
+h3{font-size:.9rem;font-weight:700;margin:10px 0 6px;color:var(--c);}
+.sech{background:linear-gradient(135deg,#5D0000,#B71C1C);color:#fff;padding:11px 16px;border-radius:10px;font-weight:600;margin-bottom:14px;font-size:.9rem;}
+.tip{background:#fdf6ec;border:1.5px solid var(--j);border-radius:10px;margin:9px 0;overflow:hidden;}
+.tip-head{padding:9px 14px;cursor:pointer;display:flex;gap:9px;align-items:center;font-size:.88rem;font-weight:600;color:#7B5800;}
+.tip-head:hover{background:#fff8d6;}
+.tip-body{display:none;padding:11px 14px 13px;font-size:.87rem;line-height:1.75;color:#4a3800;border-top:1px solid #ffe082;}
+.tip-body.on{display:block;}
+.mq{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:10px;padding:14px;margin:11px 0;}
+.mq-title{font-weight:700;color:var(--vi);font-size:.84rem;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;}
+.mq p{margin-bottom:8px;font-size:.9rem;line-height:1.9;}
+select.bl{border:2px solid var(--vi);border-radius:5px;padding:3px 7px;font-size:.86rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.bl.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.bl.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.mq-fb{font-size:.84rem;padding:7px 11px;border-radius:7px;margin-top:8px;font-weight:600;display:none;}
+.mq-fb.ok{background:#e8f5e9;color:#2E7D32;display:block;}
+.mq-fb.ko{background:#ffebee;color:#c62828;display:block;}
+.bck{background:var(--vi);color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-weight:700;font-size:.82rem;margin-top:9px;}
+.bck:hover{background:#311B92;}
+.brs{background:var(--brd);color:var(--tx);border:none;padding:7px 12px;border-radius:7px;cursor:pointer;font-size:.82rem;margin-top:9px;margin-left:6px;}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:.85rem;}
+th{background:var(--c);color:#fff;padding:8px 10px;text-align:left;}
+td{padding:7px 10px;border-bottom:1px solid var(--brd);}
+tr:nth-child(even) td{background:var(--cs);}
+tr.hl td{background:#fff0f0 !important;font-weight:700;}
+.ret{background:var(--jl);border:1.5px solid var(--j);border-radius:9px;padding:11px 14px;margin:11px 0;}
+.ret h4{color:var(--o);font-size:.76rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+.img-grid img{width:100%;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-full{display:block;max-width:100%;margin:14px auto;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-80{display:block;max-width:80%;margin:14px auto;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-60{display:block;max-width:60%;margin:14px auto;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-50{display:block;max-width:50%;margin:14px auto;border-radius:8px;box-shadow:var(--sh);border:2px solid var(--brd);}
+.img-fb{display:block;max-width:80%;margin:14px auto;padding:25px 18px;background:var(--cs);border:2px dashed var(--brd);border-radius:10px;text-align:center;font-size:.82rem;color:var(--mu);font-style:italic;line-height:1.6;}
+.al{list-style:none;display:grid;gap:6px;}
+.al li{padding:8px 12px;background:var(--cs);border-radius:7px;border-left:4px solid var(--c);font-size:.87rem;}
+.al li::before{content:"✓ ";color:var(--c);font-weight:700;}
+.bstep{background:#fff;border-radius:11px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);border-top:4px solid var(--c);}
+.bnum{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:700;font-size:.9rem;margin-right:9px;flex-shrink:0;}
+.gfb{font-size:.85rem;padding:8px 12px;border-radius:8px;margin-top:9px;font-weight:600;}
+.gfb.ok{background:#e8f5e9;color:#2E7D32;}
+.gfb.ko{background:#ffebee;color:#c62828;}
+.tab-exo{background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);border-left:4px solid var(--ar);}
+.tab-exo .ctx{background:var(--arl);border-radius:7px;padding:9px 13px;margin-bottom:10px;font-size:.86rem;border-left:3px solid var(--ar);}
+select.tcell{border:1.5px solid var(--vi);border-radius:4px;padding:3px 6px;font-size:.83rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;max-width:300px;}
+select.tcell.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.tcell.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px;margin:11px 0;}
+.fcc{background:#fff;border-radius:9px;padding:14px;box-shadow:var(--sh);border-top:4px solid var(--c);}
+.fcp{font-size:.87rem;line-height:2;margin-bottom:8px;}
+select.fs{border:2px solid var(--vi);border-radius:5px;padding:3px 6px;font-size:.81rem;background:#fff;cursor:pointer;color:var(--vi);font-weight:600;}
+select.fs.ok{border-color:#4CAF50;background:#e8f5e9;color:#2E7D32;}
+select.fs.ko{border-color:#f44336;background:#ffebee;color:#c62828;}
+.fa{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.btn{padding:8px 15px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:.85rem;}
+.bv{background:var(--c);color:#fff;}.bv:hover{background:#5D0000;}
+.bg{background:var(--brd);color:var(--tx);}
+.qi{background:#fff;border-radius:10px;padding:15px;margin-bottom:12px;box-shadow:var(--sh);}
+.qq{font-weight:600;margin-bottom:9px;font-size:.91rem;}
+.qo{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;margin-bottom:5px;cursor:pointer;font-size:.88rem;border:1.5px solid transparent;transition:background .15s;}
+.qo:hover:not(.locked){background:var(--cs);}
+.qo input{accent-color:var(--c);margin-top:3px;flex-shrink:0;}
+.qo.correct{background:#e8f5e9;border-color:#4CAF50;}
+.qo.wrong{background:#ffebee;border-color:#f44336;}
+.qo.missed{background:#fff8e1;border-color:#FF9800;}
+.fb-txt{font-size:.82rem;margin-top:4px;display:none;line-height:1.5;}
+.qo.correct .fb-txt,.qo.wrong .fb-txt,.qo.missed .fb-txt{display:block;}
+.qo.correct .fb-txt{color:#2E7D32;}
+.qo.wrong .fb-txt{color:#c62828;}
+.qo.missed .fb-txt{color:#E65100;}
+.qcm-ctrl{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;}
+.qcm-ctrl .btn{font-size:.8rem;}
+.qcm-score{font-size:.84rem;padding:7px 11px;border-radius:7px;font-weight:600;display:inline-block;margin-left:9px;}
+.bilan-rev{background:#fff;border-radius:10px;padding:18px;margin-bottom:14px;box-shadow:var(--sh);border-left:5px solid var(--c);}
+.bilan-rev h3{color:var(--c);font-size:.98rem;margin-bottom:12px;}
+.bilan-rev .obj-block{background:var(--cs);border-radius:9px;padding:14px;margin-bottom:14px;border:2px solid var(--brd);}
+.bilan-rev .obj-num{display:inline-flex;align-items:center;justify-content:center;background:var(--c);color:#fff;border-radius:50%;width:26px;height:26px;font-weight:700;font-size:.8rem;margin-right:8px;flex-shrink:0;}
+.bilan-rev .obj-title{font-weight:700;font-size:.88rem;color:var(--c);margin-bottom:7px;display:flex;align-items:center;}
+.bilan-rev .bonus-q{background:#fff;border-radius:7px;padding:11px;margin-top:9px;font-size:.86rem;line-height:1.75;border:1.5px dashed var(--sa);}
+.expl-text{font-size:.9rem;line-height:1.9;color:var(--tx);margin-bottom:12px;padding:11px 15px;background:var(--cs);border-radius:9px;border-left:4px solid var(--c);}
+.focus-box{background:linear-gradient(135deg,var(--bl),var(--cs));border:2px solid var(--b);border-radius:10px;padding:14px;margin:12px 0;font-size:.88rem;line-height:1.85;}
+.focus-box strong{color:var(--b);}
+footer{background:linear-gradient(135deg,#5D0000,#B71C1C 50%,#C62828);color:#fff;text-align:center;padding:16px 20px;font-size:.8rem;opacity:.9;margin-top:35px;border-radius:12px 12px 0 0;}
+footer .ft-sig{font-size:.78rem;opacity:.75;font-style:italic;letter-spacing:.6px;margin-top:5px;}
+.resume-hero{background:linear-gradient(135deg,#5D0000,#B71C1C 50%,#C62828);color:#fff;border-radius:14px;padding:24px;margin-bottom:18px;}
+.resume-hero h2{color:#ffcdd2;font-size:1.2rem;margin-bottom:10px;}
+.resume-hero p{font-size:.92rem;line-height:1.8;opacity:.92;}
+.resume-hero .sub{font-size:.82rem;opacity:.7;margin-top:7px;font-style:italic;}
+.concept-map{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 0;}
+.cnode{border-radius:11px;padding:15px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:center;}
+.cnode:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.cnode.active{border-color:rgba(255,255,255,.5);}
+.cnode .cn-icon{font-size:2rem;margin-bottom:6px;}
+.cnode .cn-title{font-size:.82rem;font-weight:700;margin-bottom:4px;}
+.cnode .cn-sub{font-size:.72rem;opacity:.85;line-height:1.4;}
+.cn-a{background:linear-gradient(135deg,#B71C1C,#C62828);color:#fff;}
+.cn-b{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;}
+.cn-c{background:linear-gradient(135deg,#0277BD,#0288D1);color:#fff;}
+.cn-d{background:linear-gradient(135deg,#F57F17,#FFB300);color:#fff;}
+.cn-e{background:linear-gradient(135deg,#37474F,#546E7A);color:#fff;}
+.cn-panel{display:none;background:#fff;border-radius:11px;padding:18px;margin-bottom:14px;box-shadow:var(--sh);}
+.cn-panel.on{display:block;}
+.cn-panel.a{border-left:5px solid var(--c);}
+.cn-panel.b{border-left:5px solid var(--g);}
+.cn-panel.c{border-left:5px solid var(--b);}
+.cn-panel.d{border-left:5px solid var(--sa);}
+.cn-panel.e{border-left:5px solid var(--ar);}
+.connexion-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:13px 0;}
+.conn-item{border-radius:9px;padding:13px;border:2px solid;font-size:.86rem;line-height:1.65;}
+.conn-item .conn-ch{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.75;}
+.piege-item{border-radius:10px;padding:14px;margin-bottom:10px;border:2px solid var(--r);background:var(--rl);overflow:hidden;}
+.piege-head{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.9rem;font-weight:700;color:var(--r);}
+.piege-body{display:none;padding-top:11px;font-size:.88rem;line-height:1.75;color:var(--tx);}
+.piege-body.on{display:block;}
+.reflex{background:linear-gradient(135deg,var(--vil),var(--cs));border:2px solid var(--vi);border-radius:11px;padding:16px;margin:14px 0;}
+.reflex h4{color:var(--vi);font-size:.87rem;font-weight:700;margin-bottom:12px;}
+.reflex-q{background:#fff;border-radius:8px;padding:12px;margin-bottom:9px;}
+.reflex-q .rq{font-size:.9rem;line-height:1.75;font-weight:600;margin-bottom:8px;}
+.rev-btn{background:var(--vi);color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.81rem;font-weight:600;}
+.reflex-ans{display:none;margin-top:9px;padding:10px 13px;background:var(--vil);border-radius:7px;font-size:.87rem;line-height:1.75;color:#4a0080;}
+.reflex-ans.on{display:block;}
+@media(max-width:700px){
+  .img-grid,.concept-map,.connexion-grid{grid-template-columns:1fr;}
+  header h1{font-size:.88rem;}.t{padding:9px 3px;font-size:.6rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapitre 4 — Dégradation des Nutriments : La Respiration Cellulaire</h1>
+  <p>3ème Secondaire SVT · Thème 1 · Partie II · Pages 73–92 · 5 Activités</p>
+  <div class="signature-header">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</div>
+  <div class="pb"><div class="pf" id="pf"></div></div>
+</header>
+
+<div class="tw"><div class="ts">
+  <button class="t on"  onclick="showTab(0)">📚 Acquis</button>
+  <button class="t"     onclick="showTab(1)">🧠 Résumé</button>
+  <button class="t"     onclick="showTab(2)">🔬 Act.1</button>
+  <button class="t"     onclick="showTab(3)">⚙️ Act.2</button>
+  <button class="t"     onclick="showTab(4)">🧪 Act.3</button>
+  <button class="t"     onclick="showTab(5)">⚡ Act.4</button>
+  <button class="t"     onclick="showTab(6)">🏃 Act.5</button>
+  <button class="t"     onclick="showTab(7)">📋 BILAN</button>
+  <button class="t"     onclick="showTab(8)">📝 Exercices</button>
+  <button class="t"     onclick="showTab(9)">📋 Révision</button>
+  <button class="t"     onclick="showTab(10)">🃏 Flashcards</button>
+  <button class="t"     onclick="showTab(11)">✏️ QCM</button>
+</div></div>
+
+<div class="content">
+
+<!-- ══ 0 ACQUIS ══ -->
+<div class="pan on" id="p0">
+  <div style="background:linear-gradient(135deg,#5D0000,#B71C1C 50%,#C62828);color:#fff;border-radius:14px;padding:24px;margin-bottom:18px;">
+    <h2 style="color:#ffcdd2;font-size:1.2rem;margin-bottom:14px;">🎯 Pourquoi ce chapitre ?</h2>
+    <p style="font-size:.9rem;line-height:1.75;margin-bottom:14px;opacity:.92;">D'après le <strong>programme officiel tunisien</strong> (Thème 1, Partie II), ce chapitre vise à :</p>
+    <div style="display:grid;grid-template-columns:1fr;gap:9px;">
+      <div style="background:rgba(255,255,255,.1);padding:11px 15px;border-radius:8px;font-size:.86rem;line-height:1.65;border-left:3px solid #ffcdd2;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffcdd2;color:#5D0000;border-radius:50%;width:24px;height:24px;font-weight:700;font-size:.78rem;margin-right:7px;">1</span> Expliquer comment se fait la <strong>dégradation du glucose</strong> dans la cellule.</div>
+      <div style="background:rgba(255,255,255,.1);padding:11px 15px;border-radius:8px;font-size:.86rem;line-height:1.65;border-left:3px solid #ffcdd2;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffcdd2;color:#5D0000;border-radius:50%;width:24px;height:24px;font-weight:700;font-size:.78rem;margin-right:7px;">2</span> Identifier les <strong>ultrastructures cellulaires</strong> et les <strong>molécules</strong> impliquées.</div>
+      <div style="background:rgba(255,255,255,.1);padding:11px 15px;border-radius:8px;font-size:.86rem;line-height:1.65;border-left:3px solid #ffcdd2;"><span style="display:inline-flex;align-items:center;justify-content:center;background:#ffcdd2;color:#5D0000;border-radius:50%;width:24px;height:24px;font-weight:700;font-size:.78rem;margin-right:7px;">3</span> Préciser sous quelle forme est <strong>produite l'énergie</strong> et utilisée par la cellule.</div>
+    </div>
+  </div>
+  <div class="card"><h2>📚 Situation Problème (p.73)</h2>
+    <p class="expl-text">La croissance et l'activité physique nécessitent de l'énergie. Les cellules utilisent le <strong>glucose</strong> comme principale source d'énergie. Leur dégradation exige une consommation d'O₂ proportionnelle à l'énergie produite.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc01_athlete_effort.PNG" alt="Athlète en effort" onerror="this.outerHTML='<div class=img-fb>📷 Doc.1 — Athlète en plein effort · La croissance et l&apos;activité physique nécessitent de l&apos;énergie et de l&apos;oxygène (p.73)</div>'">
+      <img src="images/T3Ch4_Doc02_mesure_o2_sportif.PNG" alt="Mesure O₂ sportif" onerror="this.outerHTML='<div class=img-fb>📷 Doc.2 — Mesure de l&apos;absorption d&apos;oxygène chez un athlète au cours d&apos;un effort (p.73)</div>'">
+    </div>
+    <img src="images/T3Ch4_Doc03_conso_o2_tableau.PNG" alt="Tableau consommation O₂ sports" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.3 — Tableau : Consommation maximale d&apos;O₂ pour différents sports (Gymnastique, Tennis, Ski de fond…) (p.74)</div>'">
+    <img src="images/T3Ch4_Doc04_repos_vs_activite_tableau.PNG" alt="Tableau repos vs activité" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.4 — Tableau : Comparaison muscle au repos / muscle en activité (volume sang, O₂, glucose utilisés) (p.74)</div>'">
+  </div>
+  <div class="card"><h2>📚 Préacquis (p.74-75)</h2>
+    <p class="expl-text">La respiration se manifeste par des échanges gazeux : absorption d'O₂ et rejet de CO₂. Le dioxygène est transporté par l'hémoglobine jusqu'aux cellules où les nutriments sont dégradés.</p>
+    <img src="images/T3Ch4_Doc05_experience_respiration_tissu.PNG" alt="Expérience respiration tissu" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.5 — Schéma de l&apos;expérience de mise en évidence de la respiration d&apos;un tissu (muscle frais vs bouilli, eau de chaux, thermomètre) (p.75)</div>'">
+    <img src="images/T3Ch4_Doc06_sang_arteriel_veineux_tableau.PNG" alt="Tableau sang artériel/veineux" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.6 — Tableau : Composition du sang à l&apos;entrée (artériel) et à la sortie (veineux) d&apos;un organe (p.75)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz — Préacquis</div><div id="mq0-q">
+      <p>1. Le sang artériel est <select class="bl" data-rep="riche en O₂"><option value="">—</option><option>pauvre en O₂</option><option>riche en O₂</option></select> et le sang veineux est <select class="bl" data-rep="riche en CO₂"><option value="">—</option><option>riche en O₂</option><option>riche en CO₂</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq0')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq0')">↺</button><div class="mq-fb" id="mq0-fb"></div></div>
+  </div>
+  <div class="card"><h2 style="color:var(--ar);">❓ 3 Questions directrices (p.74)</h2>
+    <ol style="margin-left:18px;line-height:2.6;font-size:.95rem">
+      <li>Comment se fait la <strong>dégradation du glucose</strong> dans la cellule ?</li>
+      <li>Quels sont les <strong>ultrastructures et molécules</strong> impliquées ?</li>
+      <li>Sous quelle forme l'<strong>énergie</strong> est-elle produite et utilisée ?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ 1 RÉSUMÉ ══ -->
+<div class="pan" id="p1">
+  <div class="resume-hero"><h2>🧠 Comprendre avant de mémoriser</h2><p>La respiration cellulaire est une <strong>dégradation complète du glucose</strong> en présence d'O₂. Elle se déroule en trois grandes étapes : la <strong>glycolyse</strong> dans le hyaloplasme (anaérobie), le <strong>cycle de Krebs</strong> dans la matrice mitochondriale et la <strong>chaîne respiratoire</strong> sur les crêtes. L'énergie libérée est stockée sous forme d'<strong>ATP</strong> (36 molécules par glucose). En absence d'O₂, la cellule peut recourir à la <strong>fermentation lactique</strong>, beaucoup moins énergétique.</p><p class="sub">Clique sur chaque notion · Pièges CAPES et connexions révélés</p></div>
+  <div class="concept-map">
+    <div class="cnode cn-a" onclick="showCN('a')"><div class="cn-icon">🍬</div><div class="cn-title">Glycolyse</div><div class="cn-sub">Hyaloplasme·anaérobie</div></div>
+    <div class="cnode cn-b" onclick="showCN('b')"><div class="cn-icon">🔄</div><div class="cn-title">Krebs</div><div class="cn-sub">Matrice mitochondriale</div></div>
+    <div class="cnode cn-c" onclick="showCN('c')"><div class="cn-icon">⛓️</div><div class="cn-title">Chaîne</div><div class="cn-sub">Crêtes·O₂→H₂O</div></div>
+    <div class="cnode cn-d" onclick="showCN('d')"><div class="cn-icon">⚡</div><div class="cn-title">ATP</div><div class="cn-sub">36/glucose</div></div>
+    <div class="cnode cn-e" onclick="showCN('e')"><div class="cn-icon">🏃</div><div class="cn-title">Fermentation</div><div class="cn-sub">Anaérobie·lactique</div></div>
+  </div>
+  <div class="cn-panel a" id="cn-a"><h3 style="color:var(--c)">🍬 Glycolyse (hyaloplasme)</h3><p class="expl-text">La glycolyse dégrade 1 <strong>glucose (C6)</strong> en <strong>2 acides pyruviques (C3)</strong>. C'est une étape <strong>anaérobie</strong> (ne consomme pas d'O₂). Elle produit <strong>2 ATP</strong> et des transporteurs réduits TH₂.</p></div>
+  <div class="cn-panel b" id="cn-b"><h3 style="color:var(--g)">🔄 Cycle de Krebs (matrice)</h3><p class="expl-text">L'acide pyruvique pénètre dans la mitochondrie. Il subit des <strong>décarboxylations</strong> (→ CO₂) et des <strong>déshydrogénations</strong> (→ H₂ capté par transporteurs). Bilan : <strong>2 ATP</strong> + CO₂ + transporteurs réduits.</p></div>
+  <div class="cn-panel c" id="cn-c"><h3 style="color:var(--b)">⛓️ Chaîne respiratoire (crêtes)</h3><p class="expl-text">Les transporteurs réduits sont régénérés au niveau des crêtes. L'O₂ est l'<strong>accepteur final</strong> d'électrons et de protons → <strong>H₂O</strong>. Cette étape produit <strong>32 ATP</strong>, l'essentiel de l'énergie.</p></div>
+  <div class="cn-panel d" id="cn-d"><h3 style="color:var(--sa)">⚡ ATP — Monnaie énergétique</h3><p class="expl-text">Bilan global par glucose : <strong>36 ATP</strong> (2 glycolyse + 2 Krebs + 32 chaîne). L'ATP est un <strong>transporteur</strong> d'énergie chimique, PAS une réserve. Cycle ATP ⇄ ADP + Pi.</p></div>
+  <div class="cn-panel e" id="cn-e"><h3 style="color:var(--ar)">🏃 Fermentation lactique</h3><p class="expl-text">En absence d'O₂, l'acide pyruvique → <strong>acide lactique</strong>. Cette voie ne produit que <strong>2 ATP</strong> (issus de la glycolyse). Elle explique la <strong>dette d'oxygène</strong> après un effort intense.</p></div>
+
+  <h3 style="margin-top:18px;">⚠️ 3 Pièges du CAPES</h3>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Ne pas confondre respiration pulmonaire et respiration cellulaire <span style="margin-left:auto">▼</span></div><div class="piege-body">La respiration <strong>pulmonaire</strong> = échanges gazeux (O₂/CO₂) au niveau des poumons. La respiration <strong>cellulaire</strong> = dégradation du glucose dans les mitochondries avec production d'ATP. Deux phénomènes distincts.</div></div>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ L'ATP n'est PAS une réserve d'énergie <span style="margin-left:auto">▼</span></div><div class="piege-body">L'ATP est un <strong>transporteur</strong> d'énergie chimique utilisable immédiatement. Les vraies réserves sont le <strong>glycogène</strong> (animaux) et l'<strong>amidon</strong> (végétaux). L'ATP est constamment hydrolysé et resynthétisé (cycle ATP/ADP).</div></div>
+  <div class="piege-item"><div class="piege-head" onclick="togPiege(this)">⚠️ Le cycle de Krebs ne consomme PAS directement d'O₂ <span style="margin-left:auto">▼</span></div><div class="piege-body">L'O₂ intervient uniquement à la fin de la <strong>chaîne respiratoire</strong> comme accepteur final d'électrons pour former H₂O. Le cycle de Krebs se déroule sans O₂ — il produit CO₂ et des transporteurs réduits.</div></div>
+
+  <h3 style="margin-top:18px;">🔗 Connexions</h3>
+  <div class="connexion-grid">
+    <div class="conn-item" style="border-color:var(--c);background:var(--cs)"><div class="conn-ch" style="color:var(--c)">← Ch.3 — Digestion</div><p style="font-size:.84rem">Les nutriments (glucose) absorbés au Ch.3 sont ici dégradés pour produire de l'énergie.</p></div>
+    <div class="conn-item" style="border-color:var(--b);background:var(--bl)"><div class="conn-ch" style="color:var(--b)">→ Ch.7-8 — Milieu Intérieur</div><p style="font-size:.84rem">L'O₂ et le glucose sont transportés par le sang. La constance du milieu intérieur est essentielle à la respiration.</p></div>
+  </div>
+
+  <div class="reflex"><h4>💭 Réflexion</h4><div class="reflex-q"><div class="rq">1. Pourquoi un athlète consomme-t-il jusqu'à 20 fois plus d'O₂ pendant un effort intense ?</div><button class="rev-btn" onclick="togAns(this)">Voir</button><div class="reflex-ans">L'effort intense nécessite plus d'<strong>ATP</strong> pour la contraction musculaire. Cette ATP est produite par la respiration cellulaire qui consomme de l'O₂ au niveau de la chaîne respiratoire. Plus d'énergie = plus de respiration = plus d'O₂ consommé.</div></div></div>
+</div>
+
+<!-- ══ 2 ACT.1 — RESPIRATION CELLULAIRE ══ -->
+<div class="pan" id="p2">
+  <div class="sech">🔬 Activité 1 — La Respiration Cellulaire (p.76-78)</div>
+
+  <div class="card"><h3 style="color:var(--c);">1A — Origine du CO₂ et de l'H₂O (p.76)</h3>
+    <p class="expl-text">La réaction globale : <strong>C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + Énergie</strong>. Pour déterminer l'origine des produits, on utilise des marqueurs isotopiques (¹⁴C, ¹⁸O).</p>
+    <table><tr><th>Expérience</th><th>Résultat</th><th>Conclusion</th></tr>
+      <tr class="hl"><td>Glucose marqué au ¹⁴C</td><td>Le CO₂ rejeté est radioactif</td><td>Le CO₂ provient du glucose</td></tr>
+      <tr><td>Oxygène marqué ¹⁸O₂</td><td>L'eau produite est radioactive, pas le CO₂</td><td>L'O₂ respiratoire sert à former H₂O</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 Conclusion :</strong> Le CO₂ provient de la <strong>décarboxylation</strong> du glucose. L'O₂ respiratoire est utilisé pour former <strong>H₂O</strong> (et non CO₂).</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 1A</div><div id="mq1a-q">
+      <p>1. Le CO₂ provient <select class="bl" data-rep="du glucose (décarboxylation)"><option value="">—</option><option>de l'O₂ respiratoire</option><option>du glucose (décarboxylation)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1a')">↺</button><div class="mq-fb" id="mq1a-fb"></div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">1B — Mise en évidence de la déshydrogénation (p.76-77)</h3>
+    <p class="expl-text">Le bleu de méthylène (Bm) est un indicateur coloré : <strong>bleu à l'état oxydé, incolore à l'état réduit (BmH₂)</strong>. Sa décoloration met en évidence une réaction de déshydrogénation.</p>
+    <img src="images/T3Ch4_Doc07_experience_deshydrogenation.PNG" alt="Expérience déshydrogénation" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.7 — Schéma de l&apos;expérience de déshydrogénation : 3 tubes (Ringer + bleu de méthylène + huile) avec ou sans muscle frais/bouilli (p.76)</div>'">
+    <table><tr><th>Tube</th><th>Contenu</th><th>Résultat</th><th>Conclusion</th></tr>
+      <tr class="hl"><td>1</td><td>Ringer + Bm (témoin)</td><td>Bleu</td><td>Pas de réaction</td></tr>
+      <tr><td>2</td><td>Ringer + muscle frais + Bm</td><td>Décoloration</td><td>Le muscle libère H₂ → réduit Bm</td></tr>
+      <tr class="hl"><td>3</td><td>Ringer + muscle bouilli + Bm</td><td>Bleu</td><td>La chaleur détruit l'activité</td></tr>
+    </table>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 1B</div><div id="mq1b-q">
+      <p>1. La décoloration du bleu de méthylène indique <select class="bl" data-rep="une déshydrogénation (libération de H₂)"><option value="">—</option><option>une décarboxylation</option><option>une déshydrogénation (libération de H₂)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1b')">↺</button><div class="mq-fb" id="mq1b-fb"></div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">1C — Des enzymes respiratoires (p.77-78)</h3>
+    <p class="expl-text">Les réactions de décarboxylation et de déshydrogénation sont catalysées par des <strong>enzymes spécifiques</strong> (protéines thermosensibles).</p>
+    <img src="images/T3Ch4_Doc08_experience_filtrat_broyat.PNG" alt="Expérience filtrat broyat" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.8 — Schéma de l&apos;expérience avec filtrat de broyat : 4 tubes à 37°C et 0°C avec bleu de méthylène et glucose (p.77)</div>'">
+    <table><tr><th>Tube</th><th>Contenu</th><th>T°</th><th>Décoloration</th></tr>
+      <tr class="hl"><td>1</td><td>Bm + glucose (témoin)</td><td>37°C</td><td>Non (–)</td></tr>
+      <tr><td>2</td><td>Bm + glucose + filtrat</td><td>37°C</td><td>Oui (+)</td></tr>
+      <tr class="hl"><td>3</td><td>Bm + glucose + filtrat bouilli</td><td>37°C</td><td>Non (–)</td></tr>
+      <tr><td>4</td><td>Bm + glucose + filtrat</td><td>0°C</td><td>Non (–)</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 Conclusion :</strong> Le filtrat contient des <strong>enzymes</strong>. Chauffé (tube 3) → dénaturation irréversible. À 0°C (tube 4) → inactivation réversible.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 1C</div><div id="mq1c-q">
+      <p>1. Le tube 3 (filtrat bouilli) ne décolore pas car <select class="bl" data-rep="les enzymes sont dénaturées par la chaleur"><option value="">—</option><option>le glucose est absent</option><option>les enzymes sont dénaturées par la chaleur</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq1c')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq1c')">↺</button><div class="mq-fb" id="mq1c-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 3 ACT.2 — MITOCHONDRIE ══ -->
+<div class="pan" id="p3">
+  <div class="sech">⚙️ Activité 2 — La Mitochondrie, Usine Cellulaire (p.78-81)</div>
+
+  <div class="card"><h3 style="color:var(--c);">2A — Mise en évidence (p.78-79)</h3>
+    <p class="expl-text">Les cellules très actives (hépatiques, musculaires) ont de <strong>nombreuses mitochondries</strong>. En milieu aérobie, elles sont développées ; en anaérobie, rares.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc09_aerobie_vs_anaerobie.PNG" alt="Aérobie vs anaérobie" onerror="this.outerHTML='<div class=img-fb>📷 Doc.9 — Comparaison cellule en milieu aérobie (mitochondries développées) vs anaérobie (mitochondries rares) (p.78)</div>'">
+      <img src="images/T3Ch4_Doc10b_courbe_o2_mitochondries.PNG" alt="Courbe O₂" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10b — Graphique : variation du taux d&apos;O₂ dans le milieu après ajout de mitochondries isolées (p.79)</div>'">
+    </div>
+    <img src="images/T3Ch4_Doc10a_dispositif_mitochondries.PNG" alt="Dispositif expérimental" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.10a — Schéma du dispositif expérimental pour mesurer la consommation d&apos;O₂ par des mitochondries isolées (p.79)</div>'">
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 2A</div><div id="mq2a-q">
+      <p>1. Les mitochondries isolées en milieu aérobie <select class="bl" data-rep="consomment de l'O₂"><option value="">—</option><option>produisent de l'O₂</option><option>consomment de l'O₂</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2a')">↺</button><div class="mq-fb" id="mq2a-fb"></div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">2B — Quel est le métabolite dégradé ? (p.79-80)</h3>
+    <p class="expl-text">Le glucose n'est PAS dégradé directement dans la mitochondrie. C'est l'<strong>acide pyruvique</strong> (C3), issu de la glycolyse, qui y pénètre et y est dégradé.</p>
+    <img src="images/T3Ch4_Doc11_metabolites_poisons_graphique.PNG" alt="Métabolites et poisons" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.11 — Graphique : influence de différents métabolites (succinate, pyruvate) et poisons (roténone, cyanure) sur la consommation d&apos;O₂ par les mitochondries (p.80)</div>'">
+    <table><tr><th>Condition</th><th>Produits</th><th>Énergie</th></tr>
+      <tr class="hl"><td>Mitochondries + ac. pyruvique + O₂</td><td>CO₂ + H₂O</td><td>1100 kJ</td></tr>
+      <tr><td>Mitochondries + ac. pyruvique SANS O₂</td><td>CO₂ + alcool</td><td>61 kJ</td></tr>
+    </table>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 2B</div><div id="mq2b-q">
+      <p>1. Le métabolite dégradé dans la mitochondrie est <select class="bl" data-rep="l'acide pyruvique"><option value="">—</option><option>le glucose</option><option>l'acide pyruvique</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq2b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq2b')">↺</button><div class="mq-fb" id="mq2b-fb"></div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">2C — Ultrastructure de la mitochondrie (p.81)</h3>
+    <p class="expl-text">La mitochondrie possède : <strong>membrane externe</strong> (40% lipides), <strong>membrane interne</strong> avec crêtes (80% protéines, enzymes de la chaîne respiratoire), <strong>matrice</strong> (enzymes du cycle de Krebs).</p>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc13_mitochondrie_photo.PNG" alt="Photo mitochondrie" onerror="this.outerHTML='<div class=img-fb>📷 Doc.13 — Photographie/observation microscopique d&apos;une mitochondrie (p.81)</div>'">
+      <img src="images/T3Ch4_Doc14_ultrastructure_mitochondrie.PNG" alt="Schéma ultrastructure" onerror="this.outerHTML='<div class=img-fb>📷 Doc.14 — Schéma 3D de l&apos;ultrastructure de la mitochondrie (membrane externe, interne, crêtes, matrice) (p.81)</div>'">
+    </div>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc15_detail_crete.PNG" alt="Détail crête" onerror="this.outerHTML='<div class=img-fb>📷 Doc.15 — Schéma de détail d&apos;une crête mitochondriale avec les chaînes respiratoires (p.81)</div>'">
+      <img src="images/T3Ch4_Doc16_analyse_biochimique_tableau.PNG" alt="Analyse biochimique" onerror="this.outerHTML='<div class=img-fb>📷 Doc.16 — Tableau : Analyse biochimique des constituants de la mitochondrie (membrane externe, interne, matrice) (p.81)</div>'">
+    </div>
+  </div>
+</div>
+
+<!-- ══ 4 ACT.3 — ÉTAPES ══ -->
+<div class="pan" id="p4">
+  <div class="sech">🧪 Activité 3 — Étapes de la Dégradation du Glucose (p.82-83)</div>
+  <div class="card"><h3 style="color:var(--c);">Le voyage du glucose étape par étape</h3>
+    <img src="images/T3Ch4_Doc17_etapes_glucose.PNG" alt="Étapes dégradation glucose" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.17 — Schéma général simplifié : Les étapes de la dégradation du glucose dans la cellule (Hyaloplasme → Glycolyse ; Mitochondrie → Respiration) (p.82)</div>'">
+    <p class="expl-text">Dans le <strong>hyaloplasme</strong>, la glycolyse transforme 1 glucose (C6) en <strong>2 acides pyruviques (C3)</strong> via 9 réactions enzymatiques. Cette étape est <strong>anaérobie</strong> et produit 2 ATP.</p>
+    <img src="images/T3Ch4_Doc18_cycle_krebs_chaine.PNG" alt="Cycle Krebs et chaîne respiratoire" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.18 — Schéma détaillé du Cycle de Krebs (dans la matrice) et de la Chaîne Respiratoire (sur les crêtes). Document central du chapitre (p.83)</div>'">
+    <p class="expl-text">Dans la <strong>mitochondrie</strong> : l'acide pyruvique entre dans le <strong>cycle de Krebs</strong> (matrice) → décarboxylations (CO₂) + déshydrogénations (transporteurs réduits). La <strong>chaîne respiratoire</strong> (crêtes) régénère les transporteurs, utilise l'O₂ pour former H₂O et produit <strong>34 ATP</strong>.</p>
+    <div class="focus-box"><strong>🔍 Bilan global :</strong> 1 glucose → 2 ATP (glycolyse) + 2 ATP (Krebs) + 32 ATP (chaîne) = <strong>36 ATP</strong>.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 3</div><div id="mq3-q">
+      <p>1. La glycolyse se déroule dans <select class="bl" data-rep="le hyaloplasme"><option value="">—</option><option>la mitochondrie</option><option>le hyaloplasme</option></select>.</p>
+      <p>2. Le cycle de Krebs se déroule dans <select class="bl" data-rep="la matrice mitochondriale"><option value="">—</option><option>le hyaloplasme</option><option>la matrice mitochondriale</option></select>.</p>
+      <p>3. La chaîne respiratoire est localisée sur <select class="bl" data-rep="les crêtes de la membrane interne"><option value="">—</option><option>la membrane externe</option><option>les crêtes de la membrane interne</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq3')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq3')">↺</button><div class="mq-fb" id="mq3-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 5 ACT.4 — ATP ══ -->
+<div class="pan" id="p5">
+  <div class="sech">⚡ Activité 4 — L'ATP, la Monnaie Énergétique (p.84-86)</div>
+
+  <div class="card"><h3 style="color:var(--c);">4A — Problème et mise en évidence (p.84-85)</h3>
+    <p class="expl-text">Lors de la dégradation du glucose, une partie de l'énergie est dissipée en <strong>chaleur</strong>, mais la majeure partie est stockée dans l'<strong>ATP</strong> (adénosine triphosphate).</p>
+    <img src="images/T3Ch4_Doc19_bombe_calorimetrique.PNG" alt="Bombe calorimétrique" class="img-60" onerror="this.outerHTML='<div class=img-fb>📷 Doc.19 — Photo/schéma d&apos;une bombe calorimétrique (p.84)</div>'">
+    <img src="images/T3Ch4_Doc22_experience_blocage_ATP.PNG" alt="Blocage ATP" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Doc.22 — Schéma du dispositif expérimental : injection d&apos;un bloqueur d&apos;ATP dans un muscle → paralysie ; injection d&apos;ATP → récupération (p.85)</div>'">
+    <p class="expl-text">L'injection d'une substance qui bloque l'hydrolyse de l'ATP <strong>paralyse le muscle</strong>. L'injection d'ATP au muscle paralysé <strong>rétablit la contraction</strong> → preuve du rôle énergétique de l'ATP.</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4A</div><div id="mq4a-q">
+      <p>1. Le blocage de l'hydrolyse de l'ATP entraîne <select class="bl" data-rep="la paralysie musculaire"><option value="">—</option><option>une contraction intense</option><option>la paralysie musculaire</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4a')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4a')">↺</button><div class="mq-fb" id="mq4a-fb"></div></div>
+  </div>
+
+  <div class="card"><h3 style="color:var(--c);">4B — Structure et cycle de l'ATP (p.85-86)</h3>
+    <p class="expl-text">L'ATP : <strong>Adénine</strong> (base azotée) + <strong>Ribose</strong> (sucre à 5C) + <strong>3 groupements phosphate</strong> (P~P~P). Les liaisons ~ sont <strong>riches en énergie</strong>.</p>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc23_structure_ATP_simple.PNG" alt="Structure ATP" onerror="this.outerHTML='<div class=img-fb>📷 Doc.23 — Schéma simplifié de la structure de l&apos;ATP (Adénine - Ribose - P~P~P) (p.85)</div>'">
+      <img src="images/T3Ch4_Doc25_AMP_ADP_ATP_comparatif.PNG" alt="AMP ADP ATP" onerror="this.outerHTML='<div class=img-fb>📷 Doc.25 — Schéma comparatif AMP, ADP, ATP (p.86)</div>'">
+    </div>
+    <div class="img-grid">
+      <img src="images/T3Ch4_Doc26_liaisons_riches_energie.PNG" alt="Liaisons riches en énergie" onerror="this.outerHTML='<div class=img-fb>📷 Doc.26 — Schéma illustrant les liaisons riches en énergie (~) et la libération d&apos;énergie par hydrolyse (p.86)</div>'">
+      <img src="images/T3Ch4_Doc27_cycle_ATP_ADP.PNG" alt="Cycle ATP-ADP" onerror="this.outerHTML='<div class=img-fb>📷 Doc.27 — Schéma du cycle ATP-ADP : Phosphorylation (respiration) ↔ Hydrolyse (travail cellulaire) (p.86)</div>'">
+    </div>
+    <img src="images/T3Ch4_Doc24_ATP_vue3D.PNG" alt="ATP vue 3D" class="img-50" onerror="this.outerHTML='<div class=img-fb>📷 Doc.24 — Vue 3D ou formule développée détaillée de l&apos;ATP (p.85)</div>'">
+    <p class="expl-text"><strong>Cycle ATP/ADP :</strong> La respiration <strong>phosphoryle</strong> l'ADP en ATP (réaction endergonique). Le travail cellulaire <strong>hydrolyse</strong> l'ATP en ADP + Pi + 30,5 kJ (réaction exergonique).</p>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 4B</div><div id="mq4b-q">
+      <p>1. L'ATP est constitué d'adénine, ribose et <select class="bl" data-rep="3 groupements phosphate"><option value="">—</option><option>2 phosphates</option><option>3 groupements phosphate</option></select>.</p>
+      <p>2. L'hydrolyse de l'ATP est une réaction <select class="bl" data-rep="exergonique (libère de l'énergie)"><option value="">—</option><option>endergonique</option><option>exergonique (libère de l'énergie)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq4b')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq4b')">↺</button><div class="mq-fb" id="mq4b-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 6 ACT.5 — FERMENTATION ══ -->
+<div class="pan" id="p6">
+  <div class="sech">🏃 Activité 5 — La Fermentation Lactique (p.87)</div>
+  <div class="card"><h3 style="color:var(--c);">La respiration cellulaire est-elle notre unique source d'énergie ?</h3>
+    <p class="expl-text">Après un effort intense, on observe une <strong>dette d'oxygène</strong> : la consommation réelle d'O₂ est <strong>inférieure</strong> à la consommation théorique. Le muscle produit de l'<strong>acide lactique</strong> en absence d'O₂.</p>
+    <img src="images/T3Ch4_Doc28_dette_oxygene_tableau.PNG" alt="Dette d'oxygène" class="img-full" onerror="this.outerHTML='<div class=img-fb>📷 Doc.28 — Tableau : Dépense énergétique, O₂ théorique, O₂ consommée et dette d&apos;oxygène pour différentes courses (100m, 1500m, marathon) (p.87)</div>'">
+    <p class="expl-text"><strong>Respiration :</strong> Glucose → acide pyruvique → CO₂ + H₂O + <strong>686 kcal</strong> (283 kJ) — <strong>36 ATP</strong><br><strong>Fermentation :</strong> Glucose → acide pyruvique → acide lactique + <strong>50,8 kcal</strong> (210 kJ) — <strong>2 ATP</strong></p>
+    <table><tr><th>Voie</th><th>O₂</th><th>ATP</th><th>Produit final</th></tr>
+      <tr class="hl"><td>Respiration cellulaire</td><td>Présent</td><td>36</td><td>CO₂ + H₂O</td></tr>
+      <tr><td>Fermentation lactique</td><td>Absent</td><td>2</td><td>Acide lactique</td></tr>
+    </table>
+    <div class="focus-box"><strong>🔍 Dette d'oxygène :</strong> Après l'effort, le muscle consomme de l'O₂ pour transformer l'acide lactique accumulé en acide pyruvique, qui sera dégradé par la respiration.</div>
+    <div class="mq"><div class="mq-title">✏️ Mini-quiz 5</div><div id="mq5-q">
+      <p>1. La fermentation lactique produit <select class="bl" data-rep="2 ATP (beaucoup moins que la respiration)"><option value="">—</option><option>36 ATP</option><option>2 ATP (beaucoup moins que la respiration)</option></select>.</p>
+      <p>2. La fermentation lactique se déroule <select class="bl" data-rep="en absence d'O₂ (anaérobie)"><option value="">—</option><option>en présence d'O₂</option><option>en absence d'O₂ (anaérobie)</option></select>.</p>
+    </div><button class="bck" onclick="ckMQ('mq5')">✓ Vérifier</button><button class="brs" onclick="rsMQ('mq5')">↺</button><div class="mq-fb" id="mq5-fb"></div></div>
+  </div>
+</div>
+
+<!-- ══ 7 BILAN ══ -->
+<div class="pan" id="p7">
+  <div class="sech">📋 BILAN — Pages 88-89 (4 blocs)</div>
+  <div class="bstep"><h3><span class="bnum">1</span> La dégradation du glucose (p.88)</h3><p style="font-size:.9rem">La respiration cellulaire est une <select class="bl" data-rep="oxydation du glucose"><option value="">—</option><option>oxydation du glucose</option><option>réduction du glucose</option></select>. Elle fait intervenir des <select class="bl" data-rep="décarboxylases, déshydrogénases et oxydases"><option value="">—</option><option>hydrolases uniquement</option><option>décarboxylases, déshydrogénases et oxydases</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">2</span> Glycolyse + devenir acide pyruvique (p.88-89)</h3><p style="font-size:.9rem">La glycolyse a lieu dans le <select class="bl" data-rep="hyaloplasme"><option value="">—</option><option>hyaloplasme</option><option>noyau</option></select>. Elle dégrade le glucose en <select class="bl" data-rep="2 acides pyruviques (C3)"><option value="">—</option><option>2 éthanol</option><option>2 acides pyruviques (C3)</option></select>. L'acide pyruvique entre dans la <select class="bl" data-rep="mitochondrie"><option value="">—</option><option>mitochondrie</option><option>vacuole</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">3</span> Chaîne respiratoire (p.89)</h3><p style="font-size:.9rem">Au niveau des crêtes, l'O₂ est <select class="bl" data-rep="activé (ionisé)"><option value="">—</option><option>activé (ionisé)</option><option>détruit</option></select>. L'H₂ est <select class="bl" data-rep="ionisé en protons"><option value="">—</option><option>stocké</option><option>ionisé en protons</option></select>. La réaction finale : 2H⁺ + O²⁻ → <select class="bl" data-rep="H₂O (eau)"><option value="">—</option><option>H₂O (eau)</option><option>CO₂</option></select>.</p></div>
+  <div class="bstep"><h3><span class="bnum">4</span> ATP : phosphorylation oxydative (p.89)</h3><p style="font-size:.9rem">Bilan par glucose : <select class="bl" data-rep="36 ATP"><option value="">—</option><option>2 ATP</option><option>36 ATP</option></select> dont <select class="bl" data-rep="2 ATP glycolyse, 34 ATP mitochondrie"><option value="">—</option><option>36 de la glycolyse</option><option>2 ATP glycolyse, 34 ATP mitochondrie</option></select>. Synthèse par <select class="bl" data-rep="l'ATP synthétase"><option value="">—</option><option>l'ATPase</option><option>l'ATP synthétase</option></select>.</p></div>
+  <div style="margin-top:16px"><button class="bck" onclick="ckBilan()">✓ Vérifier tout le bilan</button><button class="brs" onclick="rsBilan()">↺</button><div class="gfb" id="bilan-fb"></div></div>
+</div>
+
+<!-- ══ 8 EXERCICES ══ -->
+<div class="pan" id="p8">
+  <div class="sech">📝 Exercices — Manuel p.90</div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:9px">✏️ Ex.1 — QCM du manuel (p.90)</h3>
+    <table>
+      <tr><td><strong>1. Résultat respiration :</strong></td><td><select class="tcell" data-rep="une synthèse d'ATP"><option value="">—</option><option>consommation d'énergie</option><option>une synthèse d'ATP</option></select></td></tr>
+      <tr><td><strong>2. Phosphorylation =</strong></td><td><select class="tcell" data-rep="synthèse d'ATP à partir d'ADP + P"><option value="">—</option><option>dégradation d'ATP</option><option>synthèse d'ATP à partir d'ADP + P</option></select></td></tr>
+      <tr><td><strong>3. Bilan respiration =</strong></td><td><select class="tcell" data-rep="synthèse d'ATP"><option value="">—</option><option>hydrolyse d'ATP</option><option>synthèse d'ATP</option></select></td></tr>
+      <tr><td><strong>4. Cycle de Krebs :</strong></td><td><select class="tcell" data-rep="comporte des déshydrogénations et décarboxylations"><option value="">—</option><option>se déroule dans le hyaloplasme</option><option>comporte des déshydrogénations et décarboxylations</option></select></td></tr>
+      <tr><td><strong>5. Glycolyse :</strong></td><td><select class="tcell" data-rep="a lieu dans le hyaloplasme"><option value="">—</option><option>a lieu dans le hyaloplasme</option><option>est une dégradation complète</option></select></td></tr>
+      <tr><td><strong>6. Étape la + énergétique :</strong></td><td><select class="tcell" data-rep="la chaîne respiratoire"><option value="">—</option><option>la glycolyse</option><option>la chaîne respiratoire</option></select></td></tr>
+    </table>
+    <button class="bck" onclick="ckTabExo('ex1tab')">✓ Vérifier</button><button class="brs" onclick="rsTabExo('ex1tab')">↺</button><div class="gfb" id="ex1tab-fb"></div>
+  </div>
+  <div class="tab-exo"><h3 style="color:var(--ar);margin-bottom:9px">🧪 Ex.2 — Relation ADP / O₂ (p.90)</h3>
+    <div class="ctx">Des mitochondries isolées sont placées dans un milieu oxygéné riche en ions phosphates. On mesure le taux d'O₂ après addition d'ADP.</div>
+    <img src="images/T3Ch4_Ex2_graphique_ADP_o2.PNG" alt="Exercice 2 graphique" class="img-80" onerror="this.outerHTML='<div class=img-fb>📷 Exercice 2 — Graphique montrant l&apos;effet de l&apos;ajout d&apos;ADP sur la consommation d&apos;O₂ par des mitochondries (p.90)</div>'">
+    <p style="font-size:.87rem;margin-bottom:7px">L'ajout d'ADP <select class="bl" data-rep="stimule la consommation d'O₂ (phosphorylation oxydative)"><option value="">—</option><option>inhibe la consommation d'O₂</option><option>stimule la consommation d'O₂ (phosphorylation oxydative)</option></select>.</p>
+    <button class="bck" onclick="ckMQ('ex2')">✓ Vérifier</button><button class="brs" onclick="rsMQ('ex2')">↺</button><div class="mq-fb" id="ex2-fb"></div>
+  </div>
+</div>
+
+<!-- ══ 9 BILAN RÉVISION ══ -->
+<div class="pan" id="p9">
+  <div class="sech">📋 Bilan Révision — Vérifie chaque objectif</div>
+  <p style="font-size:.87rem;color:var(--mu);margin-bottom:14px">Exercice principal + bonus par objectif du programme.</p>
+  <div class="bilan-rev">
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">1</span> Expliquer la dégradation du glucose</div><p style="font-size:.87rem;margin-bottom:7px">Respiration = <select class="bl" data-rep="C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36 ATP"><option value="">—</option><option>C₆H₁₂O₆ → 2 acide lactique + 2 ATP</option><option>C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36 ATP</option></select>. Glycolyse (hyaloplasme) → <select class="bl" data-rep="2 ATP + 2 acides pyruviques"><option value="">—</option><option>36 ATP</option><option>2 ATP + 2 acides pyruviques</option></select>.</p><button class="bck" onclick="ckMQ('rev1')" style="font-size:.74rem;">Vérifier</button><span class="mq-fb" id="rev1-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">2</span> Identifier ultrastructures et molécules</div><p style="font-size:.87rem;margin-bottom:7px">Krebs → <select class="bl" data-rep="matrice mitochondriale"><option value="">—</option><option>hyaloplasme</option><option>matrice mitochondriale</option></select>. Chaîne → <select class="bl" data-rep="crêtes de la membrane interne"><option value="">—</option><option>membrane externe</option><option>crêtes de la membrane interne</option></select>. Accepteur final = <select class="bl" data-rep="O₂"><option value="">—</option><option>CO₂</option><option>O₂</option></select>.</p><button class="bck" onclick="ckMQ('rev2')" style="font-size:.74rem;">Vérifier</button><span class="mq-fb" id="rev2-fb"></span></div>
+    <div class="obj-block"><div class="obj-title"><span class="obj-num">3</span> Préciser production et utilisation de l'énergie</div><p style="font-size:.87rem;margin-bottom:7px">Forme stockage = <select class="bl" data-rep="ATP (adénosine triphosphate)"><option value="">—</option><option>glucose</option><option>ATP (adénosine triphosphate)</option></select>. Bilan = <select class="bl" data-rep="36 ATP par glucose"><option value="">—</option><option>2 ATP</option><option>36 ATP par glucose</option></select>. Hydrolyse → <select class="bl" data-rep="ADP + Pi + 30,5 kJ"><option value="">—</option><option>AMP + 2Pi</option><option>ADP + Pi + 30,5 kJ</option></select>.</p><button class="bck" onclick="ckMQ('rev3')" style="font-size:.74rem;">Vérifier</button><span class="mq-fb" id="rev3-fb"></span></div>
+  </div>
+</div>
+
+<!-- ══ 10 FLASHCARDS ══ -->
+<div class="pan" id="p10"><h2 style="margin-bottom:14px">🃏 Flashcards — Paragraphes à trous</h2><div class="fa"><button class="btn bv" onclick="chkFC()">✓ Vérifier tout</button><button class="btn bg" onclick="rstFC()">↺</button><span id="fcs" style="display:none;padding:8px 14px;border-radius:8px;font-weight:700"></span></div><div class="fcg" id="fcg"></div></div>
+
+<!-- ══ 11 QCM ══ -->
+<div class="pan" id="p11"><h2 style="margin-bottom:8px">✏️ QCM — 12 Questions (Manuel + BAC)</h2><p style="margin-bottom:8px;font-size:.87rem;color:var(--mu)">Questions 1-6 (p.90) + 6 questions complémentaires</p><div class="qcm-ctrl"><button class="btn bg" onclick="corrAllQ()" style="font-size:.8rem;">📋 Tout corriger</button><button class="btn bg" onclick="rstAllQ()" style="font-size:.8rem;">↺ Tout réinitialiser</button><span id="qcm-global-score" class="qcm-score" style="display:none;"></span></div><div id="qcm-c"></div></div>
+
+</div>
+
+<footer>
+  <p>Chapitre 4 — La Respiration Cellulaire · 3ème année Secondaire SVT · Programme Tunisien</p>
+  <p class="ft-sig">INGÉNIEUR Mohamed CHAGRAOUI / ENSEIGNANT SVT · CANDIDAT CAPES SVT 2026 · TUNISIE</p>
+</footer>
+
+<script>
+const panels=document.querySelectorAll('.pan'),tabs=document.querySelectorAll('.t');
+const pf=document.getElementById('pf');let vis=new Set([0]);
+function showTab(n){
+  panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));
+  if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');
+  vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';
+  localStorage.setItem('t3ch4tab',n);window.scrollTo({top:0,behavior:'smooth'});
+}
+const sv=localStorage.getItem('t3ch4tab');
+if(sv){const n=parseInt(sv);if(n>0&&n<panels.length){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));if(panels[n])panels[n].classList.add('on');if(tabs[n])tabs[n].classList.add('on');vis.add(n);pf.style.width=Math.round(vis.size/tabs.length*100)+'%';}}
+function togPiege(h){const b=h.nextElementSibling;b.classList.toggle('on');h.querySelector('span').textContent=b.classList.contains('on')?'▲':'▼';}
+function togAns(b){b.nextElementSibling.classList.toggle('on');}
+function showCN(id){const p=document.getElementById('cn-'+id),isOn=p.classList.contains('on');document.querySelectorAll('.cn-panel').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cnode').forEach(x=>x.classList.remove('active'));if(!isOn){p.classList.add('on');}}
+function ckMQ(id){const sels=document.querySelectorAll('#'+id+'-q select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les réponses en rouge.';}
+function rsMQ(id){document.querySelectorAll('#'+id+'-q select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById(id+'-fb');fb.className='mq-fb';fb.textContent='';}
+function ckTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;const cells=block.querySelectorAll('.tcell');let ok=0,tot=cells.length;cells.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Parfait ! '+ok+'/'+tot:ok+'/'+tot+' — revois les cellules en rouge.';}
+function rsTabExo(id){const fb=document.getElementById(id+'-fb');if(!fb)return;const block=fb.closest('.tab-exo');if(!block)return;block.querySelectorAll('.tcell').forEach(s=>{s.value='';s.classList.remove('ok','ko');});fb.className='gfb';fb.textContent='';}
+function ckBilan(){const sels=document.querySelectorAll('#p7 select.bl');let ok=0,tot=sels.length;sels.forEach(s=>{s.classList.remove('ok','ko');if(s.value===s.dataset.rep){s.classList.add('ok');ok++;}else if(s.value)s.classList.add('ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb '+(ok===tot?'ok':'ko');fb.textContent=ok===tot?'Bilan complet ! '+ok+'/'+tot:ok+'/'+tot+' — Revois les trous en rouge.';}
+function rsBilan(){document.querySelectorAll('#p7 select.bl').forEach(s=>{s.value='';s.classList.remove('ok','ko');});const fb=document.getElementById('bilan-fb');fb.className='gfb';fb.textContent='';}
+
+// FLASHCARDS
+const fcData=[{p:"La <select class='fs' data-ans='glycolyse'>—|respiration|glycolyse|fermentation</select> a lieu dans le <select class='fs' data-ans='hyaloplasme'>—|noyau|hyaloplasme|ribosome</select>. Elle transforme 1 glucose en <select class='fs' data-ans='2 acides pyruviques'>—|2 éthanol|2 acides pyruviques|2 ATP</select>."},{p:"Le <select class='fs' data-ans='cycle de Krebs'>—|cycle de Krebs|chaîne respiratoire|glycolyse</select> se déroule dans la <select class='fs' data-ans='matrice mitochondriale'>—|membrane externe|matrice mitochondriale|crête</select>. Il libère <select class='fs' data-ans='CO₂ et des transporteurs réduits'>—|O₂|CO₂ et des transporteurs réduits|ATP</select>."},{p:"La <select class='fs' data-ans='chaîne respiratoire'>—|glycolyse|chaîne respiratoire|fermentation</select> est localisée sur les <select class='fs' data-ans='crêtes mitochondriales'>—|membranes externes|crêtes mitochondriales|ribosomes</select>. L'O₂ y est <select class='fs' data-ans='l&apos;accepteur final d&apos;électrons'>—|un donneur|un produit|etc|l&apos;accepteur final d&apos;électrons</select>."},{p:"Le bilan énergétique total est de <select class='fs' data-ans='36 ATP par glucose'>—|2 ATP|36 ATP par glucose|686 ATP</select>. L'étape la plus productive est la <select class='fs' data-ans='chaîne respiratoire (32 ATP)'>—|glycolyse|cycle de Krebs|chaîne respiratoire (32 ATP)</select>."},{p:"L'<select class='fs' data-ans='ATP'>—|ADP|AMP|ATP</select> est hydrolysé en <select class='fs' data-ans='ADP + Pi + 30,5 kJ'>—|AMP + PPi|ADP + Pi + 30,5 kJ|glucose</select>. Cette réaction est <select class='fs' data-ans='exergonique'>—|endergonique|exergonique|neutre</select>."},{p:"En <select class='fs' data-ans='absence d&apos;O₂'>—|présence d&apos;O₂|absence d&apos;O₂</select>, la cellule réalise la <select class='fs' data-ans='fermentation lactique'>—|respiration|fermentation lactique|photosynthèse</select>. Elle ne produit que <select class='fs' data-ans='2 ATP'>—|36 ATP|2 ATP|0 ATP</select>."},{p:"La <select class='fs' data-ans='mitochondrie'>—|mitochondrie|vacuole|ribosome</select> possède une double membrane. Les enzymes du cycle de Krebs sont dans la <select class='fs' data-ans='matrice'>—|matrice|membrane externe|espace intermembranaire</select>."}];
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+function buildFC(){const c=document.getElementById('fcg');if(!c)return;c.innerHTML='';fcData.forEach(fc=>{c.innerHTML+='<div class="fcc"><div class="fcp">'+fc.p+'</div></div>';});document.querySelectorAll('#fcg .fcp').forEach(div=>{let h=div.innerHTML;const regex=/<select class='fs' data-ans='([^']+)'>([^<]+)<\/select>/g;h=h.replace(regex,(match,ans,optionsStr)=>{const opts=optionsStr.split('|');const allOpts=opts.filter(o=>o!=='—');const shuffled=shuffle(allOpts);return '<select class="fs" data-ans="'+ans+'"><option value="">—</option>'+shuffled.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+'</select>';});div.innerHTML=h;});}
+function chkFC(){let ok=0,tot=0;document.querySelectorAll('#fcg .fs').forEach(s=>{tot++;s.classList.remove('ok','ko');if(!s.value)return;if(s.value===s.dataset.ans){s.classList.add('ok');ok++;}else s.classList.add('ko');});const sc=document.getElementById('fcs');sc.style.display='inline-block';sc.style.background=ok===tot?'#e8f5e9':'#ffebee';sc.style.color=ok===tot?'#2E7D32':'#c62828';sc.textContent=ok+'/'+tot+' correctes';}
+function rstFC(){document.querySelectorAll('#fcg .fs').forEach(s=>{s.value='';s.classList.remove('ok','ko');});document.getElementById('fcs').style.display='none';}
+
+// QCM 12 questions
+const QS=[{q:'Q1 (p.90). Le résultat de la respiration est :',o:['Une consommation d\'énergie','Une production de chaleur','Une synthèse d\'ATP'],c:[2],fb:'Respiration cellulaire = synthèse d\'ATP (c).'},{q:'Q2 (p.90). La phosphorylation est :',o:['La dégradation d\'ATP','La synthèse d\'ATP à partir d\'ADP + P','L\'addition d\'un phosphate à une molécule'],c:[1,2],fb:'Phosphorylation = synthèse ATP (b) ET addition phosphate (c).'},{q:'Q3 (p.90). Le bilan de la respiration est :',o:['L\'hydrolyse de l\'ATP','La synthèse de l\'acide pyruvique','La synthèse de l\'ATP'],c:[2],fb:'Bilan respiration = synthèse d\'ATP (c).'},{q:'Q4 (p.90). Le cycle de Krebs :',o:['Se déroule dans le hyaloplasme','Comporte des déshydrogénations','Comporte des décarboxylations'],c:[1,2],fb:'Krebs = déshydrogénation (b) + décarboxylation (c). Dans la matrice, pas le hyaloplasme.'},{q:'Q5 (p.90). La glycolyse :',o:['A lieu dans le hyaloplasme','Est une dégradation complète','Nécessite l\'O₂'],c:[0],fb:'Glycolyse = hyaloplasme (a). Anaérobie, dégradation partielle.'},{q:'Q6 (p.90). L\'étape la plus énergétique :',o:['La glycolyse','Le cycle de Krebs','La chaîne respiratoire'],c:[2],fb:'Chaîne respiratoire = 32 ATP sur 36 (c).'},{q:'Q7. L\'O₂ intervient directement dans :',o:['La glycolyse','Le cycle de Krebs','La chaîne respiratoire'],c:[2],fb:'O₂ = accepteur final dans la chaîne respiratoire (c).'},{q:'Q8. La fermentation lactique produit :',o:['36 ATP','2 ATP','Aucune ATP'],c:[1],fb:'Fermentation = 2 ATP issus de la glycolyse uniquement (b).'},{q:'Q9. L\'ATP est :',o:['Une réserve d\'énergie','Un transporteur d\'énergie','Un lipide'],c:[1],fb:'ATP = transporteur (b), PAS une réserve (glycogène/amidon).'},{q:'Q10. La matrice mitochondriale contient :',o:['Les enzymes du cycle de Krebs','La chaîne respiratoire','Des décarboxylases'],c:[0,2],fb:'Matrice = Krebs (a) + décarboxylases (c). Chaîne = crêtes.'},{q:'Q11. Une mitochondrie isolée consomme de l\'O₂ si on ajoute :',o:['Du glucose seul','De l\'acide pyruvique','De l\'ADP'],c:[1,2],fb:'Pyruvate (b) = substrat mitochondrial. ADP (c) = stimule phosphorylation.'},{q:'Q12. L\'équation de la respiration cellulaire est :',o:['C₆H₁₂O₆ → 2 acide lactique','C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O','C₆H₁₂O₆ + 6CO₂ → 6O₂ + 6H₂O'],c:[1],fb:'Respiration = glucose + O₂ → CO₂ + H₂O + énergie (b).'}];
+function corrOneQ(qi){const q=QS[qi],div=document.getElementById('qi'+qi),checked=[...div.querySelectorAll('input:checked')].map(c=>parseInt(c.value));div.querySelectorAll('.qo').forEach((opt,oi)=>{opt.classList.add('locked');const inp=opt.querySelector('input');if(q.c.includes(oi)&&checked.includes(oi))opt.classList.add('correct');else if(q.c.includes(oi)&&!checked.includes(oi))opt.classList.add('missed');else if(!q.c.includes(oi)&&checked.includes(oi))opt.classList.add('wrong');inp.disabled=!0;});const ef=div.querySelector('.q-feedback');if(ef)ef.remove();div.insertAdjacentHTML('beforeend','<div class="q-feedback" style="margin-top:9px;padding:9px 13px;background:#e8f5e9;border-radius:7px;font-size:.84rem;color:#2E7D32;font-weight:600">💡 '+q.fb+'</div>');updQcmScore();}
+function corrAllQ(){QS.forEach((q,i)=>corrOneQ(i));}
+function rstAllQ(){document.querySelectorAll('#qcm-c .qi').forEach(qi=>{qi.querySelectorAll('input').forEach(inp=>{inp.checked=!1;inp.disabled=!1;});qi.querySelectorAll('.qo').forEach(o=>o.classList.remove('correct','wrong','missed','locked'));const fb=qi.querySelector('.q-feedback');if(fb)fb.remove();});document.getElementById('qcm-global-score').style.display='none';}
+function updQcmScore(){let sc=0;QS.forEach((q,i)=>{const qi=document.getElementById('qi'+i),checked=[...qi.querySelectorAll('input:checked')].map(c=>parseInt(c.value));if(q.c.length===checked.length&&q.c.every(r=>checked.includes(r)))sc++;});const gs=document.getElementById('qcm-global-score');gs.style.display='inline-block';const p=Math.round(sc/QS.length*100);gs.style.background=p>=80?'#e8f5e9':p>=50?'#fff8e1':'#ffebee';gs.style.color=p>=80?'#2E7D32':p>=50?'#E65100':'#c62828';gs.textContent='Score : '+sc+'/'+QS.length+' ('+p+'%)';}
+window.addEventListener('DOMContentLoaded',()=>{buildFC();const qcmc=document.getElementById('qcm-c');QS.forEach((q,qi)=>{qcmc.innerHTML+=`<div class="qi" id="qi${qi}"><div class="qq">${q.q}</div>${q.o.map((o,oi)=>`<label class="qo" id="qo${qi}-${oi}"><input type="checkbox" name="q${qi}" value="${oi}"> <span>${o}</span><span class="fb-txt">${q.c.includes(oi)?'✓':'✗'}</span></label>`).join('')}<button class="btn bg" onclick="corrOneQ(${qi})" style="font-size:.78rem;margin-top:7px;">Vérifier Q${qi+1}</button></div>`;});});
+</script>
+</body>
+</html>
